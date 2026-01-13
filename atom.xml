@@ -3,11 +3,11 @@
   <title>独自踏月行</title>
   
   <subtitle>月下独行的思考空间</subtitle>
-  <link href="https://lyluchao.github.io/mokewenxue.github.io/atom.xml" rel="self"/>
+  <link href="https://lyluchao.github.io/atom.xml" rel="self"/>
   
-  <link href="https://lyluchao.github.io/mokewenxue.github.io/"/>
+  <link href="https://lyluchao.github.io/"/>
   <updated>2026-01-13T10:47:06.508Z</updated>
-  <id>https://lyluchao.github.io/mokewenxue.github.io/</id>
+  <id>https://lyluchao.github.io/</id>
   
   <author>
     <name>墨客</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>三问臻赋并序</title>
-    <link href="https://lyluchao.github.io/mokewenxue.github.io/2026/01/14/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/"/>
-    <id>https://lyluchao.github.io/mokewenxue.github.io/2026/01/14/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/</id>
+    <link href="https://lyluchao.github.io/2026/01/14/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/"/>
+    <id>https://lyluchao.github.io/2026/01/14/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/</id>
     <published>2026-01-13T16:30:00.000Z</published>
     <updated>2026-01-13T10:47:06.508Z</updated>
     
@@ -30,25 +30,25 @@
     
     
     
-    <category term="古文辞赋" scheme="https://lyluchao.github.io/mokewenxue.github.io/categories/%E5%8F%A4%E6%96%87%E8%BE%9E%E8%B5%8B/"/>
+    <category term="古文辞赋" scheme="https://lyluchao.github.io/categories/%E5%8F%A4%E6%96%87%E8%BE%9E%E8%B5%8B/"/>
     
     
-    <category term="赋文" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E8%B5%8B%E6%96%87/"/>
+    <category term="赋文" scheme="https://lyluchao.github.io/tags/%E8%B5%8B%E6%96%87/"/>
     
-    <category term="骈文" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E9%AA%88%E6%96%87/"/>
+    <category term="骈文" scheme="https://lyluchao.github.io/tags/%E9%AA%88%E6%96%87/"/>
     
-    <category term="三问" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E4%B8%89%E9%97%AE/"/>
+    <category term="三问" scheme="https://lyluchao.github.io/tags/%E4%B8%89%E9%97%AE/"/>
     
-    <category term="月星剑" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E6%9C%88%E6%98%9F%E5%89%91/"/>
+    <category term="月星剑" scheme="https://lyluchao.github.io/tags/%E6%9C%88%E6%98%9F%E5%89%91/"/>
     
-    <category term="人生境界" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E4%BA%BA%E7%94%9F%E5%A2%83%E7%95%8C/"/>
+    <category term="人生境界" scheme="https://lyluchao.github.io/tags/%E4%BA%BA%E7%94%9F%E5%A2%83%E7%95%8C/"/>
     
   </entry>
   
   <entry>
     <title>虞美人·孤怀婵娟</title>
-    <link href="https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E8%99%9E%E7%BE%8E%E4%BA%BA%C2%B7%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/"/>
-    <id>https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E8%99%9E%E7%BE%8E%E4%BA%BA%C2%B7%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/</id>
+    <link href="https://lyluchao.github.io/2026/01/13/%E8%99%9E%E7%BE%8E%E4%BA%BA%C2%B7%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/"/>
+    <id>https://lyluchao.github.io/2026/01/13/%E8%99%9E%E7%BE%8E%E4%BA%BA%C2%B7%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/</id>
     <published>2026-01-13T15:30:00.000Z</published>
     <updated>2026-01-13T10:35:53.577Z</updated>
     
@@ -59,23 +59,23 @@
     
     
     
-    <category term="词曲" scheme="https://lyluchao.github.io/mokewenxue.github.io/categories/%E8%AF%8D%E6%9B%B2/"/>
+    <category term="词曲" scheme="https://lyluchao.github.io/categories/%E8%AF%8D%E6%9B%B2/"/>
     
     
-    <category term="虞美人" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E8%99%9E%E7%BE%8E%E4%BA%BA/"/>
+    <category term="虞美人" scheme="https://lyluchao.github.io/tags/%E8%99%9E%E7%BE%8E%E4%BA%BA/"/>
     
-    <category term="宋词" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/"/>
+    <category term="宋词" scheme="https://lyluchao.github.io/tags/%E5%AE%8B%E8%AF%8D/"/>
     
-    <category term="孤怀" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E5%AD%A4%E6%80%80/"/>
+    <category term="孤怀" scheme="https://lyluchao.github.io/tags/%E5%AD%A4%E6%80%80/"/>
     
-    <category term="婵娟" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E5%A9%B5%E5%A8%9F/"/>
+    <category term="婵娟" scheme="https://lyluchao.github.io/tags/%E5%A9%B5%E5%A8%9F/"/>
     
   </entry>
   
   <entry>
     <title>荷塘月色随笔</title>
-    <link href="https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E8%8D%B7%E5%A1%98%E6%9C%88%E8%89%B2/"/>
-    <id>https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E8%8D%B7%E5%A1%98%E6%9C%88%E8%89%B2/</id>
+    <link href="https://lyluchao.github.io/2026/01/13/%E8%8D%B7%E5%A1%98%E6%9C%88%E8%89%B2/"/>
+    <id>https://lyluchao.github.io/2026/01/13/%E8%8D%B7%E5%A1%98%E6%9C%88%E8%89%B2/</id>
     <published>2026-01-13T14:00:00.000Z</published>
     <updated>2026-01-13T10:12:14.745Z</updated>
     
@@ -86,23 +86,23 @@
     
     
     
-    <category term="散文随笔" scheme="https://lyluchao.github.io/mokewenxue.github.io/categories/%E6%95%A3%E6%96%87%E9%9A%8F%E7%AC%94/"/>
+    <category term="散文随笔" scheme="https://lyluchao.github.io/categories/%E6%95%A3%E6%96%87%E9%9A%8F%E7%AC%94/"/>
     
     
-    <category term="散文" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E6%95%A3%E6%96%87/"/>
+    <category term="散文" scheme="https://lyluchao.github.io/tags/%E6%95%A3%E6%96%87/"/>
     
-    <category term="朱自清" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E6%9C%B1%E8%87%AA%E6%B8%85/"/>
+    <category term="朱自清" scheme="https://lyluchao.github.io/tags/%E6%9C%B1%E8%87%AA%E6%B8%85/"/>
     
-    <category term="荷塘" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E8%8D%B7%E5%A1%98/"/>
+    <category term="荷塘" scheme="https://lyluchao.github.io/tags/%E8%8D%B7%E5%A1%98/"/>
     
-    <category term="月色" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E6%9C%88%E8%89%B2/"/>
+    <category term="月色" scheme="https://lyluchao.github.io/tags/%E6%9C%88%E8%89%B2/"/>
     
   </entry>
   
   <entry>
     <title>雨巷</title>
-    <link href="https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E9%9B%A8%E5%B7%B7/"/>
-    <id>https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E9%9B%A8%E5%B7%B7/</id>
+    <link href="https://lyluchao.github.io/2026/01/13/%E9%9B%A8%E5%B7%B7/"/>
+    <id>https://lyluchao.github.io/2026/01/13/%E9%9B%A8%E5%B7%B7/</id>
     <published>2026-01-13T13:00:00.000Z</published>
     <updated>2026-01-13T10:12:13.029Z</updated>
     
@@ -113,21 +113,21 @@
     
     
     
-    <category term="现代诗" scheme="https://lyluchao.github.io/mokewenxue.github.io/categories/%E7%8E%B0%E4%BB%A3%E8%AF%97/"/>
+    <category term="现代诗" scheme="https://lyluchao.github.io/categories/%E7%8E%B0%E4%BB%A3%E8%AF%97/"/>
     
     
-    <category term="现代诗" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E7%8E%B0%E4%BB%A3%E8%AF%97/"/>
+    <category term="现代诗" scheme="https://lyluchao.github.io/tags/%E7%8E%B0%E4%BB%A3%E8%AF%97/"/>
     
-    <category term="戴望舒" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E6%88%B4%E6%9C%9B%E8%88%92/"/>
+    <category term="戴望舒" scheme="https://lyluchao.github.io/tags/%E6%88%B4%E6%9C%9B%E8%88%92/"/>
     
-    <category term="雨巷" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E9%9B%A8%E5%B7%B7/"/>
+    <category term="雨巷" scheme="https://lyluchao.github.io/tags/%E9%9B%A8%E5%B7%B7/"/>
     
   </entry>
   
   <entry>
     <title>春江花月夜</title>
-    <link href="https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E6%98%A5%E6%B1%9F%E8%8A%B1%E6%9C%88%E5%A4%9C/"/>
-    <id>https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E6%98%A5%E6%B1%9F%E8%8A%B1%E6%9C%88%E5%A4%9C/</id>
+    <link href="https://lyluchao.github.io/2026/01/13/%E6%98%A5%E6%B1%9F%E8%8A%B1%E6%9C%88%E5%A4%9C/"/>
+    <id>https://lyluchao.github.io/2026/01/13/%E6%98%A5%E6%B1%9F%E8%8A%B1%E6%9C%88%E5%A4%9C/</id>
     <published>2026-01-13T12:00:00.000Z</published>
     <updated>2026-01-13T10:12:13.003Z</updated>
     
@@ -138,23 +138,23 @@
     
     
     
-    <category term="古体诗" scheme="https://lyluchao.github.io/mokewenxue.github.io/categories/%E5%8F%A4%E4%BD%93%E8%AF%97/"/>
+    <category term="古体诗" scheme="https://lyluchao.github.io/categories/%E5%8F%A4%E4%BD%93%E8%AF%97/"/>
     
     
-    <category term="古诗" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E5%8F%A4%E8%AF%97/"/>
+    <category term="古诗" scheme="https://lyluchao.github.io/tags/%E5%8F%A4%E8%AF%97/"/>
     
-    <category term="唐诗" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E5%94%90%E8%AF%97/"/>
+    <category term="唐诗" scheme="https://lyluchao.github.io/tags/%E5%94%90%E8%AF%97/"/>
     
-    <category term="春江" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E6%98%A5%E6%B1%9F/"/>
+    <category term="春江" scheme="https://lyluchao.github.io/tags/%E6%98%A5%E6%B1%9F/"/>
     
-    <category term="月夜" scheme="https://lyluchao.github.io/mokewenxue.github.io/tags/%E6%9C%88%E5%A4%9C/"/>
+    <category term="月夜" scheme="https://lyluchao.github.io/tags/%E6%9C%88%E5%A4%9C/"/>
     
   </entry>
   
   <entry>
     <title>故都的秋-郁达夫</title>
-    <link href="https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E6%95%85%E9%83%BD%E7%9A%84%E7%A7%8B-%E9%83%81%E8%BE%BE%E5%A4%AB/"/>
-    <id>https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E6%95%85%E9%83%BD%E7%9A%84%E7%A7%8B-%E9%83%81%E8%BE%BE%E5%A4%AB/</id>
+    <link href="https://lyluchao.github.io/2026/01/13/%E6%95%85%E9%83%BD%E7%9A%84%E7%A7%8B-%E9%83%81%E8%BE%BE%E5%A4%AB/"/>
+    <id>https://lyluchao.github.io/2026/01/13/%E6%95%85%E9%83%BD%E7%9A%84%E7%A7%8B-%E9%83%81%E8%BE%BE%E5%A4%AB/</id>
     <published>2026-01-13T10:13:14.000Z</published>
     <updated>2026-01-13T10:13:14.773Z</updated>
     
@@ -166,8 +166,8 @@
   
   <entry>
     <title>乡愁-余光中</title>
-    <link href="https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E4%B9%A1%E6%84%81-%E4%BD%99%E5%85%89%E4%B8%AD/"/>
-    <id>https://lyluchao.github.io/mokewenxue.github.io/2026/01/13/%E4%B9%A1%E6%84%81-%E4%BD%99%E5%85%89%E4%B8%AD/</id>
+    <link href="https://lyluchao.github.io/2026/01/13/%E4%B9%A1%E6%84%81-%E4%BD%99%E5%85%89%E4%B8%AD/"/>
+    <id>https://lyluchao.github.io/2026/01/13/%E4%B9%A1%E6%84%81-%E4%BD%99%E5%85%89%E4%B8%AD/</id>
     <published>2026-01-13T10:13:12.000Z</published>
     <updated>2026-01-13T10:13:12.514Z</updated>
     
