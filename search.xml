@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>测试CSS引用</title>
+      <link href="/mokewenxue.github.io/2026/01/20/%E6%B5%8B%E8%AF%95CSS%E5%BC%95%E7%94%A8/"/>
+      <url>/mokewenxue.github.io/2026/01/20/%E6%B5%8B%E8%AF%95CSS%E5%BC%95%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<div class="triple-peak-article"><h2>测试全局CSS引用</h2><div class="zen-discussion"><div class="discussion-question">    <div class="question-marker">测试问题</div>    <strong>CSS是否生效？</strong><br>    如果看到紫色边框和样式，说明CSS已正确引用    <div class="discussion-answer">这里是答案区域，应该有特殊样式</div></div></div><div class="alchemy-container"><div class="alchemy-header">测试炼金术容器</div><div class="alchemy-category"><div class="category-title">测试标题</div><div class="alchemy-example">测试内容</div></div></div></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 测试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 测试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>贺新郎·醉江秋</title>
       <link href="/mokewenxue.github.io/2026/01/19/%E8%B4%BA%E6%96%B0%E9%83%8E%C2%B7%E9%86%89%E6%B1%9F%E7%A7%8B/"/>
       <url>/mokewenxue.github.io/2026/01/19/%E8%B4%BA%E6%96%B0%E9%83%8E%C2%B7%E9%86%89%E6%B1%9F%E7%A7%8B/</url>
