@@ -2527,3 +2527,43 @@ code {
     font-size: 1.5em;
     font-weight: bold;
 }
+
+/* 引入统一赋文样式 */
+@import url('fuwen-unified.css');
+
+/* 三绝赋特殊样式 */
+.trilogy-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2em 0;
+}
+
+.trilogy-item {
+    flex: 1;
+    min-width: 300px;
+    margin: 1em;
+    padding: 1.5em;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.trilogy-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.trilogy-duanhong {
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    border: 2px solid #90CAF9;
+}
+
+.trilogy-qinghui {
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border: 2px solid #FFB300;
+}
+
+.trilogy-wanlai {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    border: 2px solid #4CAF50;
+}
