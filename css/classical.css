@@ -2567,3 +2567,152 @@ code {
     background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
     border: 2px solid #4CAF50;
 }
+
+/* ===== 互动探究专用样式 ===== */
+
+/* 互动探究容器 */
+.zen-discussion {
+    background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+    border: 2px solid #9C27B0;
+    border-radius: 15px;
+    padding: 2.5em;
+    margin: 3em 0;
+    position: relative;
+}
+
+.zen-discussion::before {
+    content: "互动探究";
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #9C27B0;
+    color: white;
+    padding: 8px 35px;
+    border-radius: 25px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 10px rgba(156, 39, 176, 0.3);
+}
+
+/* 讨论问题样式 */
+.discussion-question {
+    background: white;
+    padding: 1.8em;
+    margin: 1.5em 0;
+    border-radius: 12px;
+    border: 2px solid #E1BEE7;
+    position: relative;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.discussion-question:hover {
+    border-color: #9C27B0;
+    box-shadow: 0 6px 18px rgba(156, 39, 176, 0.15);
+    transform: translateY(-3px);
+}
+
+/* 问题标记 */
+.question-marker {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #9C27B0;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 0.95em;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(156, 39, 176, 0.3);
+    z-index: 1;
+}
+
+/* 讨论答案样式 */
+.discussion-answer {
+    margin-top: 1.2em;
+    padding-top: 1.2em;
+    border-top: 2px dashed #E1BEE7;
+    color: #5D4037;
+    line-height: 1.7;
+    font-size: 0.95em;
+    background: linear-gradient(135deg, #F5F5F5, #FAFAFA);
+    padding: 1em 1.2em;
+    border-radius: 8px;
+    border-left: 4px solid #7B1FA2;
+    font-style: italic;
+}
+
+/* 讨论内容强调 */
+.discussion-question strong {
+    color: #7B1FA2;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.05em;
+    margin-right: 5px;
+}
+
+/* 思考提示样式 */
+.discussion-hint {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    border: 1px solid #FFB74D;
+    border-radius: 8px;
+    padding: 1em;
+    margin-top: 0.8em;
+    font-size: 0.9em;
+    color: #5D4037;
+    position: relative;
+}
+
+.discussion-hint::before {
+    content: "💡";
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+/* 创作练习特殊样式 */
+.discussion-question[class*="practice"] {
+    border-color: #4CAF50;
+    background: linear-gradient(135deg, #F1F8E9, #E8F5E9);
+}
+
+.discussion-question[class*="practice"]:hover {
+    border-color: #2E7D32;
+    box-shadow: 0 6px 18px rgba(76, 175, 80, 0.15);
+}
+
+.discussion-question[class*="practice"] .question-marker {
+    background: #4CAF50;
+    box-shadow: 0 3px 8px rgba(76, 175, 80, 0.3);
+}
+
+.discussion-question[class*="practice"] .discussion-answer {
+    border-left-color: #2E7D32;
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .zen-discussion {
+        padding: 1.8em 1.2em;
+        margin: 2em 0;
+    }
+    
+    .discussion-question {
+        padding: 1.5em 1.2em;
+        margin: 1.2em 0;
+    }
+    
+    .question-marker {
+        left: 15px;
+        padding: 5px 12px;
+        font-size: 0.85em;
+    }
+    
+    .zen-discussion::before {
+        font-size: 1.1em;
+        padding: 6px 25px;
+    }
+}
