@@ -841,3 +841,186 @@
         padding: 8px 30px;
     }
 }
+
+/* ===== 带ID的互动探究样式 ===== */
+
+/* 现代意义阐释专用容器 */
+#modern-significance {
+    background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+    border: 3px solid #9C27B0;
+    border-radius: 18px;
+    padding: 3em;
+    margin: 4em 0;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(156, 39, 176, 0.15);
+}
+
+#modern-significance::before {
+    content: "现代意义阐释";
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+    color: white;
+    padding: 10px 45px;
+    border-radius: 30px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.4em;
+    font-weight: bold;
+    letter-spacing: 4px;
+    box-shadow: 0 6px 15px rgba(156, 39, 176, 0.4);
+    z-index: 10;
+}
+
+/* 现代意义的问题项 */
+.significance-item {
+    background: white;
+    padding: 2em;
+    margin: 2em 0;
+    border-radius: 15px;
+    border: 2px solid #E1BEE7;
+    position: relative;
+    transition: all 0.4s;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.significance-item:hover {
+    border-color: #9C27B0;
+    box-shadow: 0 10px 25px rgba(156, 39, 176, 0.2);
+    transform: translateY(-5px) scale(1.01);
+}
+
+/* 现代意义的标记 */
+.significance-marker {
+    position: absolute;
+    top: -20px;
+    left: 25px;
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+    color: white;
+    padding: 8px 25px;
+    border-radius: 25px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
+    z-index: 5;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* 现代意义的标题 */
+.significance-title {
+    color: #7B1FA2;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.2em;
+    margin-bottom: 0.8em;
+    display: block;
+    border-bottom: 2px solid #F3E5F5;
+    padding-bottom: 0.5em;
+}
+
+/* 现代意义的文本 */
+.significance-text {
+    margin: 0.8em 0;
+    color: #555;
+    font-size: 1.05em;
+    line-height: 1.6;
+}
+
+/* 现代意义的答案 */
+.significance-answer {
+    margin-top: 1.5em;
+    padding: 1.3em 1.5em;
+    border-top: 3px dashed #E1BEE7;
+    color: #4A4A4A;
+    line-height: 1.8;
+    font-size: 1em;
+    background: linear-gradient(135deg, #F8F9FA, #E9ECEF);
+    border-radius: 10px;
+    border-left: 5px solid #7B1FA2;
+    font-style: italic;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.05);
+}
+
+/* 特殊标记 - 不同类别不同颜色 */
+#psychology-value .significance-marker {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+}
+
+#action-wisdom .significance-marker {
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+}
+
+#ultimate-care .significance-marker {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+}
+
+#contemporary-meaning .significance-marker {
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #modern-significance {
+        padding: 2em 1.5em;
+        margin: 3em 0;
+    }
+    
+    .significance-item {
+        padding: 1.5em;
+        margin: 1.5em 0;
+    }
+    
+    .significance-marker {
+        left: 15px;
+        padding: 6px 15px;
+        font-size: 0.9em;
+        min-width: 80px;
+    }
+    
+    #modern-significance::before {
+        font-size: 1.1em;
+        padding: 8px 30px;
+    }
+}
+
+/* 针对Markdown自动生成p标签的样式 */
+#modern-significance p {
+    margin: 0.8em 0;
+    line-height: 1.6;
+}
+
+#modern-significance .significance-item p:first-of-type {
+    color: #7B1FA2;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.2em;
+    margin-bottom: 0.8em;
+    border-bottom: 2px solid #F3E5F5;
+    padding-bottom: 0.5em;
+}
+
+#modern-significance .significance-item p:nth-of-type(2) {
+    color: #555;
+    font-size: 1.05em;
+    margin: 0.8em 0;
+}
+
+/* 如果Markdown解析器把significance-item里的内容都变成p标签 */
+#modern-significance div.significance-item > p.significance-marker {
+    position: absolute;
+    top: -20px;
+    left: 25px;
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+    color: white;
+    padding: 8px 25px;
+    border-radius: 25px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
+    z-index: 5;
+    min-width: 100px;
+    text-align: center;
+    margin: 0 !important;
+}
