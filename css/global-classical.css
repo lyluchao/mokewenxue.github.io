@@ -1,0 +1,656 @@
+/* ========== 全局古典文学样式 ========== */
+
+/* 1. 基础文章容器 */
+.triple-peak-article {
+    counter-reset: peak;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    font-family: "SimSun", "宋体", serif;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* 2. 标题样式 */
+.triple-peak-title {
+    text-align: center;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 2.8em;
+    color: #8B4513;
+    margin: 2em 0;
+    position: relative;
+    padding: 20px 0;
+}
+
+.triple-peak-title::before, .triple-peak-title::after {
+    content: "❖";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: #A0522D;
+}
+
+.triple-peak-title::before { left: 15%; }
+.triple-peak-title::after { right: 15%; }
+
+/* 3. 三绝容器 */
+.triple-peaks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 3em 0;
+}
+
+.peak-section {
+    position: relative;
+    padding: 2.5em;
+    border-radius: 15px;
+    margin-bottom: 1em;
+    counter-increment: peak;
+    min-height: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.peak-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* 各绝颜色主题 */
+.peak-first {
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    border: 3px solid #64B5F6;
+}
+
+.peak-second {
+    background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+    border: 3px solid #BA68C8;
+}
+
+.peak-third {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    border: 3px solid #81C784;
+}
+
+/* 4. 内容区域 */
+.peak-content {
+    line-height: 2.2;
+    font-size: 1.1em;
+    text-align: justify;
+    margin: 1em 0;
+    padding-left: 20px;
+    border-left: 3px solid rgba(139, 69, 19, 0.3);
+}
+
+/* 5. 总结升华区 */
+.peaks-summary {
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border: 4px double #8B4513;
+    padding: 3em;
+    margin: 4em 0;
+    text-align: center;
+    border-radius: 20px;
+    position: relative;
+}
+
+.peaks-summary::before {
+    content: "三绝同辉";
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8B4513;
+    color: #FFF8E1;
+    padding: 10px 40px;
+    border-radius: 30px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+/* 6. 表格样式 */
+.structure-system {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2.5em 0;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    font-family: "STKaiti", "楷体", serif;
+}
+
+.structure-system th {
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
+    padding: 18px;
+    text-align: center;
+    font-size: 1.2em;
+    border: 1px solid #5D4037;
+}
+
+.structure-system td {
+    padding: 15px;
+    border: 1px solid #D7CCC8;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.structure-system tr:nth-child(odd) { background: #FFF8E1; }
+.structure-system tr:nth-child(even) { background: #EFEBE9; }
+.structure-system tr:hover { background: #FFECB3; transition: background 0.3s; }
+
+/* 7. 树状图 */
+.imagery-tree {
+    background: white;
+    border: 2px solid #5D4037;
+    padding: 2em;
+    margin: 2.5em 0;
+    border-radius: 10px;
+    font-family: "STKaiti", "楷体", monospace;
+    line-height: 1.8;
+    position: relative;
+}
+
+.tree-node {
+    margin: 0.5em 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+.tree-node::before {
+    content: "├─";
+    position: absolute;
+    left: 10px;
+    color: #8B4513;
+}
+
+.tree-node:last-child::before { content: "└─"; }
+.tree-root {
+    font-weight: bold;
+    color: #8B4513;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    padding-left: 0;
+}
+.tree-root::before { content: none; }
+
+/* 8. 炼金术容器 */
+.alchemy-container {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    border: 2px solid #FF9800;
+    border-radius: 12px;
+    padding: 2em;
+    margin: 2.5em 0;
+    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.15);
+}
+
+.alchemy-header {
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.6em;
+    color: #E65100;
+    text-align: center;
+    margin-bottom: 1.5em;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.alchemy-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #FF9800, #FF5722);
+    border-radius: 3px;
+}
+
+.alchemy-category {
+    margin-bottom: 1.5em;
+    padding: 1.2em;
+    background: white;
+    border-radius: 8px;
+    border-left: 4px solid #FF9800;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.alchemy-category:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 18px rgba(255, 152, 0, 0.2);
+}
+
+.category-title {
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.2em;
+    color: #5D4037;
+    font-weight: bold;
+    margin-bottom: 0.8em;
+    display: flex;
+    align-items: center;
+}
+
+.category-title::before {
+    content: "✨";
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.alchemy-example {
+    background: #FFF8E1;
+    padding: 1em;
+    margin-top: 0.8em;
+    border-radius: 6px;
+    border: 1px dashed #FFB74D;
+    font-style: italic;
+    color: #5D4037;
+    line-height: 1.6;
+}
+
+.alchemy-example::before {
+    content: "例：";
+    font-weight: bold;
+    color: #FF9800;
+}
+
+/* 9. 创作方法论 */
+.creation-methodology {
+    background: #FFF;
+    border: 2px solid #A1887F;
+    padding: 2.5em;
+    margin: 3em 0;
+    border-radius: 12px;
+    position: relative;
+}
+
+.methodology-step {
+    display: flex;
+    align-items: center;
+    margin: 1.5em 0;
+    padding: 1em;
+    background: #F5F5F5;
+    border-radius: 8px;
+    border-left: 5px solid #8B4513;
+}
+
+.step-number {
+    background: #8B4513;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.methodology-content {
+    flex: 1;
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+/* 10. 演进图式 */
+.appendix-evolution {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    border: 3px solid #FFB74D;
+    padding: 2em;
+    margin: 3em 0;
+    border-radius: 12px;
+    font-family: "STKaiti", "楷体", monospace;
+    line-height: 1.8;
+}
+
+.evolution-level {
+    margin: 1em 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+.evolution-level::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #FF9800;
+    font-size: 1.2em;
+}
+
+.evolution-content {
+    margin-left: 10px;
+    color: #5D4037;
+}
+
+/* 11. 禅意境界图 */
+.zen-state-container {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    border: 2px solid #4CAF50;
+    border-radius: 12px;
+    padding: 2em;
+    margin: 2.5em 0;
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.15);
+}
+
+.zen-state-header {
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.6em;
+    color: #2E7D32;
+    text-align: center;
+    margin-bottom: 1.5em;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.zen-state-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #4CAF50, #1B5E20);
+    border-radius: 3px;
+}
+
+.state-level {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5em;
+    padding: 1.2em;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.state-arrow {
+    font-size: 2em;
+    color: #4CAF50;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.state-content {
+    flex: 1;
+}
+
+.state-title {
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.2em;
+    color: #2E7D32;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    display: flex;
+    align-items: center;
+}
+
+.state-title::before {
+    content: "▸";
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.state-desc {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95em;
+}
+
+/* 12. ========== 互动探究/研习全局样式 ========== */
+
+/* 互动容器 */
+.zen-discussion,
+.interaction-study {
+    background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+    border: 2px solid #9C27B0;
+    border-radius: 15px;
+    padding: 2.5em;
+    margin: 3em 0;
+    position: relative;
+}
+
+.zen-discussion::before,
+.interaction-study::before {
+    content: "互动研习";
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #9C27B0;
+    color: white;
+    padding: 8px 35px;
+    border-radius: 25px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 3px;
+    box-shadow: 0 4px 10px rgba(156, 39, 176, 0.3);
+}
+
+/* 讨论问题项 */
+.discussion-question,
+.study-item {
+    background: white;
+    padding: 1.8em;
+    margin: 1.5em 0;
+    border-radius: 12px;
+    border: 2px solid #E1BEE7;
+    position: relative;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.discussion-question:hover,
+.study-item:hover {
+    border-color: #9C27B0;
+    box-shadow: 0 6px 18px rgba(156, 39, 176, 0.15);
+    transform: translateY(-3px);
+}
+
+/* 问题标记 */
+.question-marker,
+.study-marker {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #9C27B0;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 0.95em;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(156, 39, 176, 0.3);
+    z-index: 1;
+}
+
+/* 讨论答案 */
+.discussion-answer,
+.study-thought {
+    margin-top: 1.2em;
+    padding-top: 1.2em;
+    border-top: 2px dashed #E1BEE7;
+    color: #5D4037;
+    line-height: 1.7;
+    font-size: 0.95em;
+    background: linear-gradient(135deg, #F5F5F5, #FAFAFA);
+    padding: 1em 1.2em;
+    border-radius: 8px;
+    border-left: 4px solid #7B1FA2;
+    font-style: italic;
+}
+
+/* 强调文本 */
+.discussion-question strong,
+.study-item strong {
+    color: #7B1FA2;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.05em;
+    margin-right: 5px;
+}
+
+/* 创作练习特殊样式 */
+.discussion-question[class*="practice"],
+.study-item[class*="practice"] {
+    border-color: #4CAF50;
+    background: linear-gradient(135deg, #F1F8E9, #E8F5E9);
+}
+
+.discussion-question[class*="practice"]:hover,
+.study-item[class*="practice"]:hover {
+    border-color: #2E7D32;
+    box-shadow: 0 6px 18px rgba(76, 175, 80, 0.15);
+}
+
+.discussion-question[class*="practice"] .question-marker,
+.study-item[class*="practice"] .study-marker {
+    background: #4CAF50;
+    box-shadow: 0 3px 8px rgba(76, 175, 80, 0.3);
+}
+
+.discussion-question[class*="practice"] .discussion-answer,
+.study-item[class*="practice"] .study-thought {
+    border-left-color: #2E7D32;
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+}
+
+/* 13. 后记样式 */
+.zen-epilogue {
+    font-style: italic;
+    text-align: justify;
+    padding: 3em;
+    margin-top: 4em;
+    background: linear-gradient(135deg, #EFEBE9, #D7CCC8);
+    border-radius: 20px;
+    border: 4px solid #8B4513;
+    position: relative;
+    line-height: 2;
+}
+
+.zen-epilogue::before {
+    content: "后记";
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8B4513;
+    color: #FFF8E1;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.8em;
+    font-weight: bold;
+    box-shadow: 0 6px 15px rgba(139, 69, 19, 0.4);
+}
+
+/* 14. 其他辅助样式 */
+.peak-quote {
+    font-style: italic;
+    color: #5D4037;
+    text-align: center;
+    padding: 1.5em;
+    margin: 2em 0;
+    border-left: 4px solid #8B4513;
+    border-right: 4px solid #8B4513;
+    background: rgba(255, 248, 225, 0.5);
+    border-radius: 8px;
+    font-size: 1.2em;
+    line-height: 1.8;
+}
+
+.peak-quote::before, .peak-quote::after {
+    content: '"';
+    font-size: 1.5em;
+    color: #A0522D;
+}
+
+.zen-note {
+    background: linear-gradient(135deg, #FFFDE7, #FFF9C4);
+    border: 2px solid #FFD54F;
+    padding: 1.5em;
+    margin: 2em 0;
+    border-radius: 10px;
+    position: relative;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.zen-note::before {
+    content: "注";
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: #FFD54F;
+    color: #5D4037;
+    padding: 3px 15px;
+    border-radius: 15px;
+    font-family: "STKaiti", "楷体", serif;
+    font-weight: bold;
+}
+
+/* 15. 响应式设计 */
+@media (max-width: 768px) {
+    .triple-peak-article {
+        padding: 10px;
+    }
+    
+    .triple-peak-title {
+        font-size: 2em;
+        margin: 1.5em 0;
+    }
+    
+    .triple-peak-title::before,
+    .triple-peak-title::after {
+        display: none;
+    }
+    
+    .peak-section {
+        padding: 1.5em;
+        min-height: auto;
+        margin-bottom: 2em;
+    }
+    
+    .zen-discussion,
+    .interaction-study {
+        padding: 1.8em 1.2em;
+        margin: 2em 0;
+    }
+    
+    .discussion-question,
+    .study-item {
+        padding: 1.5em 1.2em;
+        margin: 1.2em 0;
+    }
+    
+    .question-marker,
+    .study-marker {
+        left: 15px;
+        padding: 5px 12px;
+        font-size: 0.85em;
+    }
+    
+    .zen-discussion::before,
+    .interaction-study::before {
+        font-size: 1.1em;
+        padding: 6px 25px;
+    }
+    
+    .zen-epilogue {
+        padding: 2em 1em;
+    }
+    
+    .zen-epilogue::before {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5em;
+    }
+}
