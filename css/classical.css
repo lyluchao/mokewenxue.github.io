@@ -2204,3 +2204,326 @@ code {
     margin-top: 1em;
     background: #FFF8E1;
 }
+
+/* 三问臻赋统一样式 */
+.three-questions-article {
+    counter-reset: question;
+    max-width: 920px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #FFF, #F5F5F5);
+    padding: 2em;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
+}
+
+/* 三问标题 */
+.three-questions-title {
+    text-align: center;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 2.8em;
+    color: #8B4513;
+    margin: 1.5em 0;
+    position: relative;
+}
+
+.three-questions-title::before, .three-questions-title::after {
+    content: "❖";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+    color: #A0522D;
+}
+
+.three-questions-title::before {
+    left: 15%;
+}
+
+.three-questions-title::after {
+    right: 15%;
+}
+
+/* 三问章节容器 */
+.questions-chapters {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 3em 0;
+}
+
+.question-chapter {
+    flex: 1;
+    min-width: 280px;
+    padding: 2em;
+    border-radius: 10px;
+    position: relative;
+    counter-increment: question;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.question-chapter:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* 各问具体样式 */
+.chapter-question-moon {
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    border: 3px solid #90CAF9;
+}
+
+.chapter-question-moon::before {
+    content: "一问·寄月";
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #1565C0;
+    color: white;
+    padding: 8px 25px;
+    border-radius: 25px;
+    font-family: "STKaiti", "楷体", serif;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(21, 101, 192, 0.3);
+}
+
+.chapter-question-star {
+    background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+    border: 3px solid #CE93D8;
+}
+
+.chapter-question-star::before {
+    content: "二问·明星";
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #7B1FA2;
+    color: white;
+    padding: 8px 25px;
+    border-radius: 25px;
+    font-family: "STKaiti", "楷体", serif;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(123, 31, 162, 0.3);
+}
+
+.chapter-question-sword {
+    background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+    border: 3px solid #EF9A9A;
+}
+
+.chapter-question-sword::before {
+    content: "三问·砺剑";
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #C62828;
+    color: white;
+    padding: 8px 25px;
+    border-radius: 25px;
+    font-family: "STKaiti", "楷体", serif;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(198, 40, 40, 0.3);
+}
+
+/* 章节内容 */
+.chapter-content {
+    margin-top: 1.5em;
+    line-height: 2;
+    text-align: justify;
+}
+
+.chapter-highlight {
+    font-weight: bold;
+    color: #8B4513;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.1em;
+    margin: 1em 0;
+    padding-left: 1em;
+    border-left: 3px solid currentColor;
+}
+
+/* 进阶体系图 */
+.advancement-system {
+    background: white;
+    border: 2px solid #8B4513;
+    padding: 2em;
+    margin: 3em 0;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.advancement-system::before {
+    content: "进阶体系";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8B4513;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-family: "STKaiti", "楷体", serif;
+    font-weight: bold;
+}
+
+.system-diagram {
+    font-family: "STKaiti", "楷体", monospace;
+    white-space: pre;
+    text-align: left;
+    margin: 1em auto;
+    padding: 1em;
+    background: #F5F5F5;
+    border-radius: 5px;
+    overflow-x: auto;
+    max-width: 600px;
+}
+
+/* 意象系统图 */
+.imagery-system {
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border: 2px solid #FFB300;
+    padding: 2em;
+    margin: 3em 0;
+    border-radius: 10px;
+}
+
+.imagery-category {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 1.5em 0;
+}
+
+.imagery-item {
+    background: white;
+    border: 1px solid #D7CCC8;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.imagery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.imagery-moon { border-left: 4px solid #1565C0; }
+.imagery-star { border-left: 4px solid #7B1FA2; }
+.imagery-sword { border-left: 4px solid #C62828; }
+.imagery-nature { border-left: 4px solid #2E7D32; }
+
+/* 实践指南 */
+.practice-guide {
+    background: #E8F5E9;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 2em;
+    margin: 3em 0;
+}
+
+.practice-stage {
+    background: white;
+    padding: 1.5em;
+    margin: 1.5em 0;
+    border-radius: 8px;
+    border-left: 5px solid #4CAF50;
+}
+
+.stage-title {
+    color: #2E7D32;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px dashed #A5D6A7;
+}
+
+/* 互动讨论区 */
+.interactive-section {
+    background: #FFF3E0;
+    border: 2px solid #FFB74D;
+    border-radius: 10px;
+    padding: 2em;
+    margin: 3em 0;
+}
+
+.discussion-topic {
+    background: white;
+    padding: 1.5em;
+    margin: 1em 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(255, 183, 77, 0.2);
+}
+
+.topic-title {
+    color: #EF6C00;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+/* 结尾歌谣 */
+.ending-ballad {
+    text-align: center;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.8em;
+    color: #8B4513;
+    margin: 4em 0;
+    padding: 2.5em;
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border-radius: 15px;
+    border: 3px solid #A1887F;
+    position: relative;
+}
+
+.ending-ballad::before, .ending-ballad::after {
+    content: "✦";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: #A0522D;
+}
+
+.ending-ballad::before {
+    left: 30px;
+}
+
+.ending-ballad::after {
+    right: 30px;
+}
+
+/* 跋语 */
+.epilogue-area {
+    font-style: italic;
+    text-align: center;
+    padding: 3em 2em;
+    margin-top: 4em;
+    background: linear-gradient(135deg, #EFEBE9, #D7CCC8);
+    border-radius: 15px;
+    border-top: 4px solid #8B4513;
+    border-bottom: 4px solid #8B4513;
+    position: relative;
+}
+
+.epilogue-area::before {
+    content: "跋";
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8B4513;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "STKaiti", "楷体", serif;
+    font-size: 1.5em;
+    font-weight: bold;
+}
