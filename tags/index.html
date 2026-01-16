@@ -350,19 +350,36 @@
             line-height: 1.6;
         }
         
-        /* 所有词牌列表 - 保持原样 */
+        /* 所有词牌列表 - 重新设计为显眼闪烁效果 */
         .all-tags-section {
             background: linear-gradient(135deg, 
-                rgba(20, 26, 45, 0.9) 0%, 
-                rgba(93, 63, 211, 0.15) 100%);
+                rgba(139, 92, 246, 0.2) 0%, 
+                rgba(59, 130, 246, 0.15) 50%,
+                rgba(255, 215, 93, 0.1) 100%);
             border-radius: 25px;
             padding: 50px 40px;
             margin: 60px auto;
             max-width: 1200px;
-            border: 2px solid var(--border-cosmic);
+            border: 3px solid rgba(255, 215, 93, 0.3);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
+            animation: section-pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes section-pulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 20px 50px rgba(139, 92, 246, 0.3),
+                    0 0 30px rgba(255, 215, 93, 0.2),
+                    inset 0 0 25px rgba(255, 255, 255, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 25px 60px rgba(139, 92, 246, 0.4),
+                    0 0 40px rgba(255, 215, 93, 0.3),
+                    inset 0 0 35px rgba(255, 255, 255, 0.15);
+            }
         }
         
         .all-tags-section::before {
@@ -373,96 +390,236 @@
             right: 0;
             height: 4px;
             background: linear-gradient(90deg, 
-                var(--nebula-purple), 
-                var(--comet-blue),
-                var(--star-gold));
+                #ffd700, #ff8c00, #ff4500, #ffd700, #ff8c00);
             border-radius: 25px 25px 0 0;
+            animation: border-flow 3s linear infinite;
+        }
+        
+        @keyframes border-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
         
         .all-tags-title {
-            color: var(--star-gold);
-            font-size: 2.2rem;
-            margin-bottom: 30px;
+            color: #ffd700;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            gap: 20px;
+            text-align: center;
         }
         
         .all-tags-title i {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            animation: icon-spin 4s linear infinite;
+        }
+        
+        @keyframes icon-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .all-tags-count {
-            background: var(--gradient-nebula);
+            background: linear-gradient(135deg, #ff8c00, #ff4500);
             color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 1.2rem;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 1.5rem;
             font-weight: bold;
             margin-left: 15px;
+            animation: count-bounce 2s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
         }
         
-        /* 词牌标签样式 - 保持原样 */
+        @keyframes count-bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* 新的词牌网格布局 - 更密集显眼 */
         .all-tags-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
         }
         
         .all-tag-item {
-            background: rgba(93, 63, 211, 0.15);
-            color: var(--nebula-purple);
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.2) 0%, 
+                rgba(255, 140, 0, 0.2) 50%,
+                rgba(255, 69, 0, 0.2) 100%);
+            color: #ffd700;
             text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            border: 1px solid rgba(93, 63, 211, 0.3);
-            font-size: 1.1rem;
+            padding: 18px 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            font-size: 1.2rem;
             font-weight: 600;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            animation: tag-glowing 4s ease-in-out infinite;
+            animation-delay: calc(var(--tag-index) * 0.2s);
+        }
+        
+        @keyframes tag-glowing {
+            0%, 100% { 
+                box-shadow: 
+                    0 5px 20px rgba(255, 140, 0, 0.3),
+                    inset 0 0 10px rgba(255, 255, 255, 0.1);
+                transform: translateY(0);
+                border-color: rgba(255, 215, 0, 0.4);
+            }
+            50% { 
+                box-shadow: 
+                    0 10px 35px rgba(255, 140, 0, 0.5),
+                    0 0 25px rgba(255, 215, 0, 0.4),
+                    inset 0 0 20px rgba(255, 255, 255, 0.2);
+                transform: translateY(-5px);
+                border-color: rgba(255, 215, 0, 0.8);
+            }
+        }
+        
+        .all-tag-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                #ffd700, 
+                #ff8c00,
+                #ff4500,
+                #ffd700);
+            border-radius: 17px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .all-tag-item:hover::before {
+            opacity: 1;
+            animation: border-rotate 2s linear infinite;
+        }
+        
+        @keyframes border-rotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
         
         .all-tag-item:hover {
-            background: var(--nebula-purple);
             color: white;
-            transform: translateY(-3px);
-            border-color: var(--nebula-purple);
+            animation: tag-hover 0.3s ease forwards;
+            z-index: 10;
+        }
+        
+        @keyframes tag-hover {
+            to {
+                transform: translateY(-8px) scale(1.05);
+                box-shadow: 
+                    0 20px 50px rgba(255, 140, 0, 0.6),
+                    0 0 35px rgba(255, 215, 0, 0.4);
+            }
+        }
+        
+        .tag-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
         }
         
         .tag-icon {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tag-name {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            font-size: 1.1rem;
         }
         
         .tag-count {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             color: white;
-            font-size: 0.8rem;
-            padding: 4px 10px;
+            font-size: 0.9rem;
+            padding: 6px 12px;
             border-radius: 12px;
             font-weight: bold;
+            backdrop-filter: blur(5px);
+            animation: count-flash 3s ease-in-out infinite;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
         
-        /* 词牌分组 - 按字母排序 */
+        @keyframes count-flash {
+            0%, 100% { 
+                background: rgba(255, 255, 255, 0.25);
+                transform: scale(1);
+            }
+            50% { 
+                background: rgba(255, 215, 0, 0.5);
+                transform: scale(1.1);
+            }
+        }
+        
+        /* 词牌分组标题 */
         .tags-group {
             margin-bottom: 40px;
         }
         
         .group-title {
-            color: var(--comet-blue);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(77, 139, 240, 0.3);
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid rgba(255, 215, 0, 0.3);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
         }
         
         .group-title i {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            animation: letter-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes letter-glow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 5px #ffd700);
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 15px #ffd700);
+                transform: scale(1.1);
+            }
+        }
+        
+        .group-count {
+            background: rgba(255, 69, 0, 0.3);
+            color: white;
+            font-size: 1rem;
+            padding: 4px 12px;
+            border-radius: 10px;
+            margin-left: 10px;
+            font-weight: bold;
+            animation: group-count-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes group-count-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
         /* 页脚复用 */
@@ -533,8 +690,15 @@
         
         /* 响应式设计 */
         @media (max-width: 1200px) {
-            .laws-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            .laws-grid,
+            .all-tags-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .all-tags-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
         
@@ -560,17 +724,30 @@
                 font-size: 0.9rem;
             }
             
-            .laws-grid {
-                grid-template-columns: 1fr;
+            .laws-grid,
+            .all-tags-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
             }
             
             .all-tags-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .all-tags-count {
+                font-size: 1.2rem;
+                padding: 6px 15px;
             }
             
             .all-tag-item {
-                padding: 10px 18px;
-                font-size: 1rem;
+                padding: 15px 18px;
+                font-size: 1.1rem;
+            }
+            
+            .group-title {
+                font-size: 1.5rem;
             }
             
             .nav-container {
@@ -599,32 +776,23 @@
             }
         }
         
-        @media (max-width: 480px) {
-            .system-title {
-                font-size: 1.6rem;
-            }
-            
-            .forging-table th,
-            .forging-table td {
-                padding: 10px 8px;
-                font-size: 0.8rem;
-            }
-            
-            .law-card {
-                padding: 20px;
-            }
-            
-            .law-name {
-                font-size: 1.1rem;
-            }
-            
+        @media (max-width: 576px) {
             .all-tags-grid {
+                grid-template-columns: 1fr;
                 gap: 12px;
             }
             
             .all-tag-item {
-                padding: 8px 15px;
-                font-size: 0.9rem;
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+            
+            .system-title {
+                font-size: 1.8rem;
+            }
+            
+            .laws-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -859,7 +1027,7 @@
             </div>
         </section>
         
-        <!-- 2. 所有词牌列表（保持原样） -->
+        <!-- 2. 所有词牌列表（显眼闪烁效果） -->
         <section class="all-tags-section">
             <h2 class="all-tags-title">
                 <i class="fas fa-layer-group"></i>
@@ -874,18 +1042,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            万
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·万
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E4%B8%87%E7%B1%81%E4%BF%B1%E6%B2%89/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 0;"
                                    title="万籁俱沉 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#万籁俱沉</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#万籁俱沉</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -897,18 +1066,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            三
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·三
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E4%B8%89%E7%BB%9D%E8%B5%8B/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 100;"
                                    title="三绝赋 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#三绝赋</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#三绝赋</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -916,9 +1086,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E4%B8%89%E9%97%AE/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 101;"
                                    title="三问 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#三问</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#三问</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -930,18 +1103,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            临
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·临
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E4%B8%B4%E6%B1%9F%E4%BB%99/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 200;"
                                    title="临江仙 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#临江仙</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#临江仙</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -953,18 +1127,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            侠
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·侠
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E4%BE%A0%E6%B0%94/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 300;"
                                    title="侠气 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#侠气</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#侠气</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -976,18 +1151,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            修
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·修
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E5%BF%83/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 400;"
                                    title="修心 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#修心</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#修心</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -995,9 +1171,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E8%A1%8C/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 401;"
                                    title="修行 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#修行</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#修行</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1009,18 +1188,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            剑
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (7个)
-                            </span>
+                            词牌·剑
+                            <span class="group-count">7个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%89%91%E5%AE%A2/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 500;"
                                    title="剑客 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#剑客</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#剑客</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1028,9 +1208,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%89%91%E7%BB%8F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 501;"
                                    title="剑经 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#剑经</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#剑经</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1038,9 +1221,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/sword-classic/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 502;"
                                    title="剑经法典 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#剑经法典</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#剑经法典</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1048,9 +1234,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%89%91%E8%B5%8B/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 503;"
                                    title="剑赋 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#剑赋</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#剑赋</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1058,9 +1247,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%81%93/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 504;"
                                    title="剑道 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#剑道</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#剑道</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1068,9 +1260,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%81/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 505;"
                                    title="剑阁 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#剑阁</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#剑阁</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1078,9 +1273,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 506;"
                                    title="剑阵 (8篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#剑阵</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#剑阵</span>
+                                    </div>
                                     
                                         <span class="tag-count">8</span>
                                     
@@ -1092,18 +1290,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            双
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·双
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/double-blade-record/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 600;"
                                    title="双刃录 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#双刃录</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#双刃录</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1115,18 +1314,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            古
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·古
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%8F%A4%E8%AF%97/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 700;"
                                    title="古诗 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#古诗</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#古诗</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1138,18 +1338,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            周
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·周
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/twelve-poles/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 800;"
                                    title="周天十二极 (10篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#周天十二极</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#周天十二极</span>
+                                    </div>
                                     
                                         <span class="tag-count">10</span>
                                     
@@ -1161,18 +1362,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            哲
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·哲
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%93%B2%E5%AD%A6/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 900;"
                                    title="哲学 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#哲学</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#哲学</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1184,18 +1386,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            唐
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·唐
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%94%90%E8%AF%97/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1000;"
                                    title="唐诗 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#唐诗</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#唐诗</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1207,18 +1410,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            坚
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·坚
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%9D%9A%E5%AE%88/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1100;"
                                    title="坚守 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#坚守</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#坚守</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1230,18 +1434,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            境
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·境
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%A2%83%E7%95%8C%E9%80%92%E8%BF%9B/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1200;"
                                    title="境界递进 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#境界递进</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#境界递进</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1253,18 +1458,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            墨
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·墨
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%A2%A8%E9%94%8B/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1300;"
                                    title="墨锋 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#墨锋</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#墨锋</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1276,18 +1482,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            声
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·声
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%A3%B0%E5%A3%B0%E6%85%A2/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1400;"
                                    title="声声慢 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#声声慢</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#声声慢</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -1299,18 +1506,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            夜
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·夜
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%A4%9C%E6%80%9D/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1500;"
                                    title="夜思 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#夜思</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#夜思</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1322,18 +1530,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            天
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·天
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%A4%A9%E4%BA%BA%E5%90%88%E4%B8%80/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1600;"
                                    title="天人合一 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#天人合一</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#天人合一</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1341,9 +1550,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%A4%A9%E6%82%A0/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1601;"
                                    title="天悠 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#天悠</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#天悠</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1355,18 +1567,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            婵
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·婵
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%A9%B5%E5%A8%9F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1700;"
                                    title="婵娟 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#婵娟</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#婵娟</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1378,18 +1591,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            存
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·存
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AD%98%E5%9C%A8%E5%93%B2%E5%AD%A6/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1800;"
                                    title="存在哲学 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#存在哲学</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#存在哲学</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1401,18 +1615,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            孤
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (5个)
-                            </span>
+                            词牌·孤
+                            <span class="group-count">5个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%AF%82/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1900;"
                                    title="孤寂 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#孤寂</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#孤寂</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1420,9 +1635,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%BD%B1/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1901;"
                                    title="孤影 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#孤影</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#孤影</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -1430,9 +1648,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%80%80/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1902;"
                                    title="孤怀 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#孤怀</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#孤怀</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -1440,9 +1661,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%98%9F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1903;"
                                    title="孤星 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#孤星</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#孤星</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1450,9 +1674,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E7%8B%AC/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 1904;"
                                    title="孤独 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#孤独</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#孤独</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1464,18 +1691,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            宇
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·宇
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2000;"
                                    title="宇宙 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#宇宙</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#宇宙</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -1487,18 +1715,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            守
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·守
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AE%88%E5%BF%97/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2100;"
                                    title="守志 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#守志</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#守志</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1510,18 +1739,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            宋
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·宋
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2200;"
                                    title="宋词 (11篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#宋词</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#宋词</span>
+                                    </div>
                                     
                                         <span class="tag-count">11</span>
                                     
@@ -1533,18 +1763,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            寒
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·寒
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%AF%92%E5%BD%B1/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2300;"
                                    title="寒影 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#寒影</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#寒影</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1556,18 +1787,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            归
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·归
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%BD%92%E5%AF%82/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2400;"
                                    title="归寂 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#归寂</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#归寂</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1575,9 +1807,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%BD%92%E7%9C%9F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2401;"
                                    title="归真 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#归真</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#归真</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1589,18 +1824,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            心
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·心
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%BF%83%E7%81%AB/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2500;"
                                    title="心火 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#心火</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#心火</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1608,9 +1844,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%BF%83%E9%94%8B/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2501;"
                                    title="心锋 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#心锋</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#心锋</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1622,18 +1861,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            念
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·念
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E5%BF%B5%E5%A5%B4%E5%A8%87/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2600;"
                                    title="念奴娇 (3篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#念奴娇</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#念奴娇</span>
+                                    </div>
                                     
                                         <span class="tag-count">3</span>
                                     
@@ -1645,18 +1885,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            怀
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·怀
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%80%80%E6%80%9D/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2700;"
                                    title="怀思 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#怀思</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#怀思</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1664,9 +1905,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%80%80%E6%97%A7/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2701;"
                                    title="怀旧 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#怀旧</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#怀旧</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1678,18 +1922,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            总
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·总
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%80%BB%E5%BA%8F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2800;"
                                    title="总序 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#总序</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#总序</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1701,18 +1946,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            悖
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·悖
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%82%96%E8%AE%BA/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 2900;"
                                    title="悖论 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#悖论</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#悖论</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1724,18 +1970,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            抒
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·抒
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%8A%92%E6%80%80/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3000;"
                                    title="抒怀 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#抒怀</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#抒怀</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1747,18 +1994,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            担
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·担
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%8B%85%E5%BD%93/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3100;"
                                    title="担当 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#担当</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#担当</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1770,18 +2018,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            揽
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·揽
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3200;"
                                    title="揽星 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#揽星</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#揽星</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1793,18 +2042,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            擎
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·擎
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%93%8E%E4%B9%BE/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3300;"
                                    title="擎乾 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#擎乾</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#擎乾</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1816,18 +2066,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            散
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·散
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%95%A3%E6%96%87/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3400;"
                                    title="散文 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#散文</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#散文</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1839,18 +2090,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            文
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·文
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%96%87%E8%84%89/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3500;"
                                    title="文脉 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#文脉</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#文脉</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1862,18 +2114,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            断
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·断
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3600;"
                                    title="断鸿寒影 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#断鸿寒影</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#断鸿寒影</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1885,18 +2138,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            时
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·时
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%97%B6%E5%BA%8F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3700;"
                                    title="时序 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#时序</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#时序</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1908,18 +2162,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            星
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·星
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%98%9F%E6%B2%B3/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3800;"
                                    title="星河 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#星河</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#星河</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1927,9 +2182,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/star-sword-array/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3801;"
                                    title="星河剑阵 (3篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#星河剑阵</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#星河剑阵</span>
+                                    </div>
                                     
                                         <span class="tag-count">3</span>
                                     
@@ -1941,18 +2199,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            春
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·春
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%98%A5%E6%B1%9F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 3900;"
                                    title="春江 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#春江</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#春江</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1964,18 +2223,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            月
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·月
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%9C%88%E5%A4%9C/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4000;"
                                    title="月夜 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#月夜</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#月夜</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1983,9 +2243,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%9C%88%E8%89%B2/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4001;"
                                    title="月色 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#月色</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#月色</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -1997,18 +2260,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            本
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·本
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%9C%AC%E6%BA%90/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4100;"
                                    title="本源 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#本源</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#本源</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2020,18 +2284,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            朱
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·朱
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%9C%B1%E8%87%AA%E6%B8%85/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4200;"
                                    title="朱自清 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#朱自清</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#朱自清</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2043,18 +2308,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            水
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·水
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4300;"
                                    title="水调歌头 (3篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#水调歌头</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#水调歌头</span>
+                                    </div>
                                     
                                         <span class="tag-count">3</span>
                                     
@@ -2062,9 +2328,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E9%BE%99%E5%90%9F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4301;"
                                    title="水龙吟 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#水龙吟</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#水龙吟</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2076,18 +2345,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            永
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·永
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B0%B8%E6%81%92/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4400;"
                                    title="永恒 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#永恒</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#永恒</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2099,18 +2369,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            汉
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·汉
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B1%89%E8%AF%AD/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4500;"
                                    title="汉语 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#汉语</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#汉语</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2122,18 +2393,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            江
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·江
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B1%9F%E6%B9%96/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4600;"
                                    title="江湖 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#江湖</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#江湖</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2145,18 +2417,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            沁
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·沁
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B2%81%E5%9B%AD%E6%98%A5/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4700;"
                                    title="沁园春 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#沁园春</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#沁园春</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2168,18 +2441,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            沧
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·沧
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4800;"
                                    title="沧桑 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#沧桑</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#沧桑</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -2191,18 +2465,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            消
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·消
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B6%88%E8%A7%A3/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 4900;"
                                    title="消解 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#消解</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#消解</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2214,18 +2489,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            清
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (4个)
-                            </span>
+                            词牌·清
+                            <span class="group-count">4个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B8%85%E5%B9%B3%E4%B9%90/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5000;"
                                    title="清平乐 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#清平乐</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#清平乐</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2233,9 +2509,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B8%85%E6%80%80/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5001;"
                                    title="清怀 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#清怀</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#清怀</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2243,9 +2522,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B8%85%E8%BE%89/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5002;"
                                    title="清辉 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#清辉</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#清辉</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -2253,9 +2535,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%B8%85%E8%BE%89%E5%8A%AB%E5%B0%98/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5003;"
                                    title="清辉劫尘 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#清辉劫尘</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#清辉劫尘</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2267,18 +2552,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            满
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·满
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%BB%A1%E6%B1%9F%E7%BA%A2/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5100;"
                                    title="满江红 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#满江红</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#满江红</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2290,18 +2576,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            漂
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·漂
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E6%BC%82%E6%B3%8A/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5200;"
                                    title="漂泊 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#漂泊</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#漂泊</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2313,18 +2600,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            现
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·现
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E7%8E%B0%E5%AE%9E/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5300;"
                                    title="现实 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#现实</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#现实</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2336,18 +2624,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            生
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·生
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E7%94%9F%E5%91%BD%E9%94%BB%E9%80%A0/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5400;"
                                    title="生命锻造 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#生命锻造</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#生命锻造</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2359,18 +2648,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            秋
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·秋
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E7%A7%8B%E5%BE%8B/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5500;"
                                    title="秋律 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#秋律</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#秋律</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2378,9 +2668,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E7%A7%8B%E6%80%9D/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5501;"
                                    title="秋思 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#秋思</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#秋思</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2392,18 +2685,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            立
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·立
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E7%AB%8B%E6%B3%95/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5600;"
                                    title="立法 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#立法</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#立法</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2415,18 +2709,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            素
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·素
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E7%B4%A0%E5%BF%83/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5700;"
                                    title="素心 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#素心</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#素心</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2438,18 +2733,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            终
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·终
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E7%BB%88%E6%9E%81%E6%AD%A3%E5%85%B8/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5800;"
                                    title="终极正典 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#终极正典</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#终极正典</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2461,18 +2757,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            臻
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·臻
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%87%BB%E8%B5%8B/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 5900;"
                                    title="臻赋 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#臻赋</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#臻赋</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2484,18 +2781,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            荷
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·荷
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%8D%B7%E5%A1%98/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6000;"
                                    title="荷塘 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#荷塘</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#荷塘</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2507,18 +2805,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            萍
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·萍
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%90%8D%E8%B8%AA/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6100;"
                                    title="萍踪 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#萍踪</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#萍踪</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2530,18 +2829,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            虞
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·虞
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%99%9E%E7%BE%8E%E4%BA%BA/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6200;"
                                    title="虞美人 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#虞美人</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#虞美人</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2553,18 +2853,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            蚀
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·蚀
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%9A%80%E5%89%91/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6300;"
                                    title="蚀剑 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#蚀剑</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#蚀剑</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2576,18 +2877,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            蜕
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·蜕
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%9C%95%E9%B3%9E/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6400;"
                                    title="蜕鳞 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#蜕鳞</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#蜕鳞</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2599,18 +2901,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            蝶
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·蝶
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E6%81%8B%E8%8A%B1/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6500;"
                                    title="蝶恋花 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#蝶恋花</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#蝶恋花</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -2622,18 +2925,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            词
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·词
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%AF%8D/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6600;"
                                    title="词 (3篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#词</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#词</span>
+                                    </div>
                                     
                                         <span class="tag-count">3</span>
                                     
@@ -2645,18 +2949,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            贺
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·贺
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%B4%BA%E6%96%B0%E9%83%8E/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6700;"
                                    title="贺新郎 (3篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#贺新郎</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#贺新郎</span>
+                                    </div>
                                     
                                         <span class="tag-count">3</span>
                                     
@@ -2668,18 +2973,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            赋
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·赋
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%B5%8B%E6%96%87/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6800;"
                                    title="赋文 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#赋文</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#赋文</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2691,18 +2997,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            超
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (3个)
-                            </span>
+                            词牌·超
+                            <span class="group-count">3个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%B6%85%E7%84%B6/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6900;"
                                    title="超然 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#超然</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#超然</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2710,9 +3017,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6901;"
                                    title="超脱 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#超脱</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#超脱</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -2720,9 +3030,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%B6%8A/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 6902;"
                                    title="超越 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#超越</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#超越</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2734,18 +3047,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            踏
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·踏
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%B8%8F%E6%9C%88/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7000;"
                                    title="踏月 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#踏月</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#踏月</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2757,18 +3071,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            辩
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·辩
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E8%BE%A9%E8%AF%81/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7100;"
                                    title="辩证 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#辩证</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#辩证</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2780,18 +3095,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            道
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·道
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%81%93%E5%A2%83%E5%9C%86%E6%BB%A1/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7200;"
                                    title="道境圆满 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#道境圆满</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#道境圆满</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2799,9 +3115,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%81%93%E7%BB%9F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7201;"
                                    title="道统 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#道统</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#道统</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2813,18 +3132,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            醉
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (2个)
-                            </span>
+                            词牌·醉
+                            <span class="group-count">2个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%86%89%E6%B1%9F%E7%A7%8B/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7300;"
                                    title="醉江秋 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#醉江秋</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#醉江秋</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -2832,9 +3152,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%86%89%E9%93%B8/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7301;"
                                    title="醉铸 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#醉铸</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#醉铸</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2846,18 +3169,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            重
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·重
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%87%8D%E7%94%9F/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7400;"
                                    title="重生 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#重生</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#重生</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2869,18 +3193,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            铸
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·铸
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%93%B8%E5%89%91/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7500;"
                                    title="铸剑 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#铸剑</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#铸剑</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2892,18 +3217,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            问
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (3个)
-                            </span>
+                            词牌·问
+                            <span class="group-count">3个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%97%AE%E5%89%91/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7600;"
                                    title="问剑 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#问剑</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#问剑</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -2911,9 +3237,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%97%AE%E6%9C%88/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7601;"
                                    title="问月 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#问月</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#问月</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -2921,9 +3250,12 @@
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%97%AE%E9%81%93/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7602;"
                                    title="问道 (2篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#问道</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#问道</span>
+                                    </div>
                                     
                                         <span class="tag-count">2</span>
                                     
@@ -2935,18 +3267,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            霜
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·霜
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E5%A4%A9/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7700;"
                                    title="霜天 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#霜天</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#霜天</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2958,18 +3291,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            风
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·风
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%AA%A8/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7800;"
                                    title="风骨 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#风骨</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#风骨</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -2981,18 +3315,19 @@
                     <div class="tags-group">
                         <h3 class="group-title">
                             <i class="fas fa-hashtag"></i>
-                            鹧
-                            <span style="color: var(--text-nebula); font-size: 1rem; margin-left: 10px;">
-                                (1个)
-                            </span>
+                            词牌·鹧
+                            <span class="group-count">1个</span>
                         </h3>
                         <div class="all-tags-grid">
                             
                                 <a href="/mokewenxue.github.io/tags/%E9%B9%A7%E9%B8%AA%E5%A4%A9/" 
                                    class="all-tag-item"
+                                   style="--tag-index: 7900;"
                                    title="鹧鸪天 (1篇)">
-                                    <i class="fas fa-hashtag tag-icon"></i>
-                                    <span class="tag-name">#鹧鸪天</span>
+                                    <div class="tag-content">
+                                        <i class="fas fa-hashtag tag-icon"></i>
+                                        <span class="tag-name">#鹧鸪天</span>
+                                    </div>
                                     
                                         <span class="tag-count">1</span>
                                     
@@ -3068,6 +3403,17 @@
                     nav.style.background = 'rgba(10, 14, 26, 0.9)';
                     nav.style.boxShadow = 'none';
                 }
+            });
+            
+            // 为词牌标签添加悬停音效（可选）
+            document.querySelectorAll('.all-tag-item').forEach(tag => {
+                tag.addEventListener('mouseenter', function() {
+                    // 可以在这里添加声音效果
+                    this.style.animationPlayState = 'paused';
+                    setTimeout(() => {
+                        this.style.animationPlayState = 'running';
+                    }, 300);
+                });
             });
         });
     </script>
