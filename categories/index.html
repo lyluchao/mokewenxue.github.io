@@ -5,8 +5,447 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>剑阵分类 | 独自踏月行</title>
     <style>
-        /* 所有CSS样式保持不变... */
-        /* 为了节省空间，这里省略CSS代码，实际使用时请保持原样 */
+        :root {
+            --primary-dark: #0f172a;
+            --secondary-dark: #1e293b;
+            --accent-gold: #fbbf24;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            height: 70px;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-gold);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--accent-gold);
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* 星空背景 */
+        .star-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* 英雄区域 */
+        .hero-section {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 80px;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+        }
+        
+        .categories-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 4.5rem;
+            color: transparent;
+            background: linear-gradient(135deg, 
+                var(--accent-gold) 0%, 
+                var(--accent-purple) 25%, 
+                var(--accent-blue) 50%,
+                var(--accent-green) 75%);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradient-shift 15s ease infinite;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 50% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+        
+        .categories-subtitle {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        /* 分类内容区域 */
+        .categories-content {
+            padding: 40px 20px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* 分类网格 */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent-purple);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, 
+                var(--accent-gold), 
+                var(--accent-purple), 
+                var(--accent-blue));
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+        }
+        
+        .category-info {
+            flex: 1;
+        }
+        
+        .category-name {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .category-count {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--accent-purple);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .category-desc {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .category-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, 
+                var(--accent-purple), 
+                var(--accent-blue));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .category-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            border-color: var(--accent-gold);
+        }
+        
+        .category-link i {
+            transition: transform 0.3s ease;
+        }
+        
+        .category-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        .empty-categories {
+            text-align: center;
+            padding: 80px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 2px dashed var(--border-color);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            opacity: 0.5;
+        }
+        
+        /* 页脚 */
+        .footer {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to top, var(--primary-dark) 0%, transparent 100%);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .copyright {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            position: relative;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--text-light);
+        }
+        
+        .footer-link:hover::before {
+            width: 80%;
+        }
+        
+        .footer-seal {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            letter-spacing: 2px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                height: 60px;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--primary-dark);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+                gap: 20px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .categories-title {
+                font-size: 3rem;
+            }
+            
+            .categories-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-card {
+                padding: 25px;
+            }
+            
+            .category-name {
+                font-size: 1.6rem;
+            }
+            
+            .hero-section {
+                min-height: 50vh;
+                padding: 80px 20px 60px;
+            }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--accent-purple), var(--accent-blue));
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--accent-gold), var(--accent-purple));
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -49,51 +488,11 @@
         <div class="hero-content">
             <h1 class="categories-title">剑阵分类</h1>
             <h2 class="categories-subtitle">星河剑阵·周天十二极 · 完整的分类体系导航</h2>
-            
-            <div class="motto-container">
-                <div class="motto-content">
-                    <span class="motto-line">剑气凌云霄，诗魂贯古今</span>
-                    <span class="motto-line">月明千里照，墨韵万年存</span>
-                </div>
-            </div>
         </div>
     </section>
     
     <!-- 分类内容区域 -->
     <main class="categories-content">
-        <!-- 页面内容 -->
-        
-            <section class="intro-section">
-                <h2 class="intro-title">周天十二极·剑阵分类体系</h2>
-                
-                <div class="intro-grid">
-                    <div class="intro-card">
-                        <div class="intro-icon">🌌</div>
-                        <h3 class="intro-card-title">体系完整</h3>
-                        <p class="intro-card-desc">
-                            星河剑阵分为十二极，每极对应一个生命维度，形成完整的修行体系
-                        </p>
-                    </div>
-                    
-                    <div class="intro-card">
-                        <div class="intro-icon">⚔️</div>
-                        <h3 class="intro-card-title">剑诗合一</h3>
-                        <p class="intro-card-desc">
-                            剑中有诗，诗中有剑，传统与现代在剑意中完美融合
-                        </p>
-                    </div>
-                    
-                    <div class="intro-card">
-                        <div class="intro-icon">📜</div>
-                        <h3 class="intro-card-title">传承有序</h3>
-                        <p class="intro-card-desc">
-                            从剑经法典到剑阵解析，构建完整的知识传承链条
-                        </p>
-                    </div>
-                </div>
-            </section>
-        
-        
         <!-- 分类列表 -->
         
         
@@ -102,10 +501,8 @@
                 
                     <article class="category-card">
                         <div class="category-header">
-                            <div class="category-icon-wrapper">
-                                <div class="category-icon" style="color: #94a3b8">
-                                    📁
-                                </div>
+                            <div class="category-icon">
+                                <i class="fas fa-folder"></i>
                             </div>
                             <div class="category-info">
                                 <h2 class="category-name">词曲</h2>
@@ -125,10 +522,8 @@
                 
                     <article class="category-card">
                         <div class="category-header">
-                            <div class="category-icon-wrapper">
-                                <div class="category-icon" style="color: #94a3b8">
-                                    📁
-                                </div>
+                            <div class="category-icon">
+                                <i class="fas fa-folder"></i>
                             </div>
                             <div class="category-info">
                                 <h2 class="category-name">古文辞赋</h2>
@@ -148,10 +543,8 @@
                 
                     <article class="category-card">
                         <div class="category-header">
-                            <div class="category-icon-wrapper">
-                                <div class="category-icon" style="color: #94a3b8">
-                                    📁
-                                </div>
+                            <div class="category-icon">
+                                <i class="fas fa-folder"></i>
                             </div>
                             <div class="category-info">
                                 <h2 class="category-name">词作</h2>
@@ -171,10 +564,8 @@
                 
                     <article class="category-card">
                         <div class="category-header">
-                            <div class="category-icon-wrapper">
-                                <div class="category-icon" style="color: #8b5cf6">
-                                    📖
-                                </div>
+                            <div class="category-icon">
+                                <i class="fas fa-book"></i>
                             </div>
                             <div class="category-info">
                                 <h2 class="category-name">剑经法典</h2>
@@ -194,10 +585,8 @@
                 
                     <article class="category-card">
                         <div class="category-header">
-                            <div class="category-icon-wrapper">
-                                <div class="category-icon" style="color: #94a3b8">
-                                    📁
-                                </div>
+                            <div class="category-icon">
+                                <i class="fas fa-folder"></i>
                             </div>
                             <div class="category-info">
                                 <h2 class="category-name">法典词赋</h2>
@@ -217,10 +606,8 @@
                 
                     <article class="category-card">
                         <div class="category-header">
-                            <div class="category-icon-wrapper">
-                                <div class="category-icon" style="color: #94a3b8">
-                                    📁
-                                </div>
+                            <div class="category-icon">
+                                <i class="fas fa-folder"></i>
                             </div>
                             <div class="category-info">
                                 <h2 class="category-name">古体诗</h2>
@@ -240,10 +627,8 @@
                 
                     <article class="category-card">
                         <div class="category-header">
-                            <div class="category-icon-wrapper">
-                                <div class="category-icon" style="color: #94a3b8">
-                                    📁
-                                </div>
+                            <div class="category-icon">
+                                <i class="fas fa-folder"></i>
                             </div>
                             <div class="category-info">
                                 <h2 class="category-name">散文随笔</h2>
@@ -321,18 +706,8 @@
                 });
             }
             
-            // 渐变标题动画
-            const title = document.querySelector('.categories-title');
-            if (title) {
-                let hue = 0;
-                setInterval(() => {
-                    hue = (hue + 1) % 360;
-                    title.style.filter = `hue-rotate(${hue}deg)`;
-                }, 100);
-            }
-            
             // 卡片悬停效果
-            const cards = document.querySelectorAll('.category-card, .intro-card');
+            const cards = document.querySelectorAll('.category-card');
             cards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     this.style.zIndex = '100';
@@ -340,39 +715,6 @@
                 card.addEventListener('mouseleave', function() {
                     this.style.zIndex = '1';
                 });
-            });
-            
-            // 格言效果
-            const mottoLines = document.querySelectorAll('.motto-line');
-            mottoLines.forEach((line, index) => {
-                // 初始动画
-                setTimeout(() => {
-                    line.style.opacity = '1';
-                    line.style.transform = 'translateX(0)';
-                }, index * 200);
-                
-                // 初始状态
-                line.style.opacity = '0';
-                line.style.transform = 'translateX(-20px)';
-                line.style.transition = 'opacity 0.5s ease, transform 0.5s ease, color 0.3s ease';
-            });
-            
-            // 分类卡片进入动画
-            const categoryCards = document.querySelectorAll('.category-card');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            categoryCards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
             });
             
             // 导航栏滚动效果
