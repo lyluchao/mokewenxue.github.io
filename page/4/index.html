@@ -162,22 +162,6 @@
             box-shadow: var(--shadow-nebula);
         }
         
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--star-gold);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 70%;
-        }
-        
         /* === 主容器 === */
         .cosmic-container {
             max-width: 1200px;
@@ -252,32 +236,124 @@
             backdrop-filter: blur(5px);
         }
         
-        .site-motto::before,
-        .site-motto::after {
-            content: '✦';
+        /* === 快速导航卡片 === */
+        .quick-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 80px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-card {
+            width: 180px;
+            height: 180px;
+            perspective: 1000px;
+            text-decoration: none;
+        }
+        
+        .nav-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .nav-card:hover .nav-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .nav-card-front,
+        .nav-card-back {
             position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .nav-card-front {
+            background: linear-gradient(135deg, rgba(20, 26, 45, 0.8) 0%, rgba(93, 63, 211, 0.1) 100%);
+            border: 2px solid var(--border-cosmic);
+            color: var(--text-starlight);
+        }
+        
+        .nav-card-back {
+            background: var(--gradient-nebula);
+            transform: rotateY(180deg);
+            color: white;
+        }
+        
+        .nav-card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+        
+        .nav-card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .nav-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-nebula);
+            text-align: center;
+        }
+        
+        .nav-card-back .nav-card-desc {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* === 文章列表 === */
+        .recent-posts {
+            margin: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
             color: var(--star-gold);
-            font-size: 1.5rem;
+            margin-bottom: 60px;
+            font-family: 'Ma Shan Zheng', cursive;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
-        .site-motto::before {
-            top: -10px;
-            left: 20px;
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--star-gold), transparent);
         }
         
-        .site-motto::after {
-            bottom: -10px;
-            right: 20px;
+        .section-title::before {
+            right: calc(100% + 20px);
         }
         
-        /* === 文章卡片 === */
-        .cosmic-posts {
+        .section-title::after {
+            left: calc(100% + 20px);
+        }
+        
+        .post-list {
             display: grid;
             gap: 40px;
-            margin: 80px 0;
         }
         
-        .cosmic-card {
+        .post-card {
             background: rgba(20, 26, 45, 0.7);
             border-radius: 20px;
             padding: 40px;
@@ -288,7 +364,7 @@
             overflow: hidden;
         }
         
-        .cosmic-card::before {
+        .post-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -298,7 +374,7 @@
             background: var(--gradient-nebula);
         }
         
-        .cosmic-card:hover {
+        .post-card:hover {
             transform: translateY(-10px);
             border-color: var(--nebula-purple);
             box-shadow: 
@@ -306,7 +382,7 @@
                 0 0 40px rgba(93, 63, 211, 0.2);
         }
         
-        .card-header {
+        .post-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -315,7 +391,7 @@
             gap: 15px;
         }
         
-        .card-date {
+        .post-date {
             color: var(--star-gold);
             font-size: 1rem;
             display: flex;
@@ -323,7 +399,7 @@
             gap: 8px;
         }
         
-        .card-category {
+        .post-category {
             background: var(--gradient-nebula);
             color: white;
             padding: 8px 20px;
@@ -332,32 +408,32 @@
             font-weight: bold;
         }
         
-        .card-title {
+        .post-title {
             font-size: 2rem;
             margin: 25px 0;
             color: var(--text-starlight);
             font-family: 'Ma Shan Zheng', cursive;
         }
         
-        .card-title a {
+        .post-title a {
             color: inherit;
             text-decoration: none;
             transition: color 0.3s;
             display: inline-block;
         }
         
-        .card-title a:hover {
+        .post-title a:hover {
             color: var(--star-gold);
         }
         
-        .card-tags {
+        .post-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin: 20px 0;
         }
         
-        .tag {
+        .post-tag {
             background: rgba(93, 63, 211, 0.2);
             color: var(--nebula-purple);
             padding: 6px 15px;
@@ -365,15 +441,16 @@
             font-size: 0.85rem;
             border: 1px solid rgba(93, 63, 211, 0.3);
             transition: all 0.3s;
+            text-decoration: none;
         }
         
-        .tag:hover {
+        .post-tag:hover {
             background: var(--nebula-purple);
             color: white;
             transform: translateY(-2px);
         }
         
-        .card-excerpt {
+        .post-excerpt {
             color: var(--text-nebula);
             line-height: 1.8;
             margin: 25px 0;
@@ -467,7 +544,7 @@
             border-radius: 15px;
         }
         
-        /* === 统一页脚 === */
+        /* === 页脚 === */
         .cosmic-footer {
             background: rgba(10, 14, 26, 0.95);
             border-top: 1px solid var(--border-cosmic);
@@ -526,15 +603,6 @@
             color: #64748b;
         }
         
-        .constellation {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: var(--star-gold);
-            opacity: 0.5;
-        }
-        
         /* === 响应式设计 === */
         @media (max-width: 768px) {
             .site-title {
@@ -557,18 +625,39 @@
                 font-size: 0.9rem;
             }
             
-            .cosmic-card {
+            .quick-nav {
+                gap: 20px;
+            }
+            
+            .nav-card {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .nav-card-icon {
+                font-size: 2.5rem;
+            }
+            
+            .post-card {
                 padding: 25px;
             }
             
-            .card-title {
+            .post-title {
                 font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-title::before,
+            .section-title::after {
+                width: 40px;
             }
             
             .cosmic-pagination {
                 flex-direction: column;
                 gap: 20px;
-                padding: 20px;
             }
             
             .page-btn {
@@ -584,16 +673,6 @@
                 padding: 8px 15px;
                 font-size: 0.9rem;
             }
-        }
-        
-        /* === 动画效果 === */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .floating {
-            animation: float 3s ease-in-out infinite;
         }
     </style>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/mokewenxue.github.io/atom.xml" title="独自踏月行" type="application/atom+xml">
@@ -622,7 +701,7 @@
                     <i class="fas fa-layer-group"></i> 分类
                 </a>
                 <a href="/mokewenxue.github.io/tags" class="nav-link">
-                    <i class="fas fa-tags"></i> 标签
+                    <i class="fas fa-tags"></i> 词牌剑阵
                 </a>
                 <a href="/mokewenxue.github.io/about" class="nav-link">
                     <i class="fas fa-book"></i> 关于
@@ -631,129 +710,191 @@
         </div>
     </nav>
     
-    <!-- 主内容容器 -->
+    <!-- 主内容 -->
     <main class="cosmic-container">
         <!-- 英雄区域 -->
         <section class="hero-section">
-            <div class="moon-orb floating"></div>
-            <h1 class="site-title floating">踏月诗阁</h1>
+            <div class="moon-orb"></div>
+            <h1 class="site-title">踏月诗阁</h1>
             <h2 class="site-subtitle">星河照卷帙，墨锋映秋霜</h2>
             <p class="site-motto">独坐寒窗对月吟，一砚清辉万古心</p>
         </section>
         
-        <!-- 文章列表 -->
-        <section class="cosmic-posts">
+        <!-- 快速导航 -->
+        <div class="quick-nav">
+            <a href="/mokewenxue.github.io/archives" class="nav-card">
+                <div class="nav-card-inner">
+                    <div class="nav-card-front">
+                        <div class="nav-card-icon">🗃️</div>
+                        <div class="nav-card-title">诗卷归档</div>
+                        <div class="nav-card-desc">岁月留痕</div>
+                    </div>
+                    <div class="nav-card-back">
+                        <div class="nav-card-title">永恒收藏</div>
+                        <div class="nav-card-desc">时光印记</div>
+                    </div>
+                </div>
+            </a>
             
-                
-                    <article class="cosmic-card">
-                        <div class="card-header">
-                            <div class="card-date">
-                                <i class="far fa-calendar"></i>
-                                2025-12-15
+            <a href="/mokewenxue.github.io/categories" class="nav-card">
+                <div class="nav-card-inner">
+                    <div class="nav-card-front">
+                        <div class="nav-card-icon">🏛️</div>
+                        <div class="nav-card-title">剑阵分类</div>
+                        <div class="nav-card-desc">十二极分</div>
+                    </div>
+                    <div class="nav-card-back">
+                        <div class="nav-card-title">周天体系</div>
+                        <div class="nav-card-desc">剑阵枢机</div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/mokewenxue.github.io/tags" class="nav-card">
+                <div class="nav-card-inner">
+                    <div class="nav-card-front">
+                        <div class="nav-card-icon">🏷️</div>
+                        <div class="nav-card-title">词牌剑阵</div>
+                        <div class="nav-card-desc">剑意标签</div>
+                    </div>
+                    <div class="nav-card-back">
+                        <div class="nav-card-title">星河词牌云</div>
+                        <div class="nav-card-desc">词牌为刃</div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/mokewenxue.github.io/about" class="nav-card">
+                <div class="nav-card-inner">
+                    <div class="nav-card-front">
+                        <div class="nav-card-icon">📖</div>
+                        <div class="nav-card-title">诗阁缘起</div>
+                        <div class="nav-card-desc">创作心法</div>
+                    </div>
+                    <div class="nav-card-back">
+                        <div class="nav-card-title">剑阵源流</div>
+                        <div class="nav-card-desc">文脉传承</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- 最新文章 -->
+        <section class="recent-posts">
+            <h2 class="section-title">最新诗卷</h2>
+            
+            
+                <div class="post-list">
+                    
+                        <article class="post-card">
+                            <div class="post-header">
+                                <div class="post-date">
+                                    <i class="far fa-calendar"></i>
+                                    2025-12-15
+                                </div>
+                                
+                                
+                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
+                                        <i class="fas fa-folder"></i>
+                                        剑经法典
+                                    </a>
+                                
                             </div>
                             
-                            
-                                <a href="/mokewenxue.github.io/categories/sword-classic/" class="card-category">
-                                    <i class="fas fa-folder"></i>
-                                    剑经法典
+                            <h3 class="post-title">
+                                <a href="/mokewenxue.github.io/2025/12/15/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/">
+                                    《星河剑赋》
                                 </a>
+                            </h3>
                             
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2025/12/15/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/">
-                                《星河剑赋》
+                            
+                                <div class="post-tags">
+                                    
+                                        <a href="/mokewenxue.github.io/tags/star-sword-array/" class="post-tag">
+                                            #星河剑阵
+                                        </a>
+                                    
+                                        <a href="/mokewenxue.github.io/tags/twelve-poles/" class="post-tag">
+                                            #周天十二极
+                                        </a>
+                                    
+                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E8%B5%8B/" class="post-tag">
+                                            #剑赋
+                                        </a>
+                                    
+                                        <a href="/mokewenxue.github.io/tags/%E6%B1%89%E8%AF%AD/" class="post-tag">
+                                            #汉语
+                                        </a>
+                                    
+                                        <a href="/mokewenxue.github.io/tags/%E9%81%93%E7%BB%9F/" class="post-tag">
+                                            #道统
+                                        </a>
+                                    
+                                </div>
+                            
+                            
+                            <div class="post-excerpt">
+                                
+                                    鸿蒙未判，道隐无名；星河初辟，剑显其形。汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋...
+                                
+                            </div>
+                            
+                            <a href="/mokewenxue.github.io/2025/12/15/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/" class="read-more">
+                                阅剑全文 <i class="fas fa-arrow-right"></i>
                             </a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
+                        </article>
+                    
+                        <article class="post-card">
+                            <div class="post-header">
+                                <div class="post-date">
+                                    <i class="far fa-calendar"></i>
+                                    2025-12-14
+                                </div>
                                 
-                                    <a href="/mokewenxue.github.io/tags/star-sword-array/" class="tag">
-                                        #星河剑阵
-                                    </a>
                                 
-                                    <a href="/mokewenxue.github.io/tags/twelve-poles/" class="tag">
-                                        #周天十二极
-                                    </a>
-                                
-                                    <a href="/mokewenxue.github.io/tags/%E5%89%91%E8%B5%8B/" class="tag">
-                                        #剑赋
-                                    </a>
-                                
-                                    <a href="/mokewenxue.github.io/tags/%E6%B1%89%E8%AF%AD/" class="tag">
-                                        #汉语
-                                    </a>
-                                
-                                    <a href="/mokewenxue.github.io/tags/%E9%81%93%E7%BB%9F/" class="tag">
-                                        #道统
+                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
+                                        <i class="fas fa-folder"></i>
+                                        剑经法典
                                     </a>
                                 
                             </div>
-                        
-                        
-                        <div class="card-excerpt">
                             
-                                鸿蒙未判，道隐无名；星河初辟，剑显其形。汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋...
-                            
-                        </div>
-                        
-                        <a href="/mokewenxue.github.io/2025/12/15/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/" class="read-more">
-                            阅剑全文 <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </article>
-                
-                    <article class="cosmic-card">
-                        <div class="card-header">
-                            <div class="card-date">
-                                <i class="far fa-calendar"></i>
-                                2025-12-14
-                            </div>
-                            
-                            
-                                <a href="/mokewenxue.github.io/categories/sword-classic/" class="card-category">
-                                    <i class="fas fa-folder"></i>
-                                    剑经法典
+                            <h3 class="post-title">
+                                <a href="/mokewenxue.github.io/2025/12/14/%E8%9A%80%E5%89%91%E8%B5%8B/">
+                                    《蚀剑·赋》
                                 </a>
+                            </h3>
                             
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2025/12/14/%E8%9A%80%E5%89%91%E8%B5%8B/">
-                                《蚀剑·赋》
-                            </a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <a href="/mokewenxue.github.io/tags/%E8%9A%80%E5%89%91/" class="tag">
-                                        #蚀剑
-                                    </a>
-                                
-                                    <a href="/mokewenxue.github.io/tags/%E5%89%91%E7%BB%8F/" class="tag">
-                                        #剑经
-                                    </a>
-                                
-                                    <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%81%93/" class="tag">
-                                        #剑道
-                                    </a>
-                                
-                                    <a href="/mokewenxue.github.io/tags/%E8%BE%A9%E8%AF%81/" class="tag">
-                                        #辩证
-                                    </a>
-                                
-                                    <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E5%BF%83/" class="tag">
-                                        #修心
-                                    </a>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
                             
+                                <div class="post-tags">
+                                    
+                                        <a href="/mokewenxue.github.io/tags/%E8%9A%80%E5%89%91/" class="post-tag">
+                                            #蚀剑
+                                        </a>
+                                    
+                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E7%BB%8F/" class="post-tag">
+                                            #剑经
+                                        </a>
+                                    
+                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%81%93/" class="post-tag">
+                                            #剑道
+                                        </a>
+                                    
+                                        <a href="/mokewenxue.github.io/tags/%E8%BE%A9%E8%AF%81/" class="post-tag">
+                                            #辩证
+                                        </a>
+                                    
+                                        <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E5%BF%83/" class="post-tag">
+                                            #修心
+                                        </a>
+                                    
+                                </div>
+                            
+                            
+                            <div class="post-excerpt">
                                 
-                                
+                                    
+                                    
 
 
 
@@ -782,2511 +923,40 @@
 
 
 经中劈...
+                                
+                            </div>
                             
+                            <a href="/mokewenxue.github.io/2025/12/14/%E8%9A%80%E5%89%91%E8%B5%8B/" class="read-more">
+                                阅剑全文 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </article>
+                    
+                </div>
+                
+                <!-- 分页 -->
+                
+                    <div class="cosmic-pagination">
+                        
+                            <a href="/mokewenxue.github.io/page/3/" class="page-btn prev">
+                                <i class="fas fa-chevron-left"></i> 上一页
+                            </a>
+                        
+                        
+                        <div class="page-info">
+                            第 <strong>4</strong> 页 / 共 <strong>4</strong> 页
                         </div>
                         
-                        <a href="/mokewenxue.github.io/2025/12/14/%E8%9A%80%E5%89%91%E8%B5%8B/" class="read-more">
-                            阅剑全文 <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </article>
+                        
+                            <span class="page-btn next disabled">
+                                下一页 <i class="fas fa-chevron-right"></i>
+                            </span>
+                        
+                    </div>
                 
             
         </section>
-        
-        <!-- 标签云导航 -->
-        
-
-<!-- 标签云导航 -->
-<section class="cosmic-tag-cloud">
-    <div class="tag-cloud-header">
-        <h3 class="tag-cloud-title">
-            <i class="fas fa-cloud-moon"></i>
-            星河词牌云
-            <span class="tag-count">(50)</span>
-        </h3>
-        <p class="tag-cloud-desc">点击词牌，探索剑阵</p>
-    </div>
-    
-    <div class="tag-cloud-container">
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 2;
-                   --tag-color: #10b981;
-                   --tag-glow: #10b98140;
-                   transform: scale(2);
-               "
-               data-count="11"
-               title="宋词 (11篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-music"></i>
-                </span>
-                <span class="tag-name">宋词</span>
-                
-                    <span class="tag-count-badge">11</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/twelve-poles/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 1.87;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(1.87);
-               "
-               data-count="10"
-               title="周天十二极 (10篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-cloud-sun"></i>
-                </span>
-                <span class="tag-name">周天十二极</span>
-                
-                    <span class="tag-count-badge">10</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 1.6099999999999999;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(1.6099999999999999);
-               "
-               data-count="8"
-               title="剑阵 (8篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-swords"></i>
-                </span>
-                <span class="tag-name">剑阵</span>
-                
-                    <span class="tag-count-badge">8</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%AF%8D/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="词 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-music"></i>
-                </span>
-                <span class="tag-name">词</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/star-sword-array/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="星河剑阵 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-swords"></i>
-                </span>
-                <span class="tag-name">星河剑阵</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%BF%B5%E5%A5%B4%E5%A8%87/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="念奴娇 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">念奴娇</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #84cc16;
-                   --tag-glow: #84cc1640;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="水调歌头 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-water"></i>
-                </span>
-                <span class="tag-name">水调歌头</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%B4%BA%E6%96%B0%E9%83%8E/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="贺新郎 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">贺新郎</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%97%AE%E6%9C%88/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="问月 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-moon"></i>
-                </span>
-                <span class="tag-name">问月</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%97%AE%E5%89%91/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #ec4899;
-                   --tag-glow: #ec489940;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="问剑 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-swords"></i>
-                </span>
-                <span class="tag-name">问剑</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%97%AE%E9%81%93/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="问道 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-question"></i>
-                </span>
-                <span class="tag-name">问道</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%A3%B0%E5%A3%B0%E6%85%A2/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="声声慢 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">声声慢</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%BD%B1/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="孤影 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-user-alt"></i>
-                </span>
-                <span class="tag-name">孤影</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B8%85%E8%BE%89/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="清辉 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">清辉</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="宇宙 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">宇宙</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="超脱 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">超脱</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%80%80/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="孤怀 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-brain"></i>
-                </span>
-                <span class="tag-name">孤怀</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E6%81%8B%E8%8A%B1/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="蝶恋花 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-flower"></i>
-                </span>
-                <span class="tag-name">蝶恋花</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="沧桑 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">沧桑</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%86%89%E6%B1%9F%E7%A7%8B/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="醉江秋 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-leaf"></i>
-                </span>
-                <span class="tag-name">醉江秋</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%BD%92%E5%AF%82/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="归寂 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">归寂</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B6%88%E8%A7%A3/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="消解 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">消解</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E7%B4%A0%E5%BF%83/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #84cc16;
-                   --tag-glow: #84cc1640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="素心 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-heart"></i>
-                </span>
-                <span class="tag-name">素心</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E4%B8%89%E9%97%AE/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="三问 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-question"></i>
-                </span>
-                <span class="tag-name">三问</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%87%BB%E8%B5%8B/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="臻赋 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">臻赋</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%98%9F/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="孤星 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-star"></i>
-                </span>
-                <span class="tag-name">孤星</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%A2%83%E7%95%8C%E9%80%92%E8%BF%9B/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="境界递进 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">境界递进</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E4%B8%B4%E6%B1%9F%E4%BB%99/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="临江仙 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">临江仙</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%93%B8%E5%89%91/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="铸剑 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-swords"></i>
-                </span>
-                <span class="tag-name">铸剑</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%90%8D%E8%B8%AA/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="萍踪 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">萍踪</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%80%80%E6%97%A7/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f59e0b;
-                   --tag-glow: #f59e0b40;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="怀旧 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-brain"></i>
-                </span>
-                <span class="tag-name">怀旧</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/double-blade-record/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="双刃录 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">双刃录</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E7%94%9F%E5%91%BD%E9%94%BB%E9%80%A0/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #3b82f6;
-                   --tag-glow: #3b82f640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="生命锻造 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">生命锻造</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%A4%A9%E4%BA%BA%E5%90%88%E4%B8%80/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="天人合一 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-cloud-sun"></i>
-                </span>
-                <span class="tag-name">天人合一</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E7%A7%8B%E6%80%9D/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #10b981;
-                   --tag-glow: #10b98140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="秋思 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-leaf"></i>
-                </span>
-                <span class="tag-name">秋思</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%AF%82/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="孤寂 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-user-alt"></i>
-                </span>
-                <span class="tag-name">孤寂</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%B6%85%E7%84%B6/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #3b82f6;
-                   --tag-glow: #3b82f640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="超然 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">超然</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%9C%95%E9%B3%9E/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="蜕鳞 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">蜕鳞</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%87%8D%E7%94%9F/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="重生 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">重生</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%98%9F%E6%B2%B3/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="星河 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-star"></i>
-                </span>
-                <span class="tag-name">星河</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E4%B8%89%E7%BB%9D%E8%B5%8B/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #ec4899;
-                   --tag-glow: #ec489940;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="三绝赋 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">三绝赋</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="断鸿寒影 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">断鸿寒影</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B8%85%E8%BE%89%E5%8A%AB%E5%B0%98/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="清辉劫尘 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">清辉劫尘</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E4%B8%87%E7%B1%81%E4%BF%B1%E6%B2%89/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #10b981;
-                   --tag-glow: #10b98140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="万籁俱沉 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">万籁俱沉</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%98%E5%9C%A8%E5%93%B2%E5%AD%A6/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="存在哲学 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">存在哲学</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="揽星 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-star"></i>
-                </span>
-                <span class="tag-name">揽星</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%93%8E%E4%B9%BE/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="擎乾 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">擎乾</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E7%8E%B0%E5%AE%9E/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="现实 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">现实</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%8B%85%E5%BD%93/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="担当 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">担当</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%BC%82%E6%B3%8A/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="漂泊 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">漂泊</span>
-                
-            </a>
-        
-    </div>
-    
-    
-        <div class="tag-cloud-footer">
-            <a href="/mokewenxue.github.io/tags/" class="view-all-tags">
-                <i class="fas fa-chevron-right"></i>
-                查看全部109个词牌
-            </a>
-        </div>
-    
-</section>
-
-<style>
-    /* 标签云样式 */
-    .cosmic-tag-cloud {
-        background: rgba(20, 26, 45, 0.7);
-        border-radius: 20px;
-        padding: 40px;
-        margin: 60px 0;
-        border: 1px solid var(--border-cosmic);
-        backdrop-filter: blur(10px);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .cosmic-tag-cloud::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, 
-            #8b5cf6, #3b82f6, #ef4444, #f59e0b, #10b981);
-        border-radius: 20px 20px 0 0;
-    }
-    
-    .tag-cloud-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    
-    .tag-cloud-title {
-        color: var(--star-gold);
-        font-family: 'Ma Shan Zheng', cursive;
-        font-size: 2.2rem;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-    }
-    
-    .tag-cloud-title i {
-        font-size: 1.8rem;
-        filter: drop-shadow(0 0 10px var(--star-gold));
-    }
-    
-    .tag-count {
-        color: var(--text-nebula);
-        font-size: 1.2rem;
-        margin-left: 10px;
-    }
-    
-    .tag-cloud-desc {
-        color: var(--text-nebula);
-        font-size: 1.1rem;
-        font-style: italic;
-    }
-    
-    .tag-cloud-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px;
-        min-height: 300px;
-        align-items: center;
-    }
-    
-    .cosmic-tag {
-        --tag-size: 1;
-        --tag-color: #8b5cf6;
-        --tag-glow: rgba(139, 92, 246, 0.4);
-        
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 25px;
-        background: rgba(20, 26, 45, 0.9);
-        color: var(--tag-color);
-        text-decoration: none;
-        border-radius: 30px;
-        border: 2px solid var(--tag-color);
-        font-size: calc(1rem * var(--tag-size));
-        font-weight: 600;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-        transform: scale(var(--tag-size));
-        box-shadow: 0 5px 15px var(--tag-glow);
-    }
-    
-    .cosmic-tag::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--tag-color);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: -1;
-    }
-    
-    .cosmic-tag:hover {
-        color: white;
-        transform: scale(calc(var(--tag-size) * 1.1)) !important;
-        box-shadow: 0 0 30px var(--tag-color);
-    }
-    
-    .cosmic-tag:hover::before {
-        opacity: 1;
-    }
-    
-    .tag-icon {
-        font-size: 0.9em;
-        opacity: 0.9;
-    }
-    
-    .tag-name {
-        position: relative;
-        z-index: 2;
-    }
-    
-    .tag-count-badge {
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        font-size: 0.7em;
-        padding: 2px 8px;
-        border-radius: 10px;
-        margin-left: 5px;
-        font-weight: bold;
-        backdrop-filter: blur(5px);
-    }
-    
-    .tag-cloud-footer {
-        text-align: center;
-        margin-top: 40px;
-        padding-top: 30px;
-        border-top: 1px solid var(--border-cosmic);
-    }
-    
-    .view-all-tags {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--star-gold);
-        text-decoration: none;
-        padding: 12px 30px;
-        border: 2px solid var(--star-gold);
-        border-radius: 25px;
-        font-weight: bold;
-        transition: all 0.3s;
-    }
-    
-    .view-all-tags:hover {
-        background: var(--star-gold);
-        color: var(--primary-dark);
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(255, 217, 93, 0.3);
-    }
-    
-    /* 动画效果 */
-    @keyframes tagFloat {
-        0%, 100% { transform: translateY(0) scale(var(--tag-size)); }
-        50% { transform: translateY(-10px) scale(var(--tag-size)); }
-    }
-    
-    .cosmic-tag {
-        animation: tagFloat 3s ease-in-out infinite;
-        animation-delay: calc(var(--tag-size) * 1s);
-    }
-    
-    .cosmic-tag:hover {
-        animation-play-state: paused;
-    }
-    
-    /* 响应式设计 */
-    @media (max-width: 768px) {
-        .tag-cloud-container {
-            gap: 15px;
-            padding: 10px;
-        }
-        
-        .cosmic-tag {
-            padding: 10px 20px;
-            font-size: 0.9rem;
-        }
-        
-        .tag-cloud-title {
-            font-size: 1.8rem;
-        }
-    }
-    
-    /* 悬浮效果 */
-    .cosmic-tag:hover .tag-icon {
-        animation: iconSpin 0.5s ease;
-    }
-    
-    @keyframes iconSpin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tags = document.querySelectorAll('.cosmic-tag');
-        
-        // 鼠标悬停效果
-        tags.forEach(tag => {
-            tag.addEventListener('mouseenter', function(e) {
-                // 添加波纹效果
-                const ripple = document.createElement('span');
-                ripple.classList.add('tag-ripple');
-                this.appendChild(ripple);
-                
-                // 移除旧的波纹
-                setTimeout(() => {
-                    if (ripple.parentNode === this) {
-                        this.removeChild(ripple);
-                    }
-                }, 1000);
-            });
-            
-            // 点击效果
-            tag.addEventListener('click', function(e) {
-                e.preventDefault();
-                const url = this.getAttribute('href');
-                
-                // 添加点击动画
-                this.style.animation = 'tagClick 0.5s ease';
-                
-                setTimeout(() => {
-                    window.location.href = url;
-                }, 300);
-            });
-        });
-        
-        // 随机排列标签（创造云效果）
-        const container = document.querySelector('.tag-cloud-container');
-        if (container) {
-            const tagElements = Array.from(container.children);
-            
-            // 洗牌算法随机排列
-            for (let i = tagElements.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                container.appendChild(tagElements[j]);
-            }
-        }
-    });
-    
-    // 添加点击动画关键帧
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes tagClick {
-            0% { transform: scale(var(--tag-size)); }
-            50% { transform: scale(calc(var(--tag-size) * 0.9)); }
-            100% { transform: scale(var(--tag-size)); }
-        }
-        
-        .tag-ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: currentColor;
-            opacity: 0.3;
-            animation: ripple 1s ease-out;
-            pointer-events: none;
-        }
-        
-        @keyframes ripple {
-            from {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-</script>
-
-
-        
-        <!-- 分页 -->
-        
-            <div class="cosmic-pagination">
-                
-                    <a href="/mokewenxue.github.io/page/3/" class="page-btn prev">
-                        <i class="fas fa-chevron-left"></i> 上一页
-                    </a>
-                
-                
-                <div class="page-info">
-                    第 <strong style="color: var(--star-gold);">4</strong> 页 
-                    / 共 <strong style="color: var(--star-gold);">4</strong> 页
-                </div>
-                
-                
-                    <span class="page-btn next disabled">
-                        下一页 <i class="fas fa-chevron-right"></i>
-                    </span>
-                
-            </div>
-            
-            <!-- 页码导航 -->
-            
-                <div style="text-align: center; margin-top: 30px;">
-                    
-                        
-                            <a href="/mokewenxue.github.io/" 
-                               style="
-                                display: inline-block;
-                                padding: 10px 18px;
-                                margin: 0 5px;
-                                color: var(--text-starlight);
-                                text-decoration: none;
-                                border: 1px solid var(--border-cosmic);
-                                border-radius: 20px;
-                                background: rgba(20, 26, 45, 0.7);
-                            ">1</a>
-                        
-                    
-                        
-                            <a href="/mokewenxue.github.io/page/2/" 
-                               style="
-                                display: inline-block;
-                                padding: 10px 18px;
-                                margin: 0 5px;
-                                color: var(--text-starlight);
-                                text-decoration: none;
-                                border: 1px solid var(--border-cosmic);
-                                border-radius: 20px;
-                                background: rgba(20, 26, 45, 0.7);
-                            ">2</a>
-                        
-                    
-                        
-                            <a href="/mokewenxue.github.io/page/3/" 
-                               style="
-                                display: inline-block;
-                                padding: 10px 18px;
-                                margin: 0 5px;
-                                color: var(--text-starlight);
-                                text-decoration: none;
-                                border: 1px solid var(--border-cosmic);
-                                border-radius: 20px;
-                                background: rgba(20, 26, 45, 0.7);
-                            ">3</a>
-                        
-                    
-                        
-                            <span style="
-                                display: inline-block;
-                                padding: 10px 18px;
-                                margin: 0 5px;
-                                background: var(--gradient-nebula);
-                                color: white;
-                                border-radius: 20px;
-                                font-weight: bold;
-                                box-shadow: var(--shadow-nebula);
-                            ">4</span>
-                        
-                    
-                </div>
-            
-        
     </main>
     
-        <!-- 标签云导航 -->
-        
-
-<!-- 标签云导航 -->
-<section class="cosmic-tag-cloud">
-    <div class="tag-cloud-header">
-        <h3 class="tag-cloud-title">
-            <i class="fas fa-cloud-moon"></i>
-            星河词牌云
-            <span class="tag-count">(50)</span>
-        </h3>
-        <p class="tag-cloud-desc">点击词牌，探索剑阵</p>
-    </div>
-    
-    <div class="tag-cloud-container">
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 2;
-                   --tag-color: #10b981;
-                   --tag-glow: #10b98140;
-                   transform: scale(2);
-               "
-               data-count="11"
-               title="宋词 (11篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-music"></i>
-                </span>
-                <span class="tag-name">宋词</span>
-                
-                    <span class="tag-count-badge">11</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/twelve-poles/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 1.87;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(1.87);
-               "
-               data-count="10"
-               title="周天十二极 (10篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-cloud-sun"></i>
-                </span>
-                <span class="tag-name">周天十二极</span>
-                
-                    <span class="tag-count-badge">10</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 1.6099999999999999;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(1.6099999999999999);
-               "
-               data-count="8"
-               title="剑阵 (8篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-swords"></i>
-                </span>
-                <span class="tag-name">剑阵</span>
-                
-                    <span class="tag-count-badge">8</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%AF%8D/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="词 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-music"></i>
-                </span>
-                <span class="tag-name">词</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/star-sword-array/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="星河剑阵 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-swords"></i>
-                </span>
-                <span class="tag-name">星河剑阵</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%BF%B5%E5%A5%B4%E5%A8%87/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="念奴娇 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">念奴娇</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #84cc16;
-                   --tag-glow: #84cc1640;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="水调歌头 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-water"></i>
-                </span>
-                <span class="tag-name">水调歌头</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%B4%BA%E6%96%B0%E9%83%8E/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.96;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.96);
-               "
-               data-count="3"
-               title="贺新郎 (3篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">贺新郎</span>
-                
-                    <span class="tag-count-badge">3</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%97%AE%E6%9C%88/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="问月 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-moon"></i>
-                </span>
-                <span class="tag-name">问月</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%97%AE%E5%89%91/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #ec4899;
-                   --tag-glow: #ec489940;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="问剑 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-swords"></i>
-                </span>
-                <span class="tag-name">问剑</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%97%AE%E9%81%93/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="问道 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-question"></i>
-                </span>
-                <span class="tag-name">问道</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%A3%B0%E5%A3%B0%E6%85%A2/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="声声慢 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">声声慢</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%BD%B1/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="孤影 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-user-alt"></i>
-                </span>
-                <span class="tag-name">孤影</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B8%85%E8%BE%89/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="清辉 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">清辉</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="宇宙 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">宇宙</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="超脱 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">超脱</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%80%80/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="孤怀 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-brain"></i>
-                </span>
-                <span class="tag-name">孤怀</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E6%81%8B%E8%8A%B1/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="蝶恋花 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-flower"></i>
-                </span>
-                <span class="tag-name">蝶恋花</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="沧桑 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">沧桑</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%86%89%E6%B1%9F%E7%A7%8B/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.83;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.83);
-               "
-               data-count="2"
-               title="醉江秋 (2篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-leaf"></i>
-                </span>
-                <span class="tag-name">醉江秋</span>
-                
-                    <span class="tag-count-badge">2</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%BD%92%E5%AF%82/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="归寂 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">归寂</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B6%88%E8%A7%A3/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="消解 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">消解</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E7%B4%A0%E5%BF%83/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #84cc16;
-                   --tag-glow: #84cc1640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="素心 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-heart"></i>
-                </span>
-                <span class="tag-name">素心</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E4%B8%89%E9%97%AE/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="三问 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-question"></i>
-                </span>
-                <span class="tag-name">三问</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%87%BB%E8%B5%8B/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="臻赋 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">臻赋</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%98%9F/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="孤星 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-star"></i>
-                </span>
-                <span class="tag-name">孤星</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%A2%83%E7%95%8C%E9%80%92%E8%BF%9B/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="境界递进 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">境界递进</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E4%B8%B4%E6%B1%9F%E4%BB%99/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="临江仙 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">临江仙</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%93%B8%E5%89%91/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="铸剑 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-swords"></i>
-                </span>
-                <span class="tag-name">铸剑</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%90%8D%E8%B8%AA/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="萍踪 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">萍踪</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%80%80%E6%97%A7/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f59e0b;
-                   --tag-glow: #f59e0b40;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="怀旧 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-brain"></i>
-                </span>
-                <span class="tag-name">怀旧</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/double-blade-record/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #ef4444;
-                   --tag-glow: #ef444440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="双刃录 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">双刃录</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E7%94%9F%E5%91%BD%E9%94%BB%E9%80%A0/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #3b82f6;
-                   --tag-glow: #3b82f640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="生命锻造 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">生命锻造</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%A4%A9%E4%BA%BA%E5%90%88%E4%B8%80/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="天人合一 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-cloud-sun"></i>
-                </span>
-                <span class="tag-name">天人合一</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E7%A7%8B%E6%80%9D/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #10b981;
-                   --tag-glow: #10b98140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="秋思 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-leaf"></i>
-                </span>
-                <span class="tag-name">秋思</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%AF%82/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #06b6d4;
-                   --tag-glow: #06b6d440;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="孤寂 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-user-alt"></i>
-                </span>
-                <span class="tag-name">孤寂</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%B6%85%E7%84%B6/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #3b82f6;
-                   --tag-glow: #3b82f640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="超然 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">超然</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E8%9C%95%E9%B3%9E/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="蜕鳞 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">蜕鳞</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E9%87%8D%E7%94%9F/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="重生 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">重生</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%98%9F%E6%B2%B3/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="星河 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-star"></i>
-                </span>
-                <span class="tag-name">星河</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E4%B8%89%E7%BB%9D%E8%B5%8B/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #ec4899;
-                   --tag-glow: #ec489940;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="三绝赋 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">三绝赋</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="断鸿寒影 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">断鸿寒影</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%B8%85%E8%BE%89%E5%8A%AB%E5%B0%98/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #6366f1;
-                   --tag-glow: #6366f140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="清辉劫尘 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">清辉劫尘</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E4%B8%87%E7%B1%81%E4%BF%B1%E6%B2%89/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #10b981;
-                   --tag-glow: #10b98140;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="万籁俱沉 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">万籁俱沉</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E5%AD%98%E5%9C%A8%E5%93%B2%E5%AD%A6/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="存在哲学 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-tag"></i>
-                </span>
-                <span class="tag-name">存在哲学</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="揽星 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-star"></i>
-                </span>
-                <span class="tag-name">揽星</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%93%8E%E4%B9%BE/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="擎乾 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">擎乾</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E7%8E%B0%E5%AE%9E/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #8b5cf6;
-                   --tag-glow: #8b5cf640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="现实 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">现实</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%8B%85%E5%BD%93/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="担当 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">担当</span>
-                
-            </a>
-        
-            <a href="/mokewenxue.github.io/tags/%E6%BC%82%E6%B3%8A/" 
-               class="cosmic-tag"
-               style="
-                   --tag-size: 0.7;
-                   --tag-color: #f97316;
-                   --tag-glow: #f9731640;
-                   transform: scale(0.7);
-               "
-               data-count="1"
-               title="漂泊 (1篇)">
-                <span class="tag-icon">
-                    <i class="fas fa-hashtag"></i>
-                </span>
-                <span class="tag-name">漂泊</span>
-                
-            </a>
-        
-    </div>
-    
-    
-        <div class="tag-cloud-footer">
-            <a href="/mokewenxue.github.io/tags/" class="view-all-tags">
-                <i class="fas fa-chevron-right"></i>
-                查看全部109个词牌
-            </a>
-        </div>
-    
-</section>
-
-<style>
-    /* 标签云样式 */
-    .cosmic-tag-cloud {
-        background: rgba(20, 26, 45, 0.7);
-        border-radius: 20px;
-        padding: 40px;
-        margin: 60px 0;
-        border: 1px solid var(--border-cosmic);
-        backdrop-filter: blur(10px);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .cosmic-tag-cloud::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, 
-            #8b5cf6, #3b82f6, #ef4444, #f59e0b, #10b981);
-        border-radius: 20px 20px 0 0;
-    }
-    
-    .tag-cloud-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    
-    .tag-cloud-title {
-        color: var(--star-gold);
-        font-family: 'Ma Shan Zheng', cursive;
-        font-size: 2.2rem;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-    }
-    
-    .tag-cloud-title i {
-        font-size: 1.8rem;
-        filter: drop-shadow(0 0 10px var(--star-gold));
-    }
-    
-    .tag-count {
-        color: var(--text-nebula);
-        font-size: 1.2rem;
-        margin-left: 10px;
-    }
-    
-    .tag-cloud-desc {
-        color: var(--text-nebula);
-        font-size: 1.1rem;
-        font-style: italic;
-    }
-    
-    .tag-cloud-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px;
-        min-height: 300px;
-        align-items: center;
-    }
-    
-    .cosmic-tag {
-        --tag-size: 1;
-        --tag-color: #8b5cf6;
-        --tag-glow: rgba(139, 92, 246, 0.4);
-        
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 25px;
-        background: rgba(20, 26, 45, 0.9);
-        color: var(--tag-color);
-        text-decoration: none;
-        border-radius: 30px;
-        border: 2px solid var(--tag-color);
-        font-size: calc(1rem * var(--tag-size));
-        font-weight: 600;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-        transform: scale(var(--tag-size));
-        box-shadow: 0 5px 15px var(--tag-glow);
-    }
-    
-    .cosmic-tag::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--tag-color);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: -1;
-    }
-    
-    .cosmic-tag:hover {
-        color: white;
-        transform: scale(calc(var(--tag-size) * 1.1)) !important;
-        box-shadow: 0 0 30px var(--tag-color);
-    }
-    
-    .cosmic-tag:hover::before {
-        opacity: 1;
-    }
-    
-    .tag-icon {
-        font-size: 0.9em;
-        opacity: 0.9;
-    }
-    
-    .tag-name {
-        position: relative;
-        z-index: 2;
-    }
-    
-    .tag-count-badge {
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        font-size: 0.7em;
-        padding: 2px 8px;
-        border-radius: 10px;
-        margin-left: 5px;
-        font-weight: bold;
-        backdrop-filter: blur(5px);
-    }
-    
-    .tag-cloud-footer {
-        text-align: center;
-        margin-top: 40px;
-        padding-top: 30px;
-        border-top: 1px solid var(--border-cosmic);
-    }
-    
-    .view-all-tags {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--star-gold);
-        text-decoration: none;
-        padding: 12px 30px;
-        border: 2px solid var(--star-gold);
-        border-radius: 25px;
-        font-weight: bold;
-        transition: all 0.3s;
-    }
-    
-    .view-all-tags:hover {
-        background: var(--star-gold);
-        color: var(--primary-dark);
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(255, 217, 93, 0.3);
-    }
-    
-    /* 动画效果 */
-    @keyframes tagFloat {
-        0%, 100% { transform: translateY(0) scale(var(--tag-size)); }
-        50% { transform: translateY(-10px) scale(var(--tag-size)); }
-    }
-    
-    .cosmic-tag {
-        animation: tagFloat 3s ease-in-out infinite;
-        animation-delay: calc(var(--tag-size) * 1s);
-    }
-    
-    .cosmic-tag:hover {
-        animation-play-state: paused;
-    }
-    
-    /* 响应式设计 */
-    @media (max-width: 768px) {
-        .tag-cloud-container {
-            gap: 15px;
-            padding: 10px;
-        }
-        
-        .cosmic-tag {
-            padding: 10px 20px;
-            font-size: 0.9rem;
-        }
-        
-        .tag-cloud-title {
-            font-size: 1.8rem;
-        }
-    }
-    
-    /* 悬浮效果 */
-    .cosmic-tag:hover .tag-icon {
-        animation: iconSpin 0.5s ease;
-    }
-    
-    @keyframes iconSpin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tags = document.querySelectorAll('.cosmic-tag');
-        
-        // 鼠标悬停效果
-        tags.forEach(tag => {
-            tag.addEventListener('mouseenter', function(e) {
-                // 添加波纹效果
-                const ripple = document.createElement('span');
-                ripple.classList.add('tag-ripple');
-                this.appendChild(ripple);
-                
-                // 移除旧的波纹
-                setTimeout(() => {
-                    if (ripple.parentNode === this) {
-                        this.removeChild(ripple);
-                    }
-                }, 1000);
-            });
-            
-            // 点击效果
-            tag.addEventListener('click', function(e) {
-                e.preventDefault();
-                const url = this.getAttribute('href');
-                
-                // 添加点击动画
-                this.style.animation = 'tagClick 0.5s ease';
-                
-                setTimeout(() => {
-                    window.location.href = url;
-                }, 300);
-            });
-        });
-        
-        // 随机排列标签（创造云效果）
-        const container = document.querySelector('.tag-cloud-container');
-        if (container) {
-            const tagElements = Array.from(container.children);
-            
-            // 洗牌算法随机排列
-            for (let i = tagElements.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                container.appendChild(tagElements[j]);
-            }
-        }
-    });
-    
-    // 添加点击动画关键帧
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes tagClick {
-            0% { transform: scale(var(--tag-size)); }
-            50% { transform: scale(calc(var(--tag-size) * 0.9)); }
-            100% { transform: scale(var(--tag-size)); }
-        }
-        
-        .tag-ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: currentColor;
-            opacity: 0.3;
-            animation: ripple 1s ease-out;
-            pointer-events: none;
-        }
-        
-        @keyframes ripple {
-            from {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-</script>
-
-
     <!-- 统一页脚 -->
     <footer class="cosmic-footer">
         <div class="footer-container">
@@ -3301,13 +971,10 @@
                     <i class="fas fa-layer-group"></i> 分类
                 </a>
                 <a href="/mokewenxue.github.io/tags" class="footer-link">
-                    <i class="fas fa-tags"></i> 标签
+                    <i class="fas fa-tags"></i> 词牌剑阵
                 </a>
                 <a href="/mokewenxue.github.io/about" class="footer-link">
                     <i class="fas fa-book"></i> 关于
-                </a>
-                <a href="/mokewenxue.github.io/atom.xml" class="footer-link">
-                    <i class="fas fa-rss"></i> 订阅
                 </a>
             </nav>
             
@@ -3323,10 +990,6 @@
                     主题：Typography · 由 Hexo 驱动
                 </div>
             </div>
-            
-            <div class="constellation">
-                <i class="fas fa-star-and-crescent"></i>
-            </div>
         </div>
     </footer>
     
@@ -3339,19 +1002,11 @@
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                
-                // 随机大小
-                const size = Math.random() * 3 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                
-                // 随机位置
+                star.style.width = `${Math.random() * 3 + 1}px`;
+                star.style.height = star.style.width;
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
-                
-                // 随机闪烁延迟
                 star.style.animationDelay = `${Math.random() * 3}s`;
-                
                 starsContainer.appendChild(star);
             }
             
@@ -3364,23 +1019,6 @@
                 } else {
                     nav.style.background = 'rgba(10, 14, 26, 0.9)';
                     nav.style.boxShadow = 'none';
-                }
-            });
-            
-            // 卡片悬停效果
-            const cards = document.querySelectorAll('.cosmic-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.zIndex = '100';
-                });
-            });
-            
-            // 分页链接修复
-            const paginationLinks = document.querySelectorAll('.page-btn:not(.disabled)');
-            paginationLinks.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && (href.includes('/page/0') || href.endsWith('/page/'))) {
-                    link.setAttribute('href', href.replace('/page/0', '').replace('/page/', ''));
                 }
             });
         });
