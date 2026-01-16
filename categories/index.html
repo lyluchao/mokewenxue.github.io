@@ -31,6 +31,108 @@
             color: var(--text-light);
             line-height: 1.8;
             overflow-x: hidden;
+            padding-top: 70px; /* 导航栏高度 */
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            height: 70px;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-logo i {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .nav-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-gold);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--accent-gold);
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         
         /* 星空背景 */
@@ -54,7 +156,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 120px 20px 80px;
+            padding: 80px 20px 60px;
             overflow: hidden;
             text-align: center;
         }
@@ -222,9 +324,33 @@
             opacity: 1;
         }
         
+        /* 面包屑导航 */
+        .breadcrumb {
+            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--accent-gold);
+        }
+        
+        .breadcrumb span {
+            margin: 0 10px;
+            color: var(--accent-purple);
+        }
+        
         /* 分类内容区域 */
         .categories-content {
-            padding: 80px 20px;
+            padding: 40px 20px 80px;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -509,7 +635,6 @@
             text-align: center;
             background: linear-gradient(to top, var(--primary-dark) 0%, transparent 100%);
             border-top: 1px solid var(--border-color);
-            margin-top: 80px;
         }
         
         .footer-content {
@@ -569,6 +694,34 @@
         
         /* 响应式设计 */
         @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                height: 60px;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--primary-dark);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
             .categories-title {
                 font-size: 3rem;
             }
@@ -604,7 +757,7 @@
             
             .hero-section {
                 min-height: 50vh;
-                padding: 100px 20px 60px;
+                padding: 60px 20px 40px;
             }
         }
         
@@ -633,6 +786,51 @@
 <body>
     <!-- 星空背景 -->
     <div class="star-bg"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="/mokewenxue.github.io/" class="nav-brand">
+                <div class="nav-logo">
+                    <i class="fas fa-feather-alt"></i>
+                </div>
+                <span class="nav-title">踏月诗阁</span>
+            </a>
+            
+            <!-- 桌面端菜单 -->
+            <div class="nav-menu">
+                <a href="/mokewenxue.github.io/" class="nav-link">首页</a>
+                <a href="/mokewenxue.github.io/archives" class="nav-link">归档</a>
+                <a href="/mokewenxue.github.io/categories/" class="nav-link active">分类</a>
+                <a href="/mokewenxue.github.io/tags" class="nav-link">标签</a>
+                <a href="/mokewenxue.github.io/about" class="nav-link">关于</a>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="nav-menu" id="mobileMenu">
+            <a href="/mokewenxue.github.io/" class="nav-link">首页</a>
+            <a href="/mokewenxue.github.io/archives" class="nav-link">归档</a>
+            <a href="/mokewenxue.github.io/categories/" class="nav-link active">分类</a>
+            <a href="/mokewenxue.github.io/tags" class="nav-link">标签</a>
+            <a href="/mokewenxue.github.io/about" class="nav-link">关于</a>
+        </div>
+    </nav>
+    
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <a href="/mokewenxue.github.io/">首页</a>
+            <span>›</span>
+            <span>分类</span>
+        </div>
+    </div>
     
     <!-- 英雄区域 -->
     <section class="hero-section">
@@ -721,8 +919,8 @@
                                 </div>
                             </div>
                             <div class="category-info">
-                                <h2 class="category-name">词作</h2>
-                                <span class="category-count">10 篇剑卷</span>
+                                <h2 class="category-name">古文辞赋</h2>
+                                <span class="category-count">3 篇剑卷</span>
                             </div>
                         </div>
                         
@@ -730,7 +928,7 @@
                             待完善的分类描述
                         </p>
                         
-                        <a href="/mokewenxue.github.io/categories/%E8%AF%8D%E4%BD%9C/" class="category-link">
+                        <a href="/mokewenxue.github.io/categories/%E5%8F%A4%E6%96%87%E8%BE%9E%E8%B5%8B/" class="category-link">
                             <i class="fas fa-eye"></i>
                             查看剑卷
                         </a>
@@ -744,8 +942,8 @@
                                 </div>
                             </div>
                             <div class="category-info">
-                                <h2 class="category-name">古文辞赋</h2>
-                                <span class="category-count">3 篇剑卷</span>
+                                <h2 class="category-name">词作</h2>
+                                <span class="category-count">10 篇剑卷</span>
                             </div>
                         </div>
                         
@@ -753,7 +951,7 @@
                             待完善的分类描述
                         </p>
                         
-                        <a href="/mokewenxue.github.io/categories/%E5%8F%A4%E6%96%87%E8%BE%9E%E8%B5%8B/" class="category-link">
+                        <a href="/mokewenxue.github.io/categories/%E8%AF%8D%E4%BD%9C/" class="category-link">
                             <i class="fas fa-eye"></i>
                             查看剑卷
                         </a>
@@ -894,6 +1092,23 @@
     <script>
         // 交互效果
         document.addEventListener('DOMContentLoaded', function() {
+            // 移动端菜单切换
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                });
+                
+                // 点击菜单项后关闭菜单
+                mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                    });
+                });
+            }
+            
             // 渐变标题动画
             const title = document.querySelector('.categories-title');
             if (title) {
@@ -946,6 +1161,18 @@
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(card);
+            });
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.pageYOffset > 100) {
+                    navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                    navbar.style.backdropFilter = 'blur(10px)';
+                } else {
+                    navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                    navbar.style.backdropFilter = 'blur(10px)';
+                }
             });
         });
     </script>
