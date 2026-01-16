@@ -1,2 +1,259 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="独自踏月行"><title>剑阵分类 · 独自踏月行</title><meta name="description" content="周天十二极分类体系"><meta name="keywords" content="诗词,文学,散文,诗歌,古文"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/mokewenxue.github.io/css/bootstrap.min.css"><link rel="stylesheet" href="/mokewenxue.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 7.3.0"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/mokewenxue.github.io/"></a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/mokewenxue.github.io/"></a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/mokewenxue.github.io/">Home</a></li><li><a href="/mokewenxue.github.io/archives">Archive</a></li><li><a class="current" href="/mokewenxue.github.io/categories">Categories</a></li><li><a href="/mokewenxue.github.io/tags">Tags</a></li><!-- +make_page_links() // 暂时禁用--><li class="soc"></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2026&nbsp;<a target="_blank" href="https://lyluchao.github.io" rel="noopener noreferrer">独自踏月行</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post"><h1 class="post-title">剑阵分类</h1><div class="post-meta"><span class="post-time">post.posted 2026-01-15</span></div><div class="post-content"><p>周天十二极分类体系</p>
-</div></div></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2026&nbsp;<a target="_blank" href="https://lyluchao.github.io" rel="noopener noreferrer">独自踏月行</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/mokewenxue.github.io/js/jquery-3.1.0.min.js"></script><script src="/mokewenxue.github.io/js/bootstrap.min.js"></script><script src="/mokewenxue.github.io/js/jquery-migrate-1.2.1.min.js"></script><script src="/mokewenxue.github.io/js/jquery.appear.js"></script><script src="/mokewenxue.github.io/js/google-analytics.js"></script><script src="/mokewenxue.github.io/js/typography.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剑阵分类 | 独自踏月行</title>
+    <style>
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .star-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .categories-header {
+            padding: 100px 20px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+        }
+        
+        .categories-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 4rem;
+            color: transparent;
+            background: linear-gradient(135deg, #fbbf24, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .categories-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .category-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .category-name {
+            font-size: 1.8rem;
+            color: #f8fafc;
+            margin-bottom: 10px;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .category-count {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .category-description {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .category-link {
+            display: inline-block;
+            color: #c4b5fd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .category-link:hover {
+            color: #fbbf24;
+        }
+        
+        .page-content {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to top, #0f172a, transparent);
+            border-top: 1px solid #334155;
+            margin-top: 60px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/mokewenxue.github.io/atom.xml" title="独自踏月行" type="application/atom+xml">
+</head>
+<body>
+    <div class="star-bg"></div>
+    
+    <header class="categories-header">
+        <h1 class="categories-title">剑阵分类</h1>
+        <p style="color: #94a3b8; font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+            星河剑阵·周天十二极 · 完整的分类体系导航
+        </p>
+    </header>
+    
+    <main class="categories-content">
+        <!-- 页面内容 -->
+        
+            <div class="page-content">
+                <h1 id="周天十二极·剑阵分类体系"><a href="#周天十二极·剑阵分类体系" class="headerlink" title="周天十二极·剑阵分类体系"></a>周天十二极·剑阵分类体系</h1><div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 20px; padding: 40px; margin: 30px 0; border: 1px solid #334155;">
+<div style="text-align: center; margin-bottom: 40px;">
+<h2 style="color: #fbbf24; font-family: 'Ma Shan Zheng', cursive; font-size: 2.5rem; margin-bottom: 10px;">🌌 星河剑阵·周天十二极</h2>
+<p style="color: #94a3b8; font-size: 1.1rem;">剑气凌云霄，诗魂贯古今 · 分类体系详解</p>
+</div>
+</div>
+
+            </div>
+        
+        
+        <!-- 分类列表 -->
+        
+        
+        
+            <div class="categories-grid">
+                
+                    <div class="category-card" style="border-left-color: #94a3b8; border-left-width: 4px;">
+                        <div class="category-icon" style="color: #94a3b8">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <h2 class="category-name">词曲</h2>
+                        <span class="category-count">4 篇文章</span>
+                        <p class="category-description">暂无描述</p>
+                        <a href="/mokewenxue.github.io/categories/%E8%AF%8D%E6%9B%B2/" class="category-link">
+                            查看详情 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                
+                    <div class="category-card" style="border-left-color: #94a3b8; border-left-width: 4px;">
+                        <div class="category-icon" style="color: #94a3b8">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <h2 class="category-name">古文辞赋</h2>
+                        <span class="category-count">3 篇文章</span>
+                        <p class="category-description">暂无描述</p>
+                        <a href="/mokewenxue.github.io/categories/%E5%8F%A4%E6%96%87%E8%BE%9E%E8%B5%8B/" class="category-link">
+                            查看详情 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                
+                    <div class="category-card" style="border-left-color: #94a3b8; border-left-width: 4px;">
+                        <div class="category-icon" style="color: #94a3b8">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <h2 class="category-name">词作</h2>
+                        <span class="category-count">10 篇文章</span>
+                        <p class="category-description">暂无描述</p>
+                        <a href="/mokewenxue.github.io/categories/%E8%AF%8D%E4%BD%9C/" class="category-link">
+                            查看详情 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                
+                    <div class="category-card" style="border-left-color: #8b5cf6; border-left-width: 4px;">
+                        <div class="category-icon" style="color: #8b5cf6">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h2 class="category-name">剑经法典</h2>
+                        <span class="category-count">11 篇文章</span>
+                        <p class="category-description">周天十二极正典，星河剑阵核心法典</p>
+                        <a href="/mokewenxue.github.io/categories/sword-classic/" class="category-link">
+                            查看详情 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                
+                    <div class="category-card" style="border-left-color: #94a3b8; border-left-width: 4px;">
+                        <div class="category-icon" style="color: #94a3b8">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <h2 class="category-name">法典词赋</h2>
+                        <span class="category-count">1 篇文章</span>
+                        <p class="category-description">暂无描述</p>
+                        <a href="/mokewenxue.github.io/categories/%E6%B3%95%E5%85%B8%E8%AF%8D%E8%B5%8B/" class="category-link">
+                            查看详情 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                
+                    <div class="category-card" style="border-left-color: #94a3b8; border-left-width: 4px;">
+                        <div class="category-icon" style="color: #94a3b8">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <h2 class="category-name">古体诗</h2>
+                        <span class="category-count">1 篇文章</span>
+                        <p class="category-description">暂无描述</p>
+                        <a href="/mokewenxue.github.io/categories/%E5%8F%A4%E4%BD%93%E8%AF%97/" class="category-link">
+                            查看详情 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                
+                    <div class="category-card" style="border-left-color: #94a3b8; border-left-width: 4px;">
+                        <div class="category-icon" style="color: #94a3b8">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <h2 class="category-name">散文随笔</h2>
+                        <span class="category-count">1 篇文章</span>
+                        <p class="category-description">暂无描述</p>
+                        <a href="/mokewenxue.github.io/categories/%E6%95%A3%E6%96%87%E9%9A%8F%E7%AC%94/" class="category-link">
+                            查看详情 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                
+            </div>
+        
+    </main>
+    
+    <footer>
+        <div style="color: #94a3b8; margin-bottom: 20px;">
+            © 2026 独自踏月行<br>
+            剑气凌云霄，诗魂贯古今
+        </div>
+        <div style="font-size: 0.9rem; color: #64748b;">
+            <i class="fas fa-feather-alt"></i>
+            Theme Typography by Makito
+            <i class="fas fa-feather-alt"></i>
+            · Proudly published with Hexo
+        </div>
+    </footer>
+</body>
+</html>
