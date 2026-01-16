@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 | 独自踏月行</title>
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --secondary-dark: #1e293b;
+            --accent-gold: #fbbf24;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.8;
+            overflow-x: hidden;
+            padding-top: 70px;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            height: 70px;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-gold);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--accent-gold);
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* 星空背景 */
+        .star-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* 英雄区域 */
+        .hero-section {
+            position: relative;
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            overflow: hidden;
+            text-align: center;
+            background: linear-gradient(135deg, 
+                rgba(15, 23, 42, 0.9) 0%, 
+                rgba(30, 41, 59, 0.7) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+        }
+        
+        .about-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 4rem;
+            color: transparent;
+            background: linear-gradient(135deg, 
+                var(--accent-gold) 0%, 
+                var(--accent-purple) 50%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+        
+        .about-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        /* 内容区域 */
+        .about-content {
+            padding: 40px 20px 80px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .poem-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .poem-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--accent-gold), 
+                var(--accent-purple), 
+                var(--accent-blue));
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .poem-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .poem-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--accent-gold), 
+                transparent);
+        }
+        
+        .poem-body {
+            font-size: 1.15rem;
+            line-height: 2.2;
+            color: #e2e8f0;
+            text-align: justify;
+        }
+        
+        .poem-paragraph {
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid rgba(139, 92, 246, 0.3);
+        }
+        
+        .poem-paragraph:first-letter {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            float: left;
+            line-height: 1;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .section-divider {
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+        }
+        
+        .section-divider::before,
+        .section-divider::after {
+            content: '⚔️';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            opacity: 0.5;
+        }
+        
+        .section-divider::before {
+            left: calc(50% - 100px);
+        }
+        
+        .section-divider::after {
+            right: calc(50% - 100px);
+        }
+        
+        .section-divider-line {
+            display: inline-block;
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--accent-gold), 
+                transparent);
+            margin: 0 20px;
+            vertical-align: middle;
+        }
+        
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .structure-card {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .structure-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .structure-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                var(--accent-purple), 
+                var(--accent-blue));
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .structure-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            text-align: center;
+        }
+        
+        .structure-title {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-family: 'Ma Shan Zheng', cursive;
+            text-align: center;
+        }
+        
+        .structure-desc {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1rem;
+            text-align: justify;
+        }
+        
+        .highlight {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--accent-gold);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        
+        .sword-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .sword-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-purple);
+        }
+        
+        .sword-name {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sword-name::before {
+            content: '🗡️';
+            font-size: 1.2rem;
+        }
+        
+        .sword-desc {
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding-left: 30px;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--accent-gold);
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 40px 0;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .quote::before,
+        .quote::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .quote::before {
+            top: 10px;
+            left: 20px;
+        }
+        
+        .quote::after {
+            bottom: 10px;
+            right: 20px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to top, var(--primary-dark) 0%, transparent 100%);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .copyright {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            position: relative;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--text-light);
+        }
+        
+        .footer-link:hover::before {
+            width: 80%;
+        }
+        
+        .footer-seal {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            letter-spacing: 2px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .navbar {
+                height: 60px;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--primary-dark);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+                gap: 20px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .about-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .poem-section {
+                padding: 25px;
+            }
+            
+            .poem-title {
+                font-size: 1.8rem;
+            }
+            
+            .poem-body {
+                font-size: 1rem;
+                line-height: 2;
+            }
+            
+            .poem-paragraph {
+                padding-left: 20px;
+            }
+            
+            .structure-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-section {
+                min-height: 30vh;
+                padding: 60px 20px;
+            }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--accent-purple), var(--accent-blue));
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--accent-gold), var(--accent-purple));
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/mokewenxue.github.io/atom.xml" title="独自踏月行" type="application/atom+xml">
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="star-bg"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- 桌面端菜单 -->
+            <div class="nav-menu">
+                <a href="/mokewenxue.github.io/" class="nav-link">首页</a>
+                <a href="/mokewenxue.github.io/archives" class="nav-link">归档</a>
+                <a href="/mokewenxue.github.io/categories/" class="nav-link">分类</a>
+                <a href="/mokewenxue.github.io/tags" class="nav-link">标签</a>
+                <a href="/mokewenxue.github.io/about/" class="nav-link active">关于</a>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="nav-menu" id="mobileMenu">
+            <a href="/mokewenxue.github.io/" class="nav-link">首页</a>
+            <a href="/mokewenxue.github.io/archives" class="nav-link">归档</a>
+            <a href="/mokewenxue.github.io/categories/" class="nav-link">分类</a>
+            <a href="/mokewenxue.github.io/tags" class="nav-link">标签</a>
+            <a href="/mokewenxue.github.io/about/" class="nav-link active">关于</a>
+        </div>
+    </nav>
+    
+    <!-- 英雄区域 -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="about-title">星河剑赋</h1>
+            <p class="about-subtitle">
+                鸿蒙未判，道隐无名；星河初辟，剑显其形
+            </p>
+        </div>
+    </section>
+    
+    <!-- 内容区域 -->
+    <main class="about-content">
+        <!-- 页面内容 -->
+        
+            <div class="poem-section">
+                <h1 id="星河剑赋"><a href="#星河剑赋" class="headerlink" title="星河剑赋"></a>星河剑赋</h1><div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9)); border-radius: 20px; padding: 40px; margin: 30px 0; border: 1px solid #334155;">
+<div style="text-align: center; margin-bottom: 40px;">
+<h2 style="color: #fbbf24; font-family: 'Ma Shan Zheng', cursive; font-size: 2.5rem; margin-bottom: 10px;">⚔️ 星河剑赋</h2>
+<p style="color: #94a3b8; font-size: 1.1rem;">鸿蒙未判，道隐无名；星河初辟，剑显其形</p>
+</div>
+</div>
+
+            </div>
+        
+        
+        <!-- 星河剑赋正文 -->
+        <div class="poem-section">
+            <h2 class="poem-title">星河剑赋</h2>
+            
+            <div class="poem-body">
+                <div class="poem-paragraph">
+                    鸿蒙未判，道隐无名；星河初辟，剑显其形。汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋。剑阵循<span class="highlight">"1+12+1"</span>之圆满，合创世、锻造、证道三重境，开天总序悬若日曜，周天十二列如星环，双刃总录契若北辰，三极相贯，是为《汉语星河剑阵》。
+                </div>
+                
+                <div class="section-divider">
+                    <span class="section-divider-line"></span>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">一、开天·创世之则</span>
+                    <span class="section-divider-line"></span>
+                </div>
+                
+                <div class="poem-paragraph">
+                    《念奴娇·登霄纵海》为卷首，辟鸿蒙而定法则。登霄蹑玄，叩天关以探元化；纵海凌浩，穷地根而溯太初。天为阳纲，海为阴纪，刚柔相摩，八卦相荡，斯生创世之力；霄为形上，海为形下，体用相彰，虚实相因，乃显剑道之真。此卷如日普照，定"存在与虚无"之基，启"本源照澈"之始，使星河有根，剑器有魂。
+                </div>
+                
+                <div class="section-divider">
+                    <span class="section-divider-line"></span>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">二、周天·锻造之章</span>
+                    <span class="section-divider-line"></span>
+                </div>
+                
+                <div class="poem-paragraph">
+                    十二极卷宗列于阵中，各秉分域法则，共冶星河之锋：
+                </div>
+                
+                <ul class="sword-list">
+                    <li class="sword-item">
+                        <div class="sword-name">《心火》</div>
+                        <div class="sword-desc">
+                            锻于本源界，张力存乎有无，熔为鸿蒙光，照澈本源赋剑初灵；其火也，生于太虚，长于杳冥，无中生有，有复归无，昭宇宙之元炁，耀剑心之本明。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《怀思》</div>
+                        <div class="sword-desc">
+                            锻于心意界，张力在柔与锐，凝为温润刃，初心凝锋含恻怛韵；其思也，柔如春水，锐若秋霜，柔以蕴仁，锐以显义，契孔圣之恻怛，合孟轲之浩然。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《醉铸》</div>
+                        <div class="sword-desc">
+                            锻于情感界，张力藏浓与纯，炼为江秋金，情意熔炼显赤诚彩；其醉也，非耽杯酒，实醉天真，浓而不浊，纯而不枯，似青莲之邀月，类少陵之忧民。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《萍魄》</div>
+                        <div class="sword-desc">
+                            锻于缘法界，张力见聚散间，淬为惊鸿魄，缘起淬魂具灵动姿；其魄也，聚如萍合，散若萍飘，聚以成契，散以守真，同濠梁之观鱼，契濠濮之会心。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《清怀》</div>
+                        <div class="sword-desc">
+                            锻于人格界，张力合清寂傲骨，耸为孤柯脊，风骨孤耸守端方节；其怀也，清如冰壶，傲若雪松，清以绝尘，傲以持节，法伯夷之采薇，师渊明之采菊。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《知契》</div>
+                        <div class="sword-desc">
+                            锻于伦理界，张力在孤绝共铸，合为共魂契，双心同冶蕴和合德；其契也，孤而不独，共而不群，孤以砺己，共以济世，法孔颜之同坐，效管鲍之分金。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《墨锋》</div>
+                        <div class="sword-desc">
+                            锻于符号界，张力载道与烙印，刻为星霞纹，文脉铭刻藏古今智；其锋也，书于竹帛，镂于金石，载道以传，烙印以记，溯仓颉之造字，绍许慎之说文。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《擎乾》</div>
+                        <div class="sword-desc">
+                            锻于现实界，张力抗重压担当，挺为乾坤锷，尘途锻脊生砥柱力；其锷也，擎于五岳，镇于四溟，压而不弯，担而不避，慕仲尼之木铎，法文公之铁肩。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《秋律》</div>
+                        <div class="sword-desc">
+                            锻于时空界，张力在流逝定格，订为天框律，时序重订持恒常序；其律也，行于四时，运于八荒，逝而不亡，定格不朽，法羲和之驭日，效望舒之驱月。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《双刃录》</div>
+                        <div class="sword-desc">
+                            锻于生命界，张力贯淬炼重铸，著为星穹录，生死辩证含轮回韵；其录也，淬于雷火，铸于罡风，死而复生，生而复死，契庄生之鼓盆，合释氏之圆觉。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《揽星》</div>
+                        <div class="sword-desc">
+                            锻于宇宙界，张力合浩瀚抱负，拓为星河锷，星海为锋具天地魄；其锷也，揽星为芒，摘月为锋，浩而不茫，志而不妄，慕屈原之问天，效李贺之访古。
+                        </div>
+                    </li>
+                    
+                    <li class="sword-item">
+                        <div class="sword-name">《踏月》</div>
+                        <div class="sword-desc">
+                            锻于道境界，张力藏有迹无痕，归为清辉痕，道迹归真臻圆融境；其迹也，踏月而来，拂云而去，有迹非滞，无痕非空，合老聃之无为，契庄周之逍遥。
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="poem-paragraph">
+                    十二卷宗，或阴或阳，或刚或柔，辩证相生如周天运转。皆以汉语为料、心意为火、时空为炉，使剑非仅为器，更载文脉、含伦理、蕴道韵。
+                </div>
+                
+                <div class="section-divider">
+                    <span class="section-divider-line"></span>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">三、证道·综演之旨</span>
+                    <span class="section-divider-line"></span>
+                </div>
+                
+                <div class="poem-paragraph">
+                    《双刃录：星穹淬炼与江湖重铸》为总录，综演万法而证道圆满。双刃者，非徒剑之两刃，实乃道之两仪：一曰星穹，一曰江湖。星穹在上，昭日月星辰之序；江湖在下，演悲欢离合之场。星穹为体，江湖为用，体用不二，高以下为基；一曰淬炼，一曰重铸。淬炼以破，破陈腐之桎梏；重铸以立，立新生之乾坤。破立相生，革故以鼎新。
+                </div>
+                
+                <div class="poem-paragraph">
+                    此卷收十二极精华，融创世之则与锻造之法，使剑道贯通天地人神：以本源照澈为根，风骨孤耸为干，文明铭刻为枝，道迹归真为果。剑出星河为锋，剑藏汉语为魂；用则劈破混沌显秩序，藏则涵养文脉传永续。
+                </div>
+                
+                <div class="quote">
+                    盖剑阵之圆满，非剑非形，乃道乃理。汉语为星河经纬，十二极为周天星宿，证道为北辰恒定，三者合一，是为"十二极周天圆满"。
+                </div>
+                
+                <div class="poem-paragraph">
+                    剑在阵中，阵在道中，道在汉语中，生生不息，道统永续。
+                </div>
+                
+                <div class="poem-paragraph">
+                    呜呼！星河浩渺，汉语无疆，剑道精深。今作此赋，明剑阵之旨，颂文脉之盛。愿后之览者，悟创世之艰、锻造之苦、证道之真，以剑为媒，以文为魂，承十二极法则，续周天圆满荣光。
+                </div>
+                
+                <div class="poem-paragraph" style="text-align: center; font-weight: bold; color: var(--accent-gold); margin-top: 40px;">
+                    是为《星河剑赋》，以志不朽。
+                </div>
+            </div>
+        </div>
+        
+        <!-- 结构说明 -->
+        <div class="structure-grid">
+            <div class="structure-card">
+                <div class="structure-icon">🌌</div>
+                <h3 class="structure-title">1+12+1 圆满结构</h3>
+                <p class="structure-desc">
+                    创世之则（1）开启混沌，周天十二极（12）锻造锋芒，证道之旨（1）综演万法。三境相贯，如日、星、辰相映，构成完整的剑阵体系。
+                </p>
+            </div>
+            
+            <div class="structure-card">
+                <div class="structure-icon">⚔️</div>
+                <h3 class="structure-title">辩证锻造</h3>
+                <p class="structure-desc">
+                    每卷皆含辩证张力：有无、刚柔、聚散、时空。汉语为薪，心意为火，在辩证中锻造出既能劈破混沌，又能涵养文脉的星河之剑。
+                </p>
+            </div>
+            
+            <div class="structure-card">
+                <div class="structure-icon">📜</div>
+                <h3 class="structure-title">文脉传承</h3>
+                <p class="structure-desc">
+                    剑非仅为器，乃文明之载体。融合儒释道精髓，贯通古今智慧，使剑阵既是修行体系，也是文化传承，更是汉语精神的显化。
+                </p>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="copyright">
+                © 2026 独自踏月行<br>
+                剑气凌云霄，诗魂贯古今<br>
+                月明千里照，墨韵万年存
+            </div>
+            
+            <div class="footer-links">
+                <a href="/mokewenxue.github.io/" class="footer-link">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+                <a href="/mokewenxue.github.io/archives" class="footer-link">
+                    <i class="fas fa-archive"></i> 归档
+                </a>
+                <a href="/mokewenxue.github.io/categories/" class="footer-link">
+                    <i class="fas fa-layer-group"></i> 分类
+                </a>
+                <a href="/mokewenxue.github.io/tags" class="footer-link">
+                    <i class="fas fa-tags"></i> 标签
+                </a>
+                <a href="/mokewenxue.github.io/atom.xml" class="footer-link">
+                    <i class="fas fa-rss"></i> 订阅
+                </a>
+            </div>
+            
+            <div class="footer-seal">
+                <i class="fas fa-feather-alt"></i>
+                Theme Typography by Makito
+                <i class="fas fa-feather-alt"></i><br>
+                Proudly published with Hexo · 剑气长存
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // 交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 移动端菜单切换
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                });
+                
+                // 点击菜单项后关闭菜单
+                mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                    });
+                });
+            }
+            
+            // 卡片悬停效果
+            const cards = document.querySelectorAll('.structure-card, .sword-item');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '100';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.pageYOffset > 100) {
+                    navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                    navbar.style.backdropFilter = 'blur(10px)';
+                } else {
+                    navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                    navbar.style.backdropFilter = 'blur(10px)';
+                }
+            });
+            
+            // 段落渐入效果
+            const paragraphs = document.querySelectorAll('.poem-paragraph');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            paragraphs.forEach((para, index) => {
+                para.style.opacity = '0';
+                para.style.transform = 'translateY(20px)';
+                para.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                setTimeout(() => {
+                    observer.observe(para);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
