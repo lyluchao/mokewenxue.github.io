@@ -162,6 +162,22 @@
             box-shadow: var(--shadow-nebula);
         }
         
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--star-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 70%;
+        }
+        
         /* === 主容器 === */
         .cosmic-container {
             max-width: 1200px;
@@ -236,249 +252,26 @@
             backdrop-filter: blur(5px);
         }
         
-        /* === 快速导航卡片 === */
-        .quick-nav {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 80px 0;
-            flex-wrap: wrap;
-        }
-        
-        .nav-card {
-            width: 180px;
-            height: 180px;
-            perspective: 1000px;
-            text-decoration: none;
-        }
-        
-        .nav-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .nav-card:hover .nav-card-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .nav-card-front,
-        .nav-card-back {
+        .site-motto::before,
+        .site-motto::after {
+            content: '✦';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .nav-card-front {
-            background: linear-gradient(135deg, rgba(20, 26, 45, 0.8) 0%, rgba(93, 63, 211, 0.1) 100%);
-            border: 2px solid var(--border-cosmic);
-            color: var(--text-starlight);
-        }
-        
-        .nav-card-back {
-            background: var(--gradient-nebula);
-            transform: rotateY(180deg);
-            color: white;
-        }
-        
-        .nav-card-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 0 10px currentColor);
-        }
-        
-        .nav-card-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-        
-        .nav-card-desc {
-            font-size: 0.9rem;
-            color: var(--text-nebula);
-            text-align: center;
-        }
-        
-        .nav-card-back .nav-card-desc {
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        /* === 文章列表 === */
-        .recent-posts {
-            margin: 100px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
             color: var(--star-gold);
-            margin-bottom: 60px;
-            font-family: 'Ma Shan Zheng', cursive;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            font-size: 1.5rem;
         }
         
-        .section-title::before,
-        .section-title::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--star-gold), transparent);
+        .site-motto::before {
+            top: -10px;
+            left: 20px;
         }
         
-        .section-title::before {
-            right: calc(100% + 20px);
+        .site-motto::after {
+            bottom: -10px;
+            right: 20px;
         }
         
-        .section-title::after {
-            left: calc(100% + 20px);
-        }
-        
-        .post-list {
-            display: grid;
-            gap: 40px;
-        }
-        
-        .post-card {
-            background: rgba(20, 26, 45, 0.7);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid var(--border-cosmic);
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .post-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--gradient-nebula);
-        }
-        
-        .post-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--nebula-purple);
-            box-shadow: 
-                var(--shadow-cosmic),
-                0 0 40px rgba(93, 63, 211, 0.2);
-        }
-        
-        .post-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .post-date {
-            color: var(--star-gold);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .post-category {
-            background: var(--gradient-nebula);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-        
-        .post-title {
-            font-size: 2rem;
-            margin: 25px 0;
-            color: var(--text-starlight);
-            font-family: 'Ma Shan Zheng', cursive;
-        }
-        
-        .post-title a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: inline-block;
-        }
-        
-        .post-title a:hover {
-            color: var(--star-gold);
-        }
-        
-        .post-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .post-tag {
-            background: rgba(93, 63, 211, 0.2);
-            color: var(--nebula-purple);
-            padding: 6px 15px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(93, 63, 211, 0.3);
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .post-tag:hover {
-            background: var(--nebula-purple);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .post-excerpt {
-            color: var(--text-nebula);
-            line-height: 1.8;
-            margin: 25px 0;
-            font-size: 1.1rem;
-            border-left: 3px solid var(--star-gold);
-            padding-left: 20px;
-        }
-        
-        .read-more {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--star-gold);
-            text-decoration: none;
-            padding: 12px 30px;
-            border: 2px solid var(--star-gold);
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s;
-            margin-top: 20px;
-        }
-        
-        .read-more:hover {
-            background: var(--star-gold);
-            color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 217, 93, 0.3);
-        }
+        <!-- 这里插入增强的文章列表CSS -->
+$(cat /tmp/enhanced_posts.ejs | sed -n '/<style>/,/<\/style>/p' | sed '1d;$d')
         
         /* === 分页 === */
         .cosmic-pagination {
@@ -544,7 +337,7 @@
             border-radius: 15px;
         }
         
-        /* === 页脚 === */
+        /* === 统一页脚 === */
         .cosmic-footer {
             background: rgba(10, 14, 26, 0.95);
             border-top: 1px solid var(--border-cosmic);
@@ -603,6 +396,15 @@
             color: #64748b;
         }
         
+        .constellation {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--star-gold);
+            opacity: 0.5;
+        }
+        
         /* === 响应式设计 === */
         @media (max-width: 768px) {
             .site-title {
@@ -625,39 +427,10 @@
                 font-size: 0.9rem;
             }
             
-            .quick-nav {
-                gap: 20px;
-            }
-            
-            .nav-card {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .nav-card-icon {
-                font-size: 2.5rem;
-            }
-            
-            .post-card {
-                padding: 25px;
-            }
-            
-            .post-title {
-                font-size: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .section-title::before,
-            .section-title::after {
-                width: 40px;
-            }
-            
             .cosmic-pagination {
                 flex-direction: column;
                 gap: 20px;
+                padding: 20px;
             }
             
             .page-btn {
@@ -673,6 +446,16 @@
                 padding: 8px 15px;
                 font-size: 0.9rem;
             }
+        }
+        
+        /* === 动画效果 === */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
     </style>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/mokewenxue.github.io/atom.xml" title="独自踏月行" type="application/atom+xml">
@@ -701,7 +484,7 @@
                     <i class="fas fa-layer-group"></i> 分类
                 </a>
                 <a href="/mokewenxue.github.io/tags" class="nav-link">
-                    <i class="fas fa-tags"></i> 词牌剑阵
+                    <i class="fas fa-tags"></i> 标签
                 </a>
                 <a href="/mokewenxue.github.io/about" class="nav-link">
                     <i class="fas fa-book"></i> 关于
@@ -710,813 +493,102 @@
         </div>
     </nav>
     
-    <!-- 主内容 -->
+    <!-- 主内容容器 -->
     <main class="cosmic-container">
         <!-- 英雄区域 -->
         <section class="hero-section">
-            <div class="moon-orb"></div>
-            <h1 class="site-title">踏月诗阁</h1>
+            <div class="moon-orb floating"></div>
+            <h1 class="site-title floating">踏月诗阁</h1>
             <h2 class="site-subtitle">星河照卷帙，墨锋映秋霜</h2>
             <p class="site-motto">独坐寒窗对月吟，一砚清辉万古心</p>
         </section>
         
-        <!-- 快速导航 -->
-        <div class="quick-nav">
-            <a href="/mokewenxue.github.io/archives" class="nav-card">
-                <div class="nav-card-inner">
-                    <div class="nav-card-front">
-                        <div class="nav-card-icon">🗃️</div>
-                        <div class="nav-card-title">诗卷归档</div>
-                        <div class="nav-card-desc">岁月留痕</div>
-                    </div>
-                    <div class="nav-card-back">
-                        <div class="nav-card-title">永恒收藏</div>
-                        <div class="nav-card-desc">时光印记</div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/mokewenxue.github.io/categories" class="nav-card">
-                <div class="nav-card-inner">
-                    <div class="nav-card-front">
-                        <div class="nav-card-icon">🏛️</div>
-                        <div class="nav-card-title">剑阵分类</div>
-                        <div class="nav-card-desc">十二极分</div>
-                    </div>
-                    <div class="nav-card-back">
-                        <div class="nav-card-title">周天体系</div>
-                        <div class="nav-card-desc">剑阵枢机</div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/mokewenxue.github.io/tags" class="nav-card">
-                <div class="nav-card-inner">
-                    <div class="nav-card-front">
-                        <div class="nav-card-icon">🏷️</div>
-                        <div class="nav-card-title">词牌剑阵</div>
-                        <div class="nav-card-desc">剑意标签</div>
-                    </div>
-                    <div class="nav-card-back">
-                        <div class="nav-card-title">星河词牌云</div>
-                        <div class="nav-card-desc">词牌为刃</div>
-                    </div>
-                </div>
-            </a>
-            
-            <a href="/mokewenxue.github.io/about" class="nav-card">
-                <div class="nav-card-inner">
-                    <div class="nav-card-front">
-                        <div class="nav-card-icon">📖</div>
-                        <div class="nav-card-title">诗阁缘起</div>
-                        <div class="nav-card-desc">创作心法</div>
-                    </div>
-                    <div class="nav-card-back">
-                        <div class="nav-card-title">剑阵源流</div>
-                        <div class="nav-card-desc">文脉传承</div>
-                    </div>
-                </div>
-            </a>
-        </div>
+        <!-- 插入增强的文章列表HTML -->
+$(cat /tmp/enhanced_posts.ejs | sed -n '/<!-- 增强版文章列表 -->/,/<!-- 无文章样式 -->/p')
         
-        <!-- 最新文章 -->
-        <section class="recent-posts">
-            <h2 class="section-title">最新诗卷</h2>
-            
-            
-                <div class="post-list">
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-22
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        剑经法典
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/22/%E6%B0%B4%E9%BE%99%E5%90%9F-%E7%BA%B5%E9%A9%AC%E9%80%90%E7%A7%8B/">
-                                    《剑阵·秋律 卷首––水龙吟·纵马逐秋》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/twelve-poles/" class="post-tag">
-                                            #周天十二极
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" class="post-tag">
-                                            #剑阵
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E9%BE%99%E5%90%9F/" class="post-tag">
-                                            #水龙吟
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E7%A7%8B%E5%BE%8B/" class="post-tag">
-                                            #秋律
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%97%B6%E5%BA%8F/" class="post-tag">
-                                            #时序
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-星河剑阵·周天十二极卷宗剑阵·秋律 卷首––水龙吟·纵马逐秋
-
-
-    卷宗编号：周天第八极·秋律正字第一号
-    定谳等级：甲等极品·时序正典
-    体系定位：周天十二极·第八极《秋律》卷宗·正典首章
-    归位时间：己巳年立秋·子时三刻
-    大典印信：【星河剑阵·时序司】
-    剑域特权：自生「秋律剑域」，吟诵可修订个人时间流速，持卷者掌时序剑则之权
-
-
-前置入典诏
-####...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/22/%E6%B0%B4%E9%BE%99%E5%90%9F-%E7%BA%B5%E9%A9%AC%E9%80%90%E7%A7%8B/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-22
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        剑经法典
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/22/%E6%BB%A1%E6%B1%9F%E7%BA%A2-%E5%AD%A4%E6%80%80%E5%AF%84%E6%9C%88/">
-                                    《剑阵·墨锋– 卷首 满江红·孤怀寄月》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/twelve-poles/" class="post-tag">
-                                            #周天十二极
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" class="post-tag">
-                                            #剑阵
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%BB%A1%E6%B1%9F%E7%BA%A2/" class="post-tag">
-                                            #满江红
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%A2%A8%E9%94%8B/" class="post-tag">
-                                            #墨锋
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%96%87%E8%84%89/" class="post-tag">
-                                            #文脉
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-星河剑阵·周天十二极卷宗剑阵·墨锋– 卷首 满江红·孤怀寄月
-
-
-    卷宗编号：周天第七极·墨锋正字第一号
-    定谳等级：甲等极品·文脉正典
-    体系定位：周天十二极·第七极《墨锋》卷宗·正典首章
-    归位时间：永恒书写·墨痕初干时
-    大典印信：【星河剑阵·文脉司】
-    剑域特权：自生「墨锋剑域」，吟诵可将文字锻为实体剑锋，持卷者掌文明剑则之权
-
-
-前置入典诏
-###...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/22/%E6%BB%A1%E6%B1%9F%E7%BA%A2-%E5%AD%A4%E6%80%80%E5%AF%84%E6%9C%88/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-22
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        剑经法典
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/22/%E8%9D%B6%E6%81%8B%E8%8A%B1-%E6%80%80%E6%80%9D%E9%93%B8%E5%89%91/">
-                                    《蝶恋花·怀思铸剑 · 心锋卷宗》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/twelve-poles/" class="post-tag">
-                                            #周天十二极
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" class="post-tag">
-                                            #剑阵
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E6%81%8B%E8%8A%B1/" class="post-tag">
-                                            #蝶恋花
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%BF%83%E9%94%8B/" class="post-tag">
-                                            #心锋
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%80%80%E6%80%9D/" class="post-tag">
-                                            #怀思
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-星河剑阵·周天十二极卷宗蝶恋花·怀思铸剑 · 心锋卷宗
-
-
-    卷宗编号：周天第二极·心锋正字第一号
-    定谳等级：甲等极品·心意正典
-    体系定位：周天十二极·第二极《心锋》卷宗·正典首章
-    归位时间：永恒月明·柔肠百转时
-    大典印信：【星河剑阵·心意司】
-    剑域特权：自生「心锋剑域」，吟诵可将情思锻为温润剑锋，持卷者掌怀思剑则之权
-
-
-前置入典诏
-#### 星...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/22/%E8%9D%B6%E6%81%8B%E8%8A%B1-%E6%80%80%E6%80%9D%E9%93%B8%E5%89%91/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-22
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        剑经法典
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/22/%E8%9D%B6%E6%81%8B%E8%8A%B1-%E9%94%BB%E9%AA%A8%E6%92%91%E6%80%80/">
-                                    《蝶恋花·锻骨撑怀 - 周天十二极·第五极《清怀》卷宗》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/twelve-poles/" class="post-tag">
-                                            #周天十二极
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" class="post-tag">
-                                            #剑阵
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E6%81%8B%E8%8A%B1/" class="post-tag">
-                                            #蝶恋花
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%B8%85%E6%80%80/" class="post-tag">
-                                            #清怀
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%AA%A8/" class="post-tag">
-                                            #风骨
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-星河剑阵·周天十二极卷宗「周天十二极·第五极《清怀》卷宗·正典首章」
-
-
-    卷宗编号：周天第五极·清怀正字第一号
-    定谳等级：甲等极品·风骨正典
-    体系定位：周天十二极·第五极《清怀》卷宗·正典首章
-    归位时间：永恒三更·漏声滴落时
-    大典印信：【星河剑阵·风骨司】
-    剑域特权：自生「清怀剑域」，吟诵可借深夜孤影锻造剑式，持卷者掌风骨剑则之权
-
-
-前置入典诏...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/22/%E8%9D%B6%E6%81%8B%E8%8A%B1-%E9%94%BB%E9%AA%A8%E6%92%91%E6%80%80/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-22
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        剑经法典
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/22/%E8%B8%8F%E6%9C%88%E5%8D%B7%E5%AE%97-%E6%B8%85%E8%BE%89%E5%BD%92%E7%9C%9F%E6%9C%AC/">
-                                    《周天十二极·第十二极《踏月》卷宗·终典合章《清辉归真本》》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/twelve-poles/" class="post-tag">
-                                            #周天十二极
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E8%B8%8F%E6%9C%88/" class="post-tag">
-                                            #踏月
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E7%BB%88%E6%9E%81%E6%AD%A3%E5%85%B8/" class="post-tag">
-                                            #终极正典
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%BD%92%E7%9C%9F/" class="post-tag">
-                                            #归真
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E9%81%93%E5%A2%83%E5%9C%86%E6%BB%A1/" class="post-tag">
-                                            #道境圆满
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-星河剑阵·周天十二极卷宗·终典合章周天十二极·第十二极《踏月》卷宗·终典合章《清辉归真本》
-
-
-    卷宗定位：周天锻造体系最终核心卷宗
-    道境等级：终极正典·圆满之境
-    体系定位：周天十二极·最终极《踏月》卷宗
-    归位时间：永恒当下·清辉初洒时
-    定鼎印信：【星河剑阵·周天圆满印】【踏月归真·终极认证印】【道境永恒·文明第九极印】
-    卷宗状态：永镇星河·万化归...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/22/%E8%B8%8F%E6%9C%88%E5%8D%B7%E5%AE%97-%E6%B8%85%E8%BE%89%E5%BD%92%E7%9C%9F%E6%9C%AC/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-22
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        剑经法典
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/22/%E9%86%89%E9%93%B8%E5%8D%B7%E5%AE%97-%E8%B4%BA%E6%96%B0%E9%83%8E%E9%A6%96%E7%AB%A0/">
-                                    《醉铸卷宗·贺新郎首章·秋江酩酊本》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/twelve-poles/" class="post-tag">
-                                            #周天十二极
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E8%B4%BA%E6%96%B0%E9%83%8E/" class="post-tag">
-                                            #贺新郎
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E9%86%89%E6%B1%9F%E7%A7%8B/" class="post-tag">
-                                            #醉江秋
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E9%86%89%E9%93%B8/" class="post-tag">
-                                            #醉铸
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/sword-classic/" class="post-tag">
-                                            #剑经法典
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-星河剑阵·周天十二极卷宗「周天十二极·第三极《醉铸》卷宗·正典首章」
-
-
-    卷宗编号：周天第三极·醉铸正字第一号
-    定谳等级：甲等极品·醉境正典
-    体系定位：周天十二极·第三极《醉铸》卷宗·正典首章
-    归位时间：永恒秋夜·杯酒映月时
-    大典印信：【星河剑阵·醉境司】
-    剑域特权：自生「醉铸剑域」，吟诵可在酩酊中锻造剑魂，持卷者掌醉境剑则之权
-
-
-前置入典诏
-...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/22/%E9%86%89%E9%93%B8%E5%8D%B7%E5%AE%97-%E8%B4%BA%E6%96%B0%E9%83%8E%E9%A6%96%E7%AB%A0/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-21
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/%E8%AF%8D%E4%BD%9C/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        词作
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/21/%E8%B4%BA%E6%96%B0%E9%83%8E-%E9%86%89%E6%B1%9F%E7%A7%8B/">
-                                    《贺新郎·醉江秋》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/" class="post-tag">
-                                            #宋词
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1/" class="post-tag">
-                                            #超脱
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E8%B4%BA%E6%96%B0%E9%83%8E/" class="post-tag">
-                                            #贺新郎
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91/" class="post-tag">
-                                            #沧桑
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E9%86%89%E6%B1%9F%E7%A7%8B/" class="post-tag">
-                                            #醉江秋
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-贺新郎·醉江秋贺新郎·醉江秋
-
-词前小序丙午年深秋，独饮江楼。露重风寒，孤灯如豆。忆半生萍迹，恍若南柯一梦。桃花流水，尽成过往；断桥烟柳，唯余怅惘。然醉眼朦胧间，忽有所悟：聚散皆尘露，浮生任风骤。遂举杯邀江，作此《醉江秋》。
-词文露重寒侵袖。绕孤灯、游丝止水，寸心摧朽。梦里桃花流水碎，魂惊啼痕满袖。唯余此、断桥烟柳。片霎芳华都过羽，算人间、聚散皆尘露。云漠漠，遮星斗。  
-半生萍迹空白首。阅沧...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/21/%E8%B4%BA%E6%96%B0%E9%83%8E-%E9%86%89%E6%B1%9F%E7%A7%8B/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-20
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/sword-classic/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        剑经法典
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/20/%E6%B8%85%E5%B9%B3%E4%B9%90-%E7%81%AF%E8%8A%B1/">
-                                    《剑阵·心火– 卷首 清平乐·灯花》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/twelve-poles/" class="post-tag">
-                                            #周天十二极
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" class="post-tag">
-                                            #剑阵
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%B8%85%E5%B9%B3%E4%B9%90/" class="post-tag">
-                                            #清平乐
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%BF%83%E7%81%AB/" class="post-tag">
-                                            #心火
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%9C%AC%E6%BA%90/" class="post-tag">
-                                            #本源
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-星河剑阵·周天十二极卷宗剑阵·心火– 卷首 清平乐·灯花
-
-
-    卷宗编号：周天第一极·心火正字第一号
-    定谳等级：甲等极品·本源正典
-    体系定位：周天十二极·第一极《心火》卷宗·正典首章
-    归位时间：永恒子夜·烛芯绽裂时
-    大典印信：【星河剑阵·本源司】
-    剑域特权：自生「心火剑域」，吟诵可在黑暗中点燃本源心火，持卷者掌本源剑则之权
-
-
-前置入典诏
-####...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/20/%E6%B8%85%E5%B9%B3%E4%B9%90-%E7%81%AF%E8%8A%B1/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-19
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/%E6%B3%95%E5%85%B8%E8%AF%8D%E8%B5%8B/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        法典词赋
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/19/%E5%BF%B5%E5%A5%B4%E5%A8%87-%E7%99%BB%E9%9C%84%E7%BA%B5%E6%B5%B7/">
-                                    《念奴娇·登霄纵海 · 剑阵开篇总序》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/star-sword-array/" class="post-tag">
-                                            #星河剑阵
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%BF%B5%E5%A5%B4%E5%A8%87/" class="post-tag">
-                                            #念奴娇
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%B5/" class="post-tag">
-                                            #剑阵
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E7%AB%8B%E6%B3%95/" class="post-tag">
-                                            #立法
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%80%BB%E5%BA%8F/" class="post-tag">
-                                            #总序
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-星河剑阵·立法总枢档案念奴娇·登霄纵海 · 剑阵开篇总序
-
-
-    档案等级：根本大法
-    立法总序：《总纲天则剑经·登霄纵海本》
-    宪制等级：剑阵宪法
-    生效时间：天罡历·宪制元年·登霄之日子时
-    钦定印信：【星河剑阵·立法总枢印】
-    立法关系：总序为万法之源，《同轭天则剑经》为伦理情感领域专门法典
-
-
-前置钦定诏
-#### 星河剑阵·立法总序钦定诏
-
-朕承开天...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/19/%E5%BF%B5%E5%A5%B4%E5%A8%87-%E7%99%BB%E9%9C%84%E7%BA%B5%E6%B5%B7/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
-                        <article class="post-card">
-                            <div class="post-header">
-                                <div class="post-date">
-                                    <i class="far fa-calendar"></i>
-                                    2026-01-18
-                                </div>
-                                
-                                
-                                    <a href="/mokewenxue.github.io/categories/%E8%AF%8D%E4%BD%9C/" class="post-category">
-                                        <i class="fas fa-folder"></i>
-                                        词作
-                                    </a>
-                                
-                            </div>
-                            
-                            <h3 class="post-title">
-                                <a href="/mokewenxue.github.io/2026/01/18/%E8%B4%BA%E6%96%B0%E9%83%8E-%E8%9A%80/">
-                                    《贺新郎·蚀》
-                                </a>
-                            </h3>
-                            
-                            
-                                <div class="post-tags">
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/" class="post-tag">
-                                            #宋词
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E8%B4%BA%E6%96%B0%E9%83%8E/" class="post-tag">
-                                            #贺新郎
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91/" class="post-tag">
-                                            #沧桑
-                                        </a>
-                                    
-                                        <a href="/mokewenxue.github.io/tags/%E5%9D%9A%E5%AE%88/" class="post-tag">
-                                            #坚守
-                                        </a>
-                                    
-                                </div>
-                            
-                            
-                            <div class="post-excerpt">
-                                
-                                    
-                                    
-
-贺新郎·蚀贺新郎·蚀
-
-词前小序丙午年冬，夜观星月，感岁月之蚀，万物之变。飞埃蚀山，长空蒙尘，唯见孤灯一点，穿透夜色。遂作此词，以”蚀”为眼，抒胸中块垒，明坚守之志。
-词文倚尽霜天瘦。望人间、飞埃逐梦，蚀成苍岫。冷笳吹落残烟烬，谁洗长空尘垢？唯此身、冰痕如旧。胸次千峰藏夜月，敛清光、不与浮花偶。山改色，风烟骤。  
-断萍飘尽寒潭酒。怅云端、川流无迹，石痕都朽。一点孤灯穿夜色，遥共星河垂斗。更休...
-                                
-                            </div>
-                            
-                            <a href="/mokewenxue.github.io/2026/01/18/%E8%B4%BA%E6%96%B0%E9%83%8E-%E8%9A%80/" class="read-more">
-                                阅剑全文 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </article>
-                    
+        <!-- 分页 -->
+        
+            <div class="cosmic-pagination">
+                
+                    <a href="/mokewenxue.github.io/" class="page-btn prev">
+                        <i class="fas fa-chevron-left"></i> 上一页
+                    </a>
+                
+                
+                <div class="page-info">
+                    第 <strong style="color: var(--star-gold);">2</strong> 页 
+                    / 共 <strong style="color: var(--star-gold);">4</strong> 页
                 </div>
                 
-                <!-- 分页 -->
                 
-                    <div class="cosmic-pagination">
-                        
-                            <a href="/mokewenxue.github.io/" class="page-btn prev">
-                                <i class="fas fa-chevron-left"></i> 上一页
-                            </a>
-                        
-                        
-                        <div class="page-info">
-                            第 <strong>2</strong> 页 / 共 <strong>4</strong> 页
-                        </div>
-                        
-                        
-                            <a href="/mokewenxue.github.io/page/3/" class="page-btn next">
-                                下一页 <i class="fas fa-chevron-right"></i>
-                            </a>
-                        
-                    </div>
+                    <a href="/mokewenxue.github.io/page/3/" class="page-btn next">
+                        下一页 <i class="fas fa-chevron-right"></i>
+                    </a>
                 
+            </div>
             
-        </section>
+            <!-- 页码导航 -->
+            
+                <div style="text-align: center; margin-top: 30px;">
+                    
+                        
+                            <a href="/mokewenxue.github.io/" 
+                               style="
+                                display: inline-block;
+                                padding: 10px 18px;
+                                margin: 0 5px;
+                                color: var(--text-starlight);
+                                text-decoration: none;
+                                border: 1px solid var(--border-cosmic);
+                                border-radius: 20px;
+                                background: rgba(20, 26, 45, 0.7);
+                            ">1</a>
+                        
+                    
+                        
+                            <span style="
+                                display: inline-block;
+                                padding: 10px 18px;
+                                margin: 0 5px;
+                                background: var(--gradient-nebula);
+                                color: white;
+                                border-radius: 20px;
+                                font-weight: bold;
+                                box-shadow: var(--shadow-nebula);
+                            ">2</span>
+                        
+                    
+                        
+                            <a href="/mokewenxue.github.io/page/3/" 
+                               style="
+                                display: inline-block;
+                                padding: 10px 18px;
+                                margin: 0 5px;
+                                color: var(--text-starlight);
+                                text-decoration: none;
+                                border: 1px solid var(--border-cosmic);
+                                border-radius: 20px;
+                                background: rgba(20, 26, 45, 0.7);
+                            ">3</a>
+                        
+                    
+                        
+                            <a href="/mokewenxue.github.io/page/4/" 
+                               style="
+                                display: inline-block;
+                                padding: 10px 18px;
+                                margin: 0 5px;
+                                color: var(--text-starlight);
+                                text-decoration: none;
+                                border: 1px solid var(--border-cosmic);
+                                border-radius: 20px;
+                                background: rgba(20, 26, 45, 0.7);
+                            ">4</a>
+                        
+                    
+                </div>
+            
+        
     </main>
     
     <!-- 统一页脚 -->
@@ -1533,10 +605,13 @@
                     <i class="fas fa-layer-group"></i> 分类
                 </a>
                 <a href="/mokewenxue.github.io/tags" class="footer-link">
-                    <i class="fas fa-tags"></i> 词牌剑阵
+                    <i class="fas fa-tags"></i> 标签
                 </a>
                 <a href="/mokewenxue.github.io/about" class="footer-link">
                     <i class="fas fa-book"></i> 关于
+                </a>
+                <a href="/mokewenxue.github.io/atom.xml" class="footer-link">
+                    <i class="fas fa-rss"></i> 订阅
                 </a>
             </nav>
             
@@ -1552,6 +627,10 @@
                     主题：Typography · 由 Hexo 驱动
                 </div>
             </div>
+            
+            <div class="constellation">
+                <i class="fas fa-star-and-crescent"></i>
+            </div>
         </div>
     </footer>
     
@@ -1564,11 +643,19 @@
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                star.style.width = `${Math.random() * 3 + 1}px`;
-                star.style.height = star.style.width;
+                
+                // 随机大小
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // 随机位置
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
+                
+                // 随机闪烁延迟
                 star.style.animationDelay = `${Math.random() * 3}s`;
+                
                 starsContainer.appendChild(star);
             }
             
@@ -1582,6 +669,68 @@
                     nav.style.background = 'rgba(10, 14, 26, 0.9)';
                     nav.style.boxShadow = 'none';
                 }
+            });
+            
+            // 卡片悬停效果
+            const cards = document.querySelectorAll('.enhanced-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '100';
+                });
+                
+                // 点击卡片跳转
+                card.addEventListener('click', function(e) {
+                    // 防止点击按钮时触发卡片跳转
+                    if (!e.target.closest('.read-button') && 
+                        !e.target.closest('.action-btn') &&
+                        !e.target.closest('a')) {
+                        const link = this.querySelector('.title-link');
+                        if (link) {
+                            window.location.href = link.href;
+                        }
+                    }
+                });
+            });
+            
+            // 分页链接修复
+            const paginationLinks = document.querySelectorAll('.page-btn:not(.disabled)');
+            paginationLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && (href.includes('/page/0') || href.endsWith('/page/'))) {
+                    link.setAttribute('href', href.replace('/page/0', '').replace('/page/', ''));
+                }
+            });
+            
+            // 交互按钮效果
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const type = this.classList.contains('save-btn') ? '收藏' : '分享';
+                    this.innerHTML = `<i class="fas fa-check"></i>`;
+                    this.style.background = 'var(--gradient-sunset)';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = this.classList.contains('save-btn') 
+                            ? '<i class="far fa-bookmark"></i>' 
+                            : '<i class="fas fa-share-alt"></i>';
+                        this.style.background = '';
+                    }, 1000);
+                });
+            });
+            
+            // 统计项点击效果
+            document.querySelectorAll('.stat-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const value = this.querySelector('.stat-value');
+                    const current = parseInt(value.textContent) || 0;
+                    value.textContent = current + 1;
+                    this.style.color = 'var(--star-gold)';
+                    
+                    setTimeout(() => {
+                        this.style.color = '';
+                    }, 500);
+                });
             });
         });
     </script>
