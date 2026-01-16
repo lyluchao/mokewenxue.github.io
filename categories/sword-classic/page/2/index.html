@@ -52,42 +52,14 @@
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             height: 100%;
         }
         
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
-        
-        .nav-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-purple));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .nav-logo i {
-            color: white;
-            font-size: 1.2rem;
-        }
-        
-        .nav-title {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 1.5rem;
-            color: var(--text-light);
-        }
-        
         .nav-menu {
             display: flex;
-            gap: 30px;
+            gap: 40px;
         }
         
         .nav-link {
@@ -97,6 +69,7 @@
             position: relative;
             padding: 5px 0;
             transition: color 0.3s;
+            font-size: 1.1rem;
         }
         
         .nav-link::after {
@@ -105,7 +78,7 @@
             bottom: 0;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 3px;
             background: var(--accent-gold);
             transition: width 0.3s ease;
         }
@@ -146,7 +119,7 @@
             background: 
                 radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-        
+                linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
         
         /* 英雄区域 */
@@ -188,30 +161,6 @@
             color: var(--text-muted);
             margin-bottom: 2rem;
             font-weight: 300;
-        }
-        
-        /* 面包屑导航 */
-        .breadcrumb {
-            padding: 20px 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        
-        .breadcrumb a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .breadcrumb a:hover {
-            color: var(--accent-gold);
-        }
-        
-        .breadcrumb span {
-            margin: 0 10px;
-            color: var(--accent-purple);
         }
         
         /* 主要内容 */
@@ -429,6 +378,7 @@
                 flex-direction: column;
                 padding: 20px;
                 border-bottom: 1px solid var(--border-color);
+                gap: 20px;
             }
             
             .nav-menu.active {
@@ -437,6 +387,10 @@
             
             .mobile-menu-btn {
                 display: block;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
             }
             
             .category-title {
@@ -490,14 +444,6 @@
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <!-- Logo -->
-            <a href="/mokewenxue.github.io/" class="nav-brand">
-                <div class="nav-logo">
-                    <i class="fas fa-feather-alt"></i>
-                </div>
-                <span class="nav-title">踏月诗阁</span>
-            </a>
-            
             <!-- 桌面端菜单 -->
             <div class="nav-menu">
                 <a href="/mokewenxue.github.io/" class="nav-link">首页</a>
@@ -522,17 +468,6 @@
             <a href="/mokewenxue.github.io/about" class="nav-link">关于</a>
         </div>
     </nav>
-    
-    <!-- 面包屑导航 -->
-    <div class="breadcrumb">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <a href="/mokewenxue.github.io/">首页</a>
-            <span>›</span>
-            <a href="/mokewenxue.github.io/categories/">分类</a>
-            <span>›</span>
-            <span>剑经法典</span>
-        </div>
-    </div>
     
     <!-- 英雄区域 -->
     <section class="hero-section">
@@ -562,7 +497,7 @@
                     <article class="article-card">
                         <div class="article-meta">
                             
-                                <span>2024-01-27</span>
+        <span>2024-01-27</span>
                             
                         </div>
                         <h3 class="article-title">
@@ -609,7 +544,7 @@
                     <i class="fas fa-archive"></i> 归档
                 </a>
                 <a href="/mokewenxue.github.io/categories/" class="footer-link">
-                    <i class="fas fa-layer-group"></i> 分类
+       
                 </a>
                 <a href="/mokewenxue.github.io/tags" class="footer-link">
                     <i class="fas fa-tags"></i> 标签
