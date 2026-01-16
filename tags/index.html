@@ -152,7 +152,7 @@
             box-shadow: var(--shadow-nebula);
         }
         
-        /* 词牌统计区域 - 放在最上面 */
+        /* 词牌统计区域 */
         .tags-stats-section {
             background: linear-gradient(135deg, 
                 rgba(20, 26, 45, 0.9) 0%, 
@@ -277,22 +277,56 @@
             opacity: 0.8;
         }
         
-        /* 热门标签预览 */
+        /* 热门词牌预览 - 显眼背景色 */
         .popular-tags {
             margin-top: 50px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border-cosmic);
+            padding: 40px 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.15) 0%, 
+                rgba(255, 140, 0, 0.15) 50%,
+                rgba(255, 69, 0, 0.15) 100%);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 
+                0 10px 30px rgba(255, 140, 0, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: preview-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes preview-glow {
+            0%, 100% { 
+                box-shadow: 
+                    0 10px 30px rgba(255, 140, 0, 0.2),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 15px 40px rgba(255, 140, 0, 0.3),
+                    0 0 25px rgba(255, 69, 0, 0.2),
+                    inset 0 0 25px rgba(255, 255, 255, 0.15);
+            }
         }
         
         .popular-title {
-            color: var(--comet-blue);
-            font-size: 1.5rem;
+            color: #ffd700;
+            font-size: 1.8rem;
             margin-bottom: 25px;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
+        }
+        
+        .popular-title i {
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 10px #ffd700);
+            animation: fire-blink 2s ease-in-out infinite;
+        }
+        
+        @keyframes fire-blink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
         }
         
         .tag-preview {
@@ -303,23 +337,60 @@
         }
         
         .preview-tag {
-            background: rgba(93, 63, 211, 0.2);
-            color: var(--nebula-purple);
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.25) 0%, 
+                rgba(255, 140, 0, 0.25) 100%);
+            color: #ffd700;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: 1px solid rgba(93, 63, 211, 0.3);
-            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            font-size: 1.1rem;
+            font-weight: 600;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preview-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                transparent 70%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
         
         .preview-tag:hover {
-            background: var(--nebula-purple);
+            background: linear-gradient(135deg, 
+                rgba(255, 215, 0, 0.4) 0%, 
+                rgba(255, 140, 0, 0.4) 100%);
             color: white;
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.05);
+            border-color: #ffd700;
+            box-shadow: 
+                0 10px 25px rgba(255, 140, 0, 0.4),
+                0 0 15px rgba(255, 215, 0, 0.3);
         }
         
-        /* 树形剑阵区域 - 增加高度 */
+        .preview-tag i {
+            font-size: 1rem;
+        }
+        
+        /* 树形剑阵区域 */
         .sword-tree-section {
             background: rgba(10, 14, 26, 0.8);
             border-radius: 25px;
@@ -330,7 +401,7 @@
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
-            min-height: 900px; /* 增加高度 */
+            min-height: 800px;
             display: flex;
             flex-direction: column;
         }
@@ -376,20 +447,21 @@
         
         .tree-container-wrapper {
             flex: 1;
-            min-height: 700px; /* 容器也增加高度 */
+            min-height: 600px;
             position: relative;
         }
         
-        /* 所有词牌列表 - 显眼闪烁 */
+        /* 所有词牌列表 - 更显眼 */
         .all-tags-section {
             background: linear-gradient(135deg, 
-                rgba(139, 92, 246, 0.15) 0%, 
-                rgba(59, 130, 246, 0.1) 100%);
+                rgba(139, 92, 246, 0.2) 0%, 
+                rgba(59, 130, 246, 0.15) 50%,
+                rgba(255, 215, 93, 0.1) 100%);
             border-radius: 25px;
             padding: 50px 40px;
             margin: 60px auto;
             max-width: 1200px;
-            border: 2px solid var(--border-cosmic);
+            border: 3px solid rgba(255, 215, 93, 0.3);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
@@ -398,12 +470,16 @@
         
         @keyframes section-glow {
             0%, 100% { 
-                box-shadow: 0 0 30px rgba(139, 92, 246, 0.3),
-                           inset 0 0 20px rgba(255, 255, 255, 0.05);
+                box-shadow: 
+                    0 20px 50px rgba(139, 92, 246, 0.3),
+                    0 0 30px rgba(255, 215, 93, 0.2),
+                    inset 0 0 25px rgba(255, 255, 255, 0.1);
             }
             50% { 
-                box-shadow: 0 0 50px rgba(139, 92, 246, 0.5),
-                           inset 0 0 30px rgba(255, 255, 255, 0.1);
+                box-shadow: 
+                    0 25px 60px rgba(139, 92, 246, 0.4),
+                    0 0 40px rgba(255, 215, 93, 0.3),
+                    inset 0 0 35px rgba(255, 255, 255, 0.15);
             }
         }
         
@@ -415,9 +491,7 @@
             right: 0;
             height: 4px;
             background: linear-gradient(90deg, 
-                var(--star-gold), 
-                var(--nebula-purple),
-                var(--comet-blue));
+                #ffd700, #ff8c00, #ff4500, #ffd700, #ff8c00);
             border-radius: 25px 25px 0 0;
             animation: border-flow 3s linear infinite;
         }
@@ -428,7 +502,7 @@
         }
         
         .all-tags-title {
-            color: var(--star-gold);
+            color: #ffd700;
             font-size: 2.2rem;
             margin-bottom: 30px;
             display: flex;
@@ -447,7 +521,7 @@
         }
         
         .all-tags-count {
-            background: var(--gradient-nebula);
+            background: linear-gradient(135deg, #ff8c00, #ff4500);
             color: white;
             padding: 5px 15px;
             border-radius: 15px;
@@ -462,7 +536,7 @@
             50% { transform: scale(1.1); }
         }
         
-        /* 词牌标签样式 - 显眼闪烁 */
+        /* 词牌标签样式 - 更显眼 */
         .all-tags-grid {
             display: flex;
             flex-wrap: wrap;
@@ -472,14 +546,14 @@
         
         .all-tag-item {
             background: linear-gradient(135deg, 
-                rgba(255, 217, 93, 0.15) 0%, 
-                rgba(239, 68, 68, 0.15) 50%,
-                rgba(139, 92, 246, 0.15) 100%);
-            color: var(--star-gold);
+                rgba(255, 215, 0, 0.25) 0%, 
+                rgba(255, 140, 0, 0.25) 50%,
+                rgba(255, 69, 0, 0.25) 100%);
+            color: #ffd700;
             text-decoration: none;
             padding: 12px 24px;
             border-radius: 25px;
-            border: 2px solid transparent;
+            border: 2px solid rgba(255, 215, 0, 0.4);
             font-size: 1.1rem;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -487,21 +561,24 @@
             overflow: hidden;
             animation: tag-glow 3s ease-in-out infinite;
             animation-delay: calc(var(--tag-index) * 0.1s);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         @keyframes tag-glow {
             0%, 100% { 
                 box-shadow: 
-                    0 5px 15px rgba(255, 217, 93, 0.2),
-                    inset 0 0 10px rgba(255, 255, 255, 0.1);
-                border-color: rgba(255, 217, 93, 0.3);
+                    0 5px 20px rgba(255, 140, 0, 0.3),
+                    inset 0 0 15px rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 215, 0, 0.4);
             }
             50% { 
                 box-shadow: 
-                    0 10px 30px rgba(255, 217, 93, 0.4),
-                    0 0 20px rgba(255, 217, 93, 0.3),
+                    0 10px 35px rgba(255, 140, 0, 0.5),
+                    0 0 25px rgba(255, 215, 0, 0.3),
                     inset 0 0 20px rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 217, 93, 0.6);
+                border-color: rgba(255, 215, 0, 0.7);
                 transform: translateY(-5px);
             }
         }
@@ -514,10 +591,10 @@
             right: -2px;
             bottom: -2px;
             background: linear-gradient(45deg, 
-                var(--star-gold), 
-                var(--nova-red),
-                var(--nebula-purple),
-                var(--comet-blue));
+                #ffd700, 
+                #ff8c00,
+                #ff4500,
+                #ffd700);
             border-radius: 27px;
             z-index: -1;
             opacity: 0;
@@ -544,12 +621,18 @@
             to {
                 transform: translateY(-8px) scale(1.1);
                 box-shadow: 
-                    0 20px 40px rgba(255, 217, 93, 0.4),
-                    0 0 30px rgba(255, 217, 93, 0.3);
+                    0 20px 50px rgba(255, 140, 0, 0.6),
+                    0 0 35px rgba(255, 215, 0, 0.4);
             }
         }
         
         .tag-name {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tag-icon {
+            font-size: 0.9rem;
             position: relative;
             z-index: 2;
         }
@@ -560,7 +643,6 @@
             font-size: 0.8rem;
             padding: 4px 10px;
             border-radius: 12px;
-            margin-left: 10px;
             font-weight: bold;
             backdrop-filter: blur(5px);
             animation: count-bounce 2s ease-in-out infinite;
@@ -640,18 +722,19 @@
         /* 响应式设计 */
         @media (max-width: 1200px) {
             .sword-tree-section {
-                min-height: 800px;
+                min-height: 700px;
             }
             
             .tree-container-wrapper {
-                min-height: 600px;
+                min-height: 500px;
             }
         }
         
         @media (max-width: 768px) {
             .tags-stats-section,
             .sword-tree-section,
-            .all-tags-section {
+            .all-tags-section,
+            .popular-tags {
                 padding: 40px 20px;
                 margin: 80px 20px 40px;
             }
@@ -677,18 +760,19 @@
             }
             
             .sword-tree-section {
-                min-height: 700px;
+                min-height: 600px;
             }
             
             .tree-container-wrapper {
-                min-height: 500px;
+                min-height: 400px;
             }
             
             .all-tags-title {
                 font-size: 1.8rem;
             }
             
-            .all-tag-item {
+            .all-tag-item,
+            .preview-tag {
                 padding: 10px 18px;
                 font-size: 1rem;
             }
@@ -730,18 +814,19 @@
             }
             
             .sword-tree-section {
-                min-height: 600px;
+                min-height: 500px;
             }
             
             .tree-container-wrapper {
-                min-height: 400px;
+                min-height: 350px;
             }
             
             .all-tags-grid {
                 gap: 12px;
             }
             
-            .all-tag-item {
+            .all-tag-item,
+            .preview-tag {
                 padding: 8px 15px;
                 font-size: 0.9rem;
             }
@@ -784,7 +869,7 @@
     
     <!-- 主内容容器 -->
     <div class="tags-main-container">
-        <!-- 1. 词牌统计区域（放在最上面） -->
+        <!-- 1. 词牌统计区域 -->
         
             <section class="tags-stats-section">
                 <h2 class="stats-title">
@@ -833,6 +918,7 @@
                     </div>
                 </div>
                 
+                <!-- 热门词牌预览 - 使用显眼的黄金色背景 -->
                 <div class="popular-tags">
                     <h3 class="popular-title">
                         <i class="fas fa-fire"></i>
@@ -843,49 +929,89 @@
                             <a href="/mokewenxue.github.io/tags/%E8%AF%8D/" 
                                class="preview-tag"
                                title="词 (3篇)">
+                                <i class="fas fa-hashtag"></i>
                                 #词
+                                
+                                    <span class="tag-count">3</span>
+                                
                             </a>
                         
                             <a href="/mokewenxue.github.io/tags/%E5%BD%92%E5%AF%82/" 
                                class="preview-tag"
                                title="归寂 (1篇)">
+                                <i class="fas fa-hashtag"></i>
                                 #归寂
+                                
                             </a>
                         
                             <a href="/mokewenxue.github.io/tags/%E6%B6%88%E8%A7%A3/" 
                                class="preview-tag"
                                title="消解 (1篇)">
+                                <i class="fas fa-hashtag"></i>
                                 #消解
+                                
                             </a>
                         
                             <a href="/mokewenxue.github.io/tags/%E7%B4%A0%E5%BF%83/" 
                                class="preview-tag"
                                title="素心 (1篇)">
+                                <i class="fas fa-hashtag"></i>
                                 #素心
+                                
                             </a>
                         
                             <a href="/mokewenxue.github.io/tags/%E4%B8%89%E9%97%AE/" 
                                class="preview-tag"
                                title="三问 (1篇)">
+                                <i class="fas fa-hashtag"></i>
                                 #三问
+                                
                             </a>
                         
                             <a href="/mokewenxue.github.io/tags/%E8%87%BB%E8%B5%8B/" 
                                class="preview-tag"
                                title="臻赋 (1篇)">
+                                <i class="fas fa-hashtag"></i>
                                 #臻赋
+                                
                             </a>
                         
                             <a href="/mokewenxue.github.io/tags/%E9%97%AE%E6%9C%88/" 
                                class="preview-tag"
                                title="问月 (2篇)">
+                                <i class="fas fa-hashtag"></i>
                                 #问月
+                                
+                                    <span class="tag-count">2</span>
+                                
                             </a>
                         
                             <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%98%9F/" 
                                class="preview-tag"
                                title="孤星 (1篇)">
+                                <i class="fas fa-hashtag"></i>
                                 #孤星
+                                
+                            </a>
+                        
+                            <a href="/mokewenxue.github.io/tags/%E9%97%AE%E5%89%91/" 
+                               class="preview-tag"
+                               title="问剑 (2篇)">
+                                <i class="fas fa-hashtag"></i>
+                                #问剑
+                                
+                                    <span class="tag-count">2</span>
+                                
+                            </a>
+                        
+                            <a href="/mokewenxue.github.io/tags/%E9%97%AE%E9%81%93/" 
+                               class="preview-tag"
+                               title="问道 (2篇)">
+                                <i class="fas fa-hashtag"></i>
+                                #问道
+                                
+                                    <span class="tag-count">2</span>
+                                
                             </a>
                         
                     </div>
@@ -893,18 +1019,18 @@
             </section>
         
         
-        <!-- 2. 树形剑阵体系（增加高度） -->
+        <!-- 2. 树形剑阵体系（只有剑阵，不放词牌） -->
         <section class="sword-tree-section">
             <h2 class="tree-title">
                 <i class="fas fa-sitemap"></i>
-                树形剑阵体系
+                周天十二极剑阵体系
             </h2>
             <p class="tree-subtitle">
-                以词牌为叶，构建周天剑阵。点击词牌叶节点，探索剑阵文章。
+                以剑阵为纲，构建周天体系。纯粹的剑阵结构，展示十二极剑阵的层级关系。
             </p>
             
             <div class="tree-container-wrapper">
-                <!-- 引入树形剑阵组件 -->
+                <!-- 只引入树形剑阵组件，不包含词牌 -->
                 
 
 <!-- 树形剑阵体系 -->
@@ -2321,6 +2447,7 @@
                            class="all-tag-item"
                            style="--tag-index: 0;"
                            title="万籁俱沉 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#万籁俱沉</span>
                             
                         </a>
@@ -2329,6 +2456,7 @@
                            class="all-tag-item"
                            style="--tag-index: 1;"
                            title="三绝赋 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#三绝赋</span>
                             
                         </a>
@@ -2337,6 +2465,7 @@
                            class="all-tag-item"
                            style="--tag-index: 2;"
                            title="三问 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#三问</span>
                             
                         </a>
@@ -2345,6 +2474,7 @@
                            class="all-tag-item"
                            style="--tag-index: 3;"
                            title="临江仙 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#临江仙</span>
                             
                         </a>
@@ -2353,6 +2483,7 @@
                            class="all-tag-item"
                            style="--tag-index: 4;"
                            title="侠气 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#侠气</span>
                             
                         </a>
@@ -2361,6 +2492,7 @@
                            class="all-tag-item"
                            style="--tag-index: 5;"
                            title="修心 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#修心</span>
                             
                         </a>
@@ -2369,6 +2501,7 @@
                            class="all-tag-item"
                            style="--tag-index: 6;"
                            title="修行 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#修行</span>
                             
                         </a>
@@ -2377,6 +2510,7 @@
                            class="all-tag-item"
                            style="--tag-index: 7;"
                            title="剑客 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#剑客</span>
                             
                         </a>
@@ -2385,6 +2519,7 @@
                            class="all-tag-item"
                            style="--tag-index: 8;"
                            title="剑经 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#剑经</span>
                             
                         </a>
@@ -2393,6 +2528,7 @@
                            class="all-tag-item"
                            style="--tag-index: 9;"
                            title="剑经法典 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#剑经法典</span>
                             
                         </a>
@@ -2401,6 +2537,7 @@
                            class="all-tag-item"
                            style="--tag-index: 10;"
                            title="剑赋 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#剑赋</span>
                             
                         </a>
@@ -2409,6 +2546,7 @@
                            class="all-tag-item"
                            style="--tag-index: 11;"
                            title="剑道 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#剑道</span>
                             
                         </a>
@@ -2417,6 +2555,7 @@
                            class="all-tag-item"
                            style="--tag-index: 12;"
                            title="剑阁 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#剑阁</span>
                             
                         </a>
@@ -2425,6 +2564,7 @@
                            class="all-tag-item"
                            style="--tag-index: 13;"
                            title="剑阵 (8篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#剑阵</span>
                             
                                 <span class="tag-count">8</span>
@@ -2435,6 +2575,7 @@
                            class="all-tag-item"
                            style="--tag-index: 14;"
                            title="双刃录 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#双刃录</span>
                             
                         </a>
@@ -2443,6 +2584,7 @@
                            class="all-tag-item"
                            style="--tag-index: 15;"
                            title="古诗 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#古诗</span>
                             
                         </a>
@@ -2451,6 +2593,7 @@
                            class="all-tag-item"
                            style="--tag-index: 16;"
                            title="周天十二极 (10篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#周天十二极</span>
                             
                                 <span class="tag-count">10</span>
@@ -2461,6 +2604,7 @@
                            class="all-tag-item"
                            style="--tag-index: 17;"
                            title="哲学 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#哲学</span>
                             
                         </a>
@@ -2469,6 +2613,7 @@
                            class="all-tag-item"
                            style="--tag-index: 18;"
                            title="唐诗 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#唐诗</span>
                             
                         </a>
@@ -2477,6 +2622,7 @@
                            class="all-tag-item"
                            style="--tag-index: 19;"
                            title="坚守 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#坚守</span>
                             
                         </a>
@@ -2485,6 +2631,7 @@
                            class="all-tag-item"
                            style="--tag-index: 20;"
                            title="境界递进 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#境界递进</span>
                             
                         </a>
@@ -2493,6 +2640,7 @@
                            class="all-tag-item"
                            style="--tag-index: 21;"
                            title="墨锋 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#墨锋</span>
                             
                         </a>
@@ -2501,6 +2649,7 @@
                            class="all-tag-item"
                            style="--tag-index: 22;"
                            title="声声慢 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#声声慢</span>
                             
                                 <span class="tag-count">2</span>
@@ -2511,6 +2660,7 @@
                            class="all-tag-item"
                            style="--tag-index: 23;"
                            title="夜思 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#夜思</span>
                             
                         </a>
@@ -2519,6 +2669,7 @@
                            class="all-tag-item"
                            style="--tag-index: 24;"
                            title="天人合一 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#天人合一</span>
                             
                         </a>
@@ -2527,6 +2678,7 @@
                            class="all-tag-item"
                            style="--tag-index: 25;"
                            title="天悠 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#天悠</span>
                             
                         </a>
@@ -2535,6 +2687,7 @@
                            class="all-tag-item"
                            style="--tag-index: 26;"
                            title="婵娟 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#婵娟</span>
                             
                         </a>
@@ -2543,6 +2696,7 @@
                            class="all-tag-item"
                            style="--tag-index: 27;"
                            title="存在哲学 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#存在哲学</span>
                             
                         </a>
@@ -2551,6 +2705,7 @@
                            class="all-tag-item"
                            style="--tag-index: 28;"
                            title="孤寂 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#孤寂</span>
                             
                         </a>
@@ -2559,6 +2714,7 @@
                            class="all-tag-item"
                            style="--tag-index: 29;"
                            title="孤影 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#孤影</span>
                             
                                 <span class="tag-count">2</span>
@@ -2569,6 +2725,7 @@
                            class="all-tag-item"
                            style="--tag-index: 30;"
                            title="孤怀 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#孤怀</span>
                             
                                 <span class="tag-count">2</span>
@@ -2579,6 +2736,7 @@
                            class="all-tag-item"
                            style="--tag-index: 31;"
                            title="孤星 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#孤星</span>
                             
                         </a>
@@ -2587,6 +2745,7 @@
                            class="all-tag-item"
                            style="--tag-index: 32;"
                            title="孤独 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#孤独</span>
                             
                         </a>
@@ -2595,6 +2754,7 @@
                            class="all-tag-item"
                            style="--tag-index: 33;"
                            title="宇宙 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#宇宙</span>
                             
                                 <span class="tag-count">2</span>
@@ -2605,6 +2765,7 @@
                            class="all-tag-item"
                            style="--tag-index: 34;"
                            title="守志 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#守志</span>
                             
                         </a>
@@ -2613,6 +2774,7 @@
                            class="all-tag-item"
                            style="--tag-index: 35;"
                            title="宋词 (11篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#宋词</span>
                             
                                 <span class="tag-count">11</span>
@@ -2623,6 +2785,7 @@
                            class="all-tag-item"
                            style="--tag-index: 36;"
                            title="寒影 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#寒影</span>
                             
                         </a>
@@ -2631,6 +2794,7 @@
                            class="all-tag-item"
                            style="--tag-index: 37;"
                            title="归寂 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#归寂</span>
                             
                         </a>
@@ -2639,6 +2803,7 @@
                            class="all-tag-item"
                            style="--tag-index: 38;"
                            title="归真 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#归真</span>
                             
                         </a>
@@ -2647,6 +2812,7 @@
                            class="all-tag-item"
                            style="--tag-index: 39;"
                            title="心火 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#心火</span>
                             
                         </a>
@@ -2655,6 +2821,7 @@
                            class="all-tag-item"
                            style="--tag-index: 40;"
                            title="心锋 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#心锋</span>
                             
                         </a>
@@ -2663,6 +2830,7 @@
                            class="all-tag-item"
                            style="--tag-index: 41;"
                            title="念奴娇 (3篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#念奴娇</span>
                             
                                 <span class="tag-count">3</span>
@@ -2673,6 +2841,7 @@
                            class="all-tag-item"
                            style="--tag-index: 42;"
                            title="怀思 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#怀思</span>
                             
                         </a>
@@ -2681,6 +2850,7 @@
                            class="all-tag-item"
                            style="--tag-index: 43;"
                            title="怀旧 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#怀旧</span>
                             
                         </a>
@@ -2689,6 +2859,7 @@
                            class="all-tag-item"
                            style="--tag-index: 44;"
                            title="总序 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#总序</span>
                             
                         </a>
@@ -2697,6 +2868,7 @@
                            class="all-tag-item"
                            style="--tag-index: 45;"
                            title="悖论 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#悖论</span>
                             
                         </a>
@@ -2705,6 +2877,7 @@
                            class="all-tag-item"
                            style="--tag-index: 46;"
                            title="抒怀 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#抒怀</span>
                             
                         </a>
@@ -2713,6 +2886,7 @@
                            class="all-tag-item"
                            style="--tag-index: 47;"
                            title="担当 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#担当</span>
                             
                         </a>
@@ -2721,6 +2895,7 @@
                            class="all-tag-item"
                            style="--tag-index: 48;"
                            title="揽星 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#揽星</span>
                             
                         </a>
@@ -2729,6 +2904,7 @@
                            class="all-tag-item"
                            style="--tag-index: 49;"
                            title="擎乾 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#擎乾</span>
                             
                         </a>
@@ -2737,6 +2913,7 @@
                            class="all-tag-item"
                            style="--tag-index: 50;"
                            title="散文 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#散文</span>
                             
                         </a>
@@ -2745,6 +2922,7 @@
                            class="all-tag-item"
                            style="--tag-index: 51;"
                            title="文脉 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#文脉</span>
                             
                         </a>
@@ -2753,6 +2931,7 @@
                            class="all-tag-item"
                            style="--tag-index: 52;"
                            title="断鸿寒影 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#断鸿寒影</span>
                             
                         </a>
@@ -2761,6 +2940,7 @@
                            class="all-tag-item"
                            style="--tag-index: 53;"
                            title="时序 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#时序</span>
                             
                         </a>
@@ -2769,6 +2949,7 @@
                            class="all-tag-item"
                            style="--tag-index: 54;"
                            title="星河 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#星河</span>
                             
                         </a>
@@ -2777,6 +2958,7 @@
                            class="all-tag-item"
                            style="--tag-index: 55;"
                            title="星河剑阵 (3篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#星河剑阵</span>
                             
                                 <span class="tag-count">3</span>
@@ -2787,6 +2969,7 @@
                            class="all-tag-item"
                            style="--tag-index: 56;"
                            title="春江 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#春江</span>
                             
                         </a>
@@ -2795,6 +2978,7 @@
                            class="all-tag-item"
                            style="--tag-index: 57;"
                            title="月夜 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#月夜</span>
                             
                         </a>
@@ -2803,6 +2987,7 @@
                            class="all-tag-item"
                            style="--tag-index: 58;"
                            title="月色 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#月色</span>
                             
                         </a>
@@ -2811,6 +2996,7 @@
                            class="all-tag-item"
                            style="--tag-index: 59;"
                            title="本源 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#本源</span>
                             
                         </a>
@@ -2819,6 +3005,7 @@
                            class="all-tag-item"
                            style="--tag-index: 60;"
                            title="朱自清 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#朱自清</span>
                             
                         </a>
@@ -2827,6 +3014,7 @@
                            class="all-tag-item"
                            style="--tag-index: 61;"
                            title="水调歌头 (3篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#水调歌头</span>
                             
                                 <span class="tag-count">3</span>
@@ -2837,6 +3025,7 @@
                            class="all-tag-item"
                            style="--tag-index: 62;"
                            title="水龙吟 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#水龙吟</span>
                             
                         </a>
@@ -2845,6 +3034,7 @@
                            class="all-tag-item"
                            style="--tag-index: 63;"
                            title="永恒 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#永恒</span>
                             
                         </a>
@@ -2853,6 +3043,7 @@
                            class="all-tag-item"
                            style="--tag-index: 64;"
                            title="汉语 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#汉语</span>
                             
                         </a>
@@ -2861,6 +3052,7 @@
                            class="all-tag-item"
                            style="--tag-index: 65;"
                            title="江湖 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#江湖</span>
                             
                         </a>
@@ -2869,6 +3061,7 @@
                            class="all-tag-item"
                            style="--tag-index: 66;"
                            title="沁园春 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#沁园春</span>
                             
                         </a>
@@ -2877,6 +3070,7 @@
                            class="all-tag-item"
                            style="--tag-index: 67;"
                            title="沧桑 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#沧桑</span>
                             
                                 <span class="tag-count">2</span>
@@ -2887,6 +3081,7 @@
                            class="all-tag-item"
                            style="--tag-index: 68;"
                            title="消解 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#消解</span>
                             
                         </a>
@@ -2895,6 +3090,7 @@
                            class="all-tag-item"
                            style="--tag-index: 69;"
                            title="清平乐 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#清平乐</span>
                             
                         </a>
@@ -2903,6 +3099,7 @@
                            class="all-tag-item"
                            style="--tag-index: 70;"
                            title="清怀 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#清怀</span>
                             
                         </a>
@@ -2911,6 +3108,7 @@
                            class="all-tag-item"
                            style="--tag-index: 71;"
                            title="清辉 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#清辉</span>
                             
                                 <span class="tag-count">2</span>
@@ -2921,6 +3119,7 @@
                            class="all-tag-item"
                            style="--tag-index: 72;"
                            title="清辉劫尘 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#清辉劫尘</span>
                             
                         </a>
@@ -2929,6 +3128,7 @@
                            class="all-tag-item"
                            style="--tag-index: 73;"
                            title="满江红 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#满江红</span>
                             
                         </a>
@@ -2937,6 +3137,7 @@
                            class="all-tag-item"
                            style="--tag-index: 74;"
                            title="漂泊 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#漂泊</span>
                             
                         </a>
@@ -2945,6 +3146,7 @@
                            class="all-tag-item"
                            style="--tag-index: 75;"
                            title="现实 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#现实</span>
                             
                         </a>
@@ -2953,6 +3155,7 @@
                            class="all-tag-item"
                            style="--tag-index: 76;"
                            title="生命锻造 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#生命锻造</span>
                             
                         </a>
@@ -2961,6 +3164,7 @@
                            class="all-tag-item"
                            style="--tag-index: 77;"
                            title="秋律 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#秋律</span>
                             
                         </a>
@@ -2969,6 +3173,7 @@
                            class="all-tag-item"
                            style="--tag-index: 78;"
                            title="秋思 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#秋思</span>
                             
                         </a>
@@ -2977,6 +3182,7 @@
                            class="all-tag-item"
                            style="--tag-index: 79;"
                            title="立法 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#立法</span>
                             
                         </a>
@@ -2985,6 +3191,7 @@
                            class="all-tag-item"
                            style="--tag-index: 80;"
                            title="素心 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#素心</span>
                             
                         </a>
@@ -2993,6 +3200,7 @@
                            class="all-tag-item"
                            style="--tag-index: 81;"
                            title="终极正典 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#终极正典</span>
                             
                         </a>
@@ -3001,6 +3209,7 @@
                            class="all-tag-item"
                            style="--tag-index: 82;"
                            title="臻赋 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#臻赋</span>
                             
                         </a>
@@ -3009,6 +3218,7 @@
                            class="all-tag-item"
                            style="--tag-index: 83;"
                            title="荷塘 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#荷塘</span>
                             
                         </a>
@@ -3017,6 +3227,7 @@
                            class="all-tag-item"
                            style="--tag-index: 84;"
                            title="萍踪 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#萍踪</span>
                             
                         </a>
@@ -3025,6 +3236,7 @@
                            class="all-tag-item"
                            style="--tag-index: 85;"
                            title="虞美人 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#虞美人</span>
                             
                         </a>
@@ -3033,6 +3245,7 @@
                            class="all-tag-item"
                            style="--tag-index: 86;"
                            title="蚀剑 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#蚀剑</span>
                             
                         </a>
@@ -3041,6 +3254,7 @@
                            class="all-tag-item"
                            style="--tag-index: 87;"
                            title="蜕鳞 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#蜕鳞</span>
                             
                         </a>
@@ -3049,6 +3263,7 @@
                            class="all-tag-item"
                            style="--tag-index: 88;"
                            title="蝶恋花 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#蝶恋花</span>
                             
                                 <span class="tag-count">2</span>
@@ -3059,6 +3274,7 @@
                            class="all-tag-item"
                            style="--tag-index: 89;"
                            title="词 (3篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#词</span>
                             
                                 <span class="tag-count">3</span>
@@ -3069,6 +3285,7 @@
                            class="all-tag-item"
                            style="--tag-index: 90;"
                            title="贺新郎 (3篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#贺新郎</span>
                             
                                 <span class="tag-count">3</span>
@@ -3079,6 +3296,7 @@
                            class="all-tag-item"
                            style="--tag-index: 91;"
                            title="赋文 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#赋文</span>
                             
                         </a>
@@ -3087,6 +3305,7 @@
                            class="all-tag-item"
                            style="--tag-index: 92;"
                            title="超然 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#超然</span>
                             
                         </a>
@@ -3095,6 +3314,7 @@
                            class="all-tag-item"
                            style="--tag-index: 93;"
                            title="超脱 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#超脱</span>
                             
                                 <span class="tag-count">2</span>
@@ -3105,6 +3325,7 @@
                            class="all-tag-item"
                            style="--tag-index: 94;"
                            title="超越 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#超越</span>
                             
                         </a>
@@ -3113,6 +3334,7 @@
                            class="all-tag-item"
                            style="--tag-index: 95;"
                            title="踏月 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#踏月</span>
                             
                         </a>
@@ -3121,6 +3343,7 @@
                            class="all-tag-item"
                            style="--tag-index: 96;"
                            title="辩证 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#辩证</span>
                             
                         </a>
@@ -3129,6 +3352,7 @@
                            class="all-tag-item"
                            style="--tag-index: 97;"
                            title="道境圆满 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#道境圆满</span>
                             
                         </a>
@@ -3137,6 +3361,7 @@
                            class="all-tag-item"
                            style="--tag-index: 98;"
                            title="道统 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#道统</span>
                             
                         </a>
@@ -3145,6 +3370,7 @@
                            class="all-tag-item"
                            style="--tag-index: 99;"
                            title="醉江秋 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#醉江秋</span>
                             
                                 <span class="tag-count">2</span>
@@ -3155,6 +3381,7 @@
                            class="all-tag-item"
                            style="--tag-index: 100;"
                            title="醉铸 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#醉铸</span>
                             
                         </a>
@@ -3163,6 +3390,7 @@
                            class="all-tag-item"
                            style="--tag-index: 101;"
                            title="重生 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#重生</span>
                             
                         </a>
@@ -3171,6 +3399,7 @@
                            class="all-tag-item"
                            style="--tag-index: 102;"
                            title="铸剑 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#铸剑</span>
                             
                         </a>
@@ -3179,6 +3408,7 @@
                            class="all-tag-item"
                            style="--tag-index: 103;"
                            title="问剑 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#问剑</span>
                             
                                 <span class="tag-count">2</span>
@@ -3189,6 +3419,7 @@
                            class="all-tag-item"
                            style="--tag-index: 104;"
                            title="问月 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#问月</span>
                             
                                 <span class="tag-count">2</span>
@@ -3199,6 +3430,7 @@
                            class="all-tag-item"
                            style="--tag-index: 105;"
                            title="问道 (2篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#问道</span>
                             
                                 <span class="tag-count">2</span>
@@ -3209,6 +3441,7 @@
                            class="all-tag-item"
                            style="--tag-index: 106;"
                            title="霜天 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#霜天</span>
                             
                         </a>
@@ -3217,6 +3450,7 @@
                            class="all-tag-item"
                            style="--tag-index: 107;"
                            title="风骨 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#风骨</span>
                             
                         </a>
@@ -3225,6 +3459,7 @@
                            class="all-tag-item"
                            style="--tag-index: 108;"
                            title="鹧鸪天 (1篇)">
+                            <i class="fas fa-hashtag tag-icon"></i>
                             <span class="tag-name">#鹧鸪天</span>
                             
                         </a>
@@ -3299,8 +3534,8 @@
                 }
             });
             
-            // 为所有词牌标签添加悬停音效
-            document.querySelectorAll('.all-tag-item').forEach(tag => {
+            // 为词牌标签添加悬停音效
+            document.querySelectorAll('.all-tag-item, .preview-tag').forEach(tag => {
                 tag.addEventListener('mouseenter', function() {
                     // 添加粒子效果
                     createParticles(this);
@@ -3321,7 +3556,7 @@
                     position: fixed;
                     width: 4px;
                     height: 4px;
-                    background: var(--star-gold);
+                    background: #ffd700;
                     border-radius: 50%;
                     pointer-events: none;
                     z-index: 1000;
