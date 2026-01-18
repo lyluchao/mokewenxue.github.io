@@ -1,0 +1,100 @@
+/* 简单的 Obsidian 样式 */
+
+/* 双链样式 */
+a.internal-link {
+    color: #705dcf;
+    text-decoration: none;
+    border-bottom: 1px dashed #705dcf;
+}
+
+a.internal-link:hover {
+    color: #8b7bd4;
+    border-bottom: 1px solid #8b7bd4;
+}
+
+/* Callout 基础样式 */
+.callout {
+    margin: 1.2em 0;
+    padding: 12px 16px;
+    border-radius: 6px;
+    border-left: 4px solid;
+    background: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.callout .callout-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95em;
+}
+
+.callout .callout-content {
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+/* Callout 类型颜色 */
+.callout.info {
+    border-color: #3498db;
+    background: #ebf5fb;
+}
+
+.callout.tip {
+    border-color: #2ecc71;
+    background: #eafaf1;
+}
+
+.callout.warning {
+    border-color: #f39c12;
+    background: #fef5e7;
+}
+
+.callout.danger {
+    border-color: #e74c3c;
+    background: #fdedec;
+}
+
+.callout.note {
+    border-color: #9b59b6;
+    background: #f4ecf7;
+}
+
+.callout.quote {
+    border-color: #95a5a6;
+    background: #f8f9fa;
+    font-style: italic;
+}
+
+/* Mermaid 图容器 */
+.mermaid {
+    text-align: center;
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+/* Mermaid 图表样式 */
+.mermaid {
+  text-align: center;
+  margin: 20px 0;
+  overflow-x: auto;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 黑暗主题支持 */
+@media (prefers-color-scheme: dark) {
+  .mermaid {
+    background: #2d2d2d;
+    border-color: #444;
+  }
+}
