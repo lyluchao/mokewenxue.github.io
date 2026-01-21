@@ -1167,14 +1167,14 @@
               
                 </div>
                 <div class="tier-items">
-                    <div class="left-nav-item" data-filter="蚀剑学" data-filter-type="main">
+                    <div class="left-nav-item" data-filter="蚀剑学" data-filter-type="secondary">
                         <div class="item-icon">
                             <i class="fas fa-sword"></i>
                         </div>
                         <div class="item-text">蚀剑学</div>
                       
                     </div>
-                    <div class="left-nav-item" data-filter="诗文" data-filter-type="main">
+                    <div class="left-nav-item" data-filter="诗文" data-filter-type="secondary">
                         <div class="item-icon">
                             <i class="fas fa-scroll"></i>
                         </div>
@@ -2998,5 +2998,16 @@ function filterArticles(filterType, filterValue) {
             }
         });
     </script>
+<style>
+/* 临时调试样式 */
+.compact-card[data-category="诗文"] {
+    border: 3px solid red !important;
+}
+.compact-card[data-tags*="诗文"] {
+    border: 3px dashed blue !important;
+}
+</style>
+
+
 </body>
 </html>
