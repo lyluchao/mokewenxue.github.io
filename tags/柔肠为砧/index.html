@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柔肠为砧 | 独自踏月行</title>
+    
+<!-- 自定义古典文学样式 -->
+<link rel="stylesheet" href="/mokewenxue.github.io/css/global-classical.css">
+
+    
+    <!-- 引入Google字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --secondary-dark: #1e293b;
+            --accent-gold: #fbbf24;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        
+        .star-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 20px 40px;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-brand {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--text-light);
+        }
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 40px;
+        }
+        
+        .tag-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tag-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-gold), var(--accent-blue));
+        }
+        
+        .tag-name {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+        
+        .tag-count {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+        }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .post-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .post-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .post-title a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+        
+        .post-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .post-excerpt {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 25px;
+            background: var(--accent-purple);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: var(--accent-gold);
+            color: #000;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 0 20px;
+                margin-top: 100px;
+            }
+            
+            .tag-name {
+                font-size: 2.2rem;
+            }
+            
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/mokewenxue.github.io/atom.xml" title="独自踏月行" type="application/atom+xml">
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="star-bg"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="nav-header">
+        <div class="nav-content">
+            <a href="/mokewenxue.github.io/" class="site-brand">踏月诗阁</a>
+            <div class="nav-menu">
+                <a href="/mokewenxue.github.io/" class="nav-link">星河首页</a>
+                <a href="/mokewenxue.github.io/tags/" class="nav-link">词牌索引</a>
+                <a href="/mokewenxue.github.io/categories/" class="nav-link">剑阵分类</a>
+                <a href="/mokewenxue.github.io/archives/" class="nav-link">诗卷归档</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 主容器 -->
+    <main class="main-container">
+        <!-- 标签头部 -->
+        <div class="tag-header">
+            <h1 class="tag-name">
+                <i class="fas fa-tag"></i> 柔肠为砧
+            </h1>
+            <div class="tag-count">
+                共收录 1 篇诗卷
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="/mokewenxue.github.io/tags/" class="back-link">
+                    <i class="fas fa-arrow-left"></i> 返回所有词牌
+                </a>
+            </div>
+        </div>
+        
+        <!-- 文章列表 -->
+        <div class="posts-grid">
+            
+                <article class="post-card">
+                    <h2 class="post-title">
+                        <a href="/mokewenxue.github.io/2026/02/18/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%8C%E6%9E%81-%E5%BF%83%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">
+                            《周天十二极·第二极《心锋》卷宗·正典首章》
+                        </a>
+                    </h2>
+                    <div class="post-meta">
+                        <span><i class="far fa-calendar"></i> 2026-02-18</span>
+                        
+                            <span style="margin-left: 15px;">
+                                <i class="far fa-folder"></i> 剑道典籍
+                            </span>
+                        
+                    </div>
+                    <div class="post-excerpt">
+                        
+                            
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+
+第二极《心锋》卷宗·正典首章
+
+
+
+甲等极品·心意正典
+
+
+
+
+
+
+永恒月明·柔肠百转时
+
+|
+
+
+心锋剑域
+
+
+
+
+
+
+
+
+
+
+💖 卷宗基本信息
+
+
+卷宗编号
+周天第二极·心锋正字第一号
+
+
+定谳等级
+甲等极品·心意正典
+
+
+体系定位
+周天十二极·第...
+                        
+                    </div>
+                </article>
+            
+        </div>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 文章卡片动画
+            const postCards = document.querySelectorAll('.post-card');
+            postCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
