@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>剑阵阁 | 三级十二级布局</title>
+    <title>剑阵阁 | 星河剑阵</title>
     
     <!-- 优化字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@
         }
         
         /* === 剑阵导航栏 === */
-        .sword-nav {
+        .sword-nav-main {
             width: 280px;
             min-height: 100vh;
             background: var(--nav-bg);
@@ -299,6 +299,81 @@
             color: var(--warning-color);
         }
         
+        /* === 新增：剑阵导航卡片 === */
+        .sword-nav-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+            margin: var(--space-2xl) 0;
+            padding: 0 var(--space-lg);
+        }
+        
+        .sword-nav-item {
+            text-decoration: none;
+            display: block;
+        }
+        
+        .nav-card {
+            width: 100%;
+            height: 120px;
+            position: relative;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .nav-front, .nav-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md);
+            transition: all 0.6s ease;
+        }
+        
+        .nav-front {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(14, 165, 233, 0.2));
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            color: var(--text-primary);
+        }
+        
+        .nav-back {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.3), rgba(14, 165, 233, 0.3));
+            border: 1px solid rgba(124, 58, 237, 0.5);
+            color: var(--text-primary);
+            transform: rotateY(180deg);
+        }
+        
+        .nav-card:hover .nav-front {
+            transform: rotateY(180deg);
+        }
+        
+        .nav-card:hover .nav-back {
+            transform: rotateY(0deg);
+        }
+        
+        .nav-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .nav-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .nav-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+        
         /* 导航底部 */
         .nav-footer {
             padding: var(--space-lg);
@@ -514,45 +589,301 @@
             color: var(--text-secondary);
         }
         
-        /* 紧凑表格 */
-        .compact-table {
-            width: 100%;
-            margin-top: var(--space-2xl);
+        /* 星河剑阵展示区 */
+        .sword-section {
+            margin: var(--space-3xl) 0;
+        }
+        
+        .section-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .sword-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        /* 剑阵卡片 */
+        .sword-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            border-radius: 16px;
+            padding: var(--space-xl);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sword-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .sword-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .sword-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .sword-rank {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .sword-category {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .sword-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            line-height: 1.4;
+        }
+        
+        .sword-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .sword-title a:hover {
+            color: var(--primary-light);
+        }
+        
+        .sword-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .meta-icon {
+            font-size: 1.2rem;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(124, 58, 237, 0.1);
+            border-radius: 8px;
+        }
+        
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .meta-value {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .sword-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            padding: var(--space-md);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        /* 最新文章列表 */
+        .article-section {
+            margin: var(--space-3xl) 0;
+        }
+        
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .article-card {
             background: rgba(30, 41, 59, 0.7);
             border-radius: 12px;
-            overflow: hidden;
+            padding: var(--space-xl);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
         }
         
-        .table-header {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: var(--space-lg);
-            background: rgba(15, 23, 42, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 600;
+        .article-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-bottom: var(--space-md);
+        }
+        
+        .article-title {
+            font-size: 1.1rem;
             color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            line-height: 1.4;
         }
         
-        .table-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: var(--space-lg);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.2s;
+        .article-title a {
+            color: inherit;
+            text-decoration: none;
         }
         
-        .table-row:hover {
-            background: rgba(124, 58, 237, 0.05);
+        .article-title a:hover {
+            color: var(--primary-light);
         }
         
-        .table-row:last-child {
-            border-bottom: none;
+        .article-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: var(--space-md);
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .tag {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--primary-light);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+        
+        .view-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .view-all-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+        }
+        
+        /* 页脚 */
+        .poem-footer {
+            margin-top: var(--space-3xl);
+            padding: var(--space-2xl) 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary-light);
+        }
+        
+        .footer-seal {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+        
+        /* 滚动提示 */
+        .scroll-hint {
+            text-align: center;
+            margin-top: var(--space-xl);
+            color: var(--text-secondary);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
         
         /* 响应式设计 */
         @media (max-width: 1200px) {
-            .sword-nav {
+            .sword-nav-main {
                 width: 240px;
             }
             
@@ -566,11 +897,11 @@
         }
         
         @media (max-width: 768px) {
-            .sword-nav {
+            .sword-nav-main {
                 transform: translateX(-100%);
             }
             
-            .sword-nav.active {
+            .sword-nav-main.active {
                 transform: translateX(0);
             }
             
@@ -596,42 +927,74 @@
                 height: 40px;
                 border-radius: 50%;
             }
+            
+            .sword-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sword-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .sword-nav-cards {
+                grid-template-columns: 1fr;
+            }
         }
         
         /* 导航折叠状态 */
-        .sword-nav.collapsed {
+        .sword-nav-main.collapsed {
             width: 80px;
         }
         
-        .sword-nav.collapsed .brand-text,
-        .sword-nav.collapsed .level-title,
-        .sword-nav.collapsed .item-text,
-        .sword-nav.collapsed .item-badge,
-        .sword-nav.collapsed .level-indicator,
-        .sword-nav.collapsed .user-details,
-        .sword-nav.collapsed .nav-toggle span {
+        .sword-nav-main.collapsed .brand-text,
+        .sword-nav-main.collapsed .level-title,
+        .sword-nav-main.collapsed .item-text,
+        .sword-nav-main.collapsed .item-badge,
+        .sword-nav-main.collapsed .level-indicator,
+        .sword-nav-main.collapsed .user-details,
+        .sword-nav-main.collapsed .nav-toggle span,
+        .sword-nav-main.collapsed .sword-nav-cards {
             display: none;
         }
         
-        .sword-nav.collapsed .nav-brand {
+        .sword-nav-main.collapsed .nav-brand {
             justify-content: center;
         }
         
-        .sword-nav.collapsed .level-header {
+        .sword-nav-main.collapsed .level-header {
             justify-content: center;
             padding: 0 var(--space-md) var(--space-md);
         }
         
-        .sword-nav.collapsed .nav-item {
+        .sword-nav-main.collapsed .nav-item {
             justify-content: center;
             padding: var(--space-md);
         }
         
-        .sword-nav.collapsed .item-icon {
+        .sword-nav-main.collapsed .item-icon {
             margin-right: 0;
         }
         
-        .sword-nav.collapsed .main-content {
+        .sword-nav-main.collapsed .main-content {
             margin-left: 80px;
         }
         
@@ -641,7 +1004,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .sword-card {
+        .sword-card, .article-card {
             animation: fadeIn 0.5s ease-out;
         }
         
@@ -686,7 +1049,7 @@
     <div class="sword-effect effect-2"></div>
     
     <!-- 左侧剑阵导航栏 -->
-    <nav class="sword-nav">
+    <nav class="sword-nav-main">
         <!-- 导航顶部 -->
         <div class="nav-header">
             <a href="#" class="nav-brand">
@@ -702,6 +1065,65 @@
         
         <!-- 导航内容 -->
         <div class="nav-content">
+            <!-- 剑阵导航 -->
+            <div class="sword-nav-cards">
+                <a href="/mokewenxue.github.io/archives" class="sword-nav-item">
+                    <div class="nav-card">
+                        <div class="nav-front">
+                            <div class="nav-icon">🗃️</div>
+                            <div class="nav-title">诗卷归档</div>
+                            <div class="nav-desc">岁月留痕</div>
+                        </div>
+                        <div class="nav-back">
+                            <div class="nav-title">永恒收藏</div>
+                            <div class="nav-desc">时光印记</div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/mokewenxue.github.io/categories" class="sword-nav-item">
+                    <div class="nav-card">
+                        <div class="nav-front">
+                            <div class="nav-icon">🏛️</div>
+                            <div class="nav-title">剑阵分类</div>
+                            <div class="nav-desc">十二极分</div>
+                        </div>
+                        <div class="nav-back">
+                            <div class="nav-title">周天体系</div>
+                            <div class="nav-desc">剑阵枢机</div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/mokewenxue.github.io/tags" class="sword-nav-item">
+                    <div class="nav-card">
+                        <div class="nav-front">
+                            <div class="nav-icon">🏷️</div>
+                            <div class="nav-title">词牌索引</div>
+                            <div class="nav-desc">剑意标签</div>
+                        </div>
+                        <div class="nav-back">
+                            <div class="nav-title">剑谱索引</div>
+                            <div class="nav-desc">词牌为刃</div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/mokewenxue.github.io/about" class="sword-nav-item">
+                    <div class="nav-card">
+                        <div class="nav-front">
+                            <div class="nav-icon">📖</div>
+                            <div class="nav-title">诗阁缘起</div>
+                            <div class="nav-desc">创作心法</div>
+                        </div>
+                        <div class="nav-back">
+                            <div class="nav-title">剑阵源流</div>
+                            <div class="nav-desc">文脉传承</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
             <!-- 第一级：剑阵主级 -->
             <div class="nav-level">
                 <div class="level-marker"></div>
@@ -735,54 +1157,6 @@
                         </div>
                         <div class="item-text">天权剑式</div>
                     </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-mountain"></i>
-                        </div>
-                        <div class="item-text">玉衡剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-water"></i>
-                        </div>
-                        <div class="item-text">开阳剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-wind"></i>
-                        </div>
-                        <div class="item-text">摇光剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <div class="item-text">破军剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <div class="item-text">贪狼剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <div class="item-text">武曲剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <div class="item-text">廉贞剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-feather-alt"></i>
-                        </div>
-                        <div class="item-text">巨门剑式</div>
-                    </a>
                 </div>
             </div>
             
@@ -791,7 +1165,7 @@
                 <div class="level-marker"></div>
                 <div class="level-header">
                     <div class="level-title">剑阵次位</div>
-                    <span class="level-indicator">十二式</span>
+                    <span class="level-indicator">八式</span>
                 </div>
                 <div class="level-items">
                     <a href="#" class="nav-item">
@@ -817,139 +1191,6 @@
                             <i class="fas fa-expand-arrows-alt"></i>
                         </div>
                         <div class="item-text">扩展剑位</div>
-                    </a>
-                    <a href="#" class="nav-item item-warning">
-                        <div class="item-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="item-text">警戒剑位</div>
-                        <span class="item-badge">!</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-redo"></i>
-                        </div>
-                        <div class="item-text">循环剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-compress-arrows-alt"></i>
-                        </div>
-                        <div class="item-text">收缩剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-random"></i>
-                        </div>
-                        <div class="item-text">变换剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-layer-group"></i>
-                        </div>
-                        <div class="item-text">层叠剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-infinity"></i>
-                        </div>
-                        <div class="item-text">无尽剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-crosshairs"></i>
-                        </div>
-                        <div class="item-text">锁定剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-undo"></i>
-                        </div>
-                        <div class="item-text">回环剑位</div>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- 第三级：剑阵修练 -->
-            <div class="nav-level">
-                <div class="level-marker"></div>
-                <div class="level-header">
-                    <div class="level-title">剑阵修练</div>
-                    <span class="level-indicator">十二境</span>
-                </div>
-                <div class="level-items">
-                    <a href="#" class="nav-item item-success">
-                        <div class="item-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <div class="item-text">筑基境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <div class="item-text">炼气境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-meteor"></i>
-                        </div>
-                        <div class="item-text">凝神境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-atom"></i>
-                        </div>
-                        <div class="item-text">金丹境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="item-text">元婴境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <div class="item-text">化神境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-dragon"></i>
-                        </div>
-                        <div class="item-text">合体境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-feather"></i>
-                        </div>
-                        <div class="item-text">大乘境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-jedi"></i>
-                        </div>
-                        <div class="item-text">渡劫境</div>
-                    </a>
-                    <a href="#" class="nav-item item-danger">
-                        <div class="item-icon">
-                            <i class="fas fa-skull-crossbones"></i>
-                        </div>
-                        <div class="item-text">陨落境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-recycle"></i>
-                        </div>
-                        <div class="item-text">轮回境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-infinity"></i>
-                        </div>
-                        <div class="item-text">永恒境</div>
-                        <span class="item-badge">终</span>
                     </a>
                 </div>
             </div>
@@ -1000,152 +1241,480 @@
             </div>
         </div>
         
-        <!-- 剑阵状态卡片 -->
-        <div class="sword-grid">
-            <div class="sword-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-sun"></i>
-                    </div>
-                    <div class="card-title">天枢剑阵</div>
-                </div>
-                <p class="card-desc">
-                    主攻剑阵，以天枢星为核心，剑气如烈日灼空，威力无匹。
-                </p>
-                <div class="card-stats">
-                    <div class="stat">
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">剑式</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">9</div>
-                        <div class="stat-label">修习者</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">96%</div>
-                        <div class="stat-label">完成度</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sword-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="card-title">御守剑阵</div>
-                </div>
-                <p class="card-desc">
-                    防御剑阵，剑气如盾，层层叠加，可抵御万钧之力。
-                </p>
-                <div class="card-stats">
-                    <div class="stat">
-                        <div class="stat-value">8</div>
-                        <div class="stat-label">剑式</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">14</div>
-                        <div class="stat-label">修习者</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">88%</div>
-                        <div class="stat-label">完成度</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sword-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <div class="card-title">流转剑阵</div>
-                </div>
-                <p class="card-desc">
-                    变化剑阵，剑气流转不息，随敌而动，变化万千。
-                </p>
-                <div class="card-stats">
-                    <div class="stat">
-                        <div class="stat-value">15</div>
-                        <div class="stat-label">剑式</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">7</div>
-                        <div class="stat-label">修习者</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">75%</div>
-                        <div class="stat-label">完成度</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sword-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <div class="card-title">筑基境修练</div>
-                </div>
-                <p class="card-desc">
-                    剑道初阶，打牢基础，剑气初成，需勤加练习。
-                </p>
-                <div class="card-stats">
-                    <div class="stat">
-                        <div class="stat-value">36</div>
-                        <div class="stat-label">修习者</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">通过率</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">3月</div>
-                        <div class="stat-label">平均耗时</div>
-                    </div>
-                </div>
-            </div>
+        <!-- 滚动提示 -->
+        <div class="scroll-hint">
+            <i class="fas fa-chevron-down"></i>
         </div>
         
-        <!-- 剑阵修练进度 -->
-        <div class="compact-table">
-            <div class="table-header">
-                <div>剑阵名称</div>
-                <div>当前修习者</div>
-                <div>完成度</div>
-                <div>下次演化</div>
+        <!-- 星河剑阵展示区 -->
+        <section class="sword-section">
+            <h2 class="section-title">🌌 星河剑阵·周天十二极</h2>
+            
+            <div class="sword-grid">
+                
+                    <article class="sword-card">
+                        <div class="sword-header">
+                            <span class="sword-rank">甲等极品</span>
+                            <span class="sword-category">
+                                <i class="fas fa-swords"></i>
+                                剑阵典藏
+                            </span>
+                        </div>
+                        <h3 class="sword-title">
+                            <a href="/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第四极《萍魄》卷宗·正典首章》</a>
+                        </h3>
+                        <div class="sword-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">🎴</span>
+                                <div>
+                                    <div class="meta-label">词牌</div>
+                                    <div class="meta-value">词牌未定</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🏛️</span>
+                                <div>
+                                    <div class="meta-label">司职</div>
+                                    <div class="meta-value">缘法司</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">⏳</span>
+                                <div>
+                                    <div class="meta-label">归位</div>
+                                    <div class="meta-value">2026年6月20日</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sword-excerpt">
+                            星河剑阵·周天十二极卷宗 第四极《萍魄》卷宗·正典首章 惊鸿锻雾锋，初逢即开刃天地皆炉冶，痕过魂自臻 甲等极品·缘法正典 卷宗编号：周天第四极·萍魄正字第一号 ⚖️ 归位时间：永恒刹那·惊鸿照影时 🏛️ 卷宗定位·体系说明 体系定位：周天...
+                        </div>
+                    </article>
+                
+                    <article class="sword-card">
+                        <div class="sword-header">
+                            <span class="sword-rank">甲等极品</span>
+                            <span class="sword-category">
+                                <i class="fas fa-swords"></i>
+                                赋作
+                            </span>
+                        </div>
+                        <h3 class="sword-title">
+                            <a href="/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/">《孤影清辉三绝赋》</a>
+                        </h3>
+                        <div class="sword-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">🎴</span>
+                                <div>
+                                    <div class="meta-label">词牌</div>
+                                    <div class="meta-value">词牌未定</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🏛️</span>
+                                <div>
+                                    <div class="meta-label">司职</div>
+                                    <div class="meta-value">未定司职</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">⏳</span>
+                                <div>
+                                    <div class="meta-label">归位</div>
+                                    <div class="meta-value">2026年6月15日</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sword-excerpt">
+                            孤影清辉三绝赋 影与光相照，旅与禅相缠，迹与心相融 漂泊·禅思·归寂 三词为基，三境合一 | 乙巳年冬，三绝成赋 📜 序·三绝缘起 余有三词，一曰《断鸿寒影》，写漂泊淬炼之孤绝；一曰《清辉劫尘》，抒修行悖论之诘问；一曰《万籁俱沉》，尽执念...
+                        </div>
+                    </article>
+                
+                    <article class="sword-card">
+                        <div class="sword-header">
+                            <span class="sword-rank">甲等极品</span>
+                            <span class="sword-category">
+                                <i class="fas fa-swords"></i>
+                                剑阵典藏
+                            </span>
+                        </div>
+                        <h3 class="sword-title">
+                            <a href="/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/">《星河剑赋》</a>
+                        </h3>
+                        <div class="sword-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">🎴</span>
+                                <div>
+                                    <div class="meta-label">词牌</div>
+                                    <div class="meta-value">词牌未定</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🏛️</span>
+                                <div>
+                                    <div class="meta-label">司职</div>
+                                    <div class="meta-value">未定司职</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">⏳</span>
+                                <div>
+                                    <div class="meta-label">归位</div>
+                                    <div class="meta-value">2026年6月1日</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sword-excerpt">
+                            &#39;);&#34;&gt; 星河剑赋 汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋 创世·锻造·证道 结构：1+12+1圆满体系 ⚔️ 境界：创世·锻造·证道 🏛️ 总序·星河剑阵要义 鸿蒙未判，道隐无名；星河初辟，剑显其形。
+                        </div>
+                    </article>
+                
+                    <article class="sword-card">
+                        <div class="sword-header">
+                            <span class="sword-rank">甲等极品</span>
+                            <span class="sword-category">
+                                <i class="fas fa-swords"></i>
+                                剑阵典藏
+                            </span>
+                        </div>
+                        <h3 class="sword-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第七极《墨锋》卷宗·正典首章》</a>
+                        </h3>
+                        <div class="sword-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">🎴</span>
+                                <div>
+                                    <div class="meta-label">词牌</div>
+                                    <div class="meta-value">词牌未定</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🏛️</span>
+                                <div>
+                                    <div class="meta-label">司职</div>
+                                    <div class="meta-value">文脉司</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">⏳</span>
+                                <div>
+                                    <div class="meta-label">归位</div>
+                                    <div class="meta-value">2026年5月15日</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sword-excerpt">
+                            星河剑阵·周天十二极卷宗 第七极《墨锋》卷宗·正典首章 秃笔锻魂兮，素笺烙霞墨锋所指兮，皆是吾家 甲等极品·文脉正典 卷宗编号：周天第七极·墨锋正字第一号 | 归位时间：永恒书写·墨痕初干时 🏛️ 卷宗定位·体系说明 体系定位：周天十二极...
+                        </div>
+                    </article>
+                
+                    <article class="sword-card">
+                        <div class="sword-header">
+                            <span class="sword-rank">甲等极品</span>
+                            <span class="sword-category">
+                                <i class="fas fa-swords"></i>
+                                剑阵典藏
+                            </span>
+                        </div>
+                        <h3 class="sword-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第五极《清怀》卷宗·正典首章》</a>
+                        </h3>
+                        <div class="sword-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">🎴</span>
+                                <div>
+                                    <div class="meta-label">词牌</div>
+                                    <div class="meta-value">词牌未定</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🏛️</span>
+                                <div>
+                                    <div class="meta-label">司职</div>
+                                    <div class="meta-value">剑阵司</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">⏳</span>
+                                <div>
+                                    <div class="meta-label">归位</div>
+                                    <div class="meta-value">2026年5月15日</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sword-excerpt">
+                            星河剑阵·周天十二极卷宗 第五极《清怀》卷宗·正典首章 漏声锻夜兮，清怀为砧清怀撑剑兮，星河自钦 甲等极品·风骨正典 卷宗编号：周天第五极·清怀正字第一号 | 归位时间：永恒三更·漏声滴落时 🏛️ 卷宗定位·体系说明 体系定位：周天十二极...
+                        </div>
+                    </article>
+                
+                    <article class="sword-card">
+                        <div class="sword-header">
+                            <span class="sword-rank">甲等极品</span>
+                            <span class="sword-category">
+                                <i class="fas fa-swords"></i>
+                                剑阵典藏
+                            </span>
+                        </div>
+                        <h3 class="sword-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/">《星河剑阵·立法总枢档案》</a>
+                        </h3>
+                        <div class="sword-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">🎴</span>
+                                <div>
+                                    <div class="meta-label">词牌</div>
+                                    <div class="meta-value">词牌未定</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">🏛️</span>
+                                <div>
+                                    <div class="meta-label">司职</div>
+                                    <div class="meta-value">剑阵司</div>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">⏳</span>
+                                <div>
+                                    <div class="meta-label">归位</div>
+                                    <div class="meta-value">2026年5月15日</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sword-excerpt">
+                            星河剑阵·立法总枢档案 总纲天则剑经 登霄纵海本 乾坤为砧兮，玄黄锻锋芒狂啸开天兮，新纪待华章 根本大法·剑阵宪法 档案等级：根本大法 ⚖️ 生效时间：天罡历·宪制元年·登霄之日子时 🏛️ 宪法定位·体系说明 宪制等级：剑阵宪法·万法之源...
+                        </div>
+                    </article>
+                
             </div>
-            <div class="table-row">
-                <div>天枢剑阵</div>
-                <div>9人</div>
-                <div>96%</div>
-                <div>3天后</div>
+        </section>
+        
+        <!-- 最新文章列表 -->
+        <section class="article-section">
+            <h2 class="section-title">📖 最新诗卷</h2>
+            
+            <div class="article-grid">
+                
+                    <article class="article-card">
+                        <div class="article-meta">
+                            
+                                <span><i class="far fa-calendar"></i> 2026-06-20</span>
+                            
+                            
+                                <span><i class="far fa-folder"></i> 剑阵典藏</span>
+                            
+                        </div>
+                        <h3 class="article-title">
+                            <a href="/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">周天十二极·第四极《萍魄》卷宗·正典首章</a>
+                        </h3>
+                        <div class="article-excerpt">
+                            星河剑阵·周天十二极卷宗 第四极《萍魄》卷宗·正典首章 惊鸿锻雾锋，初逢即开刃天地皆炉冶，痕过魂自臻 甲等极品·缘法正典 卷宗编号：周天第四极·萍魄正字第一号 ⚖️ 归位时间：永恒刹那·惊鸿照影时 �...
+                        </div>
+                        
+                            <div class="article-tags">
+                                
+                                    <span class="tag">星河剑阵</span>
+                                
+                                    <span class="tag">周天十二极</span>
+                                
+                                    <span class="tag">萍魄卷宗</span>
+                                
+                            </div>
+                        
+                    </article>
+                
+                    <article class="article-card">
+                        <div class="article-meta">
+                            
+                                <span><i class="far fa-calendar"></i> 2026-06-15</span>
+                            
+                            
+                                <span><i class="far fa-folder"></i> 赋作</span>
+                            
+                        </div>
+                        <h3 class="article-title">
+                            <a href="/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/">孤影清辉三绝赋</a>
+                        </h3>
+                        <div class="article-excerpt">
+                            孤影清辉三绝赋 影与光相照，旅与禅相缠，迹与心相融 漂泊·禅思·归寂 三词为基，三境合一 | 乙巳年冬，三绝成赋 📜 序·三绝缘起 余有三词，一曰《断鸿寒影》，写漂泊淬炼之孤绝；一曰《清辉劫尘》，抒...
+                        </div>
+                        
+                            <div class="article-tags">
+                                
+                                    <span class="tag">孤影</span>
+                                
+                                    <span class="tag">三绝赋</span>
+                                
+                                    <span class="tag">清辉</span>
+                                
+                            </div>
+                        
+                    </article>
+                
+                    <article class="article-card">
+                        <div class="article-meta">
+                            
+                                <span><i class="far fa-calendar"></i> 2026-06-01</span>
+                            
+                            
+                                <span><i class="far fa-folder"></i> 剑阵典藏</span>
+                            
+                        </div>
+                        <h3 class="article-title">
+                            <a href="/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/">星河剑赋</a>
+                        </h3>
+                        <div class="article-excerpt">
+                            &#39;);&#34;&gt; 星河剑赋 汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋 创世·锻造·证道 结构：1+12+1圆满体系 ⚔️ 境界：创世·锻造·证道 🏛️ 总序·星河剑阵要义 鸿蒙未判，道隐无名；星河...
+                        </div>
+                        
+                            <div class="article-tags">
+                                
+                                    <span class="tag">星河剑阵</span>
+                                
+                                    <span class="tag">锻造</span>
+                                
+                                    <span class="tag">剑赋</span>
+                                
+                            </div>
+                        
+                    </article>
+                
+                    <article class="article-card">
+                        <div class="article-meta">
+                            
+                                <span><i class="far fa-calendar"></i> 2026-05-15</span>
+                            
+                            
+                                <span><i class="far fa-folder"></i> 剑阵典藏</span>
+                            
+                        </div>
+                        <h3 class="article-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">周天十二极·第七极《墨锋》卷宗·正典首章</a>
+                        </h3>
+                        <div class="article-excerpt">
+                            星河剑阵·周天十二极卷宗 第七极《墨锋》卷宗·正典首章 秃笔锻魂兮，素笺烙霞墨锋所指兮，皆是吾家 甲等极品·文脉正典 卷宗编号：周天第七极·墨锋正字第一号 | 归位时间：永恒书写·墨痕初干时 🏛️ ...
+                        </div>
+                        
+                            <div class="article-tags">
+                                
+                                    <span class="tag">星河剑阵</span>
+                                
+                                    <span class="tag">周天十二极</span>
+                                
+                                    <span class="tag">墨锋卷宗</span>
+                                
+                            </div>
+                        
+                    </article>
+                
+                    <article class="article-card">
+                        <div class="article-meta">
+                            
+                                <span><i class="far fa-calendar"></i> 2026-05-15</span>
+                            
+                            
+                                <span><i class="far fa-folder"></i> 剑阵典藏</span>
+                            
+                        </div>
+                        <h3 class="article-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">周天十二极·第五极《清怀》卷宗·正典首章</a>
+                        </h3>
+                        <div class="article-excerpt">
+                            星河剑阵·周天十二极卷宗 第五极《清怀》卷宗·正典首章 漏声锻夜兮，清怀为砧清怀撑剑兮，星河自钦 甲等极品·风骨正典 卷宗编号：周天第五极·清怀正字第一号 | 归位时间：永恒三更·漏声滴落时 🏛️ ...
+                        </div>
+                        
+                            <div class="article-tags">
+                                
+                                    <span class="tag">星河剑阵</span>
+                                
+                                    <span class="tag">周天十二极</span>
+                                
+                                    <span class="tag">清怀卷宗</span>
+                                
+                            </div>
+                        
+                    </article>
+                
+                    <article class="article-card">
+                        <div class="article-meta">
+                            
+                                <span><i class="far fa-calendar"></i> 2026-05-15</span>
+                            
+                            
+                                <span><i class="far fa-folder"></i> 剑阵典藏</span>
+                            
+                        </div>
+                        <h3 class="article-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/">星河剑阵·立法总枢档案</a>
+                        </h3>
+                        <div class="article-excerpt">
+                            星河剑阵·立法总枢档案 总纲天则剑经 登霄纵海本 乾坤为砧兮，玄黄锻锋芒狂啸开天兮，新纪待华章 根本大法·剑阵宪法 档案等级：根本大法 ⚖️ 生效时间：天罡历·宪制元年·登霄之日子时 🏛️ 宪法定位...
+                        </div>
+                        
+                            <div class="article-tags">
+                                
+                                    <span class="tag">星河剑阵</span>
+                                
+                                    <span class="tag">立法总枢</span>
+                                
+                                    <span class="tag">宪法</span>
+                                
+                            </div>
+                        
+                    </article>
+                
             </div>
-            <div class="table-row">
-                <div>御守剑阵</div>
-                <div>14人</div>
-                <div>88%</div>
-                <div>5天后</div>
+            
+            
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="/mokewenxue.github.io/archives" class="view-all-btn">
+                        <i class="fas fa-books"></i> 查看所有诗卷
+                    </a>
+                </div>
+            
+        </section>
+        
+        <!-- 页脚 -->
+        <footer class="poem-footer">
+            <div class="footer-content">
+                <div class="copyright">
+                    © 2026 独自踏月行<br>
+                    剑气凌云霄，诗魂贯古今<br>
+                    月明千里照，墨韵万年存
+                </div>
+                
+                <div class="footer-links">
+                    <a href="/mokewenxue.github.io/archives" class="footer-link">
+                        <i class="fas fa-archive"></i> 诗卷归档
+                    </a>
+                    <a href="/mokewenxue.github.io/tags" class="footer-link">
+                        <i class="fas fa-tags"></i> 词牌索引
+                    </a>
+                    <a href="/mokewenxue.github.io/categories" class="footer-link">
+                        <i class="fas fa-layer-group"></i> 剑阵分类
+                    </a>
+                    <a href="/mokewenxue.github.io/about" class="footer-link">
+                        <i class="fas fa-book"></i> 诗阁缘起
+                    </a>
+                    <a href="/mokewenxue.github.io/atom.xml" class="footer-link">
+                        <i class="fas fa-rss"></i> 星河订阅
+                    </a>
+                </div>
+                
+                <div class="footer-seal">
+                    <i class="fas fa-feather-alt"></i>
+                    Theme Typography by Makito
+                    <i class="fas fa-feather-alt"></i><br>
+                    Proudly published with Hexo · 剑气长存
+                </div>
             </div>
-            <div class="table-row">
-                <div>流转剑阵</div>
-                <div>7人</div>
-                <div>75%</div>
-                <div>1周后</div>
-            </div>
-            <div class="table-row">
-                <div>筑基境修练</div>
-                <div>36人</div>
-                <div>100%</div>
-                <div>持续进行</div>
-            </div>
-        </div>
+        </footer>
     </main>
     
     <script>
         // 导航栏折叠/展开
         const navToggle = document.getElementById('navToggle');
-        const swordNav = document.querySelector('.sword-nav');
+        const swordNav = document.querySelector('.sword-nav-main');
         const mainContent = document.querySelector('.main-content');
         
         navToggle.addEventListener('click', function() {
@@ -1189,6 +1758,20 @@
                 }
             });
         });
+        
+        // 滚动提示点击
+        const scrollHint = document.querySelector('.scroll-hint');
+        if (scrollHint) {
+            scrollHint.addEventListener('click', function() {
+                const swordSection = document.querySelector('.sword-section');
+                if (swordSection) {
+                    swordSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        }
         
         // 窗口大小调整处理
         window.addEventListener('resize', function() {
