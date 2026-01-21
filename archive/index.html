@@ -701,43 +701,7 @@
                 %>
 
 
-               <p class="page-subtitle">
-    <% 
-    const categoryConfig = {
-        '��������': '����ʮ�������� �� �Ǻӽ�����ķ���',
-        'ʫ�ʴ���': '��ͳ�����ִ�ʫ �� ʫ�⽣���ں�',
-        '�������': '�Ǻӽ�����Ƚ��� �� ��������ָ��',
-        '�Ļ�': '�Ǻӽ����һ�� �� �Ļ������',
-        '����': '�Ǻӽ���ڶ��� �� ����������',
-        'Ƽ��': '�Ǻӽ�������� �� ��Ƽ�ۻ����',
-        '�廳': '�Ǻӽ�����ľ� �� ������־������',
-        '֪��': '�Ǻӽ������� �� ֪���������ѵ�',
-        'ī��': '�Ǻӽ�������� �� ī��Ϊ�潣����',
-        '��Ǭ': '�Ǻӽ�����߾� �� ��������ǬΪ��',
-        '����': '�Ǻӽ���ڰ˾� �� ����Ϊ�ɽ�Ϊ��',
-        '˫��': '�Ǻӽ���ھž� �� ˫���������˫',
-        '����': '�Ǻӽ����ʮ�� �� �ֿ�ժ�ǽ���׷',
-        '̤��': '�Ǻӽ����ʮһ�� �� ��̤�»�������'
-    };
-    
-    // ��ȫ�ػ�ȡ��������
-    let postCount = 0;
-    if (page.posts) {
-        // ���Բ�ͬ�����ݽṹ
-        if (typeof page.posts.length !== 'undefined') {
-            postCount = page.posts.length;
-        } else if (page.posts.data && page.posts.data.length) {
-            postCount = page.posts.data.length;
-        } else if (typeof page.posts.toArray === 'function') {
-            postCount = page.posts.toArray().length;
-        } else if (Array.isArray(page.posts)) {
-            postCount = page.posts.length;
-        }
-    }
-    %>
-    <%= categoryConfig[page.category] || '�Ǻӽ������ �� ��������' %> �� ����¼ <%= postCount %> ƪʫ��
-</p>
-
+             
 
 
             </p>
