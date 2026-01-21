@@ -86,7 +86,7 @@
             50% { opacity: 1; }
         }
         
-        /* === 左侧三级十二级菜单 === */
+        /* === 左侧三级十二级菜单 - 可折叠 === */
         .left-sword-nav {
             width: 280px;
             min-height: 100vh;
@@ -100,6 +100,69 @@
             flex-direction: column;
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
+            transition: width 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* 左侧菜单折叠状态 */
+        .left-sword-nav.collapsed {
+            width: 70px;
+        }
+        
+        .left-sword-nav.collapsed .left-nav-title,
+        .left-sword-nav.collapsed .left-nav-subtitle,
+        .left-sword-nav.collapsed .tier-title,
+        .left-sword-nav.collapsed .tier-count,
+        .left-sword-nav.collapsed .item-text,
+        .left-sword-nav.collapsed .item-badge,
+        .left-sword-nav.collapsed .copyright {
+            display: none !important;
+        }
+        
+        .left-sword-nav.collapsed .left-nav-header {
+            padding: var(--gap-lg) var(--gap-md);
+        }
+        
+        .left-sword-nav.collapsed .tier-header {
+            justify-content: center;
+            padding: 0 0 var(--gap-md) 0;
+        }
+        
+        .left-sword-nav.collapsed .left-nav-item {
+            justify-content: center;
+            padding: var(--gap-md);
+        }
+        
+        .left-sword-nav.collapsed .item-icon {
+            margin-right: 0;
+        }
+        
+        .left-sword-nav.collapsed .nav-tier {
+            margin-bottom: var(--gap-xl);
+        }
+        
+        /* 左侧菜单折叠控制 */
+        .left-nav-toggle {
+            position: absolute;
+            top: var(--gap-lg);
+            right: -12px;
+            width: 24px;
+            height: 24px;
+            background: var(--nebula-purple);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .left-nav-toggle:hover {
+            transform: scale(1.1);
+            background: var(--nebula-blue);
         }
         
         /* 左侧菜单顶部 */
@@ -107,6 +170,7 @@
             padding: var(--gap-lg);
             border-bottom: 1px solid var(--border-color);
             text-align: center;
+            position: relative;
         }
         
         .left-nav-title {
@@ -117,11 +181,13 @@
             background-clip: text;
             color: transparent;
             margin-bottom: var(--gap-xs);
+            transition: opacity 0.3s ease;
         }
         
         .left-nav-subtitle {
             font-size: 0.9rem;
             color: var(--text-secondary);
+            transition: opacity 0.3s ease;
         }
         
         /* 左侧菜单内容 */
@@ -184,6 +250,7 @@
             color: var(--text-primary);
             position: relative;
             padding-left: var(--gap-md);
+            transition: opacity 0.3s ease;
         }
         
         .tier-title::before {
@@ -204,6 +271,7 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 2px 8px;
             border-radius: 10px;
+            transition: opacity 0.3s ease;
         }
         
         /* 十二级项目 */
@@ -224,6 +292,7 @@
             position: relative;
             border-left: 3px solid transparent;
             border-radius: 6px;
+            cursor: pointer;
         }
         
         .left-nav-item:hover {
@@ -258,6 +327,7 @@
             margin-right: var(--gap-md);
             font-size: 0.9rem;
             color: var(--text-muted);
+            flex-shrink: 0;
         }
         
         .left-nav-item:hover .item-icon,
@@ -272,6 +342,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            transition: opacity 0.3s ease;
         }
         
         .item-badge {
@@ -281,6 +352,8 @@
             padding: 2px 6px;
             border-radius: 8px;
             margin-left: var(--gap-sm);
+            flex-shrink: 0;
+            transition: opacity 0.3s ease;
         }
         
         /* 左侧菜单底部 */
@@ -294,6 +367,7 @@
             font-size: 0.8rem;
             color: var(--text-muted);
             line-height: 1.4;
+            transition: opacity 0.3s ease;
         }
         
         /* === 主内容区域 === */
@@ -303,6 +377,11 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .left-sword-nav.collapsed ~ .main-content {
+            margin-left: 70px;
         }
         
         /* 顶部翻转导航卡片区域 - 可折叠 */
@@ -463,7 +542,7 @@
             width: 100%;
         }
         
-        /* 页面标题 */
+        /* 页面标题和筛选状态 */
         .page-header {
             text-align: center;
             margin-bottom: var(--gap-2xl);
@@ -471,6 +550,7 @@
             background: rgba(26, 26, 64, 0.5);
             border-radius: 12px;
             border: 1px solid var(--border-color);
+            position: relative;
         }
         
         .page-title {
@@ -488,6 +568,35 @@
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+        }
+        
+        /* 筛选状态显示 */
+        .filter-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--gap-md);
+            margin-top: var(--gap-md);
+            padding: var(--gap-sm) var(--gap-lg);
+            background: rgba(138, 43, 226, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            font-size: 0.9rem;
+        }
+        
+        .filter-clear {
+            background: rgba(65, 105, 225, 0.2);
+            color: var(--nebula-blue);
+            border: 1px solid var(--nebula-blue);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-clear:hover {
+            background: rgba(65, 105, 225, 0.3);
         }
         
         /* 紧凑诗卷网格 - 每行5个 */
@@ -533,6 +642,17 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .compact-card.hidden {
+            display: none;
+        }
+        
+        .compact-card.filtered-out {
+            opacity: 0.3;
+            transform: scale(0.95);
         }
         
         .compact-card::before {
@@ -546,9 +666,13 @@
         }
         
         .compact-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             border-color: var(--nebula-cyan);
             box-shadow: 0 10px 25px rgba(0, 0, 255, 0.3);
+        }
+        
+        .compact-card.filtered-out:hover {
+            transform: scale(0.98);
         }
         
         .card-header {
@@ -608,6 +732,7 @@
             font-size: 0.7rem;
             text-decoration: none;
             border: 1px solid rgba(65, 105, 225, 0.3);
+            cursor: pointer;
         }
         
         .card-tag:hover {
@@ -787,18 +912,35 @@
                 width: 240px;
             }
             
+            .left-sword-nav.collapsed {
+                width: 60px;
+            }
+            
             .main-content {
                 margin-left: 240px;
+            }
+            
+            .left-sword-nav.collapsed ~ .main-content {
+                margin-left: 60px;
             }
         }
         
         @media (max-width: 768px) {
             .left-sword-nav {
                 transform: translateX(-100%);
-                transition: transform 0.3s ease;
+                transition: transform 0.3s ease, width 0.3s ease;
             }
             
             .left-sword-nav.active {
+                transform: translateX(0);
+            }
+            
+            .left-sword-nav.collapsed {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+            
+            .left-sword-nav.collapsed.active {
                 transform: translateX(0);
             }
             
@@ -875,8 +1017,13 @@
     <!-- 星河剑阵背景 -->
     <div class="sword-universe" id="swordUniverse"></div>
     
-    <!-- 左侧三级十二级菜单 -->
-    <nav class="left-sword-nav">
+    <!-- 左侧三级十二级菜单 - 可折叠 -->
+    <nav class="left-sword-nav" id="leftSwordNav">
+        <!-- 折叠控制按钮 -->
+        <div class="left-nav-toggle" id="leftNavToggle">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        
         <div class="left-nav-header">
             <div class="left-nav-title">独自踏月行</div>
             <div class="left-nav-subtitle">月下独行的思考空间</div>
@@ -891,80 +1038,97 @@
                     <span class="tier-count">十二卷</span>
                 </div>
                 <div class="tier-items">
-                    <a href="/mokewenxue.github.io/" class="left-nav-item active">
+                    <div class="left-nav-item active" data-filter="all" data-filter-type="main">
+                        <div class="item-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="item-text">全部诗卷</div>
+                        <span class="item-badge" id="all-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="心火" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-fire"></i>
                         </div>
                         <div class="item-text">第一卷·《心火》</div>
-                        <span class="item-badge">🔥</span>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="心火-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="醉铸" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-wine-bottle"></i>
                         </div>
                         <div class="item-text">第二卷·《醉铸》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="醉铸-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="萍魄" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-tint"></i>
                         </div>
                         <div class="item-text">第三卷·《萍魄》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="萍魄-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="清怀" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-heart"></i>
                         </div>
                         <div class="item-text">第四卷·《清怀》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="清怀-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="知契" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
                         <div class="item-text">第五卷·《知契》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="知契-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="墨锋" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-pen-nib"></i>
                         </div>
                         <div class="item-text">第六卷·《墨锋》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="墨锋-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="擎乾" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-mountain"></i>
                         </div>
                         <div class="item-text">第七卷·《擎乾》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="擎乾-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="秋律" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-leaf"></i>
                         </div>
                         <div class="item-text">第八卷·《秋律》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="秋律-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="双刃" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-swords"></i>
                         </div>
                         <div class="item-text">第九卷·《双刃》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="双刃-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="揽星" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="item-text">第十卷·《揽星》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="揽星-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="踏月" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-moon"></i>
                         </div>
                         <div class="item-text">第十一卷·《踏月》</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="踏月-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="周天圆满" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-infinity"></i>
                         </div>
                         <div class="item-text">第十二极·周天圆满</div>
                         <span class="item-badge">终</span>
-                    </a>
+                    </div>
                 </div>
             </div>
             
@@ -976,20 +1140,20 @@
                     <span class="tier-count">二道</span>
                 </div>
                 <div class="tier-items">
-                    <a href="#" class="left-nav-item">
+                    <div class="left-nav-item" data-filter="蚀剑学" data-filter-type="secondary">
                         <div class="item-icon">
                             <i class="fas fa-sword"></i>
                         </div>
                         <div class="item-text">蚀剑学</div>
-                        <span class="item-badge">武</span>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="蚀剑学-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="诗文" data-filter-type="secondary">
                         <div class="item-icon">
                             <i class="fas fa-scroll"></i>
                         </div>
                         <div class="item-text">诗文</div>
-                        <span class="item-badge">文</span>
-                    </a>
+                        <span class="item-badge" id="诗文-count">0</span>
+                    </div>
                 </div>
             </div>
             
@@ -1001,54 +1165,62 @@
                     <span class="tier-count">八境</span>
                 </div>
                 <div class="tier-items">
-                    <a href="#" class="left-nav-item">
+                    <div class="left-nav-item" data-filter="筑基境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-seedling"></i>
                         </div>
                         <div class="item-text">筑基境</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="筑基境-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="炼气境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
                         <div class="item-text">炼气境</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="炼气境-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="凝神境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-meteor"></i>
                         </div>
                         <div class="item-text">凝神境</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="凝神境-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="金丹境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-atom"></i>
                         </div>
                         <div class="item-text">金丹境</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="金丹境-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="元婴境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-brain"></i>
                         </div>
                         <div class="item-text">元婴境</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="元婴境-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="化神境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-crown"></i>
                         </div>
                         <div class="item-text">化神境</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="化神境-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="合体境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-dragon"></i>
                         </div>
                         <div class="item-text">合体境</div>
-                    </a>
-                    <a href="#" class="left-nav-item">
+                        <span class="item-badge" id="合体境-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="大乘境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-feather"></i>
                         </div>
                         <div class="item-text">大乘境</div>
-                    </a>
+                        <span class="item-badge" id="大乘境-count">0</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1147,1104 +1319,37 @@
         
         <!-- 紧凑内容区域 -->
         <div class="compact-content">
+            <!-- 页面标题和筛选状态 -->
             <div class="page-header">
                 <h1 class="page-title">星河剑阵</h1>
                 <p class="page-subtitle">剑气凌云霄，诗魂贯古今 · 月明千里照，墨韵万年存</p>
+                
+                <!-- 筛选状态显示区域 -->
+                <div class="filter-status" id="filterStatus" style="display: none;">
+                    <span id="currentFilterText">当前筛选：全部诗卷</span>
+                    <button class="filter-clear" id="clearFilter">清除筛选</button>
+                </div>
             </div>
             
             <!-- 紧凑诗卷网格 -->
-            <div class="compact-grid">
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    6-20
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第四极《萍魄》卷宗·正典首章》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">周天十二极</span>
-                                
-                                    <span class="card-tag">萍魄卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·周天十二极卷宗
-
-
-第四极《萍魄》卷宗·正典首章
-
-
-
-惊鸿锻雾锋，初逢即开刃天地皆炉冶，痕过魂自臻
-
-
-
-甲等极品·缘法正典
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    6-15
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/">《孤影清辉三绝赋》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">孤影</span>
-                                
-                                    <span class="card-tag">三绝赋</span>
-                                
-                                    <span class="card-tag">清辉</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-孤影清辉三绝赋
-
-
-
-影与光相照，旅与禅相缠，迹与心相融
-
-
-
-漂泊·禅思·归寂
-
-
-
-
-
-
-三词为基，三境合一
-
-|
-
-
-乙巳年冬，三绝成赋
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    6-1
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/">《星河剑赋》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">锻造</span>
-                                
-                                    <span class="card-tag">剑赋</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-&#39;);&#34;&gt;
-
-
-星河剑赋
-
-
-
-汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋
-
-
-
-创世·锻造·证道
-
-
-
-
-
-
-结构：1+12+1圆满体系
-
-⚔️...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    5-15
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第七极《墨锋》卷宗·正典首章》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">周天十二极</span>
-                                
-                                    <span class="card-tag">墨锋卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·周天十二极卷宗
-
-
-第七极《墨锋》卷宗·正典首章
-
-
-
-秃笔锻魂兮，素笺烙霞墨锋所指兮，皆是吾家
-
-
-
-甲等极品·文脉正典
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    5-15
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第五极《清怀》卷宗·正典首章》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">周天十二极</span>
-                                
-                                    <span class="card-tag">清怀卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·周天十二极卷宗
-
-
-第五极《清怀》卷宗·正典首章
-
-
-
-漏声锻夜兮，清怀为砧清怀撑剑兮，星河自钦
-
-
-
-甲等极品·风骨正典
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    5-15
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/">《星河剑阵·立法总枢档案》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">立法总枢</span>
-                                
-                                    <span class="card-tag">宪法</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·立法总枢档案
-
-
-
-总纲天则剑经
-
-
-登霄纵海本
-
-
-
-乾坤为砧兮，玄黄锻锋芒狂啸开天兮，新纪待华章
-
-
-
-根本大法·剑阵宪法
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    4-5
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/04/05/%E6%88%9A%E6%B0%8F-%E8%BD%BB/">《戚氏·轻》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">宋词</span>
-                                
-                                    <span class="card-tag">孤寂</span>
-                                
-                                    <span class="card-tag">戚氏</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-戚氏·轻
-
-
-
-夜沉沉，一灯摇影到天心青灯影外，长风袖底，万籁俱沉
-
-
-
-宋词长调 · 禅意之境
-
-
-
-
-
-
-2026-04-05
-
-|
-
-
-原创...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/04/05/%E6%88%9A%E6%B0%8F-%E8%BD%BB/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    4-5
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/04/05/%E8%99%9E%E7%BE%8E%E4%BA%BA-%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/">《虞美人·孤怀婵娟》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">宋词</span>
-                                
-                                    <span class="card-tag">孤怀</span>
-                                
-                                    <span class="card-tag">虞美人</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-虞美人·孤怀婵娟
-
-
-
-苔痕暗锁阶前月，千山不语对婵娟
-
-
-
-宋词 · 孤怀之思
-
-
-
-
-
-
-2026-04-05
-
-|
-
-
-原创词作
-
-|
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/04/05/%E8%99%9E%E7%BE%8E%E4%BA%BA-%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    3-10
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/03/10/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/">《声声慢·断鸿寒影》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">宋词</span>
-                                
-                                    <span class="card-tag">江湖</span>
-                                
-                                    <span class="card-tag">声声慢</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-声声慢·断鸿寒影
-
-
-
-萧萧霜阶，沉沉残漏雪满霜鬓，影落孤江
-
-
-
-宋词 · 江湖之思
-
-
-
-
-
-
-2026-03-10
-
-|
-
-
-原创词作
-
-|...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/03/10/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    3-10
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/03/10/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E-%E5%AD%A4%E9%A6%86%E7%A7%8B/">《八声甘州·孤馆秋》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">宋词</span>
-                                
-                                    <span class="card-tag">八声甘州</span>
-                                
-                                    <span class="card-tag">孤馆秋</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-八声甘州·孤馆秋
-
-
-
-记同途风雨岁华深，殷勤共此襟
-
-
-
-宋词 · 秋日之思
-
-
-
-
-
-
-2026-03-10
-
-|
-
-
-原创词作
-
-|
-
-
-八...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/03/10/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E-%E5%AD%A4%E9%A6%86%E7%A7%8B/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-23
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/23/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8%E5%8D%B7-%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8%E6%9C%AC/">《星河剑阵·超脱自在卷·正典首章《风霜砺骨本》》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">超脱自在</span>
-                                
-                                    <span class="card-tag">傲骨卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·超脱自在卷
-
-
-
-正典首章《风霜砺骨本》
-
-
-
-甲等极品·自在正典
-
-
-
-
-
-
-永恒晴光·长风过境时
-
-|
-
-
-傲骨铮然域
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/23/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8%E5%8D%B7-%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8%E6%9C%AC/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-22
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/22/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93%E6%9C%AC/">《星河剑阵·凛冽极境卷·正典终章《太虚证道本》》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">凛冽极境</span>
-                                
-                                    <span class="card-tag">霜魄卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·凛冽极境卷·霜魄卷宗
-
-
-
-正典终章《太虚证道本》
-
-
-
-甲等极品·霜魄终典
-
-
-
-
-
-
-永恒拂晓·鸿举惊霄时
-
-|
-
-
-太虚证道域
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/22/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93%E6%9C%AC/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-21
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/21/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86%E6%9C%AC/">《星河剑阵·凛冽极境卷·正典首章《霜天剑胆本》》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">凛冽极境</span>
-                                
-                                    <span class="card-tag">霜魄</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·凛冽极境卷
-
-
-
-正典首章《霜天剑胆本》
-
-
-
-甲等极品·凛冽极典
-
-
-
-
-
-
-永恒霜秋·星河垂照时
-
-|
-
-
-霜天剑胆域
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/21/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86%E6%9C%AC/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-20
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/20/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/">《三问臻赋并序》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">赋文</span>
-                                
-                                    <span class="card-tag">三问</span>
-                                
-                                    <span class="card-tag">问月</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-三问臻赋并序
-
-
-
-问月寄孤怀·问星明持守·问剑砺锋芒
-
-
-
-赋文 · 人生进阶
-
-
-
-
-
-
-2026-02-20
-
-|
-
-
-原创赋文
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/20/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-19
-                                </div>
-                            
-                            <span class="card-category">剑阵文章</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/19/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89%E5%8D%B7-%E4%BA%94%E8%95%B4%E9%94%8B%E6%80%BB%E7%BA%B2/">《星河剑阵·基础根脉卷·首章《五蕴锋总纲》》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag">星河剑阵</span>
-                                
-                                    <span class="card-tag">基础根脉</span>
-                                
-                                    <span class="card-tag">五蕴锋</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·基础根脉卷
-
-
-
-首章《五蕴锋总纲》
-
-
-
-甲等极品·根脉始典
-
-
-
-
-
-
-此刻·你阅读这些文字时
-
-|
-
-
-红尘淬锋域
-
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/19/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89%E5%8D%B7-%E4%BA%94%E8%95%B4%E9%94%8B%E6%80%BB%E7%BA%B2/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
+            <div class="compact-grid" id="articleGrid">
+                <!-- 文章将通过JavaScript动态加载和筛选 -->
             </div>
             
             <!-- 分页 -->
-            
-                <div class="compact-pagination">
-                    
-                        <a href="/mokewenxue.github.io/page/3/" class="page-link prev">
-                            <i class="fas fa-chevron-left"></i> 上一页
-                        </a>
-                    
-                    
-                    <div class="page-info">
-                        第 <strong>4</strong> 页 / 共 <strong>4</strong> 页
-                    </div>
-                    
-                    
-                        <span class="page-link next disabled">
-                            下一页 <i class="fas fa-chevron-right"></i>
-                        </span>
-                    
+            <div class="compact-pagination" id="paginationContainer" style="display: none;">
+                <a href="#" class="page-link prev" id="prevPage">
+                    <i class="fas fa-chevron-left"></i> 上一页
+                </a>
+                
+                <div class="page-info">
+                    第 <strong id="currentPage">1</strong> 页 / 共 <strong id="totalPages">1</strong> 页
                 </div>
-            
+                
+                <a href="#" class="page-link next" id="nextPage">
+                    下一页 <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
         </div>
         
         <!-- 页脚 -->
@@ -2279,7 +1384,2238 @@
         </footer>
     </main>
     
+    <!-- 文章数据模板（在JavaScript中生成） -->
+    <script id="articleTemplate" type="text/template">
+        <article class="compact-card" data-title="{title}" data-content="{content}" data-category="{category}" data-tags="{tags}" data-date="{date}">
+            <div class="card-header">
+                <div class="card-date">
+                    <i class="far fa-calendar-alt"></i>
+                    {formattedDate}
+                </div>
+                <span class="card-category">{category}</span>
+            </div>
+            
+            <h3 class="card-title">
+                <a href="{url}">《{title}》</a>
+            </h3>
+            
+            <div class="card-tags">
+                {tagsHtml}
+            </div>
+            
+            <div class="card-excerpt">
+                {excerpt}
+            </div>
+            
+            <div class="card-footer">
+                <div class="card-author">
+                    <i class="fas fa-user"></i>
+                    {author}
+                </div>
+                <a href="{url}" class="read-btn">
+                    阅读 <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </article>
+    </script>
+    
     <script>
+        // 文章数据 - 从Hexo模板获取或使用默认数据
+        const articlesData = [
+            
+            {
+                title: "周天十二极·第四极《萍魄》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Sat Jun 20 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+第四极《萍魄》卷宗·正典首章
+
+
+
+惊鸿锻雾锋，初逢即开刃天地皆炉冶，痕过魂自臻
+
+
+
+甲等极品·缘法正典
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;萍魄卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "孤影清辉三绝赋",
+                url: "/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/",
+                date: new Date("Mon Jun 15 2026 22:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+孤影清辉三绝赋
+
+
+
+影与光相照，旅与禅相缠，迹与心相融
+
+
+
+漂泊·禅思·归寂
+
+
+
+
+
+
+三词为基，三境合一
+
+|
+
+
+乙巳年冬，三绝成赋
+
+...",
+                category: "心火",
+                tags: [&#34;孤影&#34;,&#34;三绝赋&#34;,&#34;清辉&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "星河剑赋",
+                url: "/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/",
+                date: new Date("Mon Jun 01 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+星河剑赋
+
+
+
+汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋
+
+
+
+创世·锻造·证道
+
+
+
+
+
+
+结构：1+12+1圆满体系
+
+⚔️...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;锻造&#34;,&#34;剑赋&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第七极《墨锋》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Fri May 15 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+第七极《墨锋》卷宗·正典首章
+
+
+
+秃笔锻魂兮，素笺烙霞墨锋所指兮，皆是吾家
+
+
+
+甲等极品·文脉正典
+
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;墨锋卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第五极《清怀》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Fri May 15 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+第五极《清怀》卷宗·正典首章
+
+
+
+漏声锻夜兮，清怀为砧清怀撑剑兮，星河自钦
+
+
+
+甲等极品·风骨正典
+
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;清怀卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "星河剑阵·立法总枢档案",
+                url: "/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/",
+                date: new Date("Fri May 15 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·立法总枢档案
+
+
+
+总纲天则剑经
+
+
+登霄纵海本
+
+
+
+乾坤为砧兮，玄黄锻锋芒狂啸开天兮，新纪待华章
+
+
+
+根本大法·剑阵宪法
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;立法总枢&#34;,&#34;宪法&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "戚氏·轻",
+                url: "/mokewenxue.github.io/2026/04/05/%E6%88%9A%E6%B0%8F-%E8%BD%BB/",
+                date: new Date("Sun Apr 05 2026 23:15:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+戚氏·轻
+
+
+
+夜沉沉，一灯摇影到天心青灯影外，长风袖底，万籁俱沉
+
+
+
+宋词长调 · 禅意之境
+
+
+
+
+
+
+2026-04-05
+
+|
+
+
+原创...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;孤寂&#34;,&#34;戚氏&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "虞美人·孤怀婵娟",
+                url: "/mokewenxue.github.io/2026/04/05/%E8%99%9E%E7%BE%8E%E4%BA%BA-%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/",
+                date: new Date("Sun Apr 05 2026 21:20:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+虞美人·孤怀婵娟
+
+
+
+苔痕暗锁阶前月，千山不语对婵娟
+
+
+
+宋词 · 孤怀之思
+
+
+
+
+
+
+2026-04-05
+
+|
+
+
+原创词作
+
+|
+
+
+...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;孤怀&#34;,&#34;虞美人&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "声声慢·断鸿寒影",
+                url: "/mokewenxue.github.io/2026/03/10/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/",
+                date: new Date("Tue Mar 10 2026 23:45:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+声声慢·断鸿寒影
+
+
+
+萧萧霜阶，沉沉残漏雪满霜鬓，影落孤江
+
+
+
+宋词 · 江湖之思
+
+
+
+
+
+
+2026-03-10
+
+|
+
+
+原创词作
+
+|...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;江湖&#34;,&#34;声声慢&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "八声甘州·孤馆秋",
+                url: "/mokewenxue.github.io/2026/03/10/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E-%E5%AD%A4%E9%A6%86%E7%A7%8B/",
+                date: new Date("Tue Mar 10 2026 20:45:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+八声甘州·孤馆秋
+
+
+
+记同途风雨岁华深，殷勤共此襟
+
+
+
+宋词 · 秋日之思
+
+
+
+
+
+
+2026-03-10
+
+|
+
+
+原创词作
+
+|
+
+
+八...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;八声甘州&#34;,&#34;孤馆秋&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "星河剑阵·超脱自在卷·正典首章《风霜砺骨本》",
+                url: "/mokewenxue.github.io/2026/02/23/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8%E5%8D%B7-%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8%E6%9C%AC/",
+                date: new Date("Mon Feb 23 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·超脱自在卷
+
+
+
+正典首章《风霜砺骨本》
+
+
+
+甲等极品·自在正典
+
+
+
+
+
+
+永恒晴光·长风过境时
+
+|
+
+
+傲骨铮然域
+
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;超脱自在&#34;,&#34;傲骨卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "星河剑阵·凛冽极境卷·正典终章《太虚证道本》",
+                url: "/mokewenxue.github.io/2026/02/22/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93%E6%9C%AC/",
+                date: new Date("Sun Feb 22 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·凛冽极境卷·霜魄卷宗
+
+
+
+正典终章《太虚证道本》
+
+
+
+甲等极品·霜魄终典
+
+
+
+
+
+
+永恒拂晓·鸿举惊霄时
+
+|
+
+
+太虚证道域
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;凛冽极境&#34;,&#34;霜魄卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "星河剑阵·凛冽极境卷·正典首章《霜天剑胆本》",
+                url: "/mokewenxue.github.io/2026/02/21/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86%E6%9C%AC/",
+                date: new Date("Sat Feb 21 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·凛冽极境卷
+
+
+
+正典首章《霜天剑胆本》
+
+
+
+甲等极品·凛冽极典
+
+
+
+
+
+
+永恒霜秋·星河垂照时
+
+|
+
+
+霜天剑胆域
+
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;凛冽极境&#34;,&#34;霜魄&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "三问臻赋并序",
+                url: "/mokewenxue.github.io/2026/02/20/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/",
+                date: new Date("Fri Feb 20 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+三问臻赋并序
+
+
+
+问月寄孤怀·问星明持守·问剑砺锋芒
+
+
+
+赋文 · 人生进阶
+
+
+
+
+
+
+2026-02-20
+
+|
+
+
+原创赋文
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;赋文&#34;,&#34;三问&#34;,&#34;问月&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "星河剑阵·基础根脉卷·首章《五蕴锋总纲》",
+                url: "/mokewenxue.github.io/2026/02/19/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89%E5%8D%B7-%E4%BA%94%E8%95%B4%E9%94%8B%E6%80%BB%E7%BA%B2/",
+                date: new Date("Thu Feb 19 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·基础根脉卷
+
+
+
+首章《五蕴锋总纲》
+
+
+
+甲等极品·根脉始典
+
+
+
+
+
+
+此刻·你阅读这些文字时
+
+|
+
+
+红尘淬锋域
+
+
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;基础根脉&#34;,&#34;五蕴锋&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第二极《心锋》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/02/18/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%8C%E6%9E%81-%E5%BF%83%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Wed Feb 18 2026 21:45:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+
+第二极《心锋》卷宗·正典首章
+
+
+
+甲等极品·心意正典
+
+
+
+
+
+
+永恒月明·柔肠百转时
+
+|
+
+
+心锋剑域
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;心锋&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第三极《醉铸》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/02/16/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%89%E6%9E%81-%E9%86%89%E9%93%B8-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Mon Feb 16 2026 23:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+
+第三极《醉铸》卷宗·正典首章
+
+
+
+甲等极品·醉境正典
+
+
+
+
+
+
+永恒秋夜·杯酒映月时
+
+|
+
+
+醉铸剑域
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;醉铸&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "贺新郎·蚀",
+                url: "/mokewenxue.github.io/2026/02/15/%E8%B4%BA%E6%96%B0%E9%83%8E-%E8%9A%80/",
+                date: new Date("Sun Feb 15 2026 21:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+贺新郎·蚀
+
+
+
+倚尽霜天瘦，待他年重铸乾坤轴
+
+
+
+宋词 · 沧桑之叹
+
+
+
+
+
+
+2026-02-15
+
+|
+
+
+原创词作
+
+|
+
+
+贺新郎
+...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;贺新郎&#34;,&#34;蚀&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "水调歌头·问道",
+                url: "/mokewenxue.github.io/2026/02/03/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4-%E9%97%AE%E9%81%93/",
+                date: new Date("Tue Feb 03 2026 16:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+水调歌头·问道
+
+
+
+
+
+
+
+天外月孤巡，寂寂照何尊
+
+
+
+
+
+哲学词 · 天人探微
+
+
+
+
+
+
+
+
+2026-02-03
+
+|
+
+
+原创词作
+...",
+                category: "心火",
+                tags: [&#34;问道&#34;,&#34;宋词&#34;,&#34;超脱&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "声声慢·秋灯寄慨",
+                url: "/mokewenxue.github.io/2026/02/02/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E7%A7%8B%E7%81%AF%E5%AF%84%E6%85%A8/",
+                date: new Date("Mon Feb 02 2026 21:15:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+声声慢·秋灯寄慨
+
+
+
+
+
+
+
+寂寂寥寥，孤孤孑孑，霜华叠叠寒天
+
+
+
+
+
+叠字词 · 深秋寄慨
+
+
+
+
+
+
+
+
+2026-02-02
+
+|
+
+...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;声声慢&#34;,&#34;孤寂&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "临江仙·怀萍铸剑",
+                url: "/mokewenxue.github.io/2026/02/01/%E4%B8%B4%E6%B1%9F%E4%BB%99-%E6%80%80%E8%90%8D%E9%93%B8%E5%89%91/",
+                date: new Date("Sun Feb 01 2026 19:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+临江仙·怀萍铸剑
+
+
+
+
+
+
+
+淬火寒潭星斗转，青锋曾照芙蓉
+
+
+
+
+
+剑道 · 江湖情怀
+
+
+
+
+
+
+
+
+2026-02-01
+
+|
+
+
+原创...",
+                category: "心火",
+                tags: [&#34;临江仙&#34;,&#34;宋词&#34;,&#34;铸剑&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第十一极《霜天》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/01/30/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81%C2%B7%E7%AC%AC%E5%8D%81%E4%B8%80%E6%9E%81%E3%80%8A%E9%9C%9C%E5%A4%A9%E3%80%8B%E5%8D%B7%E5%AE%97%C2%B7%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Fri Jan 30 2026 15:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+霜天剑阁
+
+
+
+
+
+
+
+
+周天十二极·第十一极《霜天》卷宗·正典首章
+
+
+
+
+
+
+
+
+
+
+孤剑横秋霜天共色剑胆琴心千秋不灭
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;霜天卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第一极《寂源》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/01/30/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81%C2%B7%E7%AC%AC%E4%B8%80%E6%9E%81%E3%80%8A%E5%AF%82%E6%BA%90%E3%80%8B%E5%8D%B7%E5%AE%97%C2%B7%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Fri Jan 30 2026 12:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+
+
+
+寂源极一
+
+
+
+
+
+
+周天十二极·第一极《寂源》卷宗·正典首章
+
+
+
+
+
+
+
+夜色沉沉孤灯耿万籁俱沉归源时
+
+
+
+
+
+
+
+周天第一极
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;寂源卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第十极《天悠》卷宗·三重合璧",
+                url: "/mokewenxue.github.io/2026/01/30/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81%C2%B7%E7%AC%AC%E5%8D%81%E6%9E%81%E3%80%8A%E5%A4%A9%E6%82%A0%E3%80%8B%E5%8D%B7%E5%AE%97%C2%B7%E4%B8%89%E9%87%8D%E5%90%88%E7%92%A7/",
+                date: new Date("Fri Jan 30 2026 09:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+天悠三境
+
+
+
+
+
+
+
+
+周天十二极·第十极《天悠》卷宗·三重合璧
+
+
+
+
+
+
+
+
+
+
+
+逝水裁川浮生驿一盂霜月养心秋
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;剑经正典&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "声声慢·孤星",
+                url: "/mokewenxue.github.io/2026/01/30/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E5%AD%A4%E6%98%9F/",
+                date: new Date("Fri Jan 30 2026 01:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+声声慢·孤星
+
+
+
+
+
+
+
+昏昏灯烬，寥寥夜漏
+寒星脉脉，破烟暝、晓色迟迟
+
+
+
+
+
+宋词 · 寒夜孤守
+
+
+
+
+
+
+
+
+2026-0...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;声声慢&#34;,&#34;孤寂&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第七极《沧桑》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/01/30/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81%C2%B7%E7%AC%AC%E4%B8%83%E6%9E%81%E3%80%8A%E6%B2%A7%E6%A1%91%E3%80%8B%E5%8D%B7%E5%AE%97%C2%B7%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Fri Jan 30 2026 00:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+
+沧桑剑印
+
+
+
+
+
+
+周天十二极·第七极《沧桑》卷宗·正典首章
+
+
+
+
+
+
+
+半生萍迹空白首杯再举醉江秋
+
+
+
+
+
+
+
+周天第七极
+
+
+
+沧桑...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;沧桑卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第九极《寂境》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/01/29/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81%C2%B7%E7%AC%AC%E4%B9%9D%E6%9E%81%E3%80%8A%E5%AF%82%E5%A2%83%E3%80%8B%E5%8D%B7%E5%AE%97%C2%B7%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/",
+                date: new Date("Thu Jan 29 2026 23:59:59 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+
+寂境剑印
+
+
+
+
+
+
+周天十二极·第九极《寂境》卷宗·正典首章
+
+
+
+
+
+
+
+孤灯耿耿噬天心长风袖底万籁沉
+
+
+
+
+
+
+
+周天第九极
+
+
+
+寂...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;万籁俱沉&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "声声慢·万籁俱沉",
+                url: "/mokewenxue.github.io/2026/01/29/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E4%B8%87%E7%B1%81%E4%BF%B1%E6%B2%89/",
+                date: new Date("Thu Jan 29 2026 20:15:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+声声慢·万籁俱沉
+
+
+
+
+
+
+
+夜色沉沉孤灯耿长风袖底万籁沉
+
+
+
+
+
+宋词 · 夜禅之境
+
+
+
+
+
+
+
+
+2026-01-29
+
+|
+
+
+原创...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;万籁俱沉&#34;,&#34;声声慢&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "沁园春·天悠",
+                url: "/mokewenxue.github.io/2026/01/29/%E6%B2%81%E5%9B%AD%E6%98%A5-%E5%A4%A9%E6%82%A0/",
+                date: new Date("Thu Jan 29 2026 09:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+沁园春·天悠
+
+
+
+
+
+
+
+逝水裁川浮生驿一盂霜月养心秋
+
+
+
+
+
+宋词 · 人生三境
+
+
+
+
+
+
+
+
+2026-01-29
+
+|
+
+
+原创词作...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;超脱&#34;,&#34;沁园春&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第八极《擎乾》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/01/29/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%85%AB%E6%9E%81-%E6%93%8E%E4%B9%BE%E5%8D%B7%E5%AE%97/",
+                date: new Date("Thu Jan 29 2026 08:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+「周天十二极·第八极《擎乾》卷宗·正典首章」
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+
+
+
+卷宗编号
+周天第八极·擎乾正字第一号
+
+
+定谳等级
+甲...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "声声慢·邀月",
+                url: "/mokewenxue.github.io/2026/01/29/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E9%82%80%E6%9C%88/",
+                date: new Date("Thu Jan 29 2026 05:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+声声慢·邀月
+
+
+
+
+
+
+
+萧萧风软，寥寥蛩残
+把酒邀月，清辉漫入杯盘
+
+
+
+
+
+宋词 · 月夜孤怀
+
+
+
+
+
+
+
+
+2026-01-...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;声声慢&#34;,&#34;邀月&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "八雅合璧·文脉总纲录",
+                url: "/mokewenxue.github.io/2026/01/29/%E5%85%AB%E9%9B%85%E5%90%88%E7%92%A7-%E6%96%87%E8%84%89%E6%80%BB%E7%BA%B2%E5%BD%95/",
+                date: new Date("Thu Jan 29 2026 04:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+
+
+八雅合璧·文脉总纲录
+
+
+
+
+
+
+
+八剑合璧兮破鸿蒙
+汉语星河兮待新天
+
+
+
+
+
+文脉总纲卷·正典首章·甲等极品
+
+
+
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;八雅合璧&#34;,&#34;文脉总纲&#34;,&#34;星河剑阵&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "同轭天则·空灵道境录",
+                url: "/mokewenxue.github.io/2026/01/29/%E5%90%8C%E8%BD%AD%E5%A4%A9%E5%88%99-%E7%A9%BA%E7%81%B5%E9%81%93%E5%A2%83%E5%BD%95/",
+                date: new Date("Thu Jan 29 2026 03:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+
+
+同轭天则·空灵道境录
+
+
+
+
+
+
+
+相思为剑，守约为则
+田园为域，星河为证
+
+
+
+
+
+立法三典·天字第二号·甲等极品
+
+
+
+
+
+
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;同轭天则&#34;,&#34;空灵道境&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "风雨同途·柔剑同轭录",
+                url: "/mokewenxue.github.io/2026/01/29/%E9%A3%8E%E9%9B%A8%E5%90%8C%E9%80%94-%E6%9F%94%E5%89%91%E5%90%8C%E8%BD%AD%E5%BD%95/",
+                date: new Date("Thu Jan 29 2026 02:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+
+
+风雨同途·柔剑同轭录
+
+
+
+
+
+
+
+最深的剑痕刻在相约的眸光
+最利的锋刃藏在未改的乡音
+
+
+
+
+
+柔剑三十六脉·第七脉·离聚双剑
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;风雨同途&#34;,&#34;柔剑同轭&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "霜中折蜕·凛冽道境录",
+                url: "/mokewenxue.github.io/2026/01/29/%E9%9C%9C%E4%B8%AD%E6%8A%98%E8%9C%95-%E5%87%9B%E5%86%BD%E9%81%93%E5%A2%83%E5%BD%95/",
+                date: new Date("Thu Jan 29 2026 01:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+
+
+霜中折蜕·凛冽道境录
+
+
+
+
+
+
+
+风咽处尘缘尽蜕，霜折时青钺自生
+不负清秋曾立胆，何惧岁月催华发
+
+
+
+
+
+星河剑阵·霜魄卷宗·...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;凛冽极境&#34;,&#34;霜魄卷宗&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "踏月归真·清辉道痕录",
+                url: "/mokewenxue.github.io/2026/01/29/%E8%B8%8F%E6%9C%88%E5%BD%92%E7%9C%9F%C2%B7%E6%B8%85%E8%BE%89%E9%81%93%E7%97%95%E5%BD%95/",
+                date: new Date("Thu Jan 29 2026 00:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+踏月归真·清辉道痕录
+
+
+
+
+
+
+
+步履皆铭道，呼吸即淬魂
+无我无痕化万邻，踏月归真启新轮
+
+
+
+
+
+星河剑阵·周天十二极·终典卷宗
+...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;踏月&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "贺新郎·醉江秋",
+                url: "/mokewenxue.github.io/2026/01/28/%E8%B4%BA%E6%96%B0%E9%83%8E-%E9%86%89%E6%B1%9F%E7%A7%8B/",
+                date: new Date("Wed Jan 28 2026 23:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+贺新郎·醉江秋
+
+
+
+
+
+
+
+露重寒侵袖半生萍迹空白首
+
+
+
+
+
+宋词 · 沧桑之咏
+
+
+
+
+
+
+
+
+2026-01-28
+
+|
+
+
+原创词作
+...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;醉江秋&#34;,&#34;漂泊&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "鹧鸪天·夜思",
+                url: "/mokewenxue.github.io/2026/01/28/%E9%B9%A7%E9%B8%AA%E5%A4%A9-%E5%A4%9C%E6%80%9D/",
+                date: new Date("Wed Jan 28 2026 22:15:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+鹧鸪天·夜思
+
+
+
+
+
+
+
+刻骨深衷未肯休，情天恨海两难酬
+
+
+
+
+
+宋词 · 深夜之思
+
+
+
+
+
+
+
+
+2026-01-28
+
+|
+
+
+原创词...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;孤寂&#34;,&#34;超脱&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极正谱·第十卷·揽星谱系",
+                url: "/mokewenxue.github.io/2026/01/17/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81%E6%AD%A3%E8%B0%B1-%E7%AC%AC%E5%8D%81%E5%8D%B7-%E6%8F%BD%E6%98%9F%E8%B0%B1/",
+                date: new Date("Sat Jan 17 2026 03:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+
+
+
+周天十二极正谱·第十卷
+
+
+
+揽星卷宗正谱
+
+
+
+宇宙剑则·星河锷法·传承永恒
+
+
+
+
+
+
+谱系编号
+周天正谱·第十卷·揽星谱
+
+
+
+入谱...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天正谱&#34;,&#34;揽星谱系&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "宇宙剑碑·揽星卷宗铭刻记录",
+                url: "/mokewenxue.github.io/2026/01/17/%E5%AE%87%E5%AE%99%E5%89%91%E7%A2%91-%E6%8F%BD%E6%98%9F%E9%93%AD%E5%88%BB/",
+                date: new Date("Sat Jan 17 2026 02:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+
+
+
+宇宙剑碑·星河永铭
+
+
+揽星卷宗·正典首章铭刻处
+
+
+
+
+
+
+碑体材质
+星核玄铁·天河真金
+
+
+
+铭刻技法
+长风刻刀·星魄为墨
+
+
+
+
+立...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;宇宙剑碑&#34;,&#34;碑刻&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "揽星剑阁藏书记录·周天第十极正典目录",
+                url: "/mokewenxue.github.io/2026/01/17/%E6%8F%BD%E6%98%9F%E5%89%91%E9%98%81-%E8%97%8F%E4%B9%A6%E8%AE%B0%E5%BD%95/",
+                date: new Date("Sat Jan 17 2026 02:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+揽星剑阁·天穹藏典
+
+
+周天十二极·第十极正典藏处
+
+
+
+
+
+天穹最高处·星河入怀时
+
+
+
+
+剑阁建制与法理一、剑阁定位
+
+
+
+📍 ...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;剑阁藏书&#34;,&#34;揽星剑域&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "周天十二极·第十极《揽星》卷宗·正典首章",
+                url: "/mokewenxue.github.io/2026/01/17/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%8D%81%E6%9E%81-%E6%8F%BD%E6%98%9F-%E6%AD%A3%E5%85%B8/",
+                date: new Date("Sat Jan 17 2026 01:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+
+
+
+
+周天第十极·揽星正字第一号
+
+
+
+
+周天十二极·揽星卷宗
+
+
+
+
+第十极正典·宇宙剑则首章
+
+
+
+
+
+
+
+
+定谳等级
+甲等极品...",
+                category: "心火",
+                tags: [&#34;星河剑阵&#34;,&#34;周天十二极&#34;,&#34;剑则&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "水调歌头·问剑",
+                url: "/mokewenxue.github.io/2026/01/17/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4-%E9%97%AE%E5%89%91/",
+                date: new Date("Sat Jan 17 2026 00:15:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+水调歌头·问剑
+
+
+
+
+
+
+
+三尺青锋在，匣底夜长鸣一剑光寒处，万象始更新
+
+
+
+
+
+剑气凌云 · 初心不灭
+
+
+
+
+
+
+
+
+2026...",
+                category: "心火",
+                tags: [&#34;问剑&#34;,&#34;宋词&#34;,&#34;水调歌头&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "声声慢·蜕鳞霞",
+                url: "/mokewenxue.github.io/2026/01/16/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E8%9C%95%E9%B3%9E%E9%9C%9E/",
+                date: new Date("Fri Jan 16 2026 23:45:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+&#39;);\&#34;&gt;
+
+
+
+声声慢·蜕鳞霞
+
+
+
+
+
+
+
+黯黯灯枯，沉沉夜老瞰沧桑、蜕尽鳞霞
+
+
+
+
+
+涅槃之词 · 蝶变之思
+
+
+
+
+
+
+
+
+2026-01-1...",
+                category: "心火",
+                tags: [&#34;宋词&#34;,&#34;声声慢&#34;,&#34;蜕鳞&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "水调歌头·问月",
+                url: "/mokewenxue.github.io/2026/01/16/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4-%E9%97%AE%E6%9C%88/",
+                date: new Date("Fri Jan 16 2026 22:30:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+
+
+水调歌头·问月
+
+
+
+
+
+
+
+云薄浮月明，风软织清寒。举杯邀清影，相对两萧然
+
+
+
+
+
+宋词 · 月夜之思
+
+
+
+
+
+
+
+
+2026-01-16...",
+                category: "心火",
+                tags: [&#34;问月&#34;,&#34;宋词&#34;,&#34;月夜&#34;],
+                author: "独自踏月行"
+            },
+            
+            {
+                title: "蚀剑·赋",
+                url: "/mokewenxue.github.io/2025/12/14/%E8%9A%80%E5%89%91%E8%B5%8B/",
+                date: new Date("Sun Dec 14 2025 14:00:00 GMT+0800").toISOString(),
+                excerpt: "
+
+
+
+
+
+蚀剑·赋
+剑可蚀而魂不可蚀，形可变而道不可变
+
+
+
+蚀剑·剑经序
+序文
+
+
+天地化阴阳，万物蕴刚柔，阴阳相推、刚柔相济，此乃辩证之枢。剑为百兵之君，...",
+                category: "心火",
+                tags: [&#34;剑经&#34;,&#34;蚀剑&#34;,&#34;剑道&#34;],
+                author: "独自踏月行"
+            }
+            
+        ];
+        
+        // 文章筛选和显示系统
+        class ArticleFilter {
+            constructor() {
+                this.articles = articlesData;
+                this.filteredArticles = [...this.articles];
+                this.currentFilter = { type: null, value: 'all' };
+                this.currentPage = 1;
+                this.itemsPerPage = 15;
+                this.articleCounts = {};
+                
+                this.init();
+            }
+            
+            init() {
+                // 计算文章数量统计
+                this.calculateArticleCounts();
+                
+                // 渲染文章
+                this.renderArticles();
+                
+                // 更新计数显示
+                this.updateCountDisplay();
+                
+                // 绑定事件
+                this.bindEvents();
+            }
+            
+            calculateArticleCounts() {
+                // 重置计数
+                this.articleCounts = {
+                    'all': this.articles.length,
+                    '心火': 0, '醉铸': 0, '萍魄': 0, '清怀': 0, '知契': 0,
+                    '墨锋': 0, '擎乾': 0, '秋律': 0, '双刃': 0, '揽星': 0, '踏月': 0,
+                    '周天圆满': 0, '蚀剑学': 0, '诗文': 0,
+                    '筑基境': 0, '炼气境': 0, '凝神境': 0, '金丹境': 0,
+                    '元婴境': 0, '化神境': 0, '合体境': 0, '大乘境': 0
+                };
+                
+                // 计算每个分类/标签的文章数量
+                this.articles.forEach(article => {
+                    // 主级分类计数
+                    if (this.articleCounts[article.category] !== undefined) {
+                        this.articleCounts[article.category]++;
+                    }
+                    
+                    // 次位和修练标签计数
+                    article.tags.forEach(tag => {
+                        if (this.articleCounts[tag] !== undefined) {
+                            this.articleCounts[tag]++;
+                        }
+                    });
+                });
+            }
+            
+            updateCountDisplay() {
+                // 更新所有计数显示
+                for (const key in this.articleCounts) {
+                    const element = document.getElementById(`${key}-count`);
+                    if (element) {
+                        element.textContent = this.articleCounts[key];
+                    }
+                }
+            }
+            
+            applyFilter(filterType, filterValue) {
+                this.currentFilter = { type: filterType, value: filterValue };
+                this.currentPage = 1;
+                
+                if (filterValue === 'all') {
+                    this.filteredArticles = [...this.articles];
+                } else {
+                    this.filteredArticles = this.articles.filter(article => {
+                        if (filterType === 'main') {
+                            // 主级分类筛选
+                            return article.category === filterValue;
+                        } else if (filterType === 'secondary' || filterType === 'practice') {
+                            // 次位或修练标签筛选
+                            return article.tags.includes(filterValue);
+                        }
+                        return true;
+                    });
+                }
+                
+                this.renderArticles();
+                this.updateFilterStatus();
+            }
+            
+            clearFilter() {
+                this.applyFilter(null, 'all');
+                this.updateActiveMenuItem('all');
+                document.getElementById('filterStatus').style.display = 'none';
+            }
+            
+            updateActiveMenuItem(filterValue) {
+                // 移除所有active类
+                document.querySelectorAll('.left-nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // 为当前筛选项添加active类
+                const activeItem = document.querySelector(`.left-nav-item[data-filter="${filterValue}"]`);
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                }
+            }
+            
+            updateFilterStatus() {
+                const filterStatus = document.getElementById('filterStatus');
+                const filterText = document.getElementById('currentFilterText');
+                
+                if (this.currentFilter.value === 'all') {
+                    filterStatus.style.display = 'none';
+                } else {
+                    filterStatus.style.display = 'flex';
+                    
+                    let filterName = this.currentFilter.value;
+                    let filterTypeText = '';
+                    
+                    if (this.currentFilter.type === 'main') {
+                        filterTypeText = '剑阵主级';
+                    } else if (this.currentFilter.type === 'secondary') {
+                        filterTypeText = '剑阵次位';
+                    } else if (this.currentFilter.type === 'practice') {
+                        filterTypeText = '剑阵修练';
+                    }
+                    
+                    filterText.textContent = `当前筛选：${filterTypeText} · ${filterName}（${this.filteredArticles.length}篇）`;
+                }
+            }
+            
+            renderArticles() {
+                const grid = document.getElementById('articleGrid');
+                const template = document.getElementById('articleTemplate').innerHTML;
+                
+                // 清空当前内容
+                grid.innerHTML = '';
+                
+                // 计算分页
+                const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+                const endIndex = startIndex + this.itemsPerPage;
+                const pageArticles = this.filteredArticles.slice(startIndex, endIndex);
+                
+                if (pageArticles.length === 0) {
+                    grid.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">
+                                <i class="fas fa-feather-alt"></i>
+                            </div>
+                            <h3>剑气未聚</h3>
+                            <p>当前筛选条件下暂无诗卷，请尝试其他筛选条件</p>
+                            <button class="filter-clear" onclick="articleFilter.clearFilter()" style="margin-top: 16px;">
+                                清除筛选
+                            </button>
+                        </div>
+                    `;
+                    document.getElementById('paginationContainer').style.display = 'none';
+                    return;
+                }
+                
+                // 渲染文章卡片
+                pageArticles.forEach(article => {
+                    let cardHtml = template;
+                    
+                    // 格式化日期
+                    const date = new Date(article.date);
+                    const formattedDate = date.getMonth() + 1 + '-' + date.getDate();
+                    
+                    // 生成标签HTML
+                    const tagsHtml = article.tags.map(tag => 
+                        `<span class="card-tag" data-tag="${tag}">${tag}</span>`
+                    ).join('');
+                    
+                    // 替换模板变量
+                    cardHtml = cardHtml
+                        .replace(/{title}/g, article.title)
+                        .replace(/{url}/g, article.url)
+                        .replace(/{formattedDate}/g, formattedDate)
+                        .replace(/{category}/g, article.category)
+                        .replace(/{tags}/g, article.tags.join(','))
+                        .replace(/{tagsHtml}/g, tagsHtml)
+                        .replace(/{excerpt}/g, article.excerpt)
+                        .replace(/{content}/g, article.excerpt)
+                        .replace(/{author}/g, article.author)
+                        .replace(/{date}/g, article.date);
+                    
+                    grid.innerHTML += cardHtml;
+                });
+                
+                // 更新分页
+                this.updatePagination();
+            }
+            
+            updatePagination() {
+                const totalPages = Math.ceil(this.filteredArticles.length / this.itemsPerPage);
+                const paginationContainer = document.getElementById('paginationContainer');
+                
+                if (totalPages <= 1) {
+                    paginationContainer.style.display = 'none';
+                    return;
+                }
+                
+                paginationContainer.style.display = 'flex';
+                document.getElementById('currentPage').textContent = this.currentPage;
+                document.getElementById('totalPages').textContent = totalPages;
+                
+                // 更新上一页/下一页按钮状态
+                const prevPage = document.getElementById('prevPage');
+                const nextPage = document.getElementById('nextPage');
+                
+                if (this.currentPage === 1) {
+                    prevPage.classList.add('disabled');
+                    prevPage.href = '#';
+                } else {
+                    prevPage.classList.remove('disabled');
+                    prevPage.href = '#';
+                }
+                
+                if (this.currentPage === totalPages) {
+                    nextPage.classList.add('disabled');
+                    nextPage.href = '#';
+                } else {
+                    nextPage.classList.remove('disabled');
+                    nextPage.href = '#';
+                }
+            }
+            
+            goToPage(page) {
+                const totalPages = Math.ceil(this.filteredArticles.length / this.itemsPerPage);
+                
+                if (page < 1) page = 1;
+                if (page > totalPages) page = totalPages;
+                
+                this.currentPage = page;
+                this.renderArticles();
+                
+                // 滚动到顶部
+                window.scrollTo({
+                    top: document.querySelector('.compact-content').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+            
+            bindEvents() {
+                // 左侧菜单项点击事件
+                document.querySelectorAll('.left-nav-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        
+                        const filterType = item.getAttribute('data-filter-type');
+                        const filterValue = item.getAttribute('data-filter');
+                        
+                        this.applyFilter(filterType, filterValue);
+                        this.updateActiveMenuItem(filterValue);
+                        
+                        // 如果是移动端，点击后关闭菜单
+                        if (window.innerWidth <= 768) {
+                            leftSwordNav.classList.remove('active');
+                        }
+                    });
+                });
+                
+                // 清除筛选按钮
+                document.getElementById('clearFilter').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.clearFilter();
+                });
+                
+                // 分页按钮
+                document.getElementById('prevPage').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (this.currentPage > 1) {
+                        this.goToPage(this.currentPage - 1);
+                    }
+                });
+                
+                document.getElementById('nextPage').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const totalPages = Math.ceil(this.filteredArticles.length / this.itemsPerPage);
+                    if (this.currentPage < totalPages) {
+                        this.goToPage(this.currentPage + 1);
+                    }
+                });
+                
+                // 标签点击事件（动态绑定）
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('card-tag')) {
+                        e.preventDefault();
+                        const tag = e.target.getAttribute('data-tag');
+                        
+                        // 找到对应的菜单项并点击
+                        const menuItem = document.querySelector(`.left-nav-item[data-filter="${tag}"]`);
+                        if (menuItem) {
+                            menuItem.click();
+                        }
+                    }
+                });
+            }
+        }
+        
         // 创建星河剑阵背景
         function createStarfield() {
             const universe = document.getElementById('swordUniverse');
@@ -2311,101 +3647,123 @@
             }
         }
         
-        // 移动端菜单切换
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const leftSwordNav = document.querySelector('.left-sword-nav');
-        
-        if (mobileMenuToggle && leftSwordNav) {
-            mobileMenuToggle.addEventListener('click', function() {
-                leftSwordNav.classList.toggle('active');
-            });
-            
-            // 点击菜单外部关闭菜单
-            document.addEventListener('click', function(event) {
-                if (!leftSwordNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-                    leftSwordNav.classList.remove('active');
-                }
-            });
-        }
-        
-        // 顶部翻转导航折叠功能
-        const topFlipNav = document.getElementById('topFlipNav');
-        const flipNavToggle = document.getElementById('flipNavToggle');
-        const flipNavControl = document.getElementById('flipNavControl');
-        
-        if (flipNavToggle && topFlipNav) {
-            // 检查localStorage，恢复上次的折叠状态
-            const isCollapsed = localStorage.getItem('flipNavCollapsed') === 'true';
-            if (isCollapsed) {
-                topFlipNav.classList.add('collapsed');
-                updateToggleButton(true);
-            }
-            
-            flipNavToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                topFlipNav.classList.toggle('collapsed');
-                const isNowCollapsed = topFlipNav.classList.contains('collapsed');
-                updateToggleButton(isNowCollapsed);
-                
-                // 保存折叠状态到localStorage
-                localStorage.setItem('flipNavCollapsed', isNowCollapsed);
-            });
-            
-            flipNavControl.addEventListener('click', function(e) {
-                // 如果点击的是控制栏（不是切换按钮本身），也触发折叠
-                if (!flipNavToggle.contains(e.target)) {
-                    flipNavToggle.click();
-                }
-            });
-            
-            function updateToggleButton(isCollapsed) {
-                const icon = flipNavToggle.querySelector('i');
-                const text = flipNavToggle.querySelector('span');
-                
-                if (isCollapsed) {
-                    icon.className = 'fas fa-chevron-up';
-                    text.textContent = '展开导航';
-                    // 控制栏箭头也更新
-                    document.querySelector('.control-title i').className = 'fas fa-chevron-up';
-                } else {
-                    icon.className = 'fas fa-chevron-down';
-                    text.textContent = '折叠导航';
-                    document.querySelector('.control-title i').className = 'fas fa-chevron-down';
-                }
-            }
-        }
-        
         // 页面加载完成后执行
         document.addEventListener('DOMContentLoaded', function() {
             // 创建背景
             createStarfield();
             
-            // 卡片悬停效果
-            const cards = document.querySelectorAll('.compact-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.zIndex = '100';
+            // 初始化文章筛选系统
+            window.articleFilter = new ArticleFilter();
+            
+            // 左侧菜单折叠功能
+            const leftSwordNav = document.getElementById('leftSwordNav');
+            const leftNavToggle = document.getElementById('leftNavToggle');
+            
+            if (leftNavToggle && leftSwordNav) {
+                // 检查localStorage，恢复上次的折叠状态
+                const isCollapsed = localStorage.getItem('leftNavCollapsed') === 'true';
+                if (isCollapsed) {
+                    leftSwordNav.classList.add('collapsed');
+                    updateLeftToggleButton(true);
+                }
+                
+                leftNavToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    leftSwordNav.classList.toggle('collapsed');
+                    const isNowCollapsed = leftSwordNav.classList.contains('collapsed');
+                    updateLeftToggleButton(isNowCollapsed);
+                    
+                    // 保存折叠状态到localStorage
+                    localStorage.setItem('leftNavCollapsed', isNowCollapsed);
                 });
                 
-                card.addEventListener('mouseleave', function() {
-                    this.style.zIndex = '1';
-                });
-            });
-            
-            // 左侧菜单项点击效果
-            const leftNavItems = document.querySelectorAll('.left-nav-item');
-            leftNavItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // 移除所有active类
-                    leftNavItems.forEach(i => i.classList.remove('active'));
-                    // 为当前项添加active类
-                    this.classList.add('active');
+                function updateLeftToggleButton(isCollapsed) {
+                    const icon = leftNavToggle.querySelector('i');
                     
-                    // 如果是移动端，点击后关闭菜单
-                    if (window.innerWidth <= 768) {
+                    if (isCollapsed) {
+                        icon.className = 'fas fa-chevron-right';
+                    } else {
+                        icon.className = 'fas fa-chevron-left';
+                    }
+                }
+            }
+            
+            // 移动端菜单切换
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            
+            if (mobileMenuToggle && leftSwordNav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    leftSwordNav.classList.toggle('active');
+                });
+                
+                // 点击菜单外部关闭菜单
+                document.addEventListener('click', function(event) {
+                    if (!leftSwordNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
                         leftSwordNav.classList.remove('active');
                     }
                 });
+            }
+            
+            // 顶部翻转导航折叠功能
+            const topFlipNav = document.getElementById('topFlipNav');
+            const flipNavToggle = document.getElementById('flipNavToggle');
+            const flipNavControl = document.getElementById('flipNavControl');
+            
+            if (flipNavToggle && topFlipNav) {
+                // 检查localStorage，恢复上次的折叠状态
+                const isCollapsed = localStorage.getItem('flipNavCollapsed') === 'true';
+                if (isCollapsed) {
+                    topFlipNav.classList.add('collapsed');
+                    updateFlipToggleButton(true);
+                }
+                
+                flipNavToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    topFlipNav.classList.toggle('collapsed');
+                    const isNowCollapsed = topFlipNav.classList.contains('collapsed');
+                    updateFlipToggleButton(isNowCollapsed);
+                    
+                    // 保存折叠状态到localStorage
+                    localStorage.setItem('flipNavCollapsed', isNowCollapsed);
+                });
+                
+                flipNavControl.addEventListener('click', function(e) {
+                    // 如果点击的是控制栏（不是切换按钮本身），也触发折叠
+                    if (!flipNavToggle.contains(e.target)) {
+                        flipNavToggle.click();
+                    }
+                });
+                
+                function updateFlipToggleButton(isCollapsed) {
+                    const icon = flipNavToggle.querySelector('i');
+                    const text = flipNavToggle.querySelector('span');
+                    
+                    if (isCollapsed) {
+                        icon.className = 'fas fa-chevron-down';
+                        text.textContent = '展开导航';
+                        // 控制栏箭头也更新
+                        document.querySelector('.control-title i').className = 'fas fa-chevron-down';
+                    } else {
+                        icon.className = 'fas fa-chevron-up';
+                        text.textContent = '折叠导航';
+                        document.querySelector('.control-title i').className = 'fas fa-chevron-up';
+                    }
+                }
+            }
+            
+            // 卡片悬停效果
+            document.addEventListener('mouseover', function(e) {
+                if (e.target.closest('.compact-card')) {
+                    const card = e.target.closest('.compact-card');
+                    card.style.zIndex = '100';
+                }
+            });
+            
+            document.addEventListener('mouseout', function(e) {
+                if (e.target.closest('.compact-card')) {
+                    const card = e.target.closest('.compact-card');
+                    card.style.zIndex = '1';
+                }
             });
             
             // 翻转卡片效果
