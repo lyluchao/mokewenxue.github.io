@@ -2849,31 +2849,21 @@ function filterArticles(filterType, filterValue) {
                 });
             }
             
-          // 绑定标签点击事件 - 确保这部分存在
-articleGrid.addEventListener('click', function(e) {
-    if (e.target.classList.contains('card-tag')) {
-        e.preventDefault();
-        e.stopPropagation(); // 防止事件冒泡
-        
-        const tag = e.target.getAttribute('data-tag') || e.target.textContent;
-        
-        // 找到对应的菜单项并点击
-        const menuItem = document.querySelector(`.left-nav-item[data-filter="${tag}"]`);
-        if (menuItem) {
-            menuItem.click();
-        } else {
-            // 如果没有直接匹配，尝试在二级和修练分类中查找
-            const secondaryItem = document.querySelector(`.left-nav-item[data-filter-type="secondary"][data-filter="${tag}"]`);
-            const practiceItem = document.querySelector(`.left-nav-item[data-filter-type="practice"][data-filter="${tag}"]`);
-            
-            if (secondaryItem) {
-                secondaryItem.click();
-            } else if (practiceItem) {
-                practiceItem.click();
-            }
+            // 绑定标签点击事件
+            articleGrid.addEventListener('click', function(e) {
+                if (e.target.classList.contains('card-tag')) {
+                    e.preventDefault();
+                    const tag = e.target.getAttribute('data-tag');
+                    
+                    // 找到对应的菜单项并点击
+                    const menuItem = document.querySelector(`.left-nav-item[data-filter="${tag}"]`);
+                    if (menuItem) {
+                        menuItem.click();
+                    }
+                }
+            });
         }
-    }
-});        
+        
         // 翻转卡片效果
         function setupFlipCards() {
             const flipCards = document.querySelectorAll('.flip-card');
