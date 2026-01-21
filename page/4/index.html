@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>独自踏月行 | 月下独行的思考空间</title>
+    <title><%= config.title %> | <%= config.subtitle %></title>
     
     <!-- 引入Google字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1051,8 +1051,8 @@
                 <i class="fas fa-crossed-swords"></i>
             </div>
             <div class="brand-text">
-                <div class="left-nav-title">独自踏月行</div>
-                <div class="left-nav-subtitle">月下独行的思考空间</div>
+                <div class="left-nav-title"><%= config.title || '踏月诗阁' %></div>
+                <div class="left-nav-subtitle"><%= config.subtitle || '星河剑阵' %></div>
             </div>
         </div>
         
@@ -1254,7 +1254,7 @@
         
         <div class="left-nav-footer">
             <div class="copyright">
-                © 2026<br>
+                © <%= new Date().getFullYear() %><br>
                 剑气长存<br>
                 墨韵永驻
             </div>
@@ -1285,7 +1285,7 @@
                 
                 <!-- 翻转导航网格 -->
                 <div class="flip-nav-grid">
-                    <a href="/mokewenxue.github.io/archives" class="flip-card-wrapper">
+                    <a href="<%= url_for(config.archive_dir) || 'archives/' %>" class="flip-card-wrapper">
                         <div class="flip-card">
                             <div class="flip-front">
                                 <div class="flip-icon">🗃️</div>
@@ -1299,7 +1299,7 @@
                         </div>
                     </a>
                     
-                    <a href="/mokewenxue.github.io/categories" class="flip-card-wrapper">
+                    <a href="<%= url_for(config.category_dir) || 'categories/' %>" class="flip-card-wrapper">
                         <div class="flip-card">
                             <div class="flip-front">
                                 <div class="flip-icon">🏛️</div>
@@ -1313,7 +1313,7 @@
                         </div>
                     </a>
                     
-                    <a href="/mokewenxue.github.io/tags" class="flip-card-wrapper">
+                    <a href="<%= url_for(config.tag_dir) || 'tags/' %>" class="flip-card-wrapper">
                         <div class="flip-card">
                             <div class="flip-front">
                                 <div class="flip-icon">🏷️</div>
@@ -1327,7 +1327,7 @@
                         </div>
                     </a>
                     
-                    <a href="/mokewenxue.github.io/about/" class="flip-card-wrapper">
+                    <a href="<%= url_for('about/') %>" class="flip-card-wrapper">
                         <div class="flip-card">
                             <div class="flip-front">
                                 <div class="flip-icon">📖</div>
@@ -1363,1125 +1363,244 @@
             
             <!-- 紧凑诗卷网格 -->
             <div class="compact-grid" id="articleGrid">
+                <% 
+                // 安全获取文章数据
+                function getSafePosts() {
+                    try {
+                        if (typeof site !== 'undefined' && site.posts) {
+                            return site.posts.sort('date', -1).limit(15).toArray();
+                        } else if (typeof page !== 'undefined' && page.posts) {
+                            if (typeof page.posts.toArray === 'function') {
+                                return page.posts.toArray();
+                            } else if (Array.isArray(page.posts)) {
+                                return page.posts;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn('获取文章失败:', e);
+                    }
+                    return [];
+                }
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,萍魄卷宗">
+                const posts = getSafePosts();
+                
+                if (posts.length === 0) {
+                    // 没有文章时的占位符
+                    for (let i = 0; i < 10; i++) {
+                        const categories = ['心火', '醉铸', '萍魄', '清怀', '知契', '墨锋', '擎乾', '秋律', '双刃', '揽星', '踏月'];
+                        const tagsList = ['蚀剑学', '诗文', '筑基境', '炼气境', '凝神境', '金丹境', '元婴境', '化神境', '合体境', '大乘境'];
+                        const category = categories[Math.floor(Math.random() * categories.length)];
+                        const tags = [tagsList[Math.floor(Math.random() * tagsList.length)], tagsList[Math.floor(Math.random() * tagsList.length)]];
+                %>
+                    <article class="compact-card" data-category="<%= category %>" data-tags="<%= tags.join(',') %>">
                         <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    6-20
-                                </div>
-                            
-                            <span class="card-category">心火</span>
+                            <div class="card-date">
+                                <i class="far fa-calendar-alt"></i>
+                                等待归位
+                            </div>
+                            <span class="card-category"><%= category %></span>
                         </div>
                         
                         <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第四极《萍魄》卷宗·正典首章》</a>
+                            <a href="#">《待铸剑卷<%= i + 1 %>》</a>
                         </h3>
                         
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="周天十二极">周天十二极</span>
-                                
-                                    <span class="card-tag" data-tag="萍魄卷宗">萍魄卷宗</span>
-                                
-                            </div>
-                        
+                        <div class="card-tags">
+                            <% tags.forEach(tag => { %>
+                                <span class="card-tag"><%= tag %></span>
+                            <% }) %>
+                        </div>
                         
                         <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·周天十二极卷宗
-
-
-第四极《萍魄》卷宗·正典首章
-
-
-
-惊鸿锻雾锋，初逢即开刃天地皆炉冶，痕过魂自臻
-
-
-
-甲等极品·缘法正典
-
-
-
-
-...
+                            剑气正在凝聚，诗魂即将归位。等待创作中...
                         </div>
                         
                         <div class="card-footer">
                             <div class="card-author">
                                 <i class="fas fa-user"></i>
-                                独自踏月行
+                                <%= config.author || '剑阁主人' %>
                             </div>
-                            <a href="/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
+                            <a href="#" class="read-btn">
                                 阅读 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="孤影,三绝赋,清辉">
+                <%
+                    }
+                } else {
+                    // 显示实际文章
+                    posts.forEach((post, index) => {
+                        const title = post.title || '无题';
+                        const url = post.path || '#';
+                        const date = post.date || new Date();
+                        
+                        // 处理内容
+                        let excerpt = '';
+                        try {
+                            excerpt = post.excerpt || post.content || '';
+                            // 移除HTML标签
+                            excerpt = excerpt.replace(/<[^>]+>/g, '');
+                            // 移除Markdown标记
+                            excerpt = excerpt.replace(/[#*`\[\]!]/g, '');
+                            // 截断
+                            if (excerpt.length > 80) {
+                                excerpt = excerpt.substring(0, 80) + '...';
+                            }
+                        } catch (e) {
+                            excerpt = '剑气凝聚中...';
+                        }
+                        
+                        // 格式化日期
+                        let formattedDate = '';
+                        try {
+                            const d = new Date(date);
+                            formattedDate = d.getMonth() + 1 + '-' + d.getDate();
+                        } catch (e) {
+                            formattedDate = '';
+                        }
+                        
+   // 获取分类 - 修改这部分
+let category = '心火';
+try {
+    // 优先使用剑阵主级字段
+    if (post['剑阵主级']) {
+        category = post['剑阵主级'];
+    } else if (post.main_category) {
+        category = post.main_category;
+    } else if (post.categories && post.categories.length > 0) {
+        // 取第一个分类
+        if (typeof post.categories[0] === 'string') {
+            category = post.categories[0];
+        } else if (post.categories[0].name) {
+            category = post.categories[0].name;
+        } else if (post.categories.data && post.categories.data[0].name) {
+            category = post.categories.data[0].name;
+        }
+    }
+} catch (e) {
+    category = '心火';
+}                      
+                        // 获取标签
+                        let tags = [];
+                        try {
+                            if (post.tags && post.tags.length > 0) {
+                                tags = post.tags.slice(0, 3).map(tag => tag.name || tag);
+                            } else if (post.tags && post.tags.data) {
+                                tags = post.tags.data.slice(0, 3).map(tag => tag.name || tag);
+                            }
+                        } catch (e) {
+                            tags = ['蚀剑学', '诗文'];
+                        }
+                        
+                        // 确保标签数组
+                        if (!Array.isArray(tags) || tags.length === 0) {
+                            tags = ['蚀剑学', '诗文'];
+                        }
+                %>
+                    <article class="compact-card" data-category="<%= category %>" data-tags="<%= tags.join(',') %>">
                         <div class="card-header">
-                            
+                            <% if (formattedDate) { %>
                                 <div class="card-date">
                                     <i class="far fa-calendar-alt"></i>
-                                    6-15
+                                    <%= formattedDate %>
                                 </div>
-                            
-                            <span class="card-category">心火</span>
+                            <% } else { %>
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    待定
+                                </div>
+                            <% } %>
+                            <span class="card-category"><%= category %></span>
                         </div>
                         
                         <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/">《孤影清辉三绝赋》</a>
+                            <a href="<%= url_for(url) %>">《<%= title %>》</a>
                         </h3>
                         
-                        
+                        <% if (tags.length > 0) { %>
                             <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="孤影">孤影</span>
-                                
-                                    <span class="card-tag" data-tag="三绝赋">三绝赋</span>
-                                
-                                    <span class="card-tag" data-tag="清辉">清辉</span>
-                                
+                                <% tags.forEach(tag => { %>
+                                    <span class="card-tag" data-tag="<%= tag %>"><%= tag %></span>
+                                <% }) %>
                             </div>
-                        
+                        <% } %>
                         
                         <div class="card-excerpt">
-                            
-
-
-
-
-
-
-孤影清辉三绝赋
-
-
-
-影与光相照，旅与禅相缠，迹与心相融
-
-
-
-漂泊·禅思·归寂
-
-
-
-
-
-
-三词为基，三境合一
-
-|
-
-
-乙巳年冬，三绝成赋
-
-...
+                            <%= excerpt %>
                         </div>
                         
                         <div class="card-footer">
                             <div class="card-author">
                                 <i class="fas fa-user"></i>
-                                独自踏月行
+                                <%= config.author || '剑阁主人' %>
                             </div>
-                            <a href="/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/" class="read-btn">
+                            <a href="<%= url_for(url) %>" class="read-btn">
                                 阅读 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,锻造,剑赋">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    6-1
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/">《星河剑赋》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="锻造">锻造</span>
-                                
-                                    <span class="card-tag" data-tag="剑赋">剑赋</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-&#39;);&#34;&gt;
-
-
-星河剑赋
-
-
-
-汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋
-
-
-
-创世·锻造·证道
-
-
-
-
-
-
-结构：1+12+1圆满体系
-
-⚔️...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,墨锋卷宗">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    5-15
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第七极《墨锋》卷宗·正典首章》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="周天十二极">周天十二极</span>
-                                
-                                    <span class="card-tag" data-tag="墨锋卷宗">墨锋卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·周天十二极卷宗
-
-
-第七极《墨锋》卷宗·正典首章
-
-
-
-秃笔锻魂兮，素笺烙霞墨锋所指兮，皆是吾家
-
-
-
-甲等极品·文脉正典
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,清怀卷宗">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    5-15
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第五极《清怀》卷宗·正典首章》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="周天十二极">周天十二极</span>
-                                
-                                    <span class="card-tag" data-tag="清怀卷宗">清怀卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·周天十二极卷宗
-
-
-第五极《清怀》卷宗·正典首章
-
-
-
-漏声锻夜兮，清怀为砧清怀撑剑兮，星河自钦
-
-
-
-甲等极品·风骨正典
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,立法总枢,宪法">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    5-15
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/">《星河剑阵·立法总枢档案》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="立法总枢">立法总枢</span>
-                                
-                                    <span class="card-tag" data-tag="宪法">宪法</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·立法总枢档案
-
-
-
-总纲天则剑经
-
-
-登霄纵海本
-
-
-
-乾坤为砧兮，玄黄锻锋芒狂啸开天兮，新纪待华章
-
-
-
-根本大法·剑阵宪法
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="宋词,孤寂,戚氏">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    4-5
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/04/05/%E6%88%9A%E6%B0%8F-%E8%BD%BB/">《戚氏·轻》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="宋词">宋词</span>
-                                
-                                    <span class="card-tag" data-tag="孤寂">孤寂</span>
-                                
-                                    <span class="card-tag" data-tag="戚氏">戚氏</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-戚氏·轻
-
-
-
-夜沉沉，一灯摇影到天心青灯影外，长风袖底，万籁俱沉
-
-
-
-宋词长调 · 禅意之境
-
-
-
-
-
-
-2026-04-05
-
-|
-
-
-原创...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/04/05/%E6%88%9A%E6%B0%8F-%E8%BD%BB/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="宋词,孤怀,虞美人">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    4-5
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/04/05/%E8%99%9E%E7%BE%8E%E4%BA%BA-%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/">《虞美人·孤怀婵娟》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="宋词">宋词</span>
-                                
-                                    <span class="card-tag" data-tag="孤怀">孤怀</span>
-                                
-                                    <span class="card-tag" data-tag="虞美人">虞美人</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-虞美人·孤怀婵娟
-
-
-
-苔痕暗锁阶前月，千山不语对婵娟
-
-
-
-宋词 · 孤怀之思
-
-
-
-
-
-
-2026-04-05
-
-|
-
-
-原创词作
-
-|
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/04/05/%E8%99%9E%E7%BE%8E%E4%BA%BA-%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="宋词,江湖,声声慢">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    3-10
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/03/10/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/">《声声慢·断鸿寒影》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="宋词">宋词</span>
-                                
-                                    <span class="card-tag" data-tag="江湖">江湖</span>
-                                
-                                    <span class="card-tag" data-tag="声声慢">声声慢</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-声声慢·断鸿寒影
-
-
-
-萧萧霜阶，沉沉残漏雪满霜鬓，影落孤江
-
-
-
-宋词 · 江湖之思
-
-
-
-
-
-
-2026-03-10
-
-|
-
-
-原创词作
-
-|...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/03/10/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="宋词,八声甘州,孤馆秋">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    3-10
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/03/10/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E-%E5%AD%A4%E9%A6%86%E7%A7%8B/">《八声甘州·孤馆秋》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="宋词">宋词</span>
-                                
-                                    <span class="card-tag" data-tag="八声甘州">八声甘州</span>
-                                
-                                    <span class="card-tag" data-tag="孤馆秋">孤馆秋</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-八声甘州·孤馆秋
-
-
-
-记同途风雨岁华深，殷勤共此襟
-
-
-
-宋词 · 秋日之思
-
-
-
-
-
-
-2026-03-10
-
-|
-
-
-原创词作
-
-|
-
-
-八...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/03/10/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E-%E5%AD%A4%E9%A6%86%E7%A7%8B/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,超脱自在,傲骨卷宗">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-23
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/23/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8%E5%8D%B7-%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8%E6%9C%AC/">《星河剑阵·超脱自在卷·正典首章《风霜砺骨本》》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="超脱自在">超脱自在</span>
-                                
-                                    <span class="card-tag" data-tag="傲骨卷宗">傲骨卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·超脱自在卷
-
-
-
-正典首章《风霜砺骨本》
-
-
-
-甲等极品·自在正典
-
-
-
-
-
-
-永恒晴光·长风过境时
-
-|
-
-
-傲骨铮然域
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/23/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8%E5%8D%B7-%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8%E6%9C%AC/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,凛冽极境,霜魄卷宗">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-22
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/22/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93%E6%9C%AC/">《星河剑阵·凛冽极境卷·正典终章《太虚证道本》》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="凛冽极境">凛冽极境</span>
-                                
-                                    <span class="card-tag" data-tag="霜魄卷宗">霜魄卷宗</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·凛冽极境卷·霜魄卷宗
-
-
-
-正典终章《太虚证道本》
-
-
-
-甲等极品·霜魄终典
-
-
-
-
-
-
-永恒拂晓·鸿举惊霄时
-
-|
-
-
-太虚证道域
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/22/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93%E6%9C%AC/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,凛冽极境,霜魄">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-21
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/21/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86%E6%9C%AC/">《星河剑阵·凛冽极境卷·正典首章《霜天剑胆本》》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="凛冽极境">凛冽极境</span>
-                                
-                                    <span class="card-tag" data-tag="霜魄">霜魄</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·凛冽极境卷
-
-
-
-正典首章《霜天剑胆本》
-
-
-
-甲等极品·凛冽极典
-
-
-
-
-
-
-永恒霜秋·星河垂照时
-
-|
-
-
-霜天剑胆域
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/21/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86%E6%9C%AC/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="赋文,三问,问月">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-20
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/20/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/">《三问臻赋并序》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="赋文">赋文</span>
-                                
-                                    <span class="card-tag" data-tag="三问">三问</span>
-                                
-                                    <span class="card-tag" data-tag="问月">问月</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-三问臻赋并序
-
-
-
-问月寄孤怀·问星明持守·问剑砺锋芒
-
-
-
-赋文 · 人生进阶
-
-
-
-
-
-
-2026-02-20
-
-|
-
-
-原创赋文
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/20/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,基础根脉,五蕴锋">
-                        <div class="card-header">
-                            
-                                <div class="card-date">
-                                    <i class="far fa-calendar-alt"></i>
-                                    2-19
-                                </div>
-                            
-                            <span class="card-category">心火</span>
-                        </div>
-                        
-                        <h3 class="card-title">
-                            <a href="/mokewenxue.github.io/2026/02/19/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89%E5%8D%B7-%E4%BA%94%E8%95%B4%E9%94%8B%E6%80%BB%E7%BA%B2/">《星河剑阵·基础根脉卷·首章《五蕴锋总纲》》</a>
-                        </h3>
-                        
-                        
-                            <div class="card-tags">
-                                
-                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
-                                
-                                    <span class="card-tag" data-tag="基础根脉">基础根脉</span>
-                                
-                                    <span class="card-tag" data-tag="五蕴锋">五蕴锋</span>
-                                
-                            </div>
-                        
-                        
-                        <div class="card-excerpt">
-                            
-
-
-
-
-
-
-星河剑阵·基础根脉卷
-
-
-
-首章《五蕴锋总纲》
-
-
-
-甲等极品·根脉始典
-
-
-
-
-
-
-此刻·你阅读这些文字时
-
-|
-
-
-红尘淬锋域
-
-
-
-
-
-
-
-...
-                        </div>
-                        
-                        <div class="card-footer">
-                            <div class="card-author">
-                                <i class="fas fa-user"></i>
-                                独自踏月行
-                            </div>
-                            <a href="/mokewenxue.github.io/2026/02/19/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89%E5%8D%B7-%E4%BA%94%E8%95%B4%E9%94%8B%E6%80%BB%E7%BA%B2/" class="read-btn">
-                                阅读 <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                
+                <%
+                    });
+                }
+                %>
             </div>
             
             <!-- 分页 -->
-            
+            <% if (page && page.total && page.total > 1) { %>
                 <div class="compact-pagination">
-                    
-                        <a href="/mokewenxue.github.io/page/3/" class="page-link prev">
+                    <% if (page.prev) { %>
+                        <a href="<%= url_for(page.prev_link) %>" class="page-link prev">
                             <i class="fas fa-chevron-left"></i> 上一页
                         </a>
-                    
+                    <% } else { %>
+                        <span class="page-link prev disabled">
+                            <i class="fas fa-chevron-left"></i> 上一页
+                        </span>
+                    <% } %>
                     
                     <div class="page-info">
-                        第 <strong>4</strong> 页 / 共 <strong>4</strong> 页
+                        第 <strong><%= page.current || 1 %></strong> 页 / 共 <strong><%= page.total %></strong> 页
                     </div>
                     
-                    
+                    <% if (page.next) { %>
+                        <a href="<%= url_for(page.next_link) %>" class="page-link next">
+                            下一页 <i class="fas fa-chevron-right"></i>
+                        </a>
+                    <% } else { %>
                         <span class="page-link next disabled">
                             下一页 <i class="fas fa-chevron-right"></i>
                         </span>
-                    
+                    <% } %>
                 </div>
-            
+            <% } %>
         </div>
         
         <!-- 页脚 -->
         <footer class="sword-footer">
             <div class="footer-container">
                 <div class="footer-links">
-                    <a href="/mokewenxue.github.io/" class="footer-link">
+                    <a href="<%= url_for('/') %>" class="footer-link">
                         <i class="fas fa-home"></i> 首页
                     </a>
-                    <a href="/mokewenxue.github.io/archives" class="footer-link">
+                    <a href="<%= url_for(config.archive_dir) || 'archives/' %>" class="footer-link">
                         <i class="fas fa-archive"></i> 归档
                     </a>
-                    <a href="/mokewenxue.github.io/categories" class="footer-link">
+                    <a href="<%= url_for(config.category_dir) || 'categories/' %>" class="footer-link">
                         <i class="fas fa-layer-group"></i> 分类
                     </a>
-                    <a href="/mokewenxue.github.io/tags" class="footer-link">
+                    <a href="<%= url_for(config.tag_dir) || 'tags/' %>" class="footer-link">
                         <i class="fas fa-tags"></i> 标签
                     </a>
-                    <a href="/mokewenxue.github.io/about/" class="footer-link">
+                    <a href="<%= url_for('about/') %>" class="footer-link">
                         <i class="fas fa-book"></i> 关于
                     </a>
-                    <a href="/mokewenxue.github.io/atom.xml" class="footer-link">
+                    <a href="<%= url_for('/atom.xml') %>" class="footer-link">
                         <i class="fas fa-rss"></i> 订阅
                     </a>
                 </div>
                 
                 <div class="copyright">
-                    © 2026 独自踏月行 · 星河剑阵<br>
+                    © <%= new Date().getFullYear() %> <%= config.author || '踏月诗阁' %> · 星河剑阵<br>
                     剑气长存 · 墨韵永驻 · 周天不息
                 </div>
             </div>
