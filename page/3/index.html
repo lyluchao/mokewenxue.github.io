@@ -2632,98 +2632,173 @@
             
             if (!leftNavItems.length || !articleGrid) return;
             
-            // 统计文章数量
-            function countArticles() {
-                const articles = articleGrid.querySelectorAll('.compact-card');
-                const counts = {
-                    'all': articles.length,
-                    '心火': 0, '醉铸': 0, '萍魄': 0, '清怀': 0, '知契': 0,
-                    '墨锋': 0, '擎乾': 0, '秋律': 0, '双刃': 0, '揽星': 0, '踏月': 0,
-                    '蚀剑学': 0, '诗文': 0,
-                    '筑基境': 0, '炼气境': 0, '凝神境': 0, '金丹境': 0,
-                    '元婴境': 0, '化神境': 0, '合体境': 0, '大乘境': 0
-                };
-                
-                articles.forEach(article => {
-                    const category = article.getAttribute('data-category') || '';
-                    const tags = article.getAttribute('data-tags') || '';
-                    
-                    // 统计分类
-                    if (category && counts[category] !== undefined) {
-                        counts[category]++;
-                    }
-                    
-                    // 统计标签
-                    if (tags) {
-                        tags.split(',').forEach(tag => {
-                            if (counts[tag] !== undefined) {
-                                counts[tag]++;
-                            }
-                        });
-                    }
-                });
-                
-                // 更新计数显示
-                for (const key in counts) {
-                    const element = document.getElementById(`${key}-count`);
-                    if (element) {
-                        element.textContent = counts[key];
-                    }
+          // 统计文章数量 - 修改这个函数
+function countArticles() {
+    const articles = articleGrid.querySelectorAll('.compact-card');
+    const counts = {
+        'all': articles.length,
+        '心火': 0, '醉铸': 0, '萍魄': 0, '清怀': 0, '知契': 0,
+        '墨锋': 0, '擎乾': 0, '秋律': 0, '双刃': 0, '揽星': 0, '踏月': 0,
+        '蚀剑学': 0, '诗文': 0,
+        '筑基境': 0, '炼气境': 0, '凝神境': 0, '金丹境': 0,
+        '元婴境': 0, '化神境': 0, '合体境': 0, '大乘境': 0
+    };
+    
+    articles.forEach(article => {
+        const category = article.getAttribute('data-category') || '';
+        const tags = article.getAttribute('data-tags') || '';
+        
+        // 统计分类
+        if (category && counts[category] !== undefined) {
+            counts[category]++;
+        }
+        
+        // 统计标签 - 支持通过标签来匹配主级分类
+        if (tags) {
+            const tagList = tags.split(',');
+            tagList.forEach(tag => {
+                if (counts[tag] !== undefined) {
+                    counts[tag]++;
                 }
-            }
+            });
+        }
+    });
+    
+    // 更新计数显示
+    for (const key in counts) {
+        const element = document.getElementById(`${key}-count`);
+        if (element) {
+            element.textContent = counts[key];
+        }
+    }
+}
+
+// 分类映射系统 - 添加在setupArticleFilter函数上面
+const categoryMapping = {
+    // 剑阵主级 -> 对应可能的分类值
+    '心火': ['心火', '第一卷·心火', '心火卷'],
+    '醉铸': ['醉铸', '醉铸卷', '第二卷·醉铸', '周天十二极·第三极《醉铸》'],
+    '萍魄': ['萍魄', '萍魄卷', '第三卷·萍魄'],
+    '清怀': ['清怀', '清怀卷', '第四卷·清怀'],
+    '知契': ['知契', '知契卷', '第五卷·知契'],
+    '墨锋': ['墨锋', '墨锋卷', '第六卷·墨锋'],
+    '擎乾': ['擎乾', '擎乾卷', '第七卷·擎乾'],
+    '秋律': ['秋律', '秋律卷', '第八卷·秋律'],
+    '双刃': ['双刃', '双刃卷', '第九卷·双刃'],
+    '揽星': ['揽星', '揽星卷', '第十卷·揽星'],
+    '踏月': ['踏月', '踏月卷', '第十一卷·踏月']
+};
+
+// 修改筛选函数使用映射
+function filterArticles(filterType, filterValue) {
+    const articles = articleGrid.querySelectorAll('.compact-card');
+    
+    articles.forEach(article => {
+        const category = article.getAttribute('data-category') || '';
+        const tags = article.getAttribute('data-tags') || '';
+        let shouldShow = false;
+        
+        if (filterValue === 'all') {
+            shouldShow = true;
+        } else if (filterType === 'main') {
+            // 使用映射系统
+            const mapping = categoryMapping[filterValue] || [filterValue];
+            shouldShow = mapping.some(mappedCategory => 
+                category === mappedCategory || tags.includes(mappedCategory)
+            );
+        } else if (filterType === 'secondary' || filterType === 'practice') {
+            shouldShow = tags.includes(filterValue);
+        }
+        
+        if (shouldShow) {
+            article.style.display = 'flex';
+            article.classList.add('filtered');
+            setTimeout(() => {
+                article.classList.remove('filtered');
+            }, 600);
+        } else {
+            article.style.display = 'none';
+        }
+    });
+    
+    // 更新筛选状态显示
+    if (filterValue === 'all') {
+        filterStatus.style.display = 'none';
+        filterText.textContent = '当前筛选：全部诗卷';
+    } else {
+        filterStatus.style.display = 'block';
+        
+        let typeText = '';
+        if (filterType === 'main') typeText = '剑阵主级';
+        else if (filterType === 'secondary') typeText = '剑阵次位';
+        else if (filterType === 'practice') typeText = '剑阵修练';
+        else typeText = '全部';
+        
+        // 计算匹配的文章数量
+        const visibleArticles = Array.from(articles).filter(article => 
+            article.style.display !== 'none'
+        ).length;
+        
+        filterText.textContent = `当前筛选：${typeText} · ${filterValue}（${visibleArticles}篇）`;
+    }
+}
+
+
+
+
+
             
-            // 筛选文章
-            function filterArticles(filterType, filterValue) {
-                const articles = articleGrid.querySelectorAll('.compact-card');
-                
-                articles.forEach(article => {
-                    const category = article.getAttribute('data-category') || '';
-                    const tags = article.getAttribute('data-tags') || '';
-                    let shouldShow = false;
-                    
-                    if (filterValue === 'all') {
-                        shouldShow = true;
-                    } else if (filterType === 'main') {
-                        // 主级分类筛选
-                        shouldShow = category === filterValue;
-                    } else if (filterType === 'secondary' || filterType === 'practice') {
-                        // 次位或修练标签筛选
-                        shouldShow = tags.includes(filterValue);
-                    }
-                    
-                    if (shouldShow) {
-                        article.style.display = 'flex';
-                        article.classList.add('filtered');
-                        setTimeout(() => {
-                            article.classList.remove('filtered');
-                        }, 600);
-                    } else {
-                        article.style.display = 'none';
-                    }
-                });
-                
-                // 更新筛选状态显示
-                if (filterValue === 'all') {
-                    filterStatus.style.display = 'none';
-                    filterText.textContent = '当前筛选：全部诗卷';
-                } else {
-                    filterStatus.style.display = 'block';
-                    
-                    let typeText = '';
-                    if (filterType === 'main') typeText = '剑阵主级';
-                    else if (filterType === 'secondary') typeText = '剑阵次位';
-                    else if (filterType === 'practice') typeText = '剑阵修练';
-                    else typeText = '全部';
-                    
-                    // 计算匹配的文章数量
-                    const visibleArticles = Array.from(articles).filter(article => 
-                        article.style.display !== 'none'
-                    ).length;
-                    
-                    filterText.textContent = `当前筛选：${typeText} · ${filterValue}（${visibleArticles}篇）`;
-                }
-            }
-            
+          // 筛选文章 - 修改这个函数
+function filterArticles(filterType, filterValue) {
+    const articles = articleGrid.querySelectorAll('.compact-card');
+    
+    articles.forEach(article => {
+        const category = article.getAttribute('data-category') || '';
+        const tags = article.getAttribute('data-tags') || '';
+        let shouldShow = false;
+        
+        if (filterValue === 'all') {
+            shouldShow = true;
+        } else if (filterType === 'main') {
+            // 主级分类筛选 - 支持分类或标签匹配
+            shouldShow = category === filterValue || tags.includes(filterValue);
+        } else if (filterType === 'secondary' || filterType === 'practice') {
+            // 次位或修练标签筛选
+            shouldShow = tags.includes(filterValue);
+        }
+        
+        if (shouldShow) {
+            article.style.display = 'flex';
+            article.classList.add('filtered');
+            setTimeout(() => {
+                article.classList.remove('filtered');
+            }, 600);
+        } else {
+            article.style.display = 'none';
+        }
+    });
+    
+    // 更新筛选状态显示
+    if (filterValue === 'all') {
+        filterStatus.style.display = 'none';
+        filterText.textContent = '当前筛选：全部诗卷';
+    } else {
+        filterStatus.style.display = 'block';
+        
+        let typeText = '';
+        if (filterType === 'main') typeText = '剑阵主级';
+        else if (filterType === 'secondary') typeText = '剑阵次位';
+        else if (filterType === 'practice') typeText = '剑阵修练';
+        else typeText = '全部';
+        
+        // 计算匹配的文章数量
+        const visibleArticles = Array.from(articles).filter(article => 
+            article.style.display !== 'none'
+        ).length;
+        
+        filterText.textContent = `当前筛选：${typeText} · ${filterValue}（${visibleArticles}篇）`;
+    }
+}            
             // 初始化计数
             countArticles();
             
@@ -2774,21 +2849,31 @@
                 });
             }
             
-            // 绑定标签点击事件
-            articleGrid.addEventListener('click', function(e) {
-                if (e.target.classList.contains('card-tag')) {
-                    e.preventDefault();
-                    const tag = e.target.getAttribute('data-tag');
-                    
-                    // 找到对应的菜单项并点击
-                    const menuItem = document.querySelector(`.left-nav-item[data-filter="${tag}"]`);
-                    if (menuItem) {
-                        menuItem.click();
-                    }
-                }
-            });
-        }
+          // 绑定标签点击事件 - 确保这部分存在
+articleGrid.addEventListener('click', function(e) {
+    if (e.target.classList.contains('card-tag')) {
+        e.preventDefault();
+        e.stopPropagation(); // 防止事件冒泡
         
+        const tag = e.target.getAttribute('data-tag') || e.target.textContent;
+        
+        // 找到对应的菜单项并点击
+        const menuItem = document.querySelector(`.left-nav-item[data-filter="${tag}"]`);
+        if (menuItem) {
+            menuItem.click();
+        } else {
+            // 如果没有直接匹配，尝试在二级和修练分类中查找
+            const secondaryItem = document.querySelector(`.left-nav-item[data-filter-type="secondary"][data-filter="${tag}"]`);
+            const practiceItem = document.querySelector(`.left-nav-item[data-filter-type="practice"][data-filter="${tag}"]`);
+            
+            if (secondaryItem) {
+                secondaryItem.click();
+            } else if (practiceItem) {
+                practiceItem.click();
+            }
+        }
+    }
+});        
         // 翻转卡片效果
         function setupFlipCards() {
             const flipCards = document.querySelectorAll('.flip-card');
