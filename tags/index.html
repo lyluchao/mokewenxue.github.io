@@ -31,11 +31,12 @@
             --border-color: #303060;
             
             /* 间距 */
+            --gap-xs: 6px;
             --gap-sm: 10px;
             --gap-md: 15px;
             --gap-lg: 20px;
-            --gap-xl: 30px;
-            --gap-2xl: 40px;
+            --gap-xl: 25px;
+            --gap-2xl: 30px;
         }
         
         * {
@@ -179,14 +180,15 @@
         
         /* 页面标题 */
         .page-header {
-            padding: var(--gap-2xl) var(--gap-xl);
+            padding: var(--gap-xl) var(--gap-lg);
             background: rgba(26, 26, 64, 0.5);
             border-bottom: 1px solid var(--border-color);
+            border-left: 4px solid var(--nebula-purple);
         }
         
         .page-title {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             background: linear-gradient(135deg, var(--sword-gold), var(--nebula-cyan));
             -webkit-background-clip: text;
             background-clip: text;
@@ -196,33 +198,37 @@
         
         .page-subtitle {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             max-width: 800px;
         }
         
-        /* 标签云 */
+        /* === 紧凑标签云 === */
         .tags-cloud {
-            padding: var(--gap-xl);
+            padding: var(--gap-lg);
             display: flex;
             flex-wrap: wrap;
-            gap: var(--gap-md);
+            gap: var(--gap-sm);
             min-height: 500px;
             align-items: flex-start;
             justify-content: flex-start;
         }
         
         .tag-item {
-            display: inline-block;
-            padding: var(--gap-md) var(--gap-lg);
-            background: rgba(65, 105, 225, 0.15);
-            color: var(--nebula-blue);
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            background: rgba(65, 105, 225, 0.2);
+            color: var(--text-primary);
             text-decoration: none;
-            border-radius: 12px;
-            border: 2px solid rgba(65, 105, 225, 0.3);
-            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 2px solid rgba(65, 105, 225, 0.4);
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            min-width: 100px;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         .tag-item::before {
@@ -237,11 +243,12 @@
         }
         
         .tag-item:hover {
-            transform: translateY(-5px) scale(1.05);
-            background: rgba(138, 43, 226, 0.25);
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(138, 43, 226, 0.35);
             color: var(--text-primary);
-            border-color: var(--nebula-purple);
-            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+            border-color: var(--sword-gold);
+            box-shadow: 0 8px 16px rgba(138, 43, 226, 0.4);
+            z-index: 10;
         }
         
         .tag-item:hover::before {
@@ -249,26 +256,69 @@
         }
         
         .tag-name {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-weight: normal;
-            font-size: 1.2rem;
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            flex: 1;
+            text-align: center;
         }
         
         .tag-count {
             margin-left: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--sword-gold);
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            min-width: 26px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
         
         /* 大小不同的标签 */
-        .tag-size-1 { font-size: 1rem; padding: 10px 15px; }
-        .tag-size-2 { font-size: 1.1rem; padding: 12px 18px; }
-        .tag-size-3 { font-size: 1.2rem; padding: 14px 21px; }
-        .tag-size-4 { font-size: 1.3rem; padding: 16px 24px; }
-        .tag-size-5 { font-size: 1.4rem; padding: 18px 27px; }
+        .tag-size-1 { 
+            font-size: 0.75rem; 
+            padding: 4px 8px;
+            background: rgba(65, 105, 225, 0.15);
+        }
+        .tag-size-2 { 
+            font-size: 0.8rem; 
+            padding: 5px 10px;
+            background: rgba(65, 105, 225, 0.2);
+        }
+        .tag-size-3 { 
+            font-size: 0.85rem; 
+            padding: 6px 12px;
+            background: rgba(65, 105, 225, 0.25);
+        }
+        .tag-size-4 { 
+            font-size: 0.9rem; 
+            padding: 7px 14px;
+            background: rgba(65, 105, 225, 0.3);
+        }
+        .tag-size-5 { 
+            font-size: 0.95rem; 
+            padding: 8px 16px;
+            background: rgba(65, 105, 225, 0.35);
+        }
+        
+        /* 标签类型颜色 */
+        .tag-category-main {
+            border-color: var(--nebula-purple);
+            background: rgba(138, 43, 226, 0.2);
+        }
+        
+        .tag-category-secondary {
+            border-color: var(--nebula-blue);
+            background: rgba(65, 105, 225, 0.2);
+        }
+        
+        .tag-category-practice {
+            border-color: var(--nebula-cyan);
+            background: rgba(0, 255, 255, 0.2);
+        }
         
         /* 无标签提示 */
         .no-tags {
@@ -339,33 +389,53 @@
             }
             
             .page-header {
-                padding: var(--gap-xl) var(--gap-lg);
+                padding: var(--gap-lg);
             }
             
             .page-title {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
             }
             
             .tags-cloud {
-                padding: var(--gap-lg);
+                padding: var(--gap-md);
+                gap: 8px;
                 justify-content: center;
+            }
+            
+            .tag-item {
+                min-width: 80px;
+                padding: 4px 8px;
+            }
+            
+            .tag-name {
+                font-size: 0.8rem;
+            }
+            
+            .tag-count {
+                font-size: 0.7rem;
+                padding: 1px 4px;
+                min-width: 22px;
             }
         }
         
         @media (max-width: 480px) {
             .tags-cloud {
-                gap: 10px;
-                justify-content: center;
+                gap: 6px;
             }
             
             .tag-item {
-                padding: 8px 12px;
-                font-size: 0.9rem;
+                min-width: 70px;
+                padding: 3px 6px;
+                font-size: 0.75rem;
             }
             
-            .tag-size-1, .tag-size-2, .tag-size-3, .tag-size-4, .tag-size-5 {
-                font-size: 0.9rem;
-                padding: 8px 12px;
+            .tag-name {
+                font-size: 0.75rem;
+            }
+            
+            .tag-count {
+                font-size: 0.65rem;
+                min-width: 20px;
             }
         }
         
@@ -488,899 +558,899 @@
                 <i class="fas fa-tags"></i> 词牌索引
             </h1>
             <p class="page-subtitle">
-                星河剑阵 · 词牌为刃 · 诗卷归宗 · 周天无极
+                星河剑阵 · 词牌为刃 · 诗卷归宗 · 周天无极 · 共收录 178 个词牌
             </p>
         </div>
         
         <!-- 标签云 -->
         <div class="tags-cloud">
             
-                <a href="/mokewenxue.github.io/tags/%E8%B5%8B%E6%96%87/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%B5%8B%E6%96%87/" class="tag-item tag-size-1 ">
                     <span class="tag-name">赋文</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%B8%89%E9%97%AE/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%B8%89%E9%97%AE/" class="tag-item tag-size-1 ">
                     <span class="tag-name">三问</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E6%9C%88/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E6%9C%88/" class="tag-item tag-size-1 ">
                     <span class="tag-name">问月</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E6%98%9F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E6%98%9F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">问星</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E5%89%91/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E5%89%91/" class="tag-item tag-size-1 ">
                     <span class="tag-name">问剑</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E9%81%93/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E9%81%93/" class="tag-item tag-size-1 ">
                     <span class="tag-name">问道</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E8%B7%AF/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E8%B7%AF/" class="tag-item tag-size-1 ">
                     <span class="tag-name">心路</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%BF%9B%E9%98%B6/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%BF%9B%E9%98%B6/" class="tag-item tag-size-1 ">
                     <span class="tag-name">进阶</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%B8%B4%E6%B1%9F%E4%BB%99/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%B8%B4%E6%B1%9F%E4%BB%99/" class="tag-item tag-size-1 ">
                     <span class="tag-name">临江仙</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%AF%97%E6%96%87/" class="tag-item tag-size-3">
+                <a href="/mokewenxue.github.io/tags/%E8%AF%97%E6%96%87/" class="tag-item tag-size-3 tag-category-secondary">
                     <span class="tag-name">诗文</span>
                     <span class="tag-count">15</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/" class="tag-item tag-size-4">
+                <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/" class="tag-item tag-size-4 ">
                     <span class="tag-name">宋词</span>
                     <span class="tag-count">17</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%93%B8%E5%89%91/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%93%B8%E5%89%91/" class="tag-item tag-size-1 ">
                     <span class="tag-name">铸剑</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%B1%9F%E6%B9%96/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%B1%9F%E6%B9%96/" class="tag-item tag-size-1 ">
                     <span class="tag-name">江湖</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%90%8D%E8%B8%AA/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%90%8D%E8%B8%AA/" class="tag-item tag-size-1 ">
                     <span class="tag-name">萍踪</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%B7%AC%E7%81%AB/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%B7%AC%E7%81%AB/" class="tag-item tag-size-1 ">
                     <span class="tag-name">淬火</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E/" class="tag-item tag-size-1 ">
                     <span class="tag-name">八声甘州</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E9%A6%86%E7%A7%8B/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E9%A6%86%E7%A7%8B/" class="tag-item tag-size-1 ">
                     <span class="tag-name">孤馆秋</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%A6%BB%E5%88%AB/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%A6%BB%E5%88%AB/" class="tag-item tag-size-1 ">
                     <span class="tag-name">离别</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%80%80%E5%BF%B5/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%80%80%E5%BF%B5/" class="tag-item tag-size-1 ">
                     <span class="tag-name">怀念</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%87%8D%E9%80%A2/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%87%8D%E9%80%A2/" class="tag-item tag-size-1 ">
                     <span class="tag-name">重逢</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%85%AB%E9%9B%85%E5%90%88%E7%92%A7/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%85%AB%E9%9B%85%E5%90%88%E7%92%A7/" class="tag-item tag-size-1 ">
                     <span class="tag-name">八雅合璧</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%96%87%E8%84%89%E6%80%BB%E7%BA%B2/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%96%87%E8%84%89%E6%80%BB%E7%BA%B2/" class="tag-item tag-size-1 ">
                     <span class="tag-name">文脉总纲</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/star-sword-array/" class="tag-item tag-size-5">
+                <a href="/mokewenxue.github.io/tags/star-sword-array/" class="tag-item tag-size-5 ">
                     <span class="tag-name">星河剑阵</span>
                     <span class="tag-count">26</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%96%87%E6%98%8E%E5%9F%BA%E7%9F%B3/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%96%87%E6%98%8E%E5%9F%BA%E7%9F%B3/" class="tag-item tag-size-1 ">
                     <span class="tag-name">文明基石</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%85%AB%E9%9B%85%E5%89%91%E9%81%93/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%85%AB%E9%9B%85%E5%89%91%E9%81%93/" class="tag-item tag-size-1 ">
                     <span class="tag-name">八雅剑道</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%90%8C%E8%BD%AD%E5%A4%A9%E5%88%99/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%90%8C%E8%BD%AD%E5%A4%A9%E5%88%99/" class="tag-item tag-size-1 ">
                     <span class="tag-name">同轭天则</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%A9%BA%E7%81%B5%E9%81%93%E5%A2%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%A9%BA%E7%81%B5%E9%81%93%E5%A2%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">空灵道境</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%AB%8B%E6%B3%95%E4%B8%89%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%AB%8B%E6%B3%95%E4%B8%89%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">立法三典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%9F%94%E5%89%91%E6%B3%95%E5%88%99/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%9F%94%E5%89%91%E6%B3%95%E5%88%99/" class="tag-item tag-size-1 ">
                     <span class="tag-name">柔剑法则</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/twelve-poles/" class="tag-item tag-size-3">
+                <a href="/mokewenxue.github.io/tags/twelve-poles/" class="tag-item tag-size-3 ">
                     <span class="tag-name">周天十二极</span>
                     <span class="tag-count">13</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%A2%A8%E9%94%8B%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%A2%A8%E9%94%8B%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">墨锋卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%96%87%E8%84%89%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%96%87%E8%84%89%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">文脉正典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%96%87%E6%98%8E%E9%94%BB%E9%80%A0/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%96%87%E6%98%8E%E9%94%BB%E9%80%A0/" class="tag-item tag-size-1 ">
                     <span class="tag-name">文明锻造</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%81%93%E6%96%87%E5%BF%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%81%93%E6%96%87%E5%BF%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">剑道文心</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%86%89%E9%93%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%86%89%E9%93%B8/" class="tag-item tag-size-1 tag-category-main">
                     <span class="tag-name">醉铸</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%86%89%E9%93%B8%E5%8D%B7/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%86%89%E9%93%B8%E5%8D%B7/" class="tag-item tag-size-1 ">
                     <span class="tag-name">醉铸卷</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">正典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E7%BB%8F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E7%BB%8F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">剑经</span>
                     <span class="tag-count">3</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%86%89%E5%A2%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%86%89%E5%A2%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">醉境</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E5%88%99/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E5%88%99/" class="tag-item tag-size-1 ">
                     <span class="tag-name">剑则</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E9%94%8B/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E9%94%8B/" class="tag-item tag-size-1 ">
                     <span class="tag-name">心锋</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E6%84%8F%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E6%84%8F%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">心意正典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%80%80%E6%80%9D%E5%89%91%E5%88%99/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%80%80%E6%80%9D%E5%89%91%E5%88%99/" class="tag-item tag-size-1 ">
                     <span class="tag-name">怀思剑则</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%9F%94%E8%82%A0%E4%B8%BA%E7%A0%A7/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%9F%94%E8%82%A0%E4%B8%BA%E7%A0%A7/" class="tag-item tag-size-1 ">
                     <span class="tag-name">柔肠为砧</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%B8%A9%E6%B6%A6%E5%88%83%E6%B3%95/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%B8%A9%E6%B6%A6%E5%88%83%E6%B3%95/" class="tag-item tag-size-1 ">
                     <span class="tag-name">温润刃法</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%B8%85%E6%80%80%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%B8%85%E6%80%80%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">清怀卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%AA%A8%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%AA%A8%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">风骨正典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BA%BA%E6%A0%BC%E9%94%BB%E9%80%A0/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BA%BA%E6%A0%BC%E9%94%BB%E9%80%A0/" class="tag-item tag-size-1 ">
                     <span class="tag-name">人格锻造</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%9F%AF%E5%89%91%E5%BC%8F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%9F%AF%E5%89%91%E5%BC%8F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">孤柯剑式</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%93%8E%E4%B9%BE/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%93%8E%E4%B9%BE/" class="tag-item tag-size-1 tag-category-main">
                     <span class="tag-name">擎乾</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%94%BB%E9%80%A0%E4%BD%93%E7%B3%BB/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%94%BB%E9%80%A0%E4%BD%93%E7%B3%BB/" class="tag-item tag-size-1 ">
                     <span class="tag-name">锻造体系</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E7%9C%9F%E5%85%B8%E7%B1%8D/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E7%9C%9F%E5%85%B8%E7%B1%8D/" class="tag-item tag-size-1 ">
                     <span class="tag-name">修真典籍</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F/" class="tag-item tag-size-1">
-                    <span class="tag-name">揽星</span>
-                    <span class="tag-count">2</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
-                    <span class="tag-name">宇宙正典</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E9%94%BB%E9%80%A0/" class="tag-item tag-size-1">
-                    <span class="tag-name">锻造</span>
-                    <span class="tag-count">2</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E8%90%8D%E9%AD%84%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%90%8D%E9%AD%84%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">萍魄卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%BC%98%E6%B3%95%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%BC%98%E6%B3%95%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">缘法正典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%9B%A0%E6%9E%9C%E9%94%BB%E9%80%A0/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%9B%A0%E6%9E%9C%E9%94%BB%E9%80%A0/" class="tag-item tag-size-1 ">
                     <span class="tag-name">因果锻造</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%83%8A%E9%B8%BF%E5%89%91%E5%BC%8F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%83%8A%E9%B8%BF%E5%89%91%E5%BC%8F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">惊鸿剑式</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E7%81%AB/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F/" class="tag-item tag-size-1 tag-category-main">
+                    <span class="tag-name">揽星</span>
+                    <span class="tag-count">2</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">宇宙正典</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E9%94%BB%E9%80%A0/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">锻造</span>
+                    <span class="tag-count">2</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E7%81%AB/" class="tag-item tag-size-1 tag-category-main">
                     <span class="tag-name">心火</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AF%82%E6%BA%90%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AF%82%E6%BA%90%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">寂源卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%9C%AC%E6%BA%90%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%9C%AC%E6%BA%90%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">本源正典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%B8%87%E7%B1%81%E4%BF%B1%E6%B2%89/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%B8%87%E7%B1%81%E4%BF%B1%E6%B2%89/" class="tag-item tag-size-1 ">
                     <span class="tag-name">万籁俱沉</span>
                     <span class="tag-count">3</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">沧桑卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E7%BB%8F%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E7%BB%8F%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">剑经正典</span>
                     <span class="tag-count">3</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%86%89%E6%B1%9F%E7%A7%8B/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%86%89%E6%B1%9F%E7%A7%8B/" class="tag-item tag-size-1 ">
                     <span class="tag-name">醉江秋</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AF%82%E5%A2%83%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AF%82%E5%A2%83%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">寂境卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E5%A4%A9%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E5%A4%A9%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">霜天卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%81%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%81%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">剑阁正典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%B5%8B%E4%BD%93%E5%89%91%E7%BB%8F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%B5%8B%E4%BD%93%E5%89%91%E7%BB%8F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">赋体剑经</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%A4%A9%E6%82%A0%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%A4%A9%E6%82%A0%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">天悠卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E7%A7%8B%E6%BE%84%E6%98%8E/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%BF%83%E7%A7%8B%E6%BE%84%E6%98%8E/" class="tag-item tag-size-1 ">
                     <span class="tag-name">心秋澄明</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%91%A8%E5%A4%A9%E6%AD%A3%E8%B0%B1/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%91%A8%E5%A4%A9%E6%AD%A3%E8%B0%B1/" class="tag-item tag-size-1 ">
                     <span class="tag-name">周天正谱</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F%E8%B0%B1%E7%B3%BB/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F%E8%B0%B1%E7%B3%BB/" class="tag-item tag-size-1 ">
                     <span class="tag-name">揽星谱系</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BC%A0%E6%89%BF%E8%B0%B1%E7%B3%BB/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BC%A0%E6%89%BF%E8%B0%B1%E7%B3%BB/" class="tag-item tag-size-1 ">
                     <span class="tag-name">传承谱系</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%A3%B0%E5%A3%B0%E6%85%A2/" class="tag-item tag-size-2">
+                <a href="/mokewenxue.github.io/tags/%E5%A3%B0%E5%A3%B0%E6%85%A2/" class="tag-item tag-size-2 ">
                     <span class="tag-name">声声慢</span>
                     <span class="tag-count">6</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%AF%82/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%AF%82/" class="tag-item tag-size-1 ">
                     <span class="tag-name">孤寂</span>
                     <span class="tag-count">5</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%A7%8B%E6%80%9D/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%A7%8B%E6%80%9D/" class="tag-item tag-size-1 ">
                     <span class="tag-name">秋思</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%A6%85%E5%A2%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%A6%85%E5%A2%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">禅境</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%98%9F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%98%9F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">孤星</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%9D%9A%E5%AE%88/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%9D%9A%E5%AE%88/" class="tag-item tag-size-1 ">
                     <span class="tag-name">坚守</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AF%92%E5%A4%9C/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AF%92%E5%A4%9C/" class="tag-item tag-size-1 ">
                     <span class="tag-name">寒夜</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%96%AD%E9%B8%BF/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%96%AD%E9%B8%BF/" class="tag-item tag-size-1 ">
                     <span class="tag-name">断鸿</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%BD%B1/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E5%BD%B1/" class="tag-item tag-size-1 ">
                     <span class="tag-name">孤影</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E9%AC%93/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E9%AC%93/" class="tag-item tag-size-1 ">
                     <span class="tag-name">霜鬓</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%8F%A0%E5%AD%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%8F%A0%E5%AD%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">叠字</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AF%84%E6%85%A8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AF%84%E6%85%A8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">寄慨</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%9C%95%E9%B3%9E/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%9C%95%E9%B3%9E/" class="tag-item tag-size-1 ">
                     <span class="tag-name">蜕鳞</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E5%8F%98/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E5%8F%98/" class="tag-item tag-size-1 ">
                     <span class="tag-name">蝶变</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%87%8D%E7%94%9F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%87%8D%E7%94%9F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">重生</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%93%B2%E7%90%86/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%93%B2%E7%90%86/" class="tag-item tag-size-1 ">
                     <span class="tag-name">哲理</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%82%80%E6%9C%88/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%82%80%E6%9C%88/" class="tag-item tag-size-1 ">
                     <span class="tag-name">邀月</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%9C%88%E5%A4%9C/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%9C%88%E5%A4%9C/" class="tag-item tag-size-1 ">
                     <span class="tag-name">月夜</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%80%80/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E6%80%80/" class="tag-item tag-size-1 ">
                     <span class="tag-name">孤怀</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E7%84%B6/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E7%84%B6/" class="tag-item tag-size-1 ">
                     <span class="tag-name">超然</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%B8%89%E7%BB%9D%E8%B5%8B/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%B8%89%E7%BB%9D%E8%B5%8B/" class="tag-item tag-size-1 ">
                     <span class="tag-name">三绝赋</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%B8%85%E8%BE%89/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%B8%85%E8%BE%89/" class="tag-item tag-size-1 ">
                     <span class="tag-name">清辉</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%BC%82%E6%B3%8A/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%BC%82%E6%B3%8A/" class="tag-item tag-size-1 ">
                     <span class="tag-name">漂泊</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%A6%85%E6%80%9D/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%A6%85%E6%80%9D/" class="tag-item tag-size-1 ">
                     <span class="tag-name">禅思</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%BD%92%E5%AF%82/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%BD%92%E5%AF%82/" class="tag-item tag-size-1 ">
                     <span class="tag-name">归寂</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99%E5%89%91%E7%A2%91/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99%E5%89%91%E7%A2%91/" class="tag-item tag-size-1 ">
                     <span class="tag-name">宇宙剑碑</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%A2%91%E5%88%BB/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%A2%91%E5%88%BB/" class="tag-item tag-size-1 ">
                     <span class="tag-name">碑刻</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F%E9%93%AD%E6%96%87/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F%E9%93%AD%E6%96%87/" class="tag-item tag-size-1 ">
                     <span class="tag-name">揽星铭文</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%88%9A%E6%B0%8F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%88%9A%E6%B0%8F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">戚氏</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%95%BF%E8%B0%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%95%BF%E8%B0%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">长调</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1/" class="tag-item tag-size-1 ">
                     <span class="tag-name">超脱</span>
                     <span class="tag-count">4</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%A6%85%E6%84%8F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%A6%85%E6%84%8F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">禅意</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%81%E8%97%8F%E4%B9%A6/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%98%81%E8%97%8F%E4%B9%A6/" class="tag-item tag-size-1 ">
                     <span class="tag-name">剑阁藏书</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F%E5%89%91%E5%9F%9F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%8F%BD%E6%98%9F%E5%89%91%E5%9F%9F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">揽星剑域</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99%E5%89%91%E5%88%99/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AE%87%E5%AE%99%E5%89%91%E5%88%99/" class="tag-item tag-size-1 ">
                     <span class="tag-name">宇宙剑则</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E8%B5%8B/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E8%B5%8B/" class="tag-item tag-size-1 ">
                     <span class="tag-name">剑赋</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%8D%81%E4%BA%8C%E6%9E%81/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%8D%81%E4%BA%8C%E6%9E%81/" class="tag-item tag-size-1 ">
                     <span class="tag-name">十二极</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%88%9B%E4%B8%96/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%88%9B%E4%B8%96/" class="tag-item tag-size-1 ">
                     <span class="tag-name">创世</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%AF%81%E9%81%93/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%AF%81%E9%81%93/" class="tag-item tag-size-1 ">
                     <span class="tag-name">证道</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">凛冽极境</span>
                     <span class="tag-count">3</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%9A%80%E5%89%91%E5%AD%A6/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%9A%80%E5%89%91%E5%AD%A6/" class="tag-item tag-size-1 tag-category-secondary">
                     <span class="tag-name">蚀剑学</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E9%AD%84%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E9%AD%84%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">霜魄卷宗</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93/" class="tag-item tag-size-1 ">
                     <span class="tag-name">太虚证道</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%BB%88%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%BB%88%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">终典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E8%A1%8C%E6%AC%A1%E7%AC%AC/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E8%A1%8C%E6%AC%A1%E7%AC%AC/" class="tag-item tag-size-1 ">
                     <span class="tag-name">修行次第</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%9C%86%E6%BB%A1/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%9C%86%E6%BB%A1/" class="tag-item tag-size-1 ">
                     <span class="tag-name">圆满</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E9%AD%84/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E9%AD%84/" class="tag-item tag-size-1 ">
                     <span class="tag-name">霜魄</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86/" class="tag-item tag-size-1 ">
                     <span class="tag-name">霜天剑胆</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E7%BB%9D%E5%89%91%E5%88%99/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E7%BB%9D%E5%89%91%E5%88%99/" class="tag-item tag-size-1 ">
                     <span class="tag-name">孤绝剑则</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%9E%81%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%9E%81%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">极典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89/" class="tag-item tag-size-1 ">
                     <span class="tag-name">基础根脉</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BA%94%E8%95%B4%E9%94%8B/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BA%94%E8%95%B4%E9%94%8B/" class="tag-item tag-size-1 ">
                     <span class="tag-name">五蕴锋</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BA%BA%E9%97%B4%E6%B7%AC%E9%94%8B/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BA%BA%E9%97%B4%E6%B7%AC%E9%94%8B/" class="tag-item tag-size-1 ">
                     <span class="tag-name">人间淬锋</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%A0%B9%E8%84%89%E5%A7%8B%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%A0%B9%E8%84%89%E5%A7%8B%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">根脉始典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%BA%A2%E5%B0%98%E9%94%BB%E5%89%91/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%BA%A2%E5%B0%98%E9%94%BB%E5%89%91/" class="tag-item tag-size-1 ">
                     <span class="tag-name">红尘锻剑</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8/" class="tag-item tag-size-1">
-                    <span class="tag-name">超脱自在</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E5%82%B2%E9%AA%A8%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
-                    <span class="tag-name">傲骨卷宗</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8/" class="tag-item tag-size-1">
-                    <span class="tag-name">风霜砺骨</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E8%87%AA%E5%9C%A8%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1">
-                    <span class="tag-name">自在正典</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1%E5%89%91%E5%88%99/" class="tag-item tag-size-1">
-                    <span class="tag-name">超脱剑则</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4/" class="tag-item tag-size-1">
-                    <span class="tag-name">水调歌头</span>
-                    <span class="tag-count">3</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E6%B0%94/" class="tag-item tag-size-1">
-                    <span class="tag-name">剑气</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E8%B1%AA%E6%83%85/" class="tag-item tag-size-1">
-                    <span class="tag-name">豪情</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E5%88%9D%E5%BF%83/" class="tag-item tag-size-1">
-                    <span class="tag-name">初心</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2/" class="tag-item tag-size-1 ">
                     <span class="tag-name">立法总枢</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AE%AA%E6%B3%95/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AE%AA%E6%B3%95/" class="tag-item tag-size-1 ">
                     <span class="tag-name">宪法</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%80%BB%E7%BA%B2%E5%A4%A9%E5%88%99%E5%89%91%E7%BB%8F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%80%BB%E7%BA%B2%E5%A4%A9%E5%88%99%E5%89%91%E7%BB%8F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">总纲天则剑经</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%A0%B9%E6%9C%AC%E5%A4%A7%E6%B3%95/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%A0%B9%E6%9C%AC%E5%A4%A7%E6%B3%95/" class="tag-item tag-size-1 ">
                     <span class="tag-name">根本大法</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%93%B2%E6%80%9D/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">超脱自在</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E5%82%B2%E9%AA%A8%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">傲骨卷宗</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">风霜砺骨</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E8%87%AA%E5%9C%A8%E6%AD%A3%E5%85%B8/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">自在正典</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1%E5%89%91%E5%88%99/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">超脱剑则</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">水调歌头</span>
+                    <span class="tag-count">3</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E6%B0%94/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">剑气</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E8%B1%AA%E6%83%85/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">豪情</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E5%88%9D%E5%BF%83/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">初心</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E5%93%B2%E6%80%9D/" class="tag-item tag-size-1 ">
                     <span class="tag-name">哲思</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%93%B2%E5%AD%A6/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%93%B2%E5%AD%A6/" class="tag-item tag-size-1 ">
                     <span class="tag-name">哲学</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%99%9E%E7%BE%8E%E4%BA%BA/" class="tag-item tag-size-1">
-                    <span class="tag-name">虞美人</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E5%A9%B5%E5%A8%9F/" class="tag-item tag-size-1">
-                    <span class="tag-name">婵娟</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%AA%A8/" class="tag-item tag-size-1">
-                    <span class="tag-name">风骨</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E5%87%AD%E6%A0%8F/" class="tag-item tag-size-1">
-                    <span class="tag-name">凭栏</span>
-                    <span class="tag-count">1</span>
-                </a>
-            
-                <a href="/mokewenxue.github.io/tags/%E6%B2%81%E5%9B%AD%E6%98%A5/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%B2%81%E5%9B%AD%E6%98%A5/" class="tag-item tag-size-1 ">
                     <span class="tag-name">沁园春</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%A4%A9%E6%82%A0/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%A4%A9%E6%82%A0/" class="tag-item tag-size-1 ">
                     <span class="tag-name">天悠</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BA%BA%E7%94%9F%E5%A2%83%E7%95%8C/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BA%BA%E7%94%9F%E5%A2%83%E7%95%8C/" class="tag-item tag-size-1 ">
                     <span class="tag-name">人生境界</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%BD%92%E5%BF%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%BD%92%E5%BF%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">归心</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%9A%80%E5%89%91/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%99%9E%E7%BE%8E%E4%BA%BA/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">虞美人</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E5%A9%B5%E5%A8%9F/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">婵娟</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%AA%A8/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">风骨</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E5%87%AD%E6%A0%8F/" class="tag-item tag-size-1 ">
+                    <span class="tag-name">凭栏</span>
+                    <span class="tag-count">1</span>
+                </a>
+            
+                <a href="/mokewenxue.github.io/tags/%E8%9A%80%E5%89%91/" class="tag-item tag-size-1 ">
                     <span class="tag-name">蚀剑</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%81%93/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%89%91%E9%81%93/" class="tag-item tag-size-1 ">
                     <span class="tag-name">剑道</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%BE%A9%E8%AF%81/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%BE%A9%E8%AF%81/" class="tag-item tag-size-1 ">
                     <span class="tag-name">辩证</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E5%BF%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BF%AE%E5%BF%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">修心</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%B4%BA%E6%96%B0%E9%83%8E/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%B4%BA%E6%96%B0%E9%83%8E/" class="tag-item tag-size-1 ">
                     <span class="tag-name">贺新郎</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%9A%80/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%9A%80/" class="tag-item tag-size-1 ">
                     <span class="tag-name">蚀</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E7%BB%9D/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%AD%A4%E7%BB%9D/" class="tag-item tag-size-1 ">
                     <span class="tag-name">孤绝</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%B2%A7%E6%A1%91/" class="tag-item tag-size-1 ">
                     <span class="tag-name">沧桑</span>
                     <span class="tag-count">2</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%87%8D%E9%93%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%87%8D%E9%93%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">重铸</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">人生感悟</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%B8%8F%E6%9C%88/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%B8%8F%E6%9C%88/" class="tag-item tag-size-1 tag-category-main">
                     <span class="tag-name">踏月</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%BD%92%E7%9C%9F/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%BD%92%E7%9C%9F/" class="tag-item tag-size-1 ">
                     <span class="tag-name">归真</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%81%93%E5%A2%83/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%81%93%E5%A2%83/" class="tag-item tag-size-1 ">
                     <span class="tag-name">道境</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%BB%88%E6%9E%81%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%BB%88%E6%9E%81%E5%8D%B7%E5%AE%97/" class="tag-item tag-size-1 ">
                     <span class="tag-name">终极卷宗</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E4%B8%AD%E6%8A%98%E8%9C%95/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%9C%9C%E4%B8%AD%E6%8A%98%E8%9C%95/" class="tag-item tag-size-1 ">
                     <span class="tag-name">霜中折蜕</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%BB%AD%E5%85%B8/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%BB%AD%E5%85%B8/" class="tag-item tag-size-1 ">
                     <span class="tag-name">续典</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%9C%95%E5%8F%98/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%9C%95%E5%8F%98/" class="tag-item tag-size-1 ">
                     <span class="tag-name">蜕变</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%9B%A8%E5%90%8C%E9%80%94/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%A3%8E%E9%9B%A8%E5%90%8C%E9%80%94/" class="tag-item tag-size-1 ">
                     <span class="tag-name">风雨同途</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%9F%94%E5%89%91%E5%90%8C%E8%BD%AD/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%9F%94%E5%89%91%E5%90%8C%E8%BD%AD/" class="tag-item tag-size-1 ">
                     <span class="tag-name">柔剑同轭</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E6%81%8B%E8%8A%B1/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E8%9D%B6%E6%81%8B%E8%8A%B1/" class="tag-item tag-size-1 ">
                     <span class="tag-name">蝶恋花</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E7%A6%BB%E8%81%9A%E5%89%91%E7%AB%A0/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E7%A6%BB%E8%81%9A%E5%89%91%E7%AB%A0/" class="tag-item tag-size-1 ">
                     <span class="tag-name">离聚剑章</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E9%B9%A7%E9%B8%AA%E5%A4%A9/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E9%B9%A7%E9%B8%AA%E5%A4%A9/" class="tag-item tag-size-1 ">
                     <span class="tag-name">鹧鸪天</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E5%A4%9C%E6%80%9D/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E5%A4%9C%E6%80%9D/" class="tag-item tag-size-1 ">
                     <span class="tag-name">夜思</span>
                     <span class="tag-count">1</span>
                 </a>
             
-                <a href="/mokewenxue.github.io/tags/%E6%83%85%E6%84%81/" class="tag-item tag-size-1">
+                <a href="/mokewenxue.github.io/tags/%E6%83%85%E6%84%81/" class="tag-item tag-size-1 ">
                     <span class="tag-name">情愁</span>
                     <span class="tag-count">1</span>
                 </a>
@@ -1399,17 +1469,17 @@
                 document.body.style.opacity = '1';
             }, 100);
             
-            // 标签动画效果
+            // 标签动画效果 - 交错延迟
             const tagItems = document.querySelectorAll('.tag-item');
             tagItems.forEach((tag, index) => {
                 tag.style.opacity = '0';
-                tag.style.transform = 'translateY(20px) scale(0.8)';
+                tag.style.transform = 'translateY(15px) scale(0.95)';
                 
                 setTimeout(() => {
-                    tag.style.transition = 'all 0.5s ease';
+                    tag.style.transition = 'all 0.4s ease';
                     tag.style.opacity = '1';
                     tag.style.transform = 'translateY(0) scale(1)';
-                }, index * 30);
+                }, index * 20); // 更快的交错动画
             });
             
             // 设置当前激活状态
@@ -1426,6 +1496,17 @@
                    (currentPath.includes('/about') && href.includes('/about'))) {
                     item.classList.add('active');
                 }
+            });
+            
+            // 添加标签悬停效果增强
+            tagItems.forEach(tag => {
+                tag.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '100';
+                });
+                
+                tag.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
             });
         });
     </script>
