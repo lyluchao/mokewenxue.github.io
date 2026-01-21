@@ -3,36 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>剑阵阁 | 三级十二级布局</title>
+    <title>独自踏月行 | 月下独行的思考空间</title>
     
-    <!-- 优化字体 -->
+    <!-- 引入Google字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- 引入Font Awesome图标 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            /* 剑阵配色 - 暗黑剑阁风格 */
-            --nav-bg: #0d1117;
-            --nav-border: #1a1f29;
-            --nav-accent: #2a3441;
-            --primary-color: #7c3aed;
-            --primary-light: #8b5cf6;
-            --secondary-color: #0ea5e9;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --danger-color: #ef4444;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
+            /* 星河剑阵配色 */
+            --space-bg: #0a0a1a;
+            --space-dark: #121230;
+            --space-light: #1a1a40;
+            --star-color: #f0f4ff;
+            --nebula-purple: #8a2be2;
+            --nebula-blue: #4169e1;
+            --nebula-cyan: #00ffff;
+            --sword-gold: #ffd700;
+            --sword-silver: #c0c0c0;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b8ff;
+            --text-muted: #8888cc;
+            --border-color: #303060;
             
-            /* 间距系统 */
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 12px;
-            --space-lg: 16px;
-            --space-xl: 24px;
-            --space-2xl: 32px;
-            --space-3xl: 48px;
+            /* 紧凑间距 */
+            --gap-xs: 4px;
+            --gap-sm: 8px;
+            --gap-md: 12px;
+            --gap-lg: 16px;
+            --gap-xl: 20px;
+            --gap-2xl: 24px;
+            --gap-3xl: 32px;
         }
         
         * {
@@ -43,213 +46,327 @@
         
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: var(--space-bg);
             color: var(--text-primary);
             line-height: 1.5;
             min-height: 100vh;
-            display: flex;
             overflow-x: hidden;
+            display: flex;
         }
         
-        /* === 剑阵导航栏 === */
-        .sword-nav {
+        /* === 星河剑阵背景 === */
+        .sword-universe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(65, 105, 225, 0.15) 0%, transparent 40%),
+                linear-gradient(135deg, #0a0a1a 0%, #121230 50%, #1a1a40 100%);
+            overflow: hidden;
+        }
+        
+        /* 星星效果 */
+        .star {
+            position: absolute;
+            background-color: var(--star-color);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        .star.small { width: 1px; height: 1px; }
+        .star.medium { width: 2px; height: 2px; }
+        .star.large { width: 3px; height: 3px; }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* === 左侧三级十二级菜单 - 可折叠 === */
+        .left-sword-nav {
             width: 280px;
             min-height: 100vh;
-            background: var(--nav-bg);
-            border-right: 1px solid var(--nav-border);
+            background: rgba(18, 18, 48, 0.95);
+            border-right: 1px solid var(--border-color);
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: width 0.3s ease, transform 0.3s ease;
+            overflow: hidden;
         }
         
-        /* 导航顶部 - 剑阁标识 */
-        .nav-header {
-            padding: var(--space-xl) var(--space-lg);
-            border-bottom: 1px solid var(--nav-border);
+        /* 左侧菜单折叠状态 */
+        .left-sword-nav.collapsed {
+            width: 70px;
+        }
+        
+        .left-sword-nav.collapsed .left-nav-title,
+        .left-sword-nav.collapsed .left-nav-subtitle,
+        .left-sword-nav.collapsed .tier-title,
+        .left-sword-nav.collapsed .tier-count,
+        .left-sword-nav.collapsed .item-text,
+        .left-sword-nav.collapsed .item-badge,
+        .left-sword-nav.collapsed .copyright,
+        .left-sword-nav.collapsed .nav-toggle-text {
+            display: none !important;
+        }
+        
+        .left-sword-nav.collapsed .left-nav-header {
+            padding: var(--gap-lg) var(--gap-md);
+            justify-content: center;
+        }
+        
+        .left-sword-nav.collapsed .brand-logo {
+            margin-right: 0;
+        }
+        
+        .left-sword-nav.collapsed .tier-header {
+            justify-content: center;
+            padding: 0 0 var(--gap-md) 0;
+        }
+        
+        .left-sword-nav.collapsed .left-nav-item {
+            justify-content: center;
+            padding: var(--gap-md);
+        }
+        
+        .left-sword-nav.collapsed .item-icon {
+            margin-right: 0;
+            font-size: 1.1rem;
+        }
+        
+        .left-sword-nav.collapsed .nav-tier {
+            margin-bottom: var(--gap-xl);
+        }
+        
+        .left-sword-nav.collapsed .left-nav-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        /* 左侧菜单折叠控制 */
+        .left-nav-toggle {
+            position: absolute;
+            top: var(--gap-lg);
+            right: -12px;
+            width: 24px;
+            height: 24px;
+            background: var(--nebula-purple);
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: var(--space-md);
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: none;
         }
         
-        .nav-brand {
+        .left-nav-toggle:hover {
+            transform: scale(1.1);
+            background: var(--nebula-blue);
+        }
+        
+        /* 左侧菜单顶部 */
+        .left-nav-header {
+            padding: var(--gap-lg);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: var(--space-md);
-            text-decoration: none;
+            gap: var(--gap-md);
+            position: relative;
+            min-height: 80px;
         }
         
-        .brand-icon {
+        .brand-logo {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 8px;
+            background: linear-gradient(135deg, var(--nebula-purple), var(--nebula-blue));
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
             color: white;
-            position: relative;
-        }
-        
-        .brand-icon::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 10px;
-            z-index: -1;
-            opacity: 0.6;
-            filter: blur(4px);
+            flex-shrink: 0;
         }
         
         .brand-text {
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
         
-        .brand-title {
+        .left-nav-title {
             font-family: 'Ma Shan Zheng', cursive;
             font-size: 1.5rem;
-            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--sword-gold), var(--nebula-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: var(--gap-xs);
             line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        .brand-subtitle {
-            font-size: 0.75rem;
+        .left-nav-subtitle {
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            letter-spacing: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        /* 导航内容区域 */
-        .nav-content {
+        /* 左侧菜单内容 - 添加滚动条 */
+        .left-nav-content {
             flex: 1;
             overflow-y: auto;
-            padding: var(--space-lg) 0;
+            padding: var(--gap-lg);
             scrollbar-width: thin;
-            scrollbar-color: var(--nav-accent) transparent;
+            scrollbar-color: var(--nebula-blue) transparent;
+            max-height: calc(100vh - 180px);
         }
         
-        .nav-content::-webkit-scrollbar {
-            width: 4px;
+        .left-nav-content::-webkit-scrollbar {
+            width: 6px;
         }
         
-        .nav-content::-webkit-scrollbar-track {
+        .left-nav-content::-webkit-scrollbar-track {
             background: transparent;
+            border-radius: 3px;
         }
         
-        .nav-content::-webkit-scrollbar-thumb {
-            background-color: var(--nav-accent);
-            border-radius: 2px;
+        .left-nav-content::-webkit-scrollbar-thumb {
+            background: var(--nebula-blue);
+            border-radius: 3px;
+            opacity: 0.5;
+        }
+        
+        .left-nav-content::-webkit-scrollbar-thumb:hover {
+            background: var(--nebula-purple);
+            opacity: 0.8;
         }
         
         /* 三级结构 */
-        .nav-level {
-            margin-bottom: var(--space-2xl);
+        .nav-tier {
+            margin-bottom: var(--gap-2xl);
             position: relative;
         }
         
-        .nav-level:last-child {
+        .nav-tier:last-child {
             margin-bottom: 0;
         }
         
         /* 级标 */
-        .level-marker {
+        .tier-marker {
             position: absolute;
             left: -4px;
             top: 0;
             width: 4px;
             height: 100%;
             background: linear-gradient(to bottom, 
-                var(--primary-color) 0%,
-                var(--secondary-color) 50%,
-                var(--primary-color) 100%);
+                var(--nebula-purple) 0%,
+                var(--nebula-blue) 50%,
+                var(--nebula-purple) 100%);
             border-radius: 0 2px 2px 0;
         }
         
         /* 级标题 */
-        .level-header {
-            padding: 0 var(--space-lg) var(--space-md);
+        .tier-header {
+            padding: 0 0 var(--gap-md) var(--gap-lg);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
         
-        .level-title {
+        .tier-title {
             font-family: 'Ma Shan Zheng', cursive;
             font-size: 1.1rem;
             color: var(--text-primary);
             position: relative;
-            padding-left: var(--space-lg);
+            padding-left: var(--gap-md);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        .level-title::before {
+        .tier-title::before {
             content: '';
             position: absolute;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: var(--primary-color);
+            background: var(--nebula-purple);
         }
         
-        .level-indicator {
+        .tier-count {
             font-size: 0.8rem;
             color: var(--text-muted);
-            background: var(--nav-accent);
+            background: rgba(255, 255, 255, 0.1);
             padding: 2px 8px;
             border-radius: 10px;
+            white-space: nowrap;
         }
         
         /* 十二级项目 */
-        .level-items {
+        .tier-items {
             display: flex;
             flex-direction: column;
-            gap: var(--space-xs);
+            gap: var(--gap-xs);
         }
         
-        /* 导航项目 */
-        .nav-item {
+        /* 左侧菜单项 */
+        .left-nav-item {
             display: flex;
             align-items: center;
-            padding: var(--space-md) var(--space-lg);
+            padding: var(--gap-md) var(--gap-lg);
             text-decoration: none;
             color: var(--text-secondary);
             transition: all 0.2s ease;
             position: relative;
             border-left: 3px solid transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            user-select: none;
         }
         
-        .nav-item:hover {
-            background: rgba(124, 58, 237, 0.1);
+        .left-nav-item:hover {
+            background: rgba(138, 43, 226, 0.1);
             color: var(--text-primary);
-            border-left-color: var(--primary-light);
+            border-left-color: var(--nebula-purple);
         }
         
-        .nav-item.active {
-            background: rgba(124, 58, 237, 0.15);
+        .left-nav-item.active {
+            background: rgba(138, 43, 226, 0.15);
             color: var(--text-primary);
-            border-left-color: var(--primary-color);
+            border-left-color: var(--nebula-purple);
         }
         
-        .nav-item.active::before {
+        .left-nav-item.active::before {
             content: '';
             position: absolute;
             left: -1px;
             top: 0;
             bottom: 0;
             width: 2px;
-            background: var(--primary-color);
-            box-shadow: 0 0 8px var(--primary-color);
+            background: var(--nebula-purple);
+            box-shadow: 0 0 8px var(--nebula-purple);
         }
         
         .item-icon {
@@ -258,14 +375,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: var(--space-md);
+            margin-right: var(--gap-md);
             font-size: 0.9rem;
             color: var(--text-muted);
+            flex-shrink: 0;
         }
         
-        .nav-item:hover .item-icon,
-        .nav-item.active .item-icon {
-            color: var(--primary-light);
+        .left-nav-item:hover .item-icon,
+        .left-nav-item.active .item-icon {
+            color: var(--nebula-purple);
         }
         
         .item-text {
@@ -279,937 +397,2442 @@
         
         .item-badge {
             font-size: 0.7rem;
-            background: var(--nav-accent);
+            background: rgba(255, 255, 255, 0.1);
             color: var(--text-muted);
             padding: 2px 6px;
             border-radius: 8px;
-            margin-left: var(--space-sm);
+            margin-left: var(--gap-sm);
+            flex-shrink: 0;
         }
         
-        /* 特殊状态 */
-        .item-danger .item-icon {
-            color: var(--danger-color);
+        /* 左侧菜单底部 */
+        .left-nav-footer {
+            padding: var(--gap-lg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            margin-top: auto;
         }
         
-        .item-success .item-icon {
-            color: var(--success-color);
+        .left-nav-footer .copyright {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
         }
         
-        .item-warning .item-icon {
-            color: var(--warning-color);
-        }
-        
-        /* 导航底部 */
-        .nav-footer {
-            padding: var(--space-lg);
-            border-top: 1px solid var(--nav-border);
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-        }
-        
-        .nav-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--space-sm);
-            background: var(--nav-accent);
-            color: var(--text-secondary);
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-        }
-        
-        .nav-toggle:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-sm);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.9rem;
-        }
-        
-        .user-details {
-            flex: 1;
-            overflow: hidden;
-        }
-        
-        .user-name {
-            font-size: 0.9rem;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .user-status {
-            font-size: 0.7rem;
-            color: var(--success-color);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        /* 主内容区域 */
+        /* === 主内容区域 === */
         .main-content {
             flex: 1;
             margin-left: 280px;
             min-height: 100vh;
-            padding: var(--space-2xl);
-            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            transition: margin-left 0.3s ease;
         }
         
-        /* 内容头部 */
-        .content-header {
+        .left-sword-nav.collapsed ~ .main-content {
+            margin-left: 70px;
+        }
+        
+        /* 顶部翻转导航卡片区域 - 可折叠 */
+        .top-flip-nav {
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        
+        .flip-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--gap-lg);
+        }
+        
+        /* 折叠控制栏 */
+        .flip-nav-control {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--space-2xl);
-            padding-bottom: var(--space-lg);
+            padding: var(--gap-md) 0;
+            cursor: pointer;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .control-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--gap-sm);
+        }
+        
+        .control-toggle {
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--nebula-purple);
+            border: 1px solid var(--nebula-purple);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            outline: none;
+        }
+        
+        .control-toggle:hover {
+            background: rgba(138, 43, 226, 0.3);
+        }
+        
+        /* 翻转导航网格 */
+        .flip-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--gap-md);
+            padding: var(--gap-lg) 0;
+            transition: all 0.3s ease;
+            max-height: 1000px;
+            overflow: hidden;
+            opacity: 1;
+        }
+        
+        /* 折叠状态 */
+        .top-flip-nav.collapsed .flip-nav-grid {
+            max-height: 0;
+            padding: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .top-flip-nav.collapsed .control-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        @media (max-width: 1200px) {
+            .flip-nav-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .flip-nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 翻转卡片 */
+        .flip-card-wrapper {
+            perspective: 1000px;
+            height: 120px;
+            text-decoration: none;
+        }
+        
+        .flip-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .flip-card:hover {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--gap-md);
+        }
+        
+        .flip-front {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(65, 105, 225, 0.2));
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .flip-back {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(65, 105, 225, 0.3));
+            border: 1px solid var(--nebula-purple);
+            color: var(--text-primary);
+            transform: rotateY(180deg);
+        }
+        
+        .flip-icon {
+            font-size: 2rem;
+            margin-bottom: var(--gap-sm);
+        }
+        
+        .flip-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: var(--gap-xs);
+        }
+        
+        .flip-desc {
+            font-size: 0.85rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        /* 紧凑内容区域 */
+        .compact-content {
+            flex: 1;
+            max-width: 1200px;
+            margin: var(--gap-xl) auto;
+            padding: 0 var(--gap-lg);
+            width: 100%;
+        }
+        
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--gap-2xl);
+            padding: var(--gap-lg);
+            background: rgba(26, 26, 64, 0.5);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
         
         .page-title {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 2rem;
-            color: var(--text-primary);
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--sword-gold), var(--nebula-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: var(--gap-sm);
         }
         
         .page-subtitle {
             font-size: 1rem;
             color: var(--text-secondary);
-            margin-top: var(--space-xs);
+            max-width: 600px;
+            margin: 0 auto;
         }
         
-        .content-actions {
-            display: flex;
-            gap: var(--space-md);
-        }
-        
-        .action-btn {
-            padding: var(--space-md) var(--space-lg);
-            background: var(--nav-accent);
-            color: var(--text-primary);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            font-size: 0.9rem;
-            transition: all 0.2s;
-        }
-        
-        .action-btn:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        
-        /* 剑阵内容网格 */
-        .sword-grid {
+        /* 紧凑诗卷网格 - 每行5个 */
+        .compact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-2xl);
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--gap-md);
         }
         
-        .sword-card {
-            background: rgba(30, 41, 59, 0.7);
-            border-radius: 12px;
-            padding: var(--space-xl);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
+        @media (max-width: 1200px) {
+            .compact-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .compact-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .compact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .compact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 紧凑诗卷卡片 */
+        .compact-card {
+            background: rgba(26, 26, 64, 0.7);
+            border-radius: 10px;
+            padding: var(--gap-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
-        .sword-card::before {
+        .compact-card.filtered {
+            animation: highlightPulse 0.6s ease;
+        }
+        
+        @keyframes highlightPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); box-shadow: 0 0 20px var(--nebula-purple); }
+            100% { transform: scale(1); }
+        }
+        
+        .compact-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, var(--nebula-purple), var(--nebula-blue));
         }
         
-        .sword-card:hover {
+        .compact-card:hover {
             transform: translateY(-5px);
-            border-color: var(--primary-light);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--nebula-cyan);
+            box-shadow: 0 10px 25px rgba(0, 0, 255, 0.3);
         }
         
         .card-header {
             display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-lg);
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--gap-md);
         }
         
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            background: rgba(124, 58, 237, 0.2);
+        .card-date {
+            color: var(--text-muted);
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--primary-light);
+            gap: 4px;
+        }
+        
+        .card-category {
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--nebula-purple);
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
         }
         
         .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.1rem;
             color: var(--text-primary);
+            margin-bottom: var(--gap-md);
+            line-height: 1.4;
+            flex: 1;
         }
         
-        .card-desc {
+        .card-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .card-title a:hover {
+            color: var(--sword-gold);
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: var(--gap-md);
+        }
+        
+        .card-tag {
+            background: rgba(65, 105, 225, 0.15);
+            color: var(--nebula-blue);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            text-decoration: none;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+            cursor: pointer;
+        }
+        
+        .card-tag:hover {
+            background: rgba(65, 105, 225, 0.3);
+        }
+        
+        .card-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: var(--gap-md);
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .card-author {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .read-btn {
+            color: var(--nebula-cyan);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .read-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: var(--nebula-cyan);
+        }
+        
+        /* 分页 */
+        .compact-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--gap-md);
+            margin: var(--gap-xl) 0;
+            padding: var(--gap-lg);
+            background: rgba(26, 26, 64, 0.5);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .page-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .page-link.prev {
+            background: rgba(26, 26, 64, 0.7);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .page-link.next {
+            background: linear-gradient(135deg, var(--nebula-purple), var(--nebula-blue));
+            color: white;
+        }
+        
+        .page-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .page-link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .page-info {
             color: var(--text-secondary);
             font-size: 0.9rem;
+            padding: 6px 12px;
+            background: rgba(10, 10, 26, 0.5);
+            border-radius: 8px;
+        }
+        
+        /* 页脚 */
+        .sword-footer {
+            background: rgba(10, 10, 26, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: var(--gap-xl) 0;
+            margin-top: var(--gap-xl);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--gap-lg);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--gap-xl);
+            margin-bottom: var(--gap-lg);
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--nebula-cyan);
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
             line-height: 1.6;
         }
         
-        .card-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: var(--space-lg);
-            padding-top: var(--space-md);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        
-        /* 紧凑表格 */
-        .compact-table {
-            width: 100%;
-            margin-top: var(--space-2xl);
-            background: rgba(30, 41, 59, 0.7);
+        /* 无文章样式 */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--gap-xl);
+            background: rgba(26, 26, 64, 0.5);
             border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px dashed var(--border-color);
         }
         
-        .table-header {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: var(--space-lg);
-            background: rgba(15, 23, 42, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 600;
+        .empty-icon {
+            font-size: 3rem;
+            color: var(--sword-gold);
+            margin-bottom: var(--gap-md);
+            opacity: 0.6;
+        }
+        
+        .empty-state h3 {
             color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: var(--gap-sm);
         }
         
-        .table-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: var(--space-lg);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.2s;
-        }
-        
-        .table-row:hover {
-            background: rgba(124, 58, 237, 0.05);
-        }
-        
-        .table-row:last-child {
-            border-bottom: none;
+        .empty-state p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
         }
         
         /* 响应式设计 */
         @media (max-width: 1200px) {
-            .sword-nav {
+            .left-sword-nav {
                 width: 240px;
+            }
+            
+            .left-sword-nav.collapsed {
+                width: 60px;
             }
             
             .main-content {
                 margin-left: 240px;
             }
             
-            .sword-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            .left-sword-nav.collapsed ~ .main-content {
+                margin-left: 60px;
             }
         }
         
         @media (max-width: 768px) {
-            .sword-nav {
+            .left-sword-nav {
                 transform: translateX(-100%);
+                transition: transform 0.3s ease, width 0.3s ease;
             }
             
-            .sword-nav.active {
+            .left-sword-nav.active {
+                transform: translateX(0);
+            }
+            
+            .left-sword-nav.collapsed {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+            
+            .left-sword-nav.collapsed.active {
                 transform: translateX(0);
             }
             
             .main-content {
                 margin-left: 0;
-                padding: var(--space-lg);
             }
             
-            .content-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--space-lg);
-            }
-            
-            .nav-toggle {
+            .mobile-menu-toggle {
                 position: fixed;
-                top: var(--space-lg);
-                right: var(--space-lg);
+                top: var(--gap-lg);
+                right: var(--gap-lg);
                 z-index: 1001;
-                background: var(--primary-color);
+                background: var(--nebula-purple);
                 color: white;
                 width: 40px;
                 height: 40px;
                 border-radius: 50%;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                cursor: pointer;
             }
         }
         
-        /* 导航折叠状态 */
-        .sword-nav.collapsed {
-            width: 80px;
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
         
-        .sword-nav.collapsed .brand-text,
-        .sword-nav.collapsed .level-title,
-        .sword-nav.collapsed .item-text,
-        .sword-nav.collapsed .item-badge,
-        .sword-nav.collapsed .level-indicator,
-        .sword-nav.collapsed .user-details,
-        .sword-nav.collapsed .nav-toggle span {
-            display: none;
+        ::-webkit-scrollbar-track {
+            background: var(--space-dark);
         }
         
-        .sword-nav.collapsed .nav-brand {
-            justify-content: center;
+        ::-webkit-scrollbar-thumb {
+            background: var(--space-light);
+            border-radius: 4px;
         }
         
-        .sword-nav.collapsed .level-header {
-            justify-content: center;
-            padding: 0 var(--space-md) var(--space-md);
-        }
-        
-        .sword-nav.collapsed .nav-item {
-            justify-content: center;
-            padding: var(--space-md);
-        }
-        
-        .sword-nav.collapsed .item-icon {
-            margin-right: 0;
-        }
-        
-        .sword-nav.collapsed .main-content {
-            margin-left: 80px;
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--nebula-blue);
         }
         
         /* 动画效果 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .sword-card {
-            animation: fadeIn 0.5s ease-out;
+        .compact-card {
+            animation: fadeInUp 0.6s ease-out;
         }
         
-        .sword-card:nth-child(2) { animation-delay: 0.1s; }
-        .sword-card:nth-child(3) { animation-delay: 0.2s; }
-        .sword-card:nth-child(4) { animation-delay: 0.3s; }
-        .sword-card:nth-child(5) { animation-delay: 0.4s; }
-        .sword-card:nth-child(6) { animation-delay: 0.5s; }
-        
-        /* 剑阵特效 */
-        .sword-effect {
-            position: fixed;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .effect-1 {
-            top: 20%;
-            left: 10%;
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            transform: rotate(45deg);
-            opacity: 0.1;
-        }
-        
-        .effect-2 {
-            bottom: 30%;
-            right: 15%;
-            width: 150px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
-            transform: rotate(-30deg);
-            opacity: 0.1;
-        }
+        .compact-card:nth-child(2) { animation-delay: 0.1s; }
+        .compact-card:nth-child(3) { animation-delay: 0.2s; }
+        .compact-card:nth-child(4) { animation-delay: 0.3s; }
+        .compact-card:nth-child(5) { animation-delay: 0.4s; }
+        .compact-card:nth-child(6) { animation-delay: 0.5s; }
+        .compact-card:nth-child(7) { animation-delay: 0.6s; }
+        .compact-card:nth-child(8) { animation-delay: 0.7s; }
+        .compact-card:nth-child(9) { animation-delay: 0.8s; }
+        .compact-card:nth-child(10) { animation-delay: 0.9s; }
     </style>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/mokewenxue.github.io/atom.xml" title="独自踏月行" type="application/atom+xml">
 </head>
 <body>
-    <!-- 剑阵特效 -->
-    <div class="sword-effect effect-1"></div>
-    <div class="sword-effect effect-2"></div>
+    <!-- 星河剑阵背景 -->
+    <div class="sword-universe" id="swordUniverse"></div>
     
-    <!-- 左侧剑阵导航栏 -->
-    <nav class="sword-nav">
-        <!-- 导航顶部 -->
-        <div class="nav-header">
-            <a href="#" class="nav-brand">
-                <div class="brand-icon">
-                    <i class="fas fa-crossed-swords"></i>
-                </div>
-                <div class="brand-text">
-                    <div class="brand-title">剑阵阁</div>
-                    <div class="brand-subtitle">SWORD ARRAY</div>
-                </div>
-            </a>
+    <!-- 左侧三级十二级菜单 - 可折叠 -->
+    <nav class="left-sword-nav" id="leftSwordNav">
+        <!-- 折叠控制按钮 -->
+        <button class="left-nav-toggle" id="leftNavToggle">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="left-nav-header">
+            <div class="brand-logo">
+                <i class="fas fa-crossed-swords"></i>
+            </div>
+            <div class="brand-text">
+                <div class="left-nav-title">独自踏月行</div>
+                <div class="left-nav-subtitle">月下独行的思考空间</div>
+            </div>
         </div>
         
-        <!-- 导航内容 -->
-        <div class="nav-content">
-            <!-- 第一级：剑阵主级 -->
-            <div class="nav-level">
-                <div class="level-marker"></div>
-                <div class="level-header">
-                    <div class="level-title">剑阵主级</div>
-                    <span class="level-indicator">十二式</span>
+        <div class="left-nav-content">
+            <!-- 第一级：剑阵主级 - 十二卷 -->
+            <div class="nav-tier">
+                <div class="tier-marker"></div>
+                <div class="tier-header">
+                    <div class="tier-title">剑阵主级</div>
+                    <span class="tier-count">十二卷</span>
                 </div>
-                <div class="level-items">
-                    <a href="#" class="nav-item active">
+                <div class="tier-items">
+                    <div class="left-nav-item active" data-filter="all" data-filter-type="all">
                         <div class="item-icon">
-                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-globe"></i>
                         </div>
-                        <div class="item-text">天枢剑式</div>
-                        <span class="item-badge">主</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-moon"></i>
-                        </div>
-                        <div class="item-text">天璇剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="item-text">天玑剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                        <div class="item-text">天权剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-mountain"></i>
-                        </div>
-                        <div class="item-text">玉衡剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-water"></i>
-                        </div>
-                        <div class="item-text">开阳剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-wind"></i>
-                        </div>
-                        <div class="item-text">摇光剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <div class="item-text">全部诗卷</div>
+                        <span class="item-badge" id="all-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="心火" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-fire"></i>
                         </div>
-                        <div class="item-text">破军剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <div class="item-text">第一卷·《心火》</div>
+                        <span class="item-badge" id="heart-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="醉铸" data-filter-type="main">
+                        <div class="item-icon">
+                            <i class="fas fa-wine-bottle"></i>
+                        </div>
+                        <div class="item-text">第二卷·《醉铸》</div>
+                        <span class="item-badge" id="drunk-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="萍魄" data-filter-type="main">
+                        <div class="item-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="item-text">第三卷·《萍魄》</div>
+                        <span class="item-badge" id="duckweed-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="清怀" data-filter-type="main">
+                        <div class="item-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="item-text">第四卷·《清怀》</div>
+                        <span class="item-badge" id="pure-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="知契" data-filter-type="main">
+                        <div class="item-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="item-text">第五卷·《知契》</div>
+                        <span class="item-badge" id="know-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="墨锋" data-filter-type="main">
+                        <div class="item-icon">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <div class="item-text">第六卷·《墨锋》</div>
+                        <span class="item-badge" id="ink-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="擎乾" data-filter-type="main">
+                        <div class="item-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="item-text">第七卷·《擎乾》</div>
+                        <span class="item-badge" id="support-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="秋律" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-leaf"></i>
                         </div>
-                        <div class="item-text">贪狼剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <div class="item-text">第八卷·《秋律》</div>
+                        <span class="item-badge" id="autumn-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="双刃" data-filter-type="main">
                         <div class="item-icon">
-                            <i class="fas fa-gem"></i>
+                            <i class="fas fa-swords"></i>
                         </div>
-                        <div class="item-text">武曲剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <div class="item-text">第九卷·《双刃》</div>
+                        <span class="item-badge" id="double-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="揽星" data-filter-type="main">
                         <div class="item-icon">
-                            <i class="fas fa-bolt"></i>
+                            <i class="fas fa-star"></i>
                         </div>
-                        <div class="item-text">廉贞剑式</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <div class="item-text">第十卷·《揽星》</div>
+                        <span class="item-badge" id="star-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="踏月" data-filter-type="main">
                         <div class="item-icon">
-                            <i class="fas fa-feather-alt"></i>
+                            <i class="fas fa-moon"></i>
                         </div>
-                        <div class="item-text">巨门剑式</div>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- 第二级：剑阵次位 -->
-            <div class="nav-level">
-                <div class="level-marker"></div>
-                <div class="level-header">
-                    <div class="level-title">剑阵次位</div>
-                    <span class="level-indicator">十二式</span>
-                </div>
-                <div class="level-items">
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div class="item-text">御守剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <div class="item-text">瞄准剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-sync-alt"></i>
-                        </div>
-                        <div class="item-text">流转剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                        </div>
-                        <div class="item-text">扩展剑位</div>
-                    </a>
-                    <a href="#" class="nav-item item-warning">
-                        <div class="item-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="item-text">警戒剑位</div>
-                        <span class="item-badge">!</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-redo"></i>
-                        </div>
-                        <div class="item-text">循环剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-compress-arrows-alt"></i>
-                        </div>
-                        <div class="item-text">收缩剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-random"></i>
-                        </div>
-                        <div class="item-text">变换剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-layer-group"></i>
-                        </div>
-                        <div class="item-text">层叠剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <div class="item-text">第十一卷·《踏月》</div>
+                        <span class="item-badge" id="moon-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="周天圆满" data-filter-type="main">
                         <div class="item-icon">
                             <i class="fas fa-infinity"></i>
                         </div>
-                        <div class="item-text">无尽剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <div class="item-text">第十二极·周天圆满</div>
+                        <span class="item-badge">终</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 第二级：剑阵次位 - 蚀剑学与诗文 -->
+            <div class="nav-tier">
+                <div class="tier-marker"></div>
+                <div class="tier-header">
+                    <div class="tier-title">剑阵次位</div>
+                    <span class="tier-count">二道</span>
+                </div>
+                <div class="tier-items">
+                    <div class="left-nav-item" data-filter="蚀剑学" data-filter-type="secondary">
                         <div class="item-icon">
-                            <i class="fas fa-crosshairs"></i>
+                            <i class="fas fa-sword"></i>
                         </div>
-                        <div class="item-text">锁定剑位</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <div class="item-text">蚀剑学</div>
+                        <span class="item-badge" id="sword-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="诗文" data-filter-type="secondary">
                         <div class="item-icon">
-                            <i class="fas fa-undo"></i>
+                            <i class="fas fa-scroll"></i>
                         </div>
-                        <div class="item-text">回环剑位</div>
-                    </a>
+                        <div class="item-text">诗文</div>
+                        <span class="item-badge" id="poem-count">0</span>
+                    </div>
                 </div>
             </div>
             
             <!-- 第三级：剑阵修练 -->
-            <div class="nav-level">
-                <div class="level-marker"></div>
-                <div class="level-header">
-                    <div class="level-title">剑阵修练</div>
-                    <span class="level-indicator">十二境</span>
+            <div class="nav-tier">
+                <div class="tier-marker"></div>
+                <div class="tier-header">
+                    <div class="tier-title">剑阵修练</div>
+                    <span class="tier-count">八境</span>
                 </div>
-                <div class="level-items">
-                    <a href="#" class="nav-item item-success">
+                <div class="tier-items">
+                    <div class="left-nav-item" data-filter="筑基境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-seedling"></i>
                         </div>
                         <div class="item-text">筑基境</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <span class="item-badge" id="foundation-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="炼气境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
                         <div class="item-text">炼气境</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <span class="item-badge" id="qi-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="凝神境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-meteor"></i>
                         </div>
                         <div class="item-text">凝神境</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <span class="item-badge" id="spirit-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="金丹境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-atom"></i>
                         </div>
                         <div class="item-text">金丹境</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <span class="item-badge" id="golden-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="元婴境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-brain"></i>
                         </div>
                         <div class="item-text">元婴境</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <span class="item-badge" id="infant-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="化神境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-crown"></i>
                         </div>
                         <div class="item-text">化神境</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <span class="item-badge" id="god-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="合体境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-dragon"></i>
                         </div>
                         <div class="item-text">合体境</div>
-                    </a>
-                    <a href="#" class="nav-item">
+                        <span class="item-badge" id="merge-count">0</span>
+                    </div>
+                    <div class="left-nav-item" data-filter="大乘境" data-filter-type="practice">
                         <div class="item-icon">
                             <i class="fas fa-feather"></i>
                         </div>
                         <div class="item-text">大乘境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-jedi"></i>
-                        </div>
-                        <div class="item-text">渡劫境</div>
-                    </a>
-                    <a href="#" class="nav-item item-danger">
-                        <div class="item-icon">
-                            <i class="fas fa-skull-crossbones"></i>
-                        </div>
-                        <div class="item-text">陨落境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-recycle"></i>
-                        </div>
-                        <div class="item-text">轮回境</div>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <div class="item-icon">
-                            <i class="fas fa-infinity"></i>
-                        </div>
-                        <div class="item-text">永恒境</div>
-                        <span class="item-badge">终</span>
-                    </a>
+                        <span class="item-badge" id="great-count">0</span>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- 导航底部 -->
-        <div class="nav-footer">
-            <div class="user-info">
-                <div class="user-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-details">
-                    <div class="user-name">剑阁主人</div>
-                    <div class="user-status">
-                        <i class="fas fa-circle"></i>
-                        在线
-                    </div>
-                </div>
+        <div class="left-nav-footer">
+            <div class="copyright">
+                © 2026<br>
+                剑气长存<br>
+                墨韵永驻
             </div>
-            
-            <button class="nav-toggle" id="navToggle">
-                <i class="fas fa-chevron-left"></i>
-                <span>收起导航</span>
-            </button>
         </div>
     </nav>
     
+    <!-- 移动端菜单切换按钮 -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
     <!-- 主内容区域 -->
     <main class="main-content">
-        <div class="content-header">
-            <div>
-                <h1 class="page-title">剑阵总览</h1>
-                <p class="page-subtitle">三级十二级布局 · 三十六式剑阵演化</p>
-            </div>
-            <div class="content-actions">
-                <button class="action-btn">
-                    <i class="fas fa-plus"></i>
-                    新增剑式
-                </button>
-                <button class="action-btn">
-                    <i class="fas fa-cogs"></i>
-                    阵法设置
-                </button>
-                <button class="action-btn" id="mobileToggle">
-                    <i class="fas fa-bars"></i>
-                    菜单
-                </button>
-            </div>
-        </div>
-        
-        <!-- 剑阵状态卡片 -->
-        <div class="sword-grid">
-            <div class="sword-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-sun"></i>
+        <!-- 顶部翻转导航卡片 - 可折叠 -->
+        <div class="top-flip-nav collapsed" id="topFlipNav">
+            <div class="flip-nav-container">
+                <!-- 折叠控制栏 -->
+                <div class="flip-nav-control" id="flipNavControl">
+                    <div class="control-title">
+                        <i class="fas fa-chevron-down"></i>
+                        剑阵导航
                     </div>
-                    <div class="card-title">天枢剑阵</div>
+                    <button class="control-toggle" id="flipNavToggle">
+                        <span class="nav-toggle-text">展开导航</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
                 </div>
-                <p class="card-desc">
-                    主攻剑阵，以天枢星为核心，剑气如烈日灼空，威力无匹。
-                </p>
-                <div class="card-stats">
-                    <div class="stat">
-                        <div class="stat-value">12</div>
-                        <div class="stat-label">剑式</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">9</div>
-                        <div class="stat-label">修习者</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">96%</div>
-                        <div class="stat-label">完成度</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sword-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="card-title">御守剑阵</div>
-                </div>
-                <p class="card-desc">
-                    防御剑阵，剑气如盾，层层叠加，可抵御万钧之力。
-                </p>
-                <div class="card-stats">
-                    <div class="stat">
-                        <div class="stat-value">8</div>
-                        <div class="stat-label">剑式</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">14</div>
-                        <div class="stat-label">修习者</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">88%</div>
-                        <div class="stat-label">完成度</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sword-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <div class="card-title">流转剑阵</div>
-                </div>
-                <p class="card-desc">
-                    变化剑阵，剑气流转不息，随敌而动，变化万千。
-                </p>
-                <div class="card-stats">
-                    <div class="stat">
-                        <div class="stat-value">15</div>
-                        <div class="stat-label">剑式</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">7</div>
-                        <div class="stat-label">修习者</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">75%</div>
-                        <div class="stat-label">完成度</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sword-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <div class="card-title">筑基境修练</div>
-                </div>
-                <p class="card-desc">
-                    剑道初阶，打牢基础，剑气初成，需勤加练习。
-                </p>
-                <div class="card-stats">
-                    <div class="stat">
-                        <div class="stat-value">36</div>
-                        <div class="stat-label">修习者</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">通过率</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">3月</div>
-                        <div class="stat-label">平均耗时</div>
-                    </div>
+                
+                <!-- 翻转导航网格 -->
+                <div class="flip-nav-grid">
+                    <a href="/mokewenxue.github.io/archives" class="flip-card-wrapper">
+                        <div class="flip-card">
+                            <div class="flip-front">
+                                <div class="flip-icon">🗃️</div>
+                                <div class="flip-title">诗卷归档</div>
+                                <div class="flip-desc">岁月留痕</div>
+                            </div>
+                            <div class="flip-back">
+                                <div class="flip-title">永恒收藏</div>
+                                <div class="flip-desc">时光印记</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="/mokewenxue.github.io/categories" class="flip-card-wrapper">
+                        <div class="flip-card">
+                            <div class="flip-front">
+                                <div class="flip-icon">🏛️</div>
+                                <div class="flip-title">剑阵分类</div>
+                                <div class="flip-desc">十二极分</div>
+                            </div>
+                            <div class="flip-back">
+                                <div class="flip-title">周天体系</div>
+                                <div class="flip-desc">剑阵枢机</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="/mokewenxue.github.io/tags" class="flip-card-wrapper">
+                        <div class="flip-card">
+                            <div class="flip-front">
+                                <div class="flip-icon">🏷️</div>
+                                <div class="flip-title">词牌索引</div>
+                                <div class="flip-desc">剑意标签</div>
+                            </div>
+                            <div class="flip-back">
+                                <div class="flip-title">剑谱索引</div>
+                                <div class="flip-desc">词牌为刃</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="/mokewenxue.github.io/about/" class="flip-card-wrapper">
+                        <div class="flip-card">
+                            <div class="flip-front">
+                                <div class="flip-icon">📖</div>
+                                <div class="flip-title">诗阁缘起</div>
+                                <div class="flip-desc">创作心法</div>
+                            </div>
+                            <div class="flip-back">
+                                <div class="flip-title">剑阵源流</div>
+                                <div class="flip-desc">文脉传承</div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
         
-        <!-- 剑阵修练进度 -->
-        <div class="compact-table">
-            <div class="table-header">
-                <div>剑阵名称</div>
-                <div>当前修习者</div>
-                <div>完成度</div>
-                <div>下次演化</div>
+        <!-- 紧凑内容区域 -->
+        <div class="compact-content">
+            <div class="page-header">
+                <h1 class="page-title">星河剑阵</h1>
+                <p class="page-subtitle">剑气凌云霄，诗魂贯古今 · 月明千里照，墨韵万年存</p>
+                
+                <!-- 筛选状态显示 -->
+                <div id="filterStatus" style="margin-top: 15px; display: none;">
+                    <div style="background: rgba(138, 43, 226, 0.1); padding: 8px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(138, 43, 226, 0.3);">
+                        <span id="filterText">当前筛选：全部诗卷</span>
+                        <button id="clearFilter" style="background: rgba(65, 105, 225, 0.2); color: var(--nebula-blue); border: 1px solid var(--nebula-blue); padding: 3px 10px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; transition: all 0.3s;">
+                            清除筛选
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="table-row">
-                <div>天枢剑阵</div>
-                <div>9人</div>
-                <div>96%</div>
-                <div>3天后</div>
+            
+            <!-- 紧凑诗卷网格 -->
+            <div class="compact-grid" id="articleGrid">
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,萍魄卷宗">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    6-20
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第四极《萍魄》卷宗·正典首章》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="周天十二极">周天十二极</span>
+                                
+                                    <span class="card-tag" data-tag="萍魄卷宗">萍魄卷宗</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+第四极《萍魄》卷宗·正典首章
+
+
+
+惊鸿锻雾锋，初逢即开刃天地皆炉冶，痕过魂自臻
+
+
+
+甲等极品·缘法正典
+
+
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/06/20/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E5%9B%9B%E6%9E%81-%E8%90%8D%E9%AD%84-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="孤影,三绝赋,清辉">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    6-15
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/">《孤影清辉三绝赋》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="孤影">孤影</span>
+                                
+                                    <span class="card-tag" data-tag="三绝赋">三绝赋</span>
+                                
+                                    <span class="card-tag" data-tag="清辉">清辉</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+孤影清辉三绝赋
+
+
+
+影与光相照，旅与禅相缠，迹与心相融
+
+
+
+漂泊·禅思·归寂
+
+
+
+
+
+
+三词为基，三境合一
+
+|
+
+
+乙巳年冬，三绝成赋
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/06/15/%E5%AD%A4%E5%BD%B1%E6%B8%85%E8%BE%89%E4%B8%89%E7%BB%9D%E8%B5%8B/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,锻造,剑赋">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    6-1
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/">《星河剑赋》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="锻造">锻造</span>
+                                
+                                    <span class="card-tag" data-tag="剑赋">剑赋</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+&#39;);&#34;&gt;
+
+
+星河剑赋
+
+
+
+汉语为薪，燃十二极之焰；周天为炉，锻万法归一之锋
+
+
+
+创世·锻造·证道
+
+
+
+
+
+
+结构：1+12+1圆满体系
+
+⚔️...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/06/01/%E6%98%9F%E6%B2%B3%E5%89%91%E8%B5%8B/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,墨锋卷宗">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    5-15
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第七极《墨锋》卷宗·正典首章》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="周天十二极">周天十二极</span>
+                                
+                                    <span class="card-tag" data-tag="墨锋卷宗">墨锋卷宗</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+第七极《墨锋》卷宗·正典首章
+
+
+
+秃笔锻魂兮，素笺烙霞墨锋所指兮，皆是吾家
+
+
+
+甲等极品·文脉正典
+
+
+
+
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%B8%83%E6%9E%81-%E5%A2%A8%E9%94%8B-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,清怀卷宗">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    5-15
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/">《周天十二极·第五极《清怀》卷宗·正典首章》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="周天十二极">周天十二极</span>
+                                
+                                    <span class="card-tag" data-tag="清怀卷宗">清怀卷宗</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+星河剑阵·周天十二极卷宗
+
+
+第五极《清怀》卷宗·正典首章
+
+
+
+漏声锻夜兮，清怀为砧清怀撑剑兮，星河自钦
+
+
+
+甲等极品·风骨正典
+
+
+
+
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/05/15/%E5%91%A8%E5%A4%A9%E5%8D%81%E4%BA%8C%E6%9E%81-%E7%AC%AC%E4%BA%94%E6%9E%81-%E6%B8%85%E6%80%80-%E5%8D%B7%E5%AE%97%E6%AD%A3%E5%85%B8%E9%A6%96%E7%AB%A0/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,立法总枢,宪法">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    5-15
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/">《星河剑阵·立法总枢档案》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="立法总枢">立法总枢</span>
+                                
+                                    <span class="card-tag" data-tag="宪法">宪法</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+星河剑阵·立法总枢档案
+
+
+
+总纲天则剑经
+
+
+登霄纵海本
+
+
+
+乾坤为砧兮，玄黄锻锋芒狂啸开天兮，新纪待华章
+
+
+
+根本大法·剑阵宪法
+
+
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/05/15/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E7%AB%8B%E6%B3%95%E6%80%BB%E6%9E%A2%E6%A1%A3%E6%A1%88/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="宋词,孤寂,戚氏">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    4-5
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/04/05/%E6%88%9A%E6%B0%8F-%E8%BD%BB/">《戚氏·轻》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="宋词">宋词</span>
+                                
+                                    <span class="card-tag" data-tag="孤寂">孤寂</span>
+                                
+                                    <span class="card-tag" data-tag="戚氏">戚氏</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+戚氏·轻
+
+
+
+夜沉沉，一灯摇影到天心青灯影外，长风袖底，万籁俱沉
+
+
+
+宋词长调 · 禅意之境
+
+
+
+
+
+
+2026-04-05
+
+|
+
+
+原创...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/04/05/%E6%88%9A%E6%B0%8F-%E8%BD%BB/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="宋词,孤怀,虞美人">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    4-5
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/04/05/%E8%99%9E%E7%BE%8E%E4%BA%BA-%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/">《虞美人·孤怀婵娟》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="宋词">宋词</span>
+                                
+                                    <span class="card-tag" data-tag="孤怀">孤怀</span>
+                                
+                                    <span class="card-tag" data-tag="虞美人">虞美人</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+虞美人·孤怀婵娟
+
+
+
+苔痕暗锁阶前月，千山不语对婵娟
+
+
+
+宋词 · 孤怀之思
+
+
+
+
+
+
+2026-04-05
+
+|
+
+
+原创词作
+
+|
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/04/05/%E8%99%9E%E7%BE%8E%E4%BA%BA-%E5%AD%A4%E6%80%80%E5%A9%B5%E5%A8%9F/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="宋词,江湖,声声慢">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    3-10
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/03/10/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/">《声声慢·断鸿寒影》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="宋词">宋词</span>
+                                
+                                    <span class="card-tag" data-tag="江湖">江湖</span>
+                                
+                                    <span class="card-tag" data-tag="声声慢">声声慢</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+声声慢·断鸿寒影
+
+
+
+萧萧霜阶，沉沉残漏雪满霜鬓，影落孤江
+
+
+
+宋词 · 江湖之思
+
+
+
+
+
+
+2026-03-10
+
+|
+
+
+原创词作
+
+|...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/03/10/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E6%96%AD%E9%B8%BF%E5%AF%92%E5%BD%B1/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="宋词,八声甘州,孤馆秋">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    3-10
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/03/10/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E-%E5%AD%A4%E9%A6%86%E7%A7%8B/">《八声甘州·孤馆秋》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="宋词">宋词</span>
+                                
+                                    <span class="card-tag" data-tag="八声甘州">八声甘州</span>
+                                
+                                    <span class="card-tag" data-tag="孤馆秋">孤馆秋</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+八声甘州·孤馆秋
+
+
+
+记同途风雨岁华深，殷勤共此襟
+
+
+
+宋词 · 秋日之思
+
+
+
+
+
+
+2026-03-10
+
+|
+
+
+原创词作
+
+|
+
+
+八...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/03/10/%E5%85%AB%E5%A3%B0%E7%94%98%E5%B7%9E-%E5%AD%A4%E9%A6%86%E7%A7%8B/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,超脱自在,傲骨卷宗">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    2-23
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/02/23/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8%E5%8D%B7-%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8%E6%9C%AC/">《星河剑阵·超脱自在卷·正典首章《风霜砺骨本》》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="超脱自在">超脱自在</span>
+                                
+                                    <span class="card-tag" data-tag="傲骨卷宗">傲骨卷宗</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+星河剑阵·超脱自在卷
+
+
+
+正典首章《风霜砺骨本》
+
+
+
+甲等极品·自在正典
+
+
+
+
+
+
+永恒晴光·长风过境时
+
+|
+
+
+傲骨铮然域
+
+
+
+
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/02/23/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E8%B6%85%E8%84%B1%E8%87%AA%E5%9C%A8%E5%8D%B7-%E9%A3%8E%E9%9C%9C%E7%A0%BA%E9%AA%A8%E6%9C%AC/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,凛冽极境,霜魄卷宗">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    2-22
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/02/22/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93%E6%9C%AC/">《星河剑阵·凛冽极境卷·正典终章《太虚证道本》》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="凛冽极境">凛冽极境</span>
+                                
+                                    <span class="card-tag" data-tag="霜魄卷宗">霜魄卷宗</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+星河剑阵·凛冽极境卷·霜魄卷宗
+
+
+
+正典终章《太虚证道本》
+
+
+
+甲等极品·霜魄终典
+
+
+
+
+
+
+永恒拂晓·鸿举惊霄时
+
+|
+
+
+太虚证道域
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/02/22/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E5%A4%AA%E8%99%9A%E8%AF%81%E9%81%93%E6%9C%AC/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,凛冽极境,霜魄">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    2-21
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/02/21/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86%E6%9C%AC/">《星河剑阵·凛冽极境卷·正典首章《霜天剑胆本》》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="凛冽极境">凛冽极境</span>
+                                
+                                    <span class="card-tag" data-tag="霜魄">霜魄</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+星河剑阵·凛冽极境卷
+
+
+
+正典首章《霜天剑胆本》
+
+
+
+甲等极品·凛冽极典
+
+
+
+
+
+
+永恒霜秋·星河垂照时
+
+|
+
+
+霜天剑胆域
+
+
+
+
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/02/21/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%87%9B%E5%86%BD%E6%9E%81%E5%A2%83%E5%8D%B7-%E9%9C%9C%E5%A4%A9%E5%89%91%E8%83%86%E6%9C%AC/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="赋文,三问,问月">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    2-20
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/02/20/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/">《三问臻赋并序》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="赋文">赋文</span>
+                                
+                                    <span class="card-tag" data-tag="三问">三问</span>
+                                
+                                    <span class="card-tag" data-tag="问月">问月</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+三问臻赋并序
+
+
+
+问月寄孤怀·问星明持守·问剑砺锋芒
+
+
+
+赋文 · 人生进阶
+
+
+
+
+
+
+2026-02-20
+
+|
+
+
+原创赋文
+
+
+
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/02/20/%E4%B8%89%E9%97%AE%E8%87%BB%E8%B5%8B%E5%B9%B6%E5%BA%8F/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
+                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,基础根脉,五蕴锋">
+                        <div class="card-header">
+                            
+                                <div class="card-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    2-19
+                                </div>
+                            
+                            <span class="card-category">心火</span>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="/mokewenxue.github.io/2026/02/19/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89%E5%8D%B7-%E4%BA%94%E8%95%B4%E9%94%8B%E6%80%BB%E7%BA%B2/">《星河剑阵·基础根脉卷·首章《五蕴锋总纲》》</a>
+                        </h3>
+                        
+                        
+                            <div class="card-tags">
+                                
+                                    <span class="card-tag" data-tag="星河剑阵">星河剑阵</span>
+                                
+                                    <span class="card-tag" data-tag="基础根脉">基础根脉</span>
+                                
+                                    <span class="card-tag" data-tag="五蕴锋">五蕴锋</span>
+                                
+                            </div>
+                        
+                        
+                        <div class="card-excerpt">
+                            
+
+
+
+
+
+
+星河剑阵·基础根脉卷
+
+
+
+首章《五蕴锋总纲》
+
+
+
+甲等极品·根脉始典
+
+
+
+
+
+
+此刻·你阅读这些文字时
+
+|
+
+
+红尘淬锋域
+
+
+
+
+
+
+
+...
+                        </div>
+                        
+                        <div class="card-footer">
+                            <div class="card-author">
+                                <i class="fas fa-user"></i>
+                                独自踏月行
+                            </div>
+                            <a href="/mokewenxue.github.io/2026/02/19/%E6%98%9F%E6%B2%B3%E5%89%91%E9%98%B5-%E5%9F%BA%E7%A1%80%E6%A0%B9%E8%84%89%E5%8D%B7-%E4%BA%94%E8%95%B4%E9%94%8B%E6%80%BB%E7%BA%B2/" class="read-btn">
+                                阅读 <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                
             </div>
-            <div class="table-row">
-                <div>御守剑阵</div>
-                <div>14人</div>
-                <div>88%</div>
-                <div>5天后</div>
-            </div>
-            <div class="table-row">
-                <div>流转剑阵</div>
-                <div>7人</div>
-                <div>75%</div>
-                <div>1周后</div>
-            </div>
-            <div class="table-row">
-                <div>筑基境修练</div>
-                <div>36人</div>
-                <div>100%</div>
-                <div>持续进行</div>
-            </div>
+            
+            <!-- 分页 -->
+            
+                <div class="compact-pagination">
+                    
+                        <a href="/mokewenxue.github.io/" class="page-link prev">
+                            <i class="fas fa-chevron-left"></i> 上一页
+                        </a>
+                    
+                    
+                    <div class="page-info">
+                        第 <strong>2</strong> 页 / 共 <strong>4</strong> 页
+                    </div>
+                    
+                    
+                        <a href="/mokewenxue.github.io/page/3/" class="page-link next">
+                            下一页 <i class="fas fa-chevron-right"></i>
+                        </a>
+                    
+                </div>
+            
         </div>
+        
+        <!-- 页脚 -->
+        <footer class="sword-footer">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <a href="/mokewenxue.github.io/" class="footer-link">
+                        <i class="fas fa-home"></i> 首页
+                    </a>
+                    <a href="/mokewenxue.github.io/archives" class="footer-link">
+                        <i class="fas fa-archive"></i> 归档
+                    </a>
+                    <a href="/mokewenxue.github.io/categories" class="footer-link">
+                        <i class="fas fa-layer-group"></i> 分类
+                    </a>
+                    <a href="/mokewenxue.github.io/tags" class="footer-link">
+                        <i class="fas fa-tags"></i> 标签
+                    </a>
+                    <a href="/mokewenxue.github.io/about/" class="footer-link">
+                        <i class="fas fa-book"></i> 关于
+                    </a>
+                    <a href="/mokewenxue.github.io/atom.xml" class="footer-link">
+                        <i class="fas fa-rss"></i> 订阅
+                    </a>
+                </div>
+                
+                <div class="copyright">
+                    © 2026 独自踏月行 · 星河剑阵<br>
+                    剑气长存 · 墨韵永驻 · 周天不息
+                </div>
+            </div>
+        </footer>
     </main>
     
     <script>
-        // 导航栏折叠/展开
-        const navToggle = document.getElementById('navToggle');
-        const swordNav = document.querySelector('.sword-nav');
-        const mainContent = document.querySelector('.main-content');
-        
-        navToggle.addEventListener('click', function() {
-            swordNav.classList.toggle('collapsed');
+        // 创建星河剑阵背景
+        function createStarfield() {
+            const universe = document.getElementById('swordUniverse');
+            if (!universe) return;
             
-            // 更新按钮文字和图标
-            const icon = this.querySelector('i');
-            const text = this.querySelector('span');
-            
-            if (swordNav.classList.contains('collapsed')) {
-                icon.className = 'fas fa-chevron-right';
-                text.textContent = '展开导航';
-                mainContent.style.marginLeft = '80px';
-            } else {
-                icon.className = 'fas fa-chevron-left';
-                text.textContent = '收起导航';
-                mainContent.style.marginLeft = '280px';
-            }
-        });
-        
-        // 移动端菜单切换
-        const mobileToggle = document.getElementById('mobileToggle');
-        
-        mobileToggle.addEventListener('click', function() {
-            swordNav.classList.toggle('active');
-        });
-        
-        // 导航项点击效果
-        const navItems = document.querySelectorAll('.nav-item');
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                // 移除所有active类
-                navItems.forEach(i => i.classList.remove('active'));
-                // 为当前项添加active类
-                this.classList.add('active');
+            // 创建星星
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
                 
-                // 如果是移动端，点击后关闭导航
-                if (window.innerWidth <= 768) {
-                    swordNav.classList.remove('active');
+                // 随机大小
+                const size = Math.random();
+                if (size < 0.7) {
+                    star.classList.add('small');
+                } else if (size < 0.9) {
+                    star.classList.add('medium');
+                } else {
+                    star.classList.add('large');
+                }
+                
+                // 随机位置
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // 随机闪烁延迟
+                star.style.animationDelay = Math.random() * 3 + 's';
+                
+                universe.appendChild(star);
+            }
+        }
+        
+        // 左侧菜单折叠功能
+        function setupLeftNavToggle() {
+            const leftNavToggle = document.getElementById('leftNavToggle');
+            const leftSwordNav = document.getElementById('leftSwordNav');
+            
+            if (!leftNavToggle || !leftSwordNav) return;
+            
+            // 恢复折叠状态
+            const isCollapsed = localStorage.getItem('leftNavCollapsed') === 'true';
+            if (isCollapsed) {
+                leftSwordNav.classList.add('collapsed');
+            }
+            
+            leftNavToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                leftSwordNav.classList.toggle('collapsed');
+                const isNowCollapsed = leftSwordNav.classList.contains('collapsed');
+                
+                // 保存折叠状态
+                localStorage.setItem('leftNavCollapsed', isNowCollapsed);
+                
+                // 更新按钮图标
+                const icon = leftNavToggle.querySelector('i');
+                icon.style.transition = 'transform 0.3s ease';
+                if (isNowCollapsed) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0deg)';
                 }
             });
-        });
+        }
         
-        // 窗口大小调整处理
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                swordNav.classList.remove('active');
+        // 顶部导航折叠功能
+        function setupTopNavToggle() {
+            const flipNavToggle = document.getElementById('flipNavToggle');
+            const topFlipNav = document.getElementById('topFlipNav');
+            const flipNavControl = document.getElementById('flipNavControl');
+            
+            if (!flipNavToggle || !topFlipNav || !flipNavControl) return;
+            
+            // 恢复折叠状态
+            const isCollapsed = localStorage.getItem('flipNavCollapsed') === 'true';
+            if (isCollapsed) {
+                topFlipNav.classList.add('collapsed');
+                const icon = flipNavToggle.querySelector('i');
+                const text = flipNavToggle.querySelector('.nav-toggle-text');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+                if (text) text.textContent = '展开导航';
+                document.querySelector('.control-title i').style.transform = 'rotate(180deg)';
             }
             
-            // 更新主内容区域边距
-            if (swordNav.classList.contains('collapsed')) {
-                mainContent.style.marginLeft = '80px';
-            } else {
-                mainContent.style.marginLeft = '280px';
+            flipNavToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                topFlipNav.classList.toggle('collapsed');
+                const isNowCollapsed = topFlipNav.classList.contains('collapsed');
+                
+                // 保存折叠状态
+                localStorage.setItem('flipNavCollapsed', isNowCollapsed);
+                
+                // 更新按钮图标和文字
+                const icon = flipNavToggle.querySelector('i');
+                const text = flipNavToggle.querySelector('.nav-toggle-text');
+                const controlIcon = document.querySelector('.control-title i');
+                
+                if (isNowCollapsed) {
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                    if (text) text.textContent = '展开导航';
+                    if (controlIcon) controlIcon.style.transform = 'rotate(180deg)';
+                } else {
+                    if (icon) icon.style.transform = 'rotate(0deg)';
+                    if (text) text.textContent = '折叠导航';
+                    if (controlIcon) controlIcon.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // 点击控制栏也可以折叠
+            flipNavControl.addEventListener('click', function(e) {
+                if (!flipNavToggle.contains(e.target)) {
+                    flipNavToggle.click();
+                }
+            });
+        }
+        
+        // 移动端菜单切换
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const leftSwordNav = document.getElementById('leftSwordNav');
+            
+            if (!mobileMenuToggle || !leftSwordNav) return;
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                leftSwordNav.classList.toggle('active');
+            });
+            
+            // 点击菜单外部关闭菜单
+            document.addEventListener('click', function(event) {
+                if (!leftSwordNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                    leftSwordNav.classList.remove('active');
+                }
+            });
+        }
+        
+        // 文章筛选功能
+        function setupArticleFilter() {
+            const leftNavItems = document.querySelectorAll('.left-nav-item');
+            const articleGrid = document.getElementById('articleGrid');
+            const filterStatus = document.getElementById('filterStatus');
+            const filterText = document.getElementById('filterText');
+            const clearFilter = document.getElementById('clearFilter');
+            
+            if (!leftNavItems.length || !articleGrid) return;
+            
+            // 统计文章数量
+            function countArticles() {
+                const articles = articleGrid.querySelectorAll('.compact-card');
+                const counts = {
+                    'all': articles.length,
+                    '心火': 0, '醉铸': 0, '萍魄': 0, '清怀': 0, '知契': 0,
+                    '墨锋': 0, '擎乾': 0, '秋律': 0, '双刃': 0, '揽星': 0, '踏月': 0,
+                    '蚀剑学': 0, '诗文': 0,
+                    '筑基境': 0, '炼气境': 0, '凝神境': 0, '金丹境': 0,
+                    '元婴境': 0, '化神境': 0, '合体境': 0, '大乘境': 0
+                };
+                
+                articles.forEach(article => {
+                    const category = article.getAttribute('data-category') || '';
+                    const tags = article.getAttribute('data-tags') || '';
+                    
+                    // 统计分类
+                    if (category && counts[category] !== undefined) {
+                        counts[category]++;
+                    }
+                    
+                    // 统计标签
+                    if (tags) {
+                        tags.split(',').forEach(tag => {
+                            if (counts[tag] !== undefined) {
+                                counts[tag]++;
+                            }
+                        });
+                    }
+                });
+                
+                // 更新计数显示
+                for (const key in counts) {
+                    const element = document.getElementById(`${key}-count`);
+                    if (element) {
+                        element.textContent = counts[key];
+                    }
+                }
             }
             
-            if (window.innerWidth <= 768) {
-                mainContent.style.marginLeft = '0';
+            // 筛选文章
+            function filterArticles(filterType, filterValue) {
+                const articles = articleGrid.querySelectorAll('.compact-card');
+                
+                articles.forEach(article => {
+                    const category = article.getAttribute('data-category') || '';
+                    const tags = article.getAttribute('data-tags') || '';
+                    let shouldShow = false;
+                    
+                    if (filterValue === 'all') {
+                        shouldShow = true;
+                    } else if (filterType === 'main') {
+                        // 主级分类筛选
+                        shouldShow = category === filterValue;
+                    } else if (filterType === 'secondary' || filterType === 'practice') {
+                        // 次位或修练标签筛选
+                        shouldShow = tags.includes(filterValue);
+                    }
+                    
+                    if (shouldShow) {
+                        article.style.display = 'flex';
+                        article.classList.add('filtered');
+                        setTimeout(() => {
+                            article.classList.remove('filtered');
+                        }, 600);
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+                
+                // 更新筛选状态显示
+                if (filterValue === 'all') {
+                    filterStatus.style.display = 'none';
+                    filterText.textContent = '当前筛选：全部诗卷';
+                } else {
+                    filterStatus.style.display = 'block';
+                    
+                    let typeText = '';
+                    if (filterType === 'main') typeText = '剑阵主级';
+                    else if (filterType === 'secondary') typeText = '剑阵次位';
+                    else if (filterType === 'practice') typeText = '剑阵修练';
+                    else typeText = '全部';
+                    
+                    // 计算匹配的文章数量
+                    const visibleArticles = Array.from(articles).filter(article => 
+                        article.style.display !== 'none'
+                    ).length;
+                    
+                    filterText.textContent = `当前筛选：${typeText} · ${filterValue}（${visibleArticles}篇）`;
+                }
             }
-        });
+            
+            // 初始化计数
+            countArticles();
+            
+            // 绑定菜单项点击事件
+            leftNavItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有active类
+                    leftNavItems.forEach(i => i.classList.remove('active'));
+                    
+                    // 为当前项添加active类
+                    this.classList.add('active');
+                    
+                    // 获取筛选参数
+                    const filterType = this.getAttribute('data-filter-type');
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // 执行筛选
+                    filterArticles(filterType, filterValue);
+                    
+                    // 如果是移动端，点击后关闭菜单
+                    if (window.innerWidth <= 768) {
+                        const leftSwordNav = document.getElementById('leftSwordNav');
+                        if (leftSwordNav) {
+                            leftSwordNav.classList.remove('active');
+                        }
+                    }
+                });
+            });
+            
+            // 绑定清除筛选按钮
+            if (clearFilter) {
+                clearFilter.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有active类
+                    leftNavItems.forEach(i => i.classList.remove('active'));
+                    
+                    // 激活"全部"项
+                    const allItem = document.querySelector('.left-nav-item[data-filter="all"]');
+                    if (allItem) {
+                        allItem.classList.add('active');
+                    }
+                    
+                    // 显示所有文章
+                    filterArticles('all', 'all');
+                });
+            }
+            
+            // 绑定标签点击事件
+            articleGrid.addEventListener('click', function(e) {
+                if (e.target.classList.contains('card-tag')) {
+                    e.preventDefault();
+                    const tag = e.target.getAttribute('data-tag');
+                    
+                    // 找到对应的菜单项并点击
+                    const menuItem = document.querySelector(`.left-nav-item[data-filter="${tag}"]`);
+                    if (menuItem) {
+                        menuItem.click();
+                    }
+                }
+            });
+        }
         
-        // 页面加载动画
+        // 翻转卡片效果
+        function setupFlipCards() {
+            const flipCards = document.querySelectorAll('.flip-card');
+            
+            flipCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'rotateY(180deg)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'rotateY(0deg)';
+                });
+            });
+        }
+        
+        // 页面加载完成后执行
         document.addEventListener('DOMContentLoaded', function() {
+            // 创建背景
+            createStarfield();
+            
+            // 设置折叠功能
+            setupLeftNavToggle();
+            setupTopNavToggle();
+            setupMobileMenu();
+            
+            // 设置文章筛选功能
+            setupArticleFilter();
+            
+            // 设置翻转卡片效果
+            setupFlipCards();
+            
+            // 卡片悬停效果
+            const cards = document.querySelectorAll('.compact-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '100';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // 页面加载动画
             document.body.style.opacity = '0';
             document.body.style.transition = 'opacity 0.5s ease';
             
@@ -1217,38 +2840,28 @@
                 document.body.style.opacity = '1';
             }, 100);
             
-            // 初始化响应式布局
-            if (window.innerWidth <= 768) {
-                mainContent.style.marginLeft = '0';
-            }
+            // 窗口大小调整处理
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    const leftSwordNav = document.getElementById('leftSwordNav');
+                    if (leftSwordNav) {
+                        leftSwordNav.classList.remove('active');
+                    }
+                }
+            });
         });
         
-        // 剑阵特效
-        function createSwordEffect() {
-            const effect = document.createElement('div');
-            effect.className = 'sword-effect';
-            effect.style.cssText = `
-                position: fixed;
-                top: ${Math.random() * 100}%;
-                left: ${Math.random() * 100}%;
-                width: ${50 + Math.random() * 100}px;
-                height: 1px;
-                background: linear-gradient(90deg, transparent, ${Math.random() > 0.5 ? 'var(--primary-color)' : 'var(--secondary-color)'}, transparent);
-                transform: rotate(${Math.random() * 360}deg);
-                opacity: ${0.05 + Math.random() * 0.1};
-                pointer-events: none;
-                z-index: -1;
-            `;
-            document.body.appendChild(effect);
-            
-            // 5秒后移除
-            setTimeout(() => {
-                effect.remove();
-            }, 5000);
-        }
-        
-        // 每2秒创建一个剑阵特效
-        setInterval(createSwordEffect, 2000);
+        // 窗口滚动时顶部导航效果
+        window.addEventListener('scroll', function() {
+            const topNav = document.querySelector('.top-flip-nav');
+            if (topNav) {
+                if (window.scrollY > 50) {
+                    topNav.style.background = 'rgba(10, 10, 26, 0.98)';
+                } else {
+                    topNav.style.background = 'rgba(10, 10, 26, 0.95)';
+                }
+            }
+        });
     </script>
 </body>
 </html>
