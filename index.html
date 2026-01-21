@@ -1364,7 +1364,59 @@
             <!-- 紧凑诗卷网格 -->
             <div class="compact-grid" id="articleGrid">
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,萍魄卷宗,缘法正典,因果锻造">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,萍魄卷宗,缘法正典,因果锻造">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -1433,7 +1485,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="孤影,三绝赋,清辉,漂泊,禅思">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="孤影,三绝赋,清辉,漂泊,禅思">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -1508,7 +1612,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,锻造,剑赋,十二极,创世">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,锻造,剑赋,十二极,创世">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -1578,7 +1734,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,墨锋卷宗,文脉正典,文明锻造">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,墨锋卷宗,文脉正典,文明锻造">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -1649,7 +1857,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,清怀卷宗,风骨正典,人格锻造">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,周天十二极,清怀卷宗,风骨正典,人格锻造">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -1720,7 +1980,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,立法总枢,宪法,总纲天则剑经,根本大法">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,立法总枢,宪法,总纲天则剑经,根本大法">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -1793,7 +2105,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="宋词,孤寂,戚氏,长调,超脱">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="宋词,孤寂,戚氏,长调,超脱">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -1866,7 +2230,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="宋词,孤怀,虞美人,婵娟,风骨">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="宋词,孤怀,虞美人,婵娟,风骨">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -1944,7 +2360,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="宋词,江湖,声声慢,断鸿,孤影">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="宋词,江湖,声声慢,断鸿,孤影">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -2019,7 +2487,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="宋词,八声甘州,孤馆秋,离别,怀念">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="八声甘州,宋词,孤馆秋,离别,怀念">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -2037,9 +2557,9 @@
                         
                             <div class="card-tags">
                                 
-                                    <span class="card-tag" data-tag="宋词">宋词</span>
-                                
                                     <span class="card-tag" data-tag="八声甘州">八声甘州</span>
+                                
+                                    <span class="card-tag" data-tag="宋词">宋词</span>
                                 
                                     <span class="card-tag" data-tag="孤馆秋">孤馆秋</span>
                                 
@@ -2097,7 +2617,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,超脱自在,傲骨卷宗,风霜砺骨,自在正典">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,超脱自在,傲骨卷宗,风霜砺骨,自在正典">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -2177,7 +2749,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,凛冽极境,霜魄卷宗,太虚证道,终典">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,凛冽极境,霜魄卷宗,太虚证道,终典">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -2252,7 +2876,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,凛冽极境,霜魄,霜天剑胆,孤绝剑则">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,凛冽极境,霜魄,霜天剑胆,孤绝剑则">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -2332,7 +3008,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="赋文,三问,问月,问星,问剑">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="赋文,三问,问月,问星,问剑">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -2411,7 +3139,59 @@
                         </div>
                     </article>
                 
-                    <article class="compact-card" data-category="心火" data-tags="星河剑阵,基础根脉,五蕴锋,人间淬锋,根脉始典">
+
+
+// 获取分类 - 最简单直接的方法
+let category = '心火';
+
+// 直接检查文章对象中的分类字符串
+try {
+    // 尝试获取分类字符串
+    if (post.categories) {
+        // 如果分类包含"诗文"，就设置为"诗文"
+        if (typeof post.categories === 'string' && post.categories.includes('诗文')) {
+            category = '诗文';
+        } 
+        // 如果是数组，检查数组中的元素
+        else if (Array.isArray(post.categories)) {
+            for (let i = 0; i < post.categories.length; i++) {
+                const cat = post.categories[i];
+                if (typeof cat === 'string' && cat.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    }
+} catch (e) {
+    // 出错时保持默认值
+}
+
+// 如果上面没找到，再检查标签
+if (category !== '诗文' && post.tags) {
+    try {
+        if (typeof post.tags === 'string' && post.tags.includes('诗文')) {
+            category = '诗文';
+        } else if (Array.isArray(post.tags)) {
+            for (let i = 0; i < post.tags.length; i++) {
+                const tag = post.tags[i];
+                if (typeof tag === 'string' && tag.includes('诗文')) {
+                    category = '诗文';
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        // 忽略错误
+    }
+}
+
+
+
+
+
+                  <article class="compact-card" data-category="心火" data-tags="星河剑阵,基础根脉,五蕴锋,人间淬锋,根脉始典">
+
                         <div class="card-header">
                             
                                 <div class="card-date">
@@ -3001,14 +3781,5 @@ function filterArticles(filterType, filterValue) {
 
 
 </body>
-<style>
-/* 临时调试样式 */
-.compact-card[data-category="诗文"] {
-    border: 3px solid red !important;
-}
-.compact-card[data-tags*="诗文"] {
-    border: 3px dashed blue !important;
-}
-</style>
 
 </html>
