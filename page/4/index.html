@@ -2998,29 +2998,5 @@ function filterArticles(filterType, filterValue) {
             }
         });
     </script>
-
-<script>
-// 强制修复所有文章的分类
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.compact-card');
-    cards.forEach(card => {
-        card.setAttribute('data-category', '诗文');
-        const tags = card.getAttribute('data-tags') || '';
-        if (!tags.includes('诗文')) {
-            card.setAttribute('data-tags', '诗文,' + tags);
-        }
-        
-        // 更新显示的分类文字
-        const categorySpan = card.querySelector('.card-category');
-        if (categorySpan) {
-            categorySpan.textContent = '诗文';
-        }
-    });
-    
-    console.log('已强制设置所有文章分类为"诗文"');
-});
-</script>
-
-
 </body>
 </html>
