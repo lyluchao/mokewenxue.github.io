@@ -221,7 +221,9 @@
       
       <categories>
           
-          <category> 词作，诗文 </category>
+          <category> 词作 </category>
+          
+          <category> 诗文 </category>
           
       </categories>
       
@@ -232,13 +234,15 @@
             
             <tag> 孤寂 </tag>
             
+            <tag> 诗文 </tag>
+            
             <tag> 戚氏 </tag>
             
             <tag> 长调 </tag>
             
             <tag> 超脱 </tag>
             
-            <tag> 禅意，诗文 </tag>
+            <tag> 禅意 </tag>
             
         </tags>
       
@@ -622,12 +626,16 @@
           
           <category> 词作 </category>
           
+          <category> 诗文 </category>
+          
       </categories>
       
       
         <tags>
             
             <tag> 宋词 </tag>
+            
+            <tag> 诗文 </tag>
             
             <tag> 贺新郎 </tag>
             
