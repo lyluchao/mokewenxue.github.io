@@ -1,714 +1,98 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>水调歌头·问道 | 独自踏月行</title>
-    <style>
-        :root {
-            /* �Ǻӽ�����ɫ - ����ҳһ�� */
-            --space-bg: #0a0a1a;
-            --space-dark: #121230;
-            --space-light: #1a1a40;
-            --nebula-purple: #8a2be2;
-            --nebula-blue: #4169e1;
-            --nebula-cyan: #00ffff;
-            --sword-gold: #ffd700;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b8ff;
-            --text-muted: #8888cc;
-            --border-color: #303060;
-            
-            /* ���ռ�� */
-            --gap-xs: 4px;
-            --gap-sm: 8px;
-            --gap-md: 12px;
-            --gap-lg: 16px;
-            --gap-xl: 20px;
-            --gap-2xl: 24px;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Noto Serif SC', serif;
-            background: var(--space-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-        }
-        
-        /* === �Ǻӱ��� === */
-        .star-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(65, 105, 225, 0.15) 0%, transparent 40%),
-                linear-gradient(135deg, #0a0a1a 0%, #121230 100%);
-        }
-        
-        /* === ��ർ���� === */
-        .left-nav {
-            width: 250px;
-            min-height: 100vh;
-            background: rgba(18, 18, 48, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid var(--border-color);
-            padding: var(--gap-xl) 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .nav-brand {
-            padding: 0 var(--gap-lg) var(--gap-xl) var(--gap-lg);
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: var(--gap-xl);
-        }
-        
-        .brand-title {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--sword-gold), var(--nebula-cyan));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-decoration: none;
-            display: block;
-            margin-bottom: var(--gap-sm);
-        }
-        
-        .brand-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        .nav-menu {
-            flex: 1;
-            padding: 0 var(--gap-lg);
-        }
-        
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: var(--gap-md);
-            padding: var(--gap-md) var(--gap-lg);
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: var(--gap-sm);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-item:hover {
-            color: var(--text-primary);
-            background: rgba(138, 43, 226, 0.1);
-        }
-        
-        .nav-item.active {
-            color: var(--nebula-purple);
-            background: rgba(138, 43, 226, 0.15);
-        }
-        
-        .nav-item.active::before {
-            content: '';
-            position: absolute;
-            left: -4px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 70%;
-            background: var(--nebula-purple);
-            border-radius: 0 2px 2px 0;
-        }
-        
-        .nav-icon {
-            width: 20px;
-            text-align: center;
-        }
-        
-        .nav-text {
-            flex: 1;
-            font-size: 1rem;
-        }
-        
-        .nav-footer {
-            padding: var(--gap-lg);
-            border-top: 1px solid var(--border-color);
-            margin-top: var(--gap-xl);
-        }
-        
-        .nav-copyright {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.5;
-            text-align: center;
-        }
-        
-        /* === ���������� === */
-        .main-content {
-            flex: 1;
-            margin-left: 250px;
-            min-height: 100vh;
-            padding: 0;
-        }
-        
-        /* �������� */
-        .article-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: var(--gap-xl);
-        }
-        
-        /* ����ͷ�� */
-        .article-header {
-            padding: var(--gap-2xl) 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: var(--gap-2xl);
-        }
-        
-        .article-title {
-            font-family: 'Ma Shan Zheng', cursive;
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, var(--sword-gold), var(--nebula-cyan));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: var(--gap-lg);
-            line-height: 1.3;
-        }
-        
-        .article-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--gap-md);
-            margin-bottom: var(--gap-lg);
-        }
-        
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        .meta-icon {
-            color: var(--nebula-purple);
-        }
-        
-        /* ����ͱ�ǩ */
-        .article-taxonomy {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--gap-sm);
-            margin-top: var(--gap-lg);
-        }
-        
-        .category-badge {
-            background: rgba(138, 43, 226, 0.2);
-            color: var(--nebula-purple);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            text-decoration: none;
-            border: 1px solid rgba(138, 43, 226, 0.3);
-        }
-        
-        .category-badge:hover {
-            background: rgba(138, 43, 226, 0.3);
-        }
-        
-        .tags-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--gap-sm);
-        }
-        
-        .tag-badge {
-            background: rgba(65, 105, 225, 0.15);
-            color: var(--nebula-blue);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            text-decoration: none;
-            border: 1px solid rgba(65, 105, 225, 0.3);
-        }
-        
-        .tag-badge:hover {
-            background: rgba(65, 105, 225, 0.3);
-        }
-        
-        /* �������� */
-        .article-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-primary);
-            padding: var(--gap-xl) 0;
-        }
-        
-        /* ����������ʽ */
-        .article-content h1,
-        .article-content h2,
-        .article-content h3,
-        .article-content h4 {
-            font-family: 'Ma Shan Zheng', cursive;
-            color: var(--sword-gold);
-            margin: var(--gap-xl) 0 var(--gap-lg);
-        }
-        
-        .article-content h1 {
-            font-size: 2rem;
-        }
-        
-        .article-content h2 {
-            font-size: 1.8rem;
-        }
-        
-        .article-content h3 {
-            font-size: 1.5rem;
-        }
-        
-        .article-content p {
-            margin-bottom: var(--gap-lg);
-        }
-        
-        .article-content blockquote {
-            border-left: 4px solid var(--nebula-purple);
-            padding-left: var(--gap-lg);
-            margin: var(--gap-xl) 0;
-            color: var(--text-secondary);
-            font-style: italic;
-            background: rgba(138, 43, 226, 0.05);
-            padding: var(--gap-lg);
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .article-content code {
-            background: rgba(0, 255, 255, 0.1);
-            color: var(--nebula-cyan);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-        
-        .article-content pre {
-            background: rgba(26, 26, 64, 0.7);
-            padding: var(--gap-lg);
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: var(--gap-lg) 0;
-            border: 1px solid var(--border-color);
-        }
-        
-        .article-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: var(--gap-lg) 0;
-            border: 1px solid var(--border-color);
-        }
-        
-        /* ���µײ� */
-        .article-footer {
-            padding: var(--gap-xl) 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            margin: var(--gap-2xl) 0;
-        }
-        
-        .author-info {
-            display: flex;
-            align-items: center;
-            gap: var(--gap-lg);
-            margin-bottom: var(--gap-lg);
-        }
-        
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--nebula-purple), var(--nebula-blue));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        .author-details {
-            flex: 1;
-        }
-        
-        .author-name {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-        
-        .author-bio {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* ������ť */
-        .post-navigation {
-            display: flex;
-            justify-content: space-between;
-            gap: var(--gap-lg);
-            margin-top: var(--gap-xl);
-        }
-        
-        .nav-btn {
-            flex: 1;
-            padding: var(--gap-lg);
-            background: rgba(26, 26, 64, 0.5);
-            border-radius: 8px;
-            text-decoration: none;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            gap: var(--gap-sm);
-        }
-        
-        .nav-btn:hover {
-            border-color: var(--nebula-purple);
-            background: rgba(138, 43, 226, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        .nav-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .nav-title {
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: 600;
-        }
-        
-        /* === ҳ�� === */
-        .article-page-footer {
-            background: rgba(10, 10, 26, 0.95);
-            border-top: 1px solid var(--border-color);
-            padding: var(--gap-xl) 0;
-            margin-top: var(--gap-xl);
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--gap-xl);
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: var(--gap-xl);
-            margin-bottom: var(--gap-lg);
-            flex-wrap: wrap;
-        }
-        
-        .footer-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.3s;
-        }
-        
-        .footer-link:hover {
-            color: var(--nebula-cyan);
-        }
-        
-        .footer-copyright {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
-        
-        /* ��Ӧʽ��� */
-        @media (max-width: 1024px) {
-            .left-nav {
-                width: 200px;
-            }
-            
-            .main-content {
-                margin-left: 200px;
-            }
-            
-            .nav-text {
-                font-size: 0.9rem;
-            }
-            
-            .article-container {
-                padding: var(--gap-lg);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .left-nav {
-                width: 60px;
-                padding: var(--gap-lg) 0;
-            }
-            
-            .nav-brand {
-                padding: 0 var(--gap-sm) var(--gap-lg) var(--gap-sm);
-            }
-            
-            .brand-title {
-                font-size: 1rem;
-                text-align: center;
-            }
-            
-            .brand-subtitle,
-            .nav-text,
-            .nav-footer {
-                display: none;
-            }
-            
-            .nav-menu {
-                padding: 0 var(--gap-sm);
-            }
-            
-            .nav-item {
-                justify-content: center;
-                padding: var(--gap-md);
-            }
-            
-            .nav-icon {
-                font-size: 1.2rem;
-            }
-            
-            .main-content {
-                margin-left: 60px;
-            }
-            
-            .article-title {
-                font-size: 2rem;
-            }
-            
-            .post-navigation {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .article-container {
-                padding: var(--gap-md);
-            }
-            
-            .article-title {
-                font-size: 1.8rem;
-            }
-            
-            .article-meta {
-                flex-direction: column;
-                gap: var(--gap-sm);
-            }
-            
-            .footer-links {
-                gap: var(--gap-lg);
-            }
-        }
-        
-        /* ���������� */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--space-dark);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--space-light);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--nebula-blue);
-        }
-        
-        /* ��ർ�������� */
-        .left-nav {
-            scrollbar-width: thin;
-            scrollbar-color: var(--nebula-blue) transparent;
-        }
-        
-        .left-nav::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        .left-nav::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        
-        .left-nav::-webkit-scrollbar-thumb {
-            background: var(--nebula-blue);
-            border-radius: 2px;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/mokewenxue.github.io/atom.xml" title="独自踏月行" type="application/atom+xml">
-</head>
-<body>
-    <!-- �Ǻӱ��� -->
-    <div class="star-bg"></div>
-    
-    <!-- ��ർ���� -->
-    <nav class="left-nav">
-        <div class="nav-brand">
-            <a href="/mokewenxue.github.io/" class="brand-title">����̤����</a>
-            <div class="brand-subtitle">�Ǻӽ��� �� ʫ��ϸ��</div>
-        </div>
-        
-        <div class="nav-menu">
-            <a href="/mokewenxue.github.io/" class="nav-item ">
-                <div class="nav-icon">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="nav-text">�Ǻ���ҳ</div>
-            </a>
-            
-            <a href="/mokewenxue.github.io/tags/" class="nav-item ">
-                <div class="nav-icon">
-                    <i class="fas fa-tags"></i>
-                </div>
-                <div class="nav-text">��������</div>
-            </a>
-            
-            <a href="/mokewenxue.github.io/categories/" class="nav-item ">
-                <div class="nav-icon">
-                    <i class="fas fa-layer-group"></i>
-                </div>
-                <div class="nav-text">�������</div>
-            </a>
-            
-            <a href="/mokewenxue.github.io/archives/" class="nav-item ">
-                <div class="nav-icon">
-                    <i class="fas fa-archive"></i>
-                </div>
-                <div class="nav-text">ʫ���鵵</div>
-            </a>
-            
-            <a href="/mokewenxue.github.io/about/" class="nav-item ">
-                <div class="nav-icon">
-                    <i class="fas fa-book"></i>
-                </div>
-                <div class="nav-text">ʫ��Ե��</div>
-            </a>
-        </div>
-        
-        <div class="nav-footer">
-            <div class="nav-copyright">
-                ? 2026<br>
-                ̤��ʫ��
-            </div>
-        </div>
-    </nav>
-    
-    <!-- ���������� -->
-    <main class="main-content">
-        <div class="article-container">
-            <!-- ����ͷ�� -->
-            <header class="article-header">
-                <h1 class="article-title">水调歌头·问道</h1>
-                
-                <div class="article-meta">
-                    
-                        <div class="meta-item">
-                            <span class="meta-icon">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
-                            <span>2026-02-03</span>
-                        </div>
-                    
-                    
-                    
-                        <div class="meta-item">
-                            <span class="meta-icon">
-                                <i class="fas fa-user"></i>
-                            </span>
-                            <span>独自踏月行</span>
-                        </div>
-                    
-                    
-                    
-                    
-                    
-                </div>
-                
-                <!-- ����ͱ�ǩ -->
-                <div class="article-taxonomy">
-                    
-                        
-                            <a href="/mokewenxue.github.io/categories/%E8%AF%8D%E4%BD%9C/" class="category-badge">
-                                <i class="fas fa-folder"></i> 词作
-                            </a>
-                        
-                    
-                    
-                    
-                        <div class="tags-list">
-                            
-                                <a href="/mokewenxue.github.io/tags/%E9%97%AE%E9%81%93/" class="tag-badge">
-                                    <i class="fas fa-tag"></i> 问道
-                                </a>
-                            
-                                <a href="/mokewenxue.github.io/tags/%E8%AF%97%E6%96%87/" class="tag-badge">
-                                    <i class="fas fa-tag"></i> 诗文
-                                </a>
-                            
-                                <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/" class="tag-badge">
-                                    <i class="fas fa-tag"></i> 宋词
-                                </a>
-                            
-                                <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1/" class="tag-badge">
-                                    <i class="fas fa-tag"></i> 超脱
-                                </a>
-                            
-                                <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4/" class="tag-badge">
-                                    <i class="fas fa-tag"></i> 水调歌头
-                                </a>
-                            
-                                <a href="/mokewenxue.github.io/tags/%E5%93%B2%E5%AD%A6/" class="tag-badge">
-                                    <i class="fas fa-tag"></i> 哲学
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-            </header>
-            
-            <!-- �������� -->
-            <article class="article-content">
-                <div style="font-family: 'STKaiti', 'SimSun', 'Source Han Serif SC', serif; line-height: 1.8; color: #2c3e50; max-width: 800px; margin: 0 auto; padding: 0 1rem;">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="独自踏月行"><title>水调歌头·问道 · 独自踏月行</title><meta name="description" content="水调歌头·问道
+
+
+
+
+
+
+
+天外月孤巡，寂寂照何尊
+
+
+
+
+
+哲学词 · 天人探微
+
+
+
+
+
+
+
+
+2026-02-03
+
+|
+
+
+原创词作
+
+|
+
+
+水调歌头
+
+
+
+
+
+
+
+
+
+
+
+📜 词牌简介 · 水调歌头
+
+《水调歌头》词牌名源于隋炀帝开凿汴河时所作《水调歌》，至宋代演为词牌。此调九十五字"><meta name="og:description" content="水调歌头·问道
+
+
+
+
+
+
+
+天外月孤巡，寂寂照何尊
+
+
+
+
+
+哲学词 · 天人探微
+
+
+
+
+
+
+
+
+2026-02-03
+
+|
+
+
+原创词作
+
+|
+
+
+水调歌头
+
+
+
+
+
+
+
+
+
+
+
+📜 词牌简介 · 水调歌头
+
+《水调歌头》词牌名源于隋炀帝开凿汴河时所作《水调歌》，至宋代演为词牌。此调九十五字"><meta name="twitter:site" content="独自踏月行"><meta name="twitter:title" content="水调歌头·问道"><meta name="twitter:card" content="summary"><meta name="keywords" content="诗词,文学,散文,诗歌,古文"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/mokewenxue.github.io/css/bootstrap.min.css"><link rel="stylesheet" href="/mokewenxue.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/mokewenxue.github.io/"></a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/mokewenxue.github.io/"></a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/mokewenxue.github.io/">Home</a></li><li><a href="/mokewenxue.github.io/archives">Archive</a></li><li><a href="/mokewenxue.github.io/categories">Categories</a></li><li><a href="/mokewenxue.github.io/tags">Tags</a></li><!-- +make_page_links() // 暂时禁用--><li class="soc"></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2026&nbsp;<a target="_blank" href="https://lyluchao.github.io/mokewenxue.github.io" rel="noopener noreferrer">独自踏月行</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post"><h1 class="post-title">水调歌头·问道</h1><div class="post-meta"><span class="post-time">post.posted 2026-02-03</span> | <span class="post-category"><a href="/mokewenxue.github.io/categories/%E8%AF%8D%E4%BD%9C/">词作</a></span> | <span class="post-tags"><a href="/mokewenxue.github.io/tags/%E9%97%AE%E9%81%93/">问道</a>, <a href="/mokewenxue.github.io/tags/%E8%AF%97%E6%96%87/">诗文</a>, <a href="/mokewenxue.github.io/tags/%E5%AE%8B%E8%AF%8D/">宋词</a>, <a href="/mokewenxue.github.io/tags/%E8%B6%85%E8%84%B1/">超脱</a>, <a href="/mokewenxue.github.io/tags/%E6%B0%B4%E8%B0%83%E6%AD%8C%E5%A4%B4/">水调歌头</a>, <a href="/mokewenxue.github.io/tags/%E5%93%B2%E5%AD%A6/">哲学</a></span></div><div class="post-content"><div style="font-family: 'STKaiti', 'SimSun', 'Source Han Serif SC', serif; line-height: 1.8; color: #2c3e50; max-width: 800px; margin: 0 auto; padding: 0 1rem;">
 
 <!-- 标题区域 - 问道主题 -->
 <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); color: white; padding: 3.5rem 2rem 3rem 2rem; margin: 2rem 0 4rem 0; text-align: center; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); min-height: 320px; display: flex; flex-direction: column; justify-content: center; border-radius: 18px; width: 100%;">
@@ -1073,193 +457,7 @@
 </div> <!-- 关闭z-index包装div -->
 
 </div> <!-- 关闭主容器div -->
-
-            </article>
-            
-            <!-- ���µײ� -->
-            <footer class="article-footer">
-                <!-- ������Ϣ -->
-                <div class="author-info">
-                    <div class="author-avatar">
-                        <i class="fas fa-user-astronaut"></i>
-                    </div>
-                    <div class="author-details">
-                        <div class="author-name">独自踏月行</div>
-                        <div class="author-bio">
-                            �Ǻӽ����ػ��ߣ�̤��ʫ�����ˡ�������������ʫ���Ž�
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- ��һƪ/��һƪ���� -->
-                <div class="post-navigation">
-                    
-                        <a href="/mokewenxue.github.io/2026/02/15/%E8%B4%BA%E6%96%B0%E9%83%8E-%E8%9A%80/" class="nav-btn">
-                            <div class="nav-label">
-                                <i class="fas fa-arrow-left"></i>
-                                ��һƪ
-                            </div>
-                            <div class="nav-title">贺新郎·蚀</div>
-                        </a>
-                    
-                    
-                    
-                        <a href="/mokewenxue.github.io/2026/02/02/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E7%A7%8B%E7%81%AF%E5%AF%84%E6%85%A8/" class="nav-btn" style="text-align: right;">
-                            <div class="nav-label">
-                                ��һƪ
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                            <div class="nav-title">声声慢·秋灯寄慨</div>
-                        </a>
-                    
-                </div>
-            </footer>
-        </div>
-        
-        <!-- ҳ�� -->
-        <footer class="article-page-footer">
-            <div class="footer-container">
-                <div class="footer-links">
-                    <a href="/mokewenxue.github.io/" class="footer-link">
-                        <i class="fas fa-home"></i> ��ҳ
-                    </a>
-                    <a href="/mokewenxue.github.io/tags/" class="footer-link">
-                        <i class="fas fa-tags"></i> ����
-                    </a>
-                    <a href="/mokewenxue.github.io/categories/" class="footer-link">
-                        <i class="fas fa-layer-group"></i> ����
-                    </a>
-                    <a href="/mokewenxue.github.io/archives/" class="footer-link">
-                        <i class="fas fa-archive"></i> �鵵
-                    </a>
-                    <a href="/mokewenxue.github.io/about/" class="footer-link">
-                        <i class="fas fa-book"></i> ����
-                    </a>
-                    <a href="/mokewenxue.github.io/atom.xml" class="footer-link">
-                        <i class="fas fa-rss"></i> ����
-                    </a>
-                </div>
-                
-                <div class="footer-copyright">
-                    ? 2026 独自踏月行 �� �Ǻӽ���<br>
-                    �������� �� ī����פ �� ��������
-                </div>
-            </div>
-        </footer>
-
-
-    </main>
-    
-    <script>
-        // ҳ����ض���
-        document.addEventListener('DOMContentLoaded', function() {
-            // �ӳ���ʾ����
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-            
-            // ���õ�ǰ����״̬
-            const currentPath = window.location.pathname;
-            const navItems = document.querySelectorAll('.nav-item');
-            
-            navItems.forEach(item => {
-                const href = item.getAttribute('href');
-                if (currentPath === href || 
-                   (currentPath === '/' && href === '/') ||
-                   (currentPath.includes('/tags') && href.includes('/tags')) ||
-                   (currentPath.includes('/categories') && href.includes('/categories')) ||
-                   (currentPath.includes('/archives') && href.includes('/archives')) ||
-                   (currentPath.includes('/about') && href.includes('/about'))) {
-                    item.classList.add('active');
-                }
-            });
-            
-            // ����鸴�ƹ��ܣ���ѡ��
-            const codeBlocks = document.querySelectorAll('pre code');
-            codeBlocks.forEach((codeBlock, index) => {
-                const pre = codeBlock.parentElement;
-                const copyButton = document.createElement('button');
-                copyButton.innerHTML = '<i class="fas fa-copy"></i>';
-                copyButton.className = 'copy-code-btn';
-                copyButton.style.cssText = `
-                    position: absolute;
-                    top: 8px;
-                    right: 8px;
-                    background: rgba(65, 105, 225, 0.2);
-                    color: var(--nebula-blue);
-                    border: 1px solid rgba(65, 105, 225, 0.3);
-                    border-radius: 4px;
-                    padding: 4px 8px;
-                    cursor: pointer;
-                    font-size: 12px;
-                    transition: all 0.3s;
-                `;
-                
-                copyButton.addEventListener('mouseenter', function() {
-                    this.style.background = 'rgba(65, 105, 225, 0.3)';
-                });
-                
-                copyButton.addEventListener('mouseleave', function() {
-                    this.style.background = 'rgba(65, 105, 225, 0.2)';
-                });
-                
-                copyButton.addEventListener('click', function() {
-                    const code = codeBlock.textContent;
-                    navigator.clipboard.writeText(code).then(() => {
-                        const originalHTML = this.innerHTML;
-                        this.innerHTML = '<i class="fas fa-check"></i>';
-                        setTimeout(() => {
-                            this.innerHTML = originalHTML;
-                        }, 2000);
-                    });
-                });
-                
-                pre.style.position = 'relative';
-                pre.appendChild(copyButton);
-            });
-            
-            // ͼƬ����Ŵ���
-            const articleImages = document.querySelectorAll('.article-content img');
-            articleImages.forEach(img => {
-                img.style.cursor = 'zoom-in';
-                img.addEventListener('click', function() {
-                    const overlay = document.createElement('div');
-                    overlay.style.cssText = `
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: rgba(0, 0, 0, 0.9);
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        z-index: 9999;
-                        cursor: zoom-out;
-                    `;
-                    
-                    const enlargedImg = document.createElement('img');
-                    enlargedImg.src = this.src;
-                    enlargedImg.style.cssText = `
-                        max-width: 90%;
-                        max-height: 90%;
-                        object-fit: contain;
-                    `;
-                    
-                    overlay.appendChild(enlargedImg);
-                    document.body.appendChild(overlay);
-                    
-                    overlay.addEventListener('click', function() {
-                        document.body.removeChild(overlay);
-                    });
-                });
-            });
-        });
-    </script>
-<!-- hexo injector body_end start -->
+</div></div><div class="share"><span>Share</span>&nbsp;<span class="soc"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></span><span class="soc"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></span><span class="soc"><a class="fa fa-twitter" target="_blank" rel="noopener" href="http://twitter.com/home?status=https://lyluchao.github.io/mokewenxue.github.io/2026/02/03/水调歌头-问道/%20独自踏月行%20水调歌头·问道"></a></span></div><div class="pagination"><p class="clearfix"><span class="pre pagbuttons"><a role="navigation" href="/mokewenxue.github.io/2026/02/15/%E8%B4%BA%E6%96%B0%E9%83%8E-%E8%9A%80/" title="贺新郎·蚀"><i class="fa fa-angle-double-left"></i>&nbsp;Previous post: 贺新郎·蚀</a></span><span>&nbsp;</span><span class="next pagbuttons"><a role="navigation" href="/mokewenxue.github.io/2026/02/02/%E5%A3%B0%E5%A3%B0%E6%85%A2-%E7%A7%8B%E7%81%AF%E5%AF%84%E6%85%A8/" title="声声慢·秋灯寄慨">Next post: 声声慢·秋灯寄慨&nbsp;<i class="fa fa-angle-double-right"></i></a></span></p></div></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2026&nbsp;<a target="_blank" href="https://lyluchao.github.io/mokewenxue.github.io" rel="noopener noreferrer">独自踏月行</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/mokewenxue.github.io/js/jquery-3.1.0.min.js"></script><script src="/mokewenxue.github.io/js/bootstrap.min.js"></script><script src="/mokewenxue.github.io/js/jquery-migrate-1.2.1.min.js"></script><script src="/mokewenxue.github.io/js/jquery.appear.js"></script><script src="/mokewenxue.github.io/js/google-analytics.js"></script><script src="/mokewenxue.github.io/js/typography.js"></script><!-- hexo injector body_end start -->
 <script>
 // 检测是否需要加载 Mermaid
 if (document.querySelector('.mermaid')) {
@@ -1318,5 +516,4 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-<!-- hexo injector body_end end --></body>
-</html>
+<!-- hexo injector body_end end --></body></html>
