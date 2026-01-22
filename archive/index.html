@@ -1,1 +1,946 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="独自踏月行"><title>ʫ���鵵 · 独自踏月行</title><meta name="description" content=""><meta name="keywords" content="诗词,文学,散文,诗歌,古文"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/mokewenxue.github.io/css/bootstrap.min.css"><link rel="stylesheet" href="/mokewenxue.github.io/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="stage"><div class="row"><div class="col-sm-3 col-xs-12 side-container invisible" id="side-bar"><div class="vertical-text site-title"><h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/mokewenxue.github.io/"></a></h3><h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/mokewenxue.github.io/"></a></h1><!--h6(onclick="triggerSiteNav()") Trigger--></div><br class="visible-lg visible-md visible-sm"><div class="site-title-links" id="site-nav"><ul><li><a href="/mokewenxue.github.io/">Home</a></li><li><a href="/mokewenxue.github.io/archives">Archive</a></li><li><a href="/mokewenxue.github.io/categories">Categories</a></li><li><a href="/mokewenxue.github.io/tags">Tags</a></li><!-- +make_page_links() // 暂时禁用--><li class="soc"></li></ul><div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br"><footer><p>&copy;&nbsp;2026&nbsp;<a target="_blank" href="https://lyluchao.github.io/mokewenxue.github.io" rel="noopener noreferrer">独自踏月行</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div><div class="col-sm-9 col-xs-12 main-container invisible" id="main-container"><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post"><h1 class="post-title">ʫ���鵵</h1><div class="post-meta"><span class="post-time">post.posted 2024-01-01</span></div><div class="post-content"></div></div></div></div></div><div class="visible-xs site-bottom-footer"><footer><p>&copy;&nbsp;2026&nbsp;<a target="_blank" href="https://lyluchao.github.io/mokewenxue.github.io" rel="noopener noreferrer">独自踏月行</a></p><p>Theme&nbsp;<a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography" rel="noopener noreferrer">Typography</a>&nbsp;by&nbsp;<a target="_blank" href="https://www.keep.moe" rel="noopener noreferrer">Makito</a></p><p>Proudly published with&nbsp;<a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a></p></footer></div></div></div></div><script src="/mokewenxue.github.io/js/jquery-3.1.0.min.js"></script><script src="/mokewenxue.github.io/js/bootstrap.min.js"></script><script src="/mokewenxue.github.io/js/jquery-migrate-1.2.1.min.js"></script><script src="/mokewenxue.github.io/js/jquery.appear.js"></script><script src="/mokewenxue.github.io/js/google-analytics.js"></script><script src="/mokewenxue.github.io/js/typography.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= page.category %> | <%= config.title %></title>
+    <style>
+        :root {
+            /* �Ǻӽ�����ɫ - ����ҳһ�� */
+            --space-bg: #0a0a1a;
+            --space-dark: #121230;
+            --space-light: #1a1a40;
+            --nebula-purple: #8a2be2;
+            --nebula-blue: #4169e1;
+            --nebula-cyan: #00ffff;
+            --sword-gold: #ffd700;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b8ff;
+            --text-muted: #8888cc;
+            --border-color: #303060;
+            
+            /* ���ռ�� */
+            --gap-xs: 4px;
+            --gap-sm: 8px;
+            --gap-md: 12px;
+            --gap-lg: 16px;
+            --gap-xl: 20px;
+            --gap-2xl: 24px;
+            --gap-3xl: 32px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: var(--space-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+        }
+        
+        /* === �Ǻӱ��� === */
+        .star-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(65, 105, 225, 0.15) 0%, transparent 40%),
+                linear-gradient(135deg, #0a0a1a 0%, #121230 100%);
+        }
+        
+        /* === ��ർ���� === */
+        .left-nav {
+            width: 250px;
+            min-height: 100vh;
+            background: rgba(18, 18, 48, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border-color);
+            padding: var(--gap-xl) 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav-brand {
+            padding: 0 var(--gap-lg) var(--gap-xl) var(--gap-lg);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--gap-xl);
+        }
+        
+        .brand-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--sword-gold), var(--nebula-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--gap-sm);
+        }
+        
+        .brand-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .nav-menu {
+            flex: 1;
+            padding: 0 var(--gap-lg);
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--gap-md);
+            padding: var(--gap-md) var(--gap-lg);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: var(--gap-sm);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: rgba(138, 43, 226, 0.1);
+        }
+        
+        .nav-item.active {
+            color: var(--nebula-purple);
+            background: rgba(138, 43, 226, 0.15);
+        }
+        
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 70%;
+            background: var(--nebula-purple);
+            border-radius: 0 2px 2px 0;
+        }
+        
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .nav-text {
+            flex: 1;
+            font-size: 1rem;
+        }
+        
+        .nav-footer {
+            padding: var(--gap-lg);
+            border-top: 1px solid var(--border-color);
+            margin-top: var(--gap-xl);
+        }
+        
+        .nav-copyright {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        /* === ���������� === */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        /* ҳ��������� */
+        .page-header {
+            padding: var(--gap-xl) var(--gap-lg);
+            background: rgba(26, 26, 64, 0.5);
+            border-bottom: 1px solid var(--border-color);
+            border-left: 4px solid var(--nebula-purple);
+        }
+        
+        .page-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--sword-gold), var(--nebula-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: var(--gap-sm);
+        }
+        
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 800px;
+        }
+        
+        /* === �������� - ÿ��5�� === */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--gap-md);
+            padding: var(--gap-lg);
+        }
+        
+        @media (max-width: 1200px) {
+            .articles-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .articles-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ���¿�Ƭ */
+        .article-card {
+            background: rgba(26, 26, 64, 0.7);
+            border-radius: 10px;
+            padding: var(--gap-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--nebula-purple), var(--nebula-blue));
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--nebula-cyan);
+            box-shadow: 0 10px 25px rgba(0, 0, 255, 0.3);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--gap-md);
+        }
+        
+        .article-date {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .article-category {
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--nebula-purple);
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .article-title {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: var(--gap-md);
+            line-height: 1.4;
+            flex: 1;
+        }
+        
+        .article-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .article-title a:hover {
+            color: var(--sword-gold);
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: var(--gap-md);
+        }
+        
+        .article-tag {
+            background: rgba(65, 105, 225, 0.15);
+            color: var(--nebula-blue);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            text-decoration: none;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+            cursor: pointer;
+        }
+        
+        .article-tag:hover {
+            background: rgba(65, 105, 225, 0.3);
+        }
+        
+        .article-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: var(--gap-md);
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .article-author {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .read-btn {
+            color: var(--nebula-cyan);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .read-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: var(--nebula-cyan);
+        }
+        
+        /* ҳ���������� */
+        .page-content {
+            background: rgba(26, 26, 64, 0.5);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: var(--gap-xl);
+            margin: 0 var(--gap-lg) var(--gap-xl);
+            position: relative;
+        }
+        
+        .page-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--nebula-purple), var(--nebula-blue));
+            border-radius: 12px 12px 0 0;
+        }
+        
+        /* ��������ʾ */
+        .no-articles {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--gap-xl);
+            background: rgba(26, 26, 64, 0.5);
+            border-radius: 12px;
+            border: 2px dashed var(--border-color);
+        }
+        
+        .no-articles-icon {
+            font-size: 2rem;
+            color: var(--sword-gold);
+            margin-bottom: var(--gap-md);
+            opacity: 0.6;
+        }
+        
+        .no-articles h3 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: var(--gap-sm);
+        }
+        
+        .no-articles p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        /* === ҳ�� === */
+        .category-footer {
+            background: rgba(10, 10, 26, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: var(--gap-xl) 0;
+            margin-top: var(--gap-xl);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--gap-lg);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--gap-xl);
+            margin-bottom: var(--gap-lg);
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--nebula-cyan);
+        }
+        
+        .footer-copyright {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        
+        /* ��Ӧʽ��� */
+        @media (max-width: 1024px) {
+            .left-nav {
+                width: 200px;
+            }
+            
+            .main-content {
+                margin-left: 200px;
+            }
+            
+            .nav-text {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .left-nav {
+                width: 60px;
+                padding: var(--gap-lg) 0;
+            }
+            
+            .nav-brand {
+                padding: 0 var(--gap-sm) var(--gap-lg) var(--gap-sm);
+            }
+            
+            .brand-title {
+                font-size: 1rem;
+                text-align: center;
+            }
+            
+            .brand-subtitle,
+            .nav-text,
+            .nav-footer {
+                display: none;
+            }
+            
+            .nav-menu {
+                padding: 0 var(--gap-sm);
+            }
+            
+            .nav-item {
+                justify-content: center;
+                padding: var(--gap-md);
+            }
+            
+            .nav-icon {
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 60px;
+            }
+            
+            .page-header {
+                padding: var(--gap-lg);
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .articles-grid {
+                gap: var(--gap-sm);
+                padding: var(--gap-md);
+            }
+            
+            .article-card {
+                padding: var(--gap-md);
+            }
+            
+            .article-title {
+                font-size: 1rem;
+            }
+            
+            .article-excerpt {
+                font-size: 0.8rem;
+                -webkit-line-clamp: 2;
+            }
+            
+            .page-content {
+                padding: var(--gap-lg);
+                margin: 0 var(--gap-sm) var(--gap-xl);
+            }
+        }
+        
+        /* ���������� */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--space-dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--space-light);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--nebula-blue);
+        }
+        
+        /* ��ർ�������� */
+        .left-nav {
+            scrollbar-width: thin;
+            scrollbar-color: var(--nebula-blue) transparent;
+        }
+        
+        .left-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .left-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .left-nav::-webkit-scrollbar-thumb {
+            background: var(--nebula-blue);
+            border-radius: 2px;
+        }
+        
+        /* ����Ч�� */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .article-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/mokewenxue.github.io/atom.xml" title="独自踏月行" type="application/atom+xml">
+</head>
+<body>
+    <!-- �Ǻӱ��� -->
+    <div class="star-bg"></div>
+    
+    <!-- ��ർ���� -->
+    <nav class="left-nav">
+        <div class="nav-brand">
+            <a href="<%= url_for('/') %>" class="brand-title">����̤����</a>
+            <div class="brand-subtitle">�Ǻӽ��� �� ��������</div>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="<%= url_for('/') %>" class="nav-item <%= page.path === 'index.html' ? 'active' : '' %>">
+                <div class="nav-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="nav-text">�Ǻ���ҳ</div>
+            </a>
+            
+            <a href="<%= url_for('tags/') %>" class="nav-item <%= page.path.includes('tags/') ? 'active' : '' %>">
+                <div class="nav-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <div class="nav-text">��������</div>
+            </a>
+            
+            <a href="<%= url_for('categories/') %>" class="nav-item <%= page.path.includes('categories/') ? 'active' : '' %>">
+                <div class="nav-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="nav-text">�������</div>
+            </a>
+            
+            <a href="<%= url_for('archives/') %>" class="nav-item <%= page.path.includes('archives/') ? 'active' : '' %>">
+                <div class="nav-icon">
+                    <i class="fas fa-archive"></i>
+                </div>
+                <div class="nav-text">ʫ���鵵</div>
+            </a>
+            
+            <a href="<%= url_for('about/') %>" class="nav-item <%= page.path.includes('about/') ? 'active' : '' %>">
+                <div class="nav-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="nav-text">ʫ��Ե��</div>
+            </a>
+        </div>
+        
+        <div class="nav-footer">
+            <div class="nav-copyright">
+                ? <%= new Date().getFullYear() %><br>
+                ̤��ʫ��
+            </div>
+        </div>
+    </nav>
+    
+    <!-- ���������� -->
+    <main class="main-content">
+        <!-- ҳ����� -->
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="fas fa-folder-open"></i> <%= page.category %>
+            </h1>
+            <p class="page-subtitle">
+                <% 
+                const categoryConfig = {
+                    '��������': '����ʮ�������� �� �Ǻӽ�����ķ���',
+                    'ʫ�ʴ���': '��ͳ�����ִ�ʫ �� ʫ�⽣���ں�',
+                    '�������': '�Ǻӽ�����Ƚ��� �� ��������ָ��',
+                    '�Ļ�': '�Ǻӽ����һ�� �� �Ļ������',
+                    '����': '�Ǻӽ���ڶ��� �� ����������',
+                    'Ƽ��': '�Ǻӽ�������� �� ��Ƽ�ۻ����',
+                    '�廳': '�Ǻӽ�����ľ� �� ������־������',
+                    '֪��': '�Ǻӽ������� �� ֪���������ѵ�',
+                    'ī��': '�Ǻӽ�������� �� ī��Ϊ�潣����',
+                    '��Ǭ': '�Ǻӽ�����߾� �� ��������ǬΪ��',
+                    '����': '�Ǻӽ���ڰ˾� �� ����Ϊ�ɽ�Ϊ��',
+                    '˫��': '�Ǻӽ���ھž� �� ˫���������˫',
+                    '����': '�Ǻӽ����ʮ�� �� �ֿ�ժ�ǽ���׷',
+                    '̤��': '�Ǻӽ����ʮһ�� �� ��̤�»�������'
+                };
+                
+                // ��ȫ�ػ�ȡ��������
+                let postCount = 0;
+                if (page.posts) {
+                    // ���Բ�ͬ�����ݽṹ
+                    if (typeof page.posts.length !== 'undefined') {
+                        postCount = page.posts.length;
+                    } else if (page.posts.data && page.posts.data.length) {
+                        postCount = page.posts.data.length;
+                    } else if (typeof page.posts.toArray === 'function') {
+                        postCount = page.posts.toArray().length;
+                    } else if (Array.isArray(page.posts)) {
+                        postCount = page.posts.length;
+                    }
+                }
+                %>
+                <%= categoryConfig[page.category] || '�Ǻӽ������ �� ��������' %> �� ����¼ <%= postCount %> ƪʫ��
+            </p>
+        </div>
+        
+        <!-- ҳ�����ݣ�����У� -->
+        <% if (page.content) { %>
+            <div class="page-content">
+                <%- page.content %>
+            </div>
+        <% } %>
+        
+        <!-- �����б� -->
+        <div class="articles-grid">
+            <% 
+            // ��ȫ�ػ�ȡ��ǰ���������
+            let posts = [];
+            try {
+                if (page.posts) {
+                    // ���Բ�ͬ�����ݽṹ
+                    if (typeof page.posts.toArray === 'function') {
+                        posts = page.posts.toArray();
+                    } else if (page.posts.data && Array.isArray(page.posts.data)) {
+                        posts = page.posts.data;
+                    } else if (Array.isArray(page.posts)) {
+                        posts = page.posts;
+                    } else if (typeof page.posts === 'object') {
+                        // ����Ƕ��󣬳��Խ���ֵתΪ����
+                        posts = Object.values(page.posts);
+                    }
+                }
+            } catch (e) {
+                console.warn('��ȡ����ʧ��:', e);
+            }
+            
+            if (posts.length === 0) { %>
+                <div class="no-articles">
+                    <div class="no-articles-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>����ʫ��</h3>
+                    <p>�˷�������δ��¼�κ�ʫ������������������...</p>
+                </div>
+            <% } else { 
+                posts.forEach(post => { 
+                    const title = post.title || '����';
+                    const url = post.path || '#';
+                    const date = post.date || new Date();
+                    
+                    // ��������ժҪ
+                    let excerpt = '';
+                    try {
+                        excerpt = post.excerpt || post.content || '';
+                        // �Ƴ�HTML��ǩ
+                        excerpt = excerpt.replace(/<[^>]+>/g, '');
+                        // �Ƴ�Markdown���
+                        excerpt = excerpt.replace(/[#*`\[\]!]/g, '');
+                        // �ض�
+                        if (excerpt.length > 80) {
+                            excerpt = excerpt.substring(0, 80) + '...';
+                        }
+                    } catch (e) {
+                        excerpt = '����������...';
+                    }
+                    
+                    // ��ʽ������
+                    let formattedDate = '';
+                    try {
+                        const d = new Date(date);
+                        formattedDate = d.getMonth() + 1 + '-' + d.getDate();
+                    } catch (e) {
+                        formattedDate = '';
+                    }
+                    
+                    // ��ȡ���ࣨʹ�õ�ǰ����ҳ����ࣩ
+                    const currentCategory = page.category || 'δ����';
+                    
+                    // ��ȡ��ǩ
+                    let tags = [];
+                    try {
+                        if (post.tags && post.tags.length > 0) {
+                            tags = post.tags.slice(0, 2).map(tag => tag.name || tag);
+                        } else if (post.tags && post.tags.data) {
+                            tags = post.tags.data.slice(0, 2).map(tag => tag.name || tag);
+                        } else if (post.tag) {
+                            // �����ǵ�����ǩ
+                            tags = [post.tag];
+                        }
+                    } catch (e) {
+                        tags = ['ʴ��ѧ', 'ʫ��'];
+                    }
+                    
+                    // ȷ����ǩ����
+                    if (!Array.isArray(tags) || tags.length === 0) {
+                        tags = ['ʴ��ѧ', 'ʫ��'];
+                    }
+            %>
+                <article class="article-card">
+                    <div class="article-meta">
+                        <% if (formattedDate) { %>
+                            <div class="article-date">
+                                <i class="far fa-calendar-alt"></i>
+                                <%= formattedDate %>
+                            </div>
+                        <% } else { %>
+                            <div class="article-date">
+                                <i class="far fa-calendar-alt"></i>
+                                ����
+                            </div>
+                        <% } %>
+                        <span class="article-category"><%= currentCategory %></span>
+                    </div>
+                    
+                    <h3 class="article-title">
+                        <a href="<%= url_for(url) %>"><%= title %></a>
+                    </h3>
+                    
+                    <% if (tags.length > 0) { %>
+                        <div class="article-tags">
+                            <% tags.forEach(tag => { %>
+                                <span class="article-tag" data-tag="<%= tag %>"><%= tag %></span>
+                            <% }) %>
+                        </div>
+                    <% } %>
+                    
+                    <div class="article-excerpt">
+                        <%= excerpt %>
+                    </div>
+                    
+                    <div class="article-footer">
+                        <div class="article-author">
+                            <i class="fas fa-user"></i>
+                            <%= config.author || '��������' %>
+                        </div>
+                        <a href="<%= url_for(url) %>" class="read-btn">
+                            �Ķ� <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            <% 
+                });
+            } 
+            %>
+        </div>
+        
+        <!-- ҳ�� -->
+        <footer class="category-footer">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <a href="<%= url_for('/') %>" class="footer-link">
+                        <i class="fas fa-home"></i> ��ҳ
+                    </a>
+                    <a href="<%= url_for('tags/') %>" class="footer-link">
+                        <i class="fas fa-tags"></i> ����
+                    </a>
+                    <a href="<%= url_for('categories/') %>" class="footer-link">
+                        <i class="fas fa-layer-group"></i> ����
+                    </a>
+                    <a href="<%= url_for('archives/') %>" class="footer-link">
+                        <i class="fas fa-archive"></i> �鵵
+                    </a>
+                    <a href="<%= url_for('about/') %>" class="footer-link">
+                        <i class="fas fa-book"></i> ����
+                    </a>
+                    <a href="<%= url_for('/atom.xml') %>" class="footer-link">
+                        <i class="fas fa-rss"></i> ����
+                    </a>
+                </div>
+                
+                <div class="footer-copyright">
+                    ? <%= new Date().getFullYear() %> <%= config.author || '̤��ʫ��' %> �� �Ǻӽ���<br>
+                    �������� �� ī����פ �� ��������
+                </div>
+            </div>
+        </footer>
+
+
+
+    </main>
+    
+    <script>
+        // ҳ����ض���
+        document.addEventListener('DOMContentLoaded', function() {
+            // �ӳ���ʾ����
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+            
+            // ���¿�Ƭ����
+            const articleCards = document.querySelectorAll('.article-card');
+            articleCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(15px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+            
+            // ���õ�ǰ����״̬
+            const currentPath = window.location.pathname;
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (currentPath === href || 
+                   (currentPath === '/' && href === '/') ||
+                   (currentPath.includes('/tags') && href.includes('/tags')) ||
+                   (currentPath.includes('/categories') && href.includes('/categories')) ||
+                   (currentPath.includes('/archives') && href.includes('/archives')) ||
+                   (currentPath.includes('/about') && href.includes('/about'))) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // ���ӿ�Ƭ��ͣЧ��
+            articleCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '100';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // ��ǩ���ɸѡ����
+            const articleTags = document.querySelectorAll('.article-tag');
+            articleTags.forEach(tag => {
+                tag.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tagName = this.getAttribute('data-tag') || this.textContent;
+                    
+                    // �������������ת����ǩҳ����߼�
+                    // window.location.href = '<%= url_for("tags/") %>' + encodeURIComponent(tagName);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
